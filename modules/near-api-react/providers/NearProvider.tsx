@@ -1,0 +1,21 @@
+import { useState, useEffect } from 'react';
+import { connect, Near, WalletConnection } from 'near-api-js';
+import { NearContext } from '../context/NearContext';
+
+export const NearProvider = ({ children, config }: { children: JSX.Element; config: any }) => {
+  const [near, setNear] = useState<Near | null>(null);
+  const [wallet, setWallet] = useState<WalletConnection | null>(null);
+
+  useEffect(() => {
+    async function connectNear() {
+      const near = await connect(config);
+      setNear(near);
+      setWallet(new WalletConnection(near, 'fund3r-wallet'));
+    }
+    connectNear().catch(console.error);
+  }, []);
+
+  const isConnected = Boolean(near && wallet);
+
+  return <NearContext.Provider value={{ near, wallet }}>{isConnected && children}</NearContext.Provider>;
+};
