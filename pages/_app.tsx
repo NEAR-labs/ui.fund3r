@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { MantineProvider } from '@mantine/core';
 import { appWithTranslation } from 'next-i18next';
 import { NearProvider } from '@/modules/near-api-react/providers/NearProvider';
-import { getConfig } from '@/config/near';
 
 const App = (props: AppProps) => {
   const { Component, pageProps } = props;
@@ -25,7 +24,7 @@ const App = (props: AppProps) => {
           colorScheme: 'light',
         }}
       >
-        <NearProvider config={getConfig(nearNetworkEnv)}>
+        <NearProvider network={nearNetworkEnv}>
           <Component {...pageProps} />
         </NearProvider>
       </MantineProvider>
