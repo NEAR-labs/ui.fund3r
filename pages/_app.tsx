@@ -8,7 +8,7 @@ import DefaultLayout from '@/layouts/default';
 const App = (props: AppProps) => {
   const { Component, pageProps } = props;
 
-  const nearNetworkEnv = process.env.NEAR_NETWORK_ENV;
+  const nearNetworkEnv = process.env.NEXT_PUBLIC_NEAR_NETWORK_ENV;
 
   return (
     <DefaultLayout>
