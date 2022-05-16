@@ -12,7 +12,7 @@ const App = (props: AppProps) => {
   return (
     <>
       <Head>
-        <title>Fund3r</title>
+        <title>FUND3R</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
 
