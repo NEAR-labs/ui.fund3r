@@ -1,3 +1,6 @@
 {
-  "title": "FUND3R"
+  "title": "FUND3R",
+  "navbar": {
+    "call_to_action": "Start Grant Application"
+  }
 }
