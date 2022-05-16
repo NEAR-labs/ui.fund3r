@@ -66,7 +66,7 @@ function Navbar() {
         </Link>
         <Group spacing={5} className={classes.links}>
           <Link href="/grants" passHref>
-            <Button component="a" variant="light">
+            <Button component="a" variant="light" color="violet">
               {t('navbar.call_to_action')}
             </Button>
           </Link>
