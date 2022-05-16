@@ -33,4 +33,12 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
   },
   reportUnusedDisableDirectives: true, // https://eslint.org/docs/user-guide/configuring#report-unused-eslint-disable-comments
+  settings: {
+    'import/resolver': {
+      alias: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        map: [['@', '.']],
+      },
+    },
+  },
 };
