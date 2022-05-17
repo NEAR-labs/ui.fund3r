@@ -2,10 +2,11 @@ import Head from 'next/head';
 import { Container, Center, Text } from '@mantine/core';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
-import NearConnectButton from '@/components/common/NearConnectButton';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useWallet } from '@/modules/near-api-react/hooks/useWallet';
+import NearConnectButton from '@/components/common/NearConnectButton';
 import DefaultLayout from '@/layouts/default';
-
 import styles from '@/styles/Login.module.css';
 
 function Login() {
@@ -21,6 +22,19 @@ function Login() {
     successUrl: host + '/grants',
     failureUrl: host + '/login?error=connect',
   };
+
+  const wallet = useWallet();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (wallet && wallet.isSignedIn()) {
+      router.push('/grants');
+    }
+  }, [wallet]);
+
+  if (wallet && wallet.isSignedIn()) {
+    return <>Please wait...</>;
+  }
 
   return (
     <DefaultLayout>
