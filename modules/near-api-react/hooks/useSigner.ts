@@ -1,6 +1,7 @@
 import { useNear } from './useNear';
 import { useWallet } from './useWallet';
 import { useNetworkId } from './useNetworkId';
+import { transactions } from 'near-api-js';
 
 /**
  * Get the signer in order to sign transactions or messages
@@ -20,11 +21,15 @@ export const useSigner = () => {
   };
 
   const signStringMessage = async (stringMessage: string) => {
+    if (!signer) {
+      return false;
+    }
+
     const byteMessage = Buffer.from(stringMessage);
-    const signature = await signer?.signMessage(byteMessage, accountId, networkId);
+    const signature = await signer.signMessage(byteMessage, accountId, networkId);
     const signedMessage = signature?.signature;
 
-    return signedMessage;
+    return JSON.stringify(signedMessage);
   };
 
   return { signer, signObjectMessage, signStringMessage };

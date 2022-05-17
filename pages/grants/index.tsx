@@ -9,7 +9,7 @@ import { getAllGrantApplicationsOfUser } from '@/services/apiService';
 
 function Login() {
   const { t } = useTranslation('grants');
-  const { data } = useQuery('posts', getAllGrantApplicationsOfUser);
+  const { data } = useQuery('grants', getAllGrantApplicationsOfUser);
 
   return (
     <DefaultLayout>
@@ -18,7 +18,10 @@ function Login() {
           <title>{t('title')}</title>
         </Head>
         <NearAuthenticationGuardWithLoginRedirection>
-          <Container>Grants</Container>
+          <>
+            <Container>Grants</Container>
+            <div>{data && data[0].nearId}</div>
+          </>
         </NearAuthenticationGuardWithLoginRedirection>
       </>
     </DefaultLayout>
@@ -29,6 +32,8 @@ export async function getServerSideProps({ locale }: { locale: string }) {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery('grants', getAllGrantApplicationsOfUser);
+
+  // get cookies here
 
   return {
     props: {

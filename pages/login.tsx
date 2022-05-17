@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useWallet } from '@/modules/near-api-react/hooks/useWallet';
+import { useSigner } from '@/modules/near-api-react/hooks/useSigner';
 import NearConnectButton from '@/components/common/NearConnectButton';
 import DefaultLayout from '@/layouts/default';
 import styles from '@/styles/Login.module.css';
@@ -16,6 +17,10 @@ function Login() {
   const appName = process.env.NEXT_PUBLIC_APP_NAME;
   const host = process.env.NEXT_PUBLIC_HOST_URL;
 
+  const wallet = useWallet();
+  const router = useRouter();
+  const { signStringMessage } = useSigner();
+
   const signInOptions = {
     contractId,
     methodNames: [],
@@ -23,14 +28,15 @@ function Login() {
     failureUrl: host + '/login?error=connect',
   };
 
-  const wallet = useWallet();
-  const router = useRouter();
-
   useEffect(() => {
-    if (wallet && wallet.isSignedIn()) {
-      router.push('/grants');
+    if (wallet && wallet.isSignedIn() && signStringMessage) {
+      const accountId = wallet && wallet.isSignedIn() && wallet.getAccountId();
+      signStringMessage(accountId).then((signature) => {
+        // set cookies here
+        router.push('/grants');
+      });
     }
-  }, [wallet]);
+  }, [wallet, router, signStringMessage]);
 
   if (wallet && wallet.isSignedIn()) {
     return <>Please wait...</>;
