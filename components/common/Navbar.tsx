@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import AccountDropdown from '@/components/common/AccountDropdown';
 import { createStyles, Header, Container, Group, Burger, Button } from '@mantine/core';
 import { useBooleanToggle } from '@mantine/hooks';
 import { useTranslation } from 'next-i18next';
+import { useWallet } from '@/modules/near-api-react/hooks/useWallet';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -55,6 +57,7 @@ function Navbar() {
   const [opened, toggleOpened] = useBooleanToggle(false);
   const { classes } = useStyles();
   const { t } = useTranslation('common');
+  const wallet = useWallet();
 
   return (
     <Header height={60}>
@@ -65,11 +68,15 @@ function Navbar() {
           </a>
         </Link>
         <Group spacing={5} className={classes.links}>
-          <Link href="/grants" passHref>
-            <Button component="a" variant="light" color="violet">
-              {t('navbar.call_to_action')}
-            </Button>
-          </Link>
+          {wallet && wallet.isSignedIn() ? (
+            <AccountDropdown />
+          ) : (
+            <Link href="/grants" passHref>
+              <Button component="a" variant="light" color="violet">
+                {t('navbar.call_to_action')}
+              </Button>
+            </Link>
+          )}
         </Group>
         <Burger opened={opened} onClick={() => toggleOpened()} className={classes.burger} size="sm" />
       </Container>

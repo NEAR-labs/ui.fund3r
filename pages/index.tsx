@@ -6,6 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import { Container, SimpleGrid, Button, Center } from '@mantine/core';
 import styles from '@/styles/Home.module.css';
+import Navbar from '@/components/common/Navbar';
 
 const Home: NextPage = () => {
   const { t } = useTranslation('home');
@@ -15,6 +16,7 @@ const Home: NextPage = () => {
       <Head>
         <title>{t('title')}</title>
       </Head>
+      <Navbar />
       <Container>
         <SimpleGrid cols={2} className={styles.hero}>
           <Center>
@@ -28,7 +30,6 @@ const Home: NextPage = () => {
               </Link>
             </div>
           </Center>
-
           <Center>
             <div>
               <Image src="/images/illustration.png" alt="Illustration" width={400} height={400} />
