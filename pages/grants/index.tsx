@@ -6,6 +6,8 @@ import NearAuthenticationGuardWithLoginRedirection from '@/components/common/Nea
 import DefaultLayout from '@/layouts/default';
 import { QueryClient, dehydrate, useQuery } from 'react-query';
 import { getAllGrantApplicationsOfUser } from '@/services/apiService';
+import type { NextApiRequest } from 'next';
+import { parseCookies } from '@/utilities/parseCookies';
 
 function Login() {
   const { t } = useTranslation('grants');
@@ -28,12 +30,12 @@ function Login() {
   );
 }
 
-export async function getServerSideProps({ locale }: { locale: string }) {
+export async function getServerSideProps({ req, locale }: { req: NextApiRequest; locale: string }) {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery('grants', getAllGrantApplicationsOfUser);
 
-  // get cookies here
+  const data = parseCookies(req);
 
   return {
     props: {

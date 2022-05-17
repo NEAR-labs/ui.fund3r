@@ -9,9 +9,11 @@ import { useSigner } from '@/modules/near-api-react/hooks/useSigner';
 import NearConnectButton from '@/components/common/NearConnectButton';
 import DefaultLayout from '@/layouts/default';
 import styles from '@/styles/Login.module.css';
+import { useCookies } from 'react-cookie';
 
 function Login() {
   const { t } = useTranslation('login');
+  const [cookie, setCookie] = useCookies(['fund3r-account-signature']);
 
   const contractId = process.env.NEXT_PUBLIC_NEAR_DAO_CONTRACT_ID;
   const appName = process.env.NEXT_PUBLIC_APP_NAME;
@@ -32,7 +34,11 @@ function Login() {
     if (wallet && wallet.isSignedIn() && signStringMessage) {
       const accountId = wallet && wallet.isSignedIn() && wallet.getAccountId();
       signStringMessage(accountId).then((signature) => {
-        // set cookies here
+        setCookie('fund3r-account-signature', JSON.stringify(signature), {
+          path: '/',
+          maxAge: 2630000,
+          sameSite: true,
+        });
         router.push('/grants');
       });
     }

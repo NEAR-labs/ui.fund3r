@@ -5,6 +5,7 @@ import { appWithTranslation } from 'next-i18next';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { NearProvider } from '@/modules/near-api-react/providers/NearProvider';
 import { useState } from 'react';
+import { CookiesProvider } from 'react-cookie';
 
 if (process.env.NODE_ENV === 'development' && process.env.NEXT_PUBLIC_MOCK_API) {
   const { setupWorker } = require('../__tests__/mocks');
@@ -35,7 +36,9 @@ const App = (props: AppProps) => {
         <NearProvider networkId={nearNetworkEnv}>
           <QueryClientProvider client={queryClient}>
             <Hydrate state={pageProps.dehydratedState}>
-              <Component {...pageProps} />
+              <CookiesProvider>
+                <Component {...pageProps} />
+              </CookiesProvider>
             </Hydrate>
           </QueryClientProvider>
         </NearProvider>

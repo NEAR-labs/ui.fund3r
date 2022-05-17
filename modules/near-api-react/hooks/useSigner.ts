@@ -29,7 +29,7 @@ export const useSigner = () => {
     const signature = await signer.signMessage(byteMessage, accountId, networkId);
     const signedMessage = signature?.signature;
 
-    return JSON.stringify(signedMessage);
+    return signedMessage;
   };
 
   return { signer, signObjectMessage, signStringMessage };
