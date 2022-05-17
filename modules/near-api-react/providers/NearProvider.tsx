@@ -1,5 +1,6 @@
+import type { Near } from 'near-api-js';
 import { useState, useEffect } from 'react';
-import { connect, Near, WalletConnection } from 'near-api-js';
+import { connect, WalletConnection } from 'near-api-js';
 import { NearContext } from '../context/NearContext';
 import { getConfig } from '../config';
 
