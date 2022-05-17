@@ -8,7 +8,7 @@ import { QueryClient, dehydrate, useQuery } from 'react-query';
 import { getAllGrantApplicationsOfUser } from '@/services/apiService';
 
 function Login() {
-  const { t } = useTranslation('login');
+  const { t } = useTranslation('grants');
   const { data } = useQuery('posts', getAllGrantApplicationsOfUser);
 
   return (
@@ -32,7 +32,7 @@ export async function getServerSideProps({ locale }: { locale: string }) {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common'])),
+      ...(await serverSideTranslations(locale, ['common', 'grants'])),
       dehydratedState: dehydrate(queryClient),
     },
   };
