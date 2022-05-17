@@ -8,6 +8,7 @@ import { QueryClient, dehydrate, useQuery } from 'react-query';
 import { getAllGrantApplicationsOfUser } from '@/services/apiService';
 import type { NextApiRequest } from 'next';
 import { parseCookies } from '@/utilities/parseCookies';
+import { COOKIE_SIGNATURE_KEY } from '@/constants';
 
 function Login() {
   const { t } = useTranslation('grants');
@@ -36,6 +37,9 @@ export async function getServerSideProps({ req, locale }: { req: NextApiRequest;
   await queryClient.prefetchQuery('grants', getAllGrantApplicationsOfUser);
 
   const data = parseCookies(req);
+  const signature = data[COOKIE_SIGNATURE_KEY] ? JSON.parse(data[COOKIE_SIGNATURE_KEY]) : null;
+
+  console.log(signature);
 
   return {
     props: {
