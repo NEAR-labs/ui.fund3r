@@ -1,21 +1,26 @@
 import { useRouter } from 'next/router';
+import { useCookies } from 'react-cookie';
+import { useCallback } from 'react';
 import Link from 'next/link';
 import { Divider, Button, Menu, useMantineTheme } from '@mantine/core';
 import { Checklist, ChevronDown, Logout, UserCircle } from 'tabler-icons-react';
 import { useWallet } from '@/modules/near-api-react/hooks/useWallet';
 import { useTranslation } from 'next-i18next';
 import styles from '@/styles/AccountDropdown.module.css';
+import { COOKIE_SIGNATURE_KEY } from '@/constants';
 
 function AccountDropdown() {
   const theme = useMantineTheme();
   const wallet = useWallet();
   const { t } = useTranslation('common');
   const router = useRouter();
+  const [, , removeCookie] = useCookies([COOKIE_SIGNATURE_KEY]);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     wallet?.signOut();
+    removeCookie(COOKIE_SIGNATURE_KEY);
     router.push('/');
-  };
+  }, [wallet, router, removeCookie]);
 
   return (
     <Menu
