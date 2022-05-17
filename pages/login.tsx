@@ -28,7 +28,6 @@ function Login() {
 
   useEffect(() => {
     if (wallet && wallet.isSignedIn()) {
-      const accountId = wallet && wallet.isSignedIn() && wallet.getAccountId();
       router.push('/grants');
     }
   }, [wallet, router]);
