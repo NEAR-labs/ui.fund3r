@@ -2,8 +2,8 @@ import type MilestoneInterface from './MilestoneInterface';
 
 export default interface GrantApplicationInterface {
   id: number;
-  account: {
-    near_id: string;
+  nearId: string;
+  member?: {
     firstname: string;
     lastname: string;
     dateOfBirth: Date;
@@ -12,7 +12,7 @@ export default interface GrantApplicationInterface {
     twitter: string;
     hasPreviouslyReceivedFundingTokensGrantsFromNear: boolean;
   };
-  applicationProjectDetail: {
+  applicationProjectDetail?: {
     projectName: string;
     grantType: string; // enum maybe?
     grantCategory: string; // enum maybe?
@@ -32,19 +32,19 @@ export default interface GrantApplicationInterface {
     successMesurement: string;
     isProjectCurrentlyRaising: boolean;
   };
-  address: {
+  address?: {
     country: string;
     city: string;
     street: string;
     zip: string;
   };
-  about: {
+  about?: {
     howHeardGrants: string;
     referral: string;
     teamReferral: string;
     comments: string;
   };
-  status: {
+  status?: {
     isDraft: boolean;
     submissionDate: Date;
     evaluationDate: Date;
@@ -58,20 +58,20 @@ export default interface GrantApplicationInterface {
     invoiceSentDate: Date;
     onboardingCompletionDate: Date;
   };
-  urls: {
+  urls?: {
     interviewUrl: string;
     kycUrl: string;
     agreementUrl: string;
     invoiceUrl: string;
   };
-  reviewComment: {
+  reviewComment?: {
     project: string;
     memberDetail: string;
     attachments: string;
   };
-  milestones: [MilestoneInterface];
-  created_at: Date;
-  updated_at: Date;
+  milestones?: [MilestoneInterface];
+  created_at?: Date;
+  updated_at?: Date;
 }
 
 // need to add attachment field to the interface
