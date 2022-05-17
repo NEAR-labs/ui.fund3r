@@ -1,4 +1,7 @@
+import type MilestoneInterface from './MilestoneInterface';
+
 export default interface GrantApplicationInterface {
+  id: number;
   account: {
     near_id: string;
     firstname: string;
@@ -66,4 +69,10 @@ export default interface GrantApplicationInterface {
     memberDetail: string;
     attachments: string;
   };
+  milestones: [MilestoneInterface];
+  created_at: Date;
+  updated_at: Date;
 }
+
+// need to add attachment field to the interface
+// same attachment to the milestones
