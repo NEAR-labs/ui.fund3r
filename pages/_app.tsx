@@ -4,6 +4,11 @@ import { MantineProvider } from '@mantine/core';
 import { appWithTranslation } from 'next-i18next';
 import { NearProvider } from '@/modules/near-api-react/providers/NearProvider';
 
+if (process.env.NODE_ENV === 'development' && process.env.NEXT_PUBLIC_MOCK_API) {
+  const { setupWorker } = require('../__tests__/mocks');
+  setupWorker();
+}
+
 const App = (props: AppProps) => {
   const { Component, pageProps } = props;
 

@@ -4,9 +4,21 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
 import DefaultLayout from '@/layouts/default';
+import { useEffect } from 'react';
+import { response } from 'msw';
 
 function Login() {
   const { t } = useTranslation('login');
+
+  useEffect(() => {
+    fetch('http://localhost:4000/grants')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
+  }, []);
 
   return (
     <DefaultLayout>
