@@ -4,21 +4,12 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
 import DefaultLayout from '@/layouts/default';
-import { useEffect } from 'react';
-import { response } from 'msw';
+import { QueryClient, dehydrate, useQuery } from 'react-query';
+import { getAllGrantApplicationsOfUser } from '@/services/apiService';
 
 function Login() {
   const { t } = useTranslation('login');
-
-  useEffect(() => {
-    fetch('http://localhost:4000/grants')
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-      });
-  }, []);
+  const { data } = useQuery('posts', getAllGrantApplicationsOfUser);
 
   return (
     <DefaultLayout>
@@ -34,10 +25,15 @@ function Login() {
   );
 }
 
-export async function getStaticProps({ locale }: { locale: string }) {
+export async function getServerSideProps({ locale }: { locale: string }) {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery('grants', getAllGrantApplicationsOfUser);
+
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common'])),
+      dehydratedState: dehydrate(queryClient),
     },
   };
 }
