@@ -5,6 +5,13 @@ import { NearContext } from '../context/NearContext';
  * Get the NEAR connection object from the context.
  */
 export const useNear = () => {
-  const { near } = useContext(NearContext);
+  const context = useContext(NearContext);
+
+  if (context === undefined) {
+    throw new Error(`useNear must be used within a NearProvider`);
+  }
+
+  const { near } = context;
+
   return near;
 };

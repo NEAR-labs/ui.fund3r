@@ -2,14 +2,15 @@ import Head from 'next/head';
 import { Container, Center, Text } from '@mantine/core';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
-import NearConnectButton from '@/components/common/NearConnectButton';
 import { useRouter } from 'next/router';
-
+import { useEffect } from 'react';
+import { useWallet } from '@/modules/near-api-react/hooks/useWallet';
+import NearConnectButton from '@/components/common/NearConnectButton';
+import DefaultLayout from '@/layouts/default';
 import styles from '@/styles/Login.module.css';
 
 function Login() {
   const { t } = useTranslation('login');
-  const router = useRouter();
 
   const contractId = process.env.NEXT_PUBLIC_NEAR_DAO_CONTRACT_ID;
   const appName = process.env.NEXT_PUBLIC_APP_NAME;
@@ -22,23 +23,38 @@ function Login() {
     failureUrl: host + '/login?error=connect',
   };
 
+  const wallet = useWallet();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (wallet && wallet.isSignedIn()) {
+      router.push('/grants');
+    }
+  }, [wallet]);
+
+  if (wallet && wallet.isSignedIn()) {
+    return <>Please wait...</>;
+  }
+
   return (
-    <>
-      <Head>
-        <title>{t('title')}</title>
-      </Head>
-      <Container>
-        <Center className={styles.container}>
-          <Text align="center">
-            <h1>{t('headline')}</h1>
-            <p>{t('description')}</p>
-            <NearConnectButton signInOptions={signInOptions} appName={appName}>
-              {t('call_to_action')}
-            </NearConnectButton>
-          </Text>
-        </Center>
-      </Container>
-    </>
+    <DefaultLayout>
+      <>
+        <Head>
+          <title>{t('title')}</title>
+        </Head>
+        <Container>
+          <Center className={styles.container}>
+            <Text align="center">
+              <h1>{t('headline')}</h1>
+              <p>{t('description')}</p>
+              <NearConnectButton signInOptions={signInOptions} appName={appName}>
+                {t('call_to_action')}
+              </NearConnectButton>
+            </Text>
+          </Center>
+        </Container>
+      </>
+    </DefaultLayout>
   );
 }
 

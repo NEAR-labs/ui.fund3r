@@ -12,9 +12,7 @@ const NearConnectButton = ({ children, signInOptions, appName }: { children: JSX
   const wallet = useWallet();
 
   const signIn = () => wallet && wallet.requestSignIn(signInOptions, appName);
-  return wallet && wallet.isSignedIn() ? (
-    <p>{wallet.getAccountId()}</p>
-  ) : (
+  return (
     <Button color="violet" onClick={() => signIn()}>
       {children}
     </Button>

@@ -5,6 +5,13 @@ import { NearContext } from '../context/NearContext';
  * Get the NEAR wallet connection object from the context.
  */
 export const useWallet = () => {
-  const { wallet } = useContext(NearContext);
+  const context = useContext(NearContext);
+
+  if (context === undefined) {
+    throw new Error(`useWallet must be used within a NearProvider`);
+  }
+
+  const { wallet } = context;
+
   return wallet;
 };
