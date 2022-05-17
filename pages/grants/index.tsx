@@ -3,19 +3,22 @@ import { Container } from '@mantine/core';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
+import DefaultLayout from '@/layouts/default';
 
 function Login() {
   const { t } = useTranslation('login');
 
   return (
-    <>
-      <Head>
-        <title>{t('title')}</title>
-      </Head>
-      <NearAuthenticationGuardWithLoginRedirection>
-        <Container>Grants</Container>
-      </NearAuthenticationGuardWithLoginRedirection>
-    </>
+    <DefaultLayout>
+      <>
+        <Head>
+          <title>{t('title')}</title>
+        </Head>
+        <NearAuthenticationGuardWithLoginRedirection>
+          <Container>Grants</Container>
+        </NearAuthenticationGuardWithLoginRedirection>
+      </>
+    </DefaultLayout>
   );
 }
 
