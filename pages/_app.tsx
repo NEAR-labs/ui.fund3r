@@ -15,7 +15,7 @@ const App = (props: AppProps) => {
   const { Component, pageProps } = props;
 
   const [queryClient] = useState(() => new QueryClient());
-  const nearNetworkEnv = process.env.NEXT_PUBLIC_NEAR_NETWORK_ENV;
+  const nearNetworkEnv = process.env.NEXT_PUBLIC_NEAR_NETWORK_ENV || 'testnet';
 
   return (
     <>
@@ -32,7 +32,7 @@ const App = (props: AppProps) => {
           colorScheme: 'light',
         }}
       >
-        <NearProvider network={nearNetworkEnv}>
+        <NearProvider networkId={nearNetworkEnv}>
           <QueryClientProvider client={queryClient}>
             <Hydrate state={pageProps.dehydratedState}>
               <Component {...pageProps} />

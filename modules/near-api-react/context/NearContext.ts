@@ -4,6 +4,7 @@ import type { Near, WalletConnection } from 'near-api-js';
 interface NearContextInterface {
   near: Near | null;
   wallet?: WalletConnection | null;
+  networkId: string | undefined;
 }
 
-export const NearContext = createContext<NearContextInterface>({ near: null, wallet: null });
+export const NearContext = createContext<NearContextInterface>({ near: null, wallet: null, networkId: undefined });
