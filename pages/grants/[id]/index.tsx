@@ -9,7 +9,7 @@ import DefaultLayout from '@/layouts/default';
 import { QueryClient, dehydrate, useQuery } from 'react-query';
 import { parseCookies } from '@/utilities/parseCookies';
 import { COOKIE_SIGNATURE_KEY } from '@/constants';
-import { useAccountSignature } from '@/hooks/useAccountSignature';
+import useAccountSignature from '@/hooks/useAccountSignature';
 import { getGrantApplication } from '@/services/apiService';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
 import GrantApplicationForm from '@/components/grant-application-form/GrantApplicationForm';

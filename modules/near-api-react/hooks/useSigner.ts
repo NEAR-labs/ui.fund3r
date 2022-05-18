@@ -1,11 +1,12 @@
 import { useNear } from './useNear';
 import { useWallet } from './useWallet';
 import { useNetworkId } from './useNetworkId';
+import { useCallback } from 'react';
 
 /**
  * Get the signer in order to sign transactions or messages
  */
-export const useSigner = () => {
+const useSigner = () => {
   const near = useNear();
   const wallet = useWallet();
   const networkId = useNetworkId();
@@ -13,23 +14,28 @@ export const useSigner = () => {
   const signer = near?.connection.signer;
   const accountId = wallet && wallet.isSignedIn() && wallet.getAccountId();
 
+  const signStringMessage = useCallback(
+    async (stringMessage: string) => {
+      if (!signer) {
+        return false;
+      }
+
+      const byteMessage = Buffer.from(stringMessage);
+      const signature = await signer.signMessage(byteMessage, accountId, networkId);
+      const signedMessage = signature?.signature;
+
+      return signedMessage;
+    },
+    [signer, accountId, networkId],
+  );
+
   const signObjectMessage = async (message: any) => {
     const stringMessage = JSON.stringify(message);
-
-    return await signStringMessage(stringMessage);
-  };
-
-  const signStringMessage = async (stringMessage: string) => {
-    if (!signer) {
-      return false;
-    }
-
-    const byteMessage = Buffer.from(stringMessage);
-    const signature = await signer.signMessage(byteMessage, accountId, networkId);
-    const signedMessage = signature?.signature;
-
+    const signedMessage = await signStringMessage(stringMessage);
     return signedMessage;
   };
 
   return { signer, signObjectMessage, signStringMessage };
 };
+
+export default useSigner;
