@@ -12,6 +12,7 @@ import { COOKIE_SIGNATURE_KEY } from '@/constants';
 import { useAccountSignature } from '@/hooks/useAccountSignature';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import LoadingAnimation from '@/components/common/LoadingAnimation';
 
 function Grants() {
   const router = useRouter();
@@ -34,10 +35,7 @@ function Grants() {
           <title>{t('title')}</title>
         </Head>
         <NearAuthenticationGuardWithLoginRedirection>
-          <>
-            <Container>Grants</Container>
-            <div>{data && data[0].nearId}</div>
-          </>
+          <LoadingAnimation />
         </NearAuthenticationGuardWithLoginRedirection>
       </>
     </DefaultLayout>
