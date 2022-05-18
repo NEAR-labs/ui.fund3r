@@ -9,10 +9,12 @@ import { getAllGrantApplicationsOfUser } from '@/services/apiService';
 import type { NextApiRequest } from 'next';
 import { parseCookies } from '@/utilities/parseCookies';
 import { COOKIE_SIGNATURE_KEY } from '@/constants';
+import { useAccountSignature } from '@/hooks/useAccountSignature';
 
 function Login() {
   const { t } = useTranslation('grants');
-  const { data } = useQuery('grants', getAllGrantApplicationsOfUser);
+  const apiSignature = useAccountSignature();
+  const { data } = useQuery(['grants', apiSignature], () => getAllGrantApplicationsOfUser(apiSignature));
 
   return (
     <DefaultLayout>
@@ -33,13 +35,10 @@ function Login() {
 
 export async function getServerSideProps({ req, locale }: { req: NextApiRequest; locale: string }) {
   const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery('grants', getAllGrantApplicationsOfUser);
-
   const data = parseCookies(req);
-  const signature = data[COOKIE_SIGNATURE_KEY] ? JSON.parse(data[COOKIE_SIGNATURE_KEY]) : null;
+  const apiSignature = data[COOKIE_SIGNATURE_KEY] ? JSON.parse(data[COOKIE_SIGNATURE_KEY]) : null;
 
-  console.log(signature);
+  await queryClient.prefetchQuery(['grants', apiSignature], () => getAllGrantApplicationsOfUser(apiSignature));
 
   return {
     props: {
