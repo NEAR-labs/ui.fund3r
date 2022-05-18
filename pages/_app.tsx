@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { MantineProvider } from '@mantine/core';
 import { appWithTranslation } from 'next-i18next';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
-import { NearProvider } from '@/modules/near-api-react/providers/NearProvider';
+import NearProvider from '@/modules/near-api-react/providers/NearProvider';
 import { useState } from 'react';
 import { CookiesProvider } from 'react-cookie';
 
