@@ -19,4 +19,19 @@ const getAllGrantApplicationsOfUser = async (signature: NearApiSignatureInterfac
   return data;
 };
 
-export { getAllGrantApplicationsOfUser };
+const getGrantApplication = async (signature: NearApiSignatureInterface | undefined, grantId: string | undefined): Promise<GrantApplicationInterface> => {
+  if (!signature) {
+    throw Error('getGrantApplication: signature not received');
+  }
+
+  const { data } = await axios.get(API_HOST + '/grants/' + grantId, {
+    headers: {
+      'X-NEAR-ACCOUNT-ID': signature.accountId,
+      'X-NEAR-SIGNATURE': signature.signature,
+    },
+  });
+
+  return data;
+};
+
+export { getAllGrantApplicationsOfUser, getGrantApplication };

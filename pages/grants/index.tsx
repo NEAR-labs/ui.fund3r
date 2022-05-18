@@ -1,3 +1,4 @@
+import type { NextApiRequest } from 'next';
 import Head from 'next/head';
 import { Container } from '@mantine/core';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -6,7 +7,6 @@ import NearAuthenticationGuardWithLoginRedirection from '@/components/common/Nea
 import DefaultLayout from '@/layouts/default';
 import { QueryClient, dehydrate, useQuery } from 'react-query';
 import { getAllGrantApplicationsOfUser } from '@/services/apiService';
-import type { NextApiRequest } from 'next';
 import { parseCookies } from '@/utilities/parseCookies';
 import { COOKIE_SIGNATURE_KEY } from '@/constants';
 import { useAccountSignature } from '@/hooks/useAccountSignature';
