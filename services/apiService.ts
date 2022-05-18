@@ -11,8 +11,8 @@ const getAllGrantApplicationsOfUser = async (signature: NearApiSignatureInterfac
 
   const { data } = await axios.get(API_HOST + '/grants', {
     headers: {
-      'NEAR-ACCOUNT-ID': signature.accountId,
-      'NEAR-SIGNATURE': signature.signature,
+      'X-NEAR-ACCOUNT-ID': signature.accountId,
+      'X-NEAR-SIGNATURE': signature.signature,
     },
   });
 
