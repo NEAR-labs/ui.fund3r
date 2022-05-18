@@ -117,4 +117,18 @@ const submitGrantApplication = async (
   return data;
 };
 
-export { getAllGrantApplicationsOfUser, getGrantApplication, saveGrantApplicationAsDraft, submitGrantApplication };
+const submitMilestoneData = async (signature: NearApiSignatureInterface | undefined, data: any) => {};
+
+const submitMilestoneAttachment = async (signature: NearApiSignatureInterface | undefined, data: any) => {};
+
+const submitGrantAttachment = async (signature: NearApiSignatureInterface | undefined, data: any) => {};
+
+export {
+  getAllGrantApplicationsOfUser,
+  getGrantApplication,
+  saveGrantApplicationAsDraft,
+  submitGrantApplication,
+  submitMilestoneData,
+  submitMilestoneAttachment,
+  submitGrantAttachment,
+};

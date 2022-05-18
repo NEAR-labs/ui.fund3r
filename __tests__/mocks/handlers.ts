@@ -36,4 +36,19 @@ export const handlers = [
   rest.put<never, any>(`${BASE_URL}/grants/:accountId-:id/submit`, (_req, res, ctx) => {
     return res(ctx.json(getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id))));
   }),
+
+  // todo
+  rest.post<never, any>(`${BASE_URL}/grants/:accountId-:id/milestone/:milestoneId`, (_req, res, ctx) => {
+    return res(ctx.json({ todo: true }));
+  }),
+
+  // todo
+  rest.post<never, any>(`${BASE_URL}/grants/:accountId-:id/milestone/:milestoneId/attachment`, (_req, res, ctx) => {
+    return res(ctx.json({ todo: true }));
+  }),
+
+  // todo
+  rest.post<never, any>(`${BASE_URL}/grants/:accountId-:id/attachment`, (_req, res, ctx) => {
+    return res(ctx.json({ todo: true }));
+  }),
 ];
