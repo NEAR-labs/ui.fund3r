@@ -12,6 +12,8 @@ import { COOKIE_SIGNATURE_KEY } from '@/constants';
 import { useAccountSignature } from '@/hooks/useAccountSignature';
 import { getGrantApplication } from '@/services/apiService';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
+import GrantApplicationForm from '@/components/grant-application-form/GrantApplicationForm';
+import GrantApplicationDetails from '@/components/grant-application-details/GrantApplicationDetails';
 
 function GrantApplication() {
   const { t } = useTranslation('grant');
@@ -20,6 +22,8 @@ function GrantApplication() {
   const { id } = router.query;
   const { data } = useQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, id));
 
+  const isSubmitted = data?.status?.submissionDate;
+
   return (
     <DefaultLayout>
       <>
@@ -27,7 +31,7 @@ function GrantApplication() {
           <title>{t('title')}</title>
         </Head>
         <NearAuthenticationGuardWithLoginRedirection>
-          <Container>{data?.nearId}</Container>
+          <Container>{isSubmitted ? <GrantApplicationDetails data={data} /> : <GrantApplicationForm data={data} />}</Container>
         </NearAuthenticationGuardWithLoginRedirection>
       </>
     </DefaultLayout>
