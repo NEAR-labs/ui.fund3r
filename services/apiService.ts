@@ -9,7 +9,7 @@ const getAllGrantApplicationsOfUser = async (signature: NearApiSignatureInterfac
     throw Error('getAllGrantApplicationsOfUser: signature not received');
   }
 
-  const { data } = await axios.get(API_HOST + '/grants', {
+  const { data } = await axios.get(`${API_HOST}/grants`, {
     headers: {
       'X-NEAR-ACCOUNT-ID': signature.accountId,
       'X-NEAR-SIGNATURE': signature.signature,
@@ -19,12 +19,12 @@ const getAllGrantApplicationsOfUser = async (signature: NearApiSignatureInterfac
   return data;
 };
 
-const getGrantApplication = async (signature: NearApiSignatureInterface | undefined, grantId: string | undefined): Promise<GrantApplicationInterface> => {
+const getGrantApplication = async (signature: NearApiSignatureInterface | undefined, grantId: string | string[] | undefined): Promise<GrantApplicationInterface> => {
   if (!signature) {
     throw Error('getGrantApplication: signature not received');
   }
 
-  const { data } = await axios.get(API_HOST + '/grants/' + grantId, {
+  const { data } = await axios.get(`${API_HOST}/grants/${grantId}`, {
     headers: {
       'X-NEAR-ACCOUNT-ID': signature.accountId,
       'X-NEAR-SIGNATURE': signature.signature,
@@ -56,7 +56,7 @@ const saveGrantApplicationAsDraft = async (
   const signedHash = signStringMessage(hash);
 
   const { data } = await axios.put(
-    API_HOST + '/grants/' + grantId + '/draft',
+    `${API_HOST}/grants/${grantId}/draft`,
     {
       grantData,
       hash,
@@ -101,7 +101,7 @@ const submitGrantApplication = async (
   const signedHash = signStringMessage(hash);
 
   const { data } = await axios.put(
-    API_HOST + '/grants/' + grantId + '/submit',
+    `${API_HOST}/grants/${grantId}/submit`,
     {
       hash,
       signedHash,

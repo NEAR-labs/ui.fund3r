@@ -62,7 +62,8 @@ function Navbar() {
   return (
     <Header height={60}>
       <Container className={classes.header}>
-        <Link href="/">
+        <Link href="/" passHref>
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a className={classes.branding}>
             <Image src="/images/logo.svg" height={30} width={100} />
           </a>
