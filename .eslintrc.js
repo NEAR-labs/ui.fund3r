@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['eslint-config-airbnb-typescript-prettier'], // https://github.com/toshi-toma/eslint-config-airbnb-typescript-prettier https://github.com/airbnb/javascript
+  extends: ['eslint-config-airbnb-typescript-prettier', 'plugin:@next/next/recommended'], // https://github.com/toshi-toma/eslint-config-airbnb-typescript-prettier https://github.com/airbnb/javascript
   rules: {
     // REMEMBER TO RESTART `yarn dev` or `npm run watch` WHENEVER EDITING THESE RULES!
     'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],

@@ -17,12 +17,16 @@
     "@mantine/hooks": "^4.2.5",
     "@mantine/next": "^4.2.5",
     "@mantine/notifications": "^4.2.5",
+    "axios": "^0.27.2",
+    "cookie": "^0.5.0",
     "dayjs": "^1.11.2",
     "near-api-js": "^0.44.2",
     "next": "12.1.6",
     "next-i18next": "^11.0.0",
     "react": "18.1.0",
+    "react-cookie": "^4.1.1",
     "react-dom": "18.1.0",
+    "react-query": "^3.39.0",
     "tabler-icons-react": "^1.48.0"
   },
   "devDependencies": {
@@ -33,7 +37,11 @@
     "eslint-config-airbnb-typescript-prettier": "^5.0.0",
     "eslint-config-next": "12.1.6",
     "eslint-import-resolver-alias": "^1.1.2",
+    "msw": "^0.39.2",
     "prettier": "^2.6.2",
     "typescript": "4.6.4"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
