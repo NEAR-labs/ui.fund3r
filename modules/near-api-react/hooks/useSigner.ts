@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useNear } from './useNear';
-import { useWallet } from './useWallet';
+import useWallet from './useWallet';
 import { useNetworkId } from './useNetworkId';
 
 /**

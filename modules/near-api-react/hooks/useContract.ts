@@ -1,5 +1,5 @@
 import { Contract } from 'near-api-js';
-import { useWallet } from './useWallet';
+import useWallet from './useWallet';
 
 interface ContractConfigInterface {
   contractId: string;

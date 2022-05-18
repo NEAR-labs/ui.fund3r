@@ -1,7 +1,7 @@
 import type NearApiSignatureInterface from '@/types/NearApiSignatureInterface';
 import { useEffect, useState } from 'react';
 import useSigner from '@/modules/near-api-react/hooks/useSigner';
-import { useWallet } from '@/modules/near-api-react/hooks/useWallet';
+import useWallet from '@/modules/near-api-react/hooks/useWallet';
 import { useCookies } from 'react-cookie';
 import { COOKIE_SIGNATURE_KEY, COOKIE_EXPIRACY_TIME } from '@/constants';
 

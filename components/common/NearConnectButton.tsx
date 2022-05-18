@@ -1,4 +1,4 @@
-import { useWallet } from '@/modules/near-api-react/hooks/useWallet';
+import useWallet from '@/modules/near-api-react/hooks/useWallet';
 import { Button } from '@mantine/core';
 
 interface SignInOptionsInterface {

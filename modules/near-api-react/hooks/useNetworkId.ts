@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { NearContext } from '../context/NearContext';
+import NearContext from '../context/NearContext';
 
 /**
  * Get the NEAR connection object from the context.

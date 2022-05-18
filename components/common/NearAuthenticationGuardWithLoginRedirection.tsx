@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useWallet } from '@/modules/near-api-react/hooks/useWallet';
+import useWallet from '@/modules/near-api-react/hooks/useWallet';
 import NearAuthenticationGuard from '@/modules/near-api-react/utilities/NearAuthenticationGuard';
 import LoadingAnimation from '@/components/common/LoadingAnimation';
 
