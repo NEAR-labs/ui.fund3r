@@ -1,6 +1,5 @@
 import type { NextApiRequest } from 'next';
 import Head from 'next/head';
-import { Container } from '@mantine/core';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
@@ -12,6 +11,7 @@ import { COOKIE_SIGNATURE_KEY } from '@/constants';
 import { useAccountSignature } from '@/hooks/useAccountSignature';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import LoadingAnimation from '@/components/common/LoadingAnimation';
 
 function Grants() {
   const router = useRouter();
@@ -34,10 +34,7 @@ function Grants() {
           <title>{t('title')}</title>
         </Head>
         <NearAuthenticationGuardWithLoginRedirection>
-          <>
-            <Container>Grants</Container>
-            <div>{data && data[0].nearId}</div>
-          </>
+          <LoadingAnimation />
         </NearAuthenticationGuardWithLoginRedirection>
       </>
     </DefaultLayout>

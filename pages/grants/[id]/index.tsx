@@ -11,6 +11,7 @@ import { parseCookies } from '@/utilities/parseCookies';
 import { COOKIE_SIGNATURE_KEY } from '@/constants';
 import { useAccountSignature } from '@/hooks/useAccountSignature';
 import { getGrantApplication } from '@/services/apiService';
+import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
 
 function GrantApplication() {
   const { t } = useTranslation('grant');
@@ -25,7 +26,9 @@ function GrantApplication() {
         <Head>
           <title>{t('title')}</title>
         </Head>
-        <Container>{data?.nearId}</Container>
+        <NearAuthenticationGuardWithLoginRedirection>
+          <Container>{data?.nearId}</Container>
+        </NearAuthenticationGuardWithLoginRedirection>
       </>
     </DefaultLayout>
   );

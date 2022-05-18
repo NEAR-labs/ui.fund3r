@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { useWallet } from '@/modules/near-api-react/hooks/useWallet';
 import DefaultLayout from '@/layouts/default';
 import LoginContent from '@/components/login/LoginContent';
+import LoadingAnimation from '@/components/common/LoadingAnimation';
 
 function Login() {
   const { t } = useTranslation('login');
@@ -19,17 +20,13 @@ function Login() {
     }
   }, [wallet, router]);
 
-  if (wallet && wallet.isSignedIn()) {
-    return <>Please wait...</>;
-  }
-
   return (
     <DefaultLayout>
       <>
         <Head>
           <title>{t('title')}</title>
         </Head>
-        <LoginContent />
+        {wallet && wallet.isSignedIn() ? <LoadingAnimation /> : <LoginContent />}
       </>
     </DefaultLayout>
   );
