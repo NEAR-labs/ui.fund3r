@@ -1,4 +1,5 @@
 import type { NextApiRequest } from 'next';
+import type { ParsedUrlQuery } from 'querystring';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { Container } from '@mantine/core';
@@ -30,7 +31,7 @@ function GrantApplication() {
   );
 }
 
-export async function getServerSideProps({ req, locale, params }: { req: NextApiRequest; locale: string; params: any }) {
+export async function getServerSideProps({ req, locale, params }: { req: NextApiRequest; locale: string; params: ParsedUrlQuery }) {
   const queryClient = new QueryClient();
   const data = parseCookies(req);
   const apiSignature = data[COOKIE_SIGNATURE_KEY] ? JSON.parse(data[COOKIE_SIGNATURE_KEY]) : null;

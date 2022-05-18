@@ -8,7 +8,9 @@ import { useState } from 'react';
 import { CookiesProvider } from 'react-cookie';
 
 if (process.env.NODE_ENV === 'development' && process.env.NEXT_PUBLIC_MOCK_API) {
+  /* eslint-disable */
   const { setupWorker } = require('../__tests__/mocks');
+  /* eslint-enable */
   setupWorker();
 }
 
