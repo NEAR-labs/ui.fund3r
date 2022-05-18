@@ -16,7 +16,7 @@ const useAccountSignature = () => {
 
     if (accountId) {
       signStringMessage(accountId).then((signature) => {
-        const fullSignature = {
+        const fullSignature: NearApiSignatureInterface = {
           signature,
           accountId,
         };

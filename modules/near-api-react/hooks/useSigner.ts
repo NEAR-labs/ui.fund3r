@@ -1,7 +1,7 @@
+import { useCallback } from 'react';
 import { useNear } from './useNear';
 import { useWallet } from './useWallet';
 import { useNetworkId } from './useNetworkId';
-import { useCallback } from 'react';
 
 /**
  * Get the signer in order to sign transactions or messages
@@ -15,16 +15,16 @@ const useSigner = () => {
   const accountId = wallet && wallet.isSignedIn() && wallet.getAccountId();
 
   const signStringMessage = useCallback(
-    async (stringMessage: string) => {
-      if (!signer) {
-        return false;
+    async (stringMessage: string): Promise<Uint8Array | undefined | null> => {
+      if (signer) {
+        const byteMessage = Buffer.from(stringMessage);
+        const signature = await signer.signMessage(byteMessage, accountId, networkId);
+        const signedMessage = signature?.signature;
+
+        return signedMessage;
+      } else {
+        return null;
       }
-
-      const byteMessage = Buffer.from(stringMessage);
-      const signature = await signer.signMessage(byteMessage, accountId, networkId);
-      const signedMessage = signature?.signature;
-
-      return signedMessage;
     },
     [signer, accountId, networkId],
   );
