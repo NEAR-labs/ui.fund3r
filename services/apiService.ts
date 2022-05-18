@@ -4,9 +4,9 @@ import axios from 'axios';
 
 const API_HOST = process.env.NEXT_PUBLIC_BACKEND_HOST;
 
-const getAllGrantApplicationsOfUser = async (signature: NearApiSignatureInterface | undefined): Promise<GrantApplicationInterface[]> => {
+const getAllGrantApplicationsOfUser = async (signature: NearApiSignatureInterface | undefined): Promise<GrantApplicationInterface[] | null> => {
   if (!signature) {
-    throw Error('getAllGrantApplicationsOfUser: signature not received');
+    return null;
   }
 
   const { data } = await axios.get(`${API_HOST}/grants`, {
@@ -19,9 +19,9 @@ const getAllGrantApplicationsOfUser = async (signature: NearApiSignatureInterfac
   return data;
 };
 
-const getGrantApplication = async (signature: NearApiSignatureInterface | undefined, grantId: string | string[] | undefined): Promise<GrantApplicationInterface> => {
+const getGrantApplication = async (signature: NearApiSignatureInterface | undefined, grantId: string | string[] | undefined): Promise<GrantApplicationInterface | null> => {
   if (!signature) {
-    throw Error('getGrantApplication: signature not received');
+    return null;
   }
 
   const { data } = await axios.get(`${API_HOST}/grants/${grantId}`, {
@@ -47,7 +47,7 @@ const saveGrantApplicationAsDraft = async (
   },
 ): Promise<any> => {
   if (!signature) {
-    throw Error('saveGrantApplicationAsDraft: signature not received');
+    return null;
   }
 
   const stringifiedGrantData = JSON.stringify(grantData);
@@ -86,7 +86,7 @@ const submitGrantApplication = async (
   },
 ): Promise<any> => {
   if (!signature) {
-    throw Error('submitGrantApplication: signature not received');
+    return null;
   }
 
   await saveGrantApplicationAsDraft(signature, {

@@ -7,7 +7,8 @@ import { NearProvider } from '@/modules/near-api-react/providers/NearProvider';
 import { useState } from 'react';
 import { CookiesProvider } from 'react-cookie';
 
-if (process.env.NODE_ENV === 'development' && process.env.NEXT_PUBLIC_MOCK_API) {
+// if (process.env.NODE_ENV === 'development' && process.env.NEXT_PUBLIC_MOCK_API) {
+if (process.env.NEXT_PUBLIC_MOCK_API) {
   /* eslint-disable */
   const { setupWorker } = require('../__tests__/mocks');
   /* eslint-enable */
