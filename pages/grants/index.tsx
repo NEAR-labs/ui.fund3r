@@ -25,7 +25,7 @@ function Grants() {
       const grant = data[0];
       router.push(`/grants/${grant.nearId}-${grant.id}`);
     }
-  }, [data]);
+  }, [data, router]);
 
   return (
     <DefaultLayout>
