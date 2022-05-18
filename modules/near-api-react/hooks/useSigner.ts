@@ -1,7 +1,6 @@
 import { useNear } from './useNear';
 import { useWallet } from './useWallet';
 import { useNetworkId } from './useNetworkId';
-import { transactions } from 'near-api-js';
 
 /**
  * Get the signer in order to sign transactions or messages

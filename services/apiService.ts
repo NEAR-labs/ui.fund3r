@@ -34,4 +34,87 @@ const getGrantApplication = async (signature: NearApiSignatureInterface | undefi
   return data;
 };
 
-export { getAllGrantApplicationsOfUser, getGrantApplication };
+const saveGrantApplicationAsDraft = async (
+  signature: NearApiSignatureInterface | undefined,
+  {
+    grantId,
+    grantData,
+    signStringMessage,
+  }: {
+    grantId: string | undefined;
+    grantData: GrantApplicationInterface;
+    signStringMessage: any;
+  },
+): Promise<any> => {
+  if (!signature) {
+    throw Error('saveGrantApplicationAsDraft: signature not received');
+  }
+
+  const stringifiedGrantData = JSON.stringify(grantData);
+  // todo: the following should be replaced by a hash function, issue #34
+  const hash = stringifiedGrantData.slice(0, 10);
+  const signedHash = signStringMessage(hash);
+
+  const { data } = await axios.put(
+    API_HOST + '/grants/' + grantId + '/draft',
+    {
+      grantData,
+      hash,
+      signedHash,
+    },
+    {
+      headers: {
+        'X-NEAR-ACCOUNT-ID': signature.accountId,
+        'X-NEAR-SIGNATURE': signature.signature,
+      },
+    },
+  );
+
+  return data;
+};
+
+const submitGrantApplication = async (
+  signature: NearApiSignatureInterface | undefined,
+  {
+    grantId,
+    grantData,
+    signStringMessage,
+  }: {
+    grantId: string | undefined;
+    grantData: GrantApplicationInterface;
+    signStringMessage: any;
+  },
+): Promise<any> => {
+  if (!signature) {
+    throw Error('submitGrantApplication: signature not received');
+  }
+
+  await saveGrantApplicationAsDraft(signature, {
+    grantId,
+    grantData,
+    signStringMessage,
+  });
+
+  const stringifiedGrantData = JSON.stringify(grantData);
+  // todo: the following should be replaced by a hash function, issue #34
+  const hash = stringifiedGrantData.slice(0, 10);
+  const signedHash = signStringMessage(hash);
+
+  const { data } = await axios.put(
+    API_HOST + '/grants/' + grantId + '/submit',
+    {
+      hash,
+      signedHash,
+    },
+    {
+      headers: {
+        'X-NEAR-ACCOUNT-ID': signature.accountId,
+        'X-NEAR-SIGNATURE': signature.signature,
+      },
+    },
+  );
+
+  return data;
+};
+
+export { getAllGrantApplicationsOfUser, getGrantApplication, saveGrantApplicationAsDraft, submitGrantApplication };
