@@ -22,8 +22,8 @@ function Login() {
   const signInOptions = {
     contractId,
     methodNames: [],
-    successUrl: host + '/grants',
-    failureUrl: host + '/login?error=connect',
+    successUrl: `${host}/grants`,
+    failureUrl: `${host}/login?error=connect`,
   };
 
   useEffect(() => {

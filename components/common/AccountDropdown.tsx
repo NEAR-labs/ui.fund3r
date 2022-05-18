@@ -26,7 +26,7 @@ function AccountDropdown() {
     <Menu
       control={
         <Button rightIcon={<ChevronDown size={18} />} sx={{ paddingRight: 12 }} variant="light" color="indigo" radius="xl">
-          <UserCircle size={22} color={'#4c6ef5'} />
+          <UserCircle size={22} color="#4c6ef5" />
           &nbsp; {wallet && wallet.isSignedIn() && wallet.getAccountId()}
         </Button>
       }
