@@ -16,7 +16,7 @@ function NearAuthenticationGuardWithLoginRedirection({ children }: { children: J
     if (wallet && wallet.isSignedIn() && signStringMessage) {
       const accountId = wallet && wallet.isSignedIn() && wallet.getAccountId();
       signStringMessage(accountId).then((signature) => {
-        setCookie(COOKIE_SIGNATURE_KEY, JSON.stringify(signature), {
+        setCookie(COOKIE_SIGNATURE_KEY, JSON.stringify({ signature, accountId }), {
           path: '/',
           maxAge: COOKIE_EXPIRACY_TIME,
           sameSite: true,
