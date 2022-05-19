@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { z } from 'zod';
 import { useForm, zodResolver } from '@mantine/form';
 import { NumberInput, TextInput, Button, Textarea, Group } from '@mantine/core';
+import { useEffect } from 'react';
 
 function GrantApplicationForm({ data }: { data: GrantApplicationInterface | undefined | null }) {
   const { t } = useTranslation('grant');
@@ -22,6 +23,18 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
       fundingAmount: 0,
     },
   });
+
+  useEffect(() => {
+    if (data) {
+      const mergedValues = {
+        ...form.values,
+        ...data,
+      };
+
+      form.setValues(mergedValues);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   return (
     <div>
