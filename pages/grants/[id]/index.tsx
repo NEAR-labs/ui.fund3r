@@ -22,7 +22,7 @@ function GrantApplication() {
   const { id } = router.query;
   const { data } = useQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, id));
 
-  const isSubmitted = data?.status?.submissionDate;
+  const isSubmitted = data?.dateSubmission;
 
   return (
     <DefaultLayout>
