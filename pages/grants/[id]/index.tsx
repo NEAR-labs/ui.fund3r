@@ -7,7 +7,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import DefaultLayout from '@/layouts/default';
 import { QueryClient, dehydrate, useQuery } from 'react-query';
-import { parseCookies } from '@/utilities/parseCookies';
+import parseCookies from '@/utilities/parseCookies';
 import { COOKIE_SIGNATURE_KEY } from '@/constants';
 import useAccountSignature from '@/hooks/useAccountSignature';
 import { getGrantApplication } from '@/services/apiService';
