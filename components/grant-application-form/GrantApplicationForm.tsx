@@ -11,6 +11,8 @@ import { useQuery } from 'react-query';
 import useAccountSignature from '@/hooks/useAccountSignature';
 import useSigner from '@/modules/near-api-react/hooks/useSigner';
 import useWallet from '@/modules/near-api-react/hooks/useWallet';
+import useContract from '@/modules/near-api-react/hooks/useContract';
+import { CONTRACT_ID } from '@/constants';
 
 function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
@@ -18,6 +20,14 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
   const apiSignature = useAccountSignature();
   const { signStringMessage } = useSigner();
   const wallet = useWallet();
+
+  const contract = useContract({
+    contractId: CONTRACT_ID,
+    contractMethods: {
+      changeMethods: ['add_proposal'],
+      viewMethods: ['get_policy'],
+    },
+  });
 
   const accountId = wallet && wallet.isSignedIn() && wallet.getAccountId();
 
@@ -83,11 +93,35 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
     {
       refetchOnWindowFocus: false,
       enabled: false,
-      onSuccess: (responseData) => {
+      onSuccess: async (responseData) => {
         setData({
           ...grantData,
           ...responseData,
         });
+
+        // to do fix types & replace hardcoded values
+        // add callback url
+        // make call after the callback to mark the grant as submitted & submitted in the blockchain
+        // maybe add a field to know if it's in the blockchain or not
+
+        const policy = await contract.get_policy();
+
+        contract.add_proposal(
+          {
+            proposal: {
+              description: 'teest',
+              kind: {
+                Transfer: {
+                  token_id: '',
+                  receiver_id: accountId,
+                  amount: '10000',
+                },
+              },
+            },
+          },
+          '30000000000000',
+          policy.proposal_bond.toString(),
+        );
       },
     },
   );
