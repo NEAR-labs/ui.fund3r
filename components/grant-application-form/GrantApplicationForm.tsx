@@ -121,6 +121,7 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
   };
 
   const loading = isSavingLoading || isSubmitingLoading;
+  const lastSavedDate = savedFormResponse?.dateLastDraftSaving || data?.dateLastDraftSaving;
 
   return (
     <div>
@@ -166,6 +167,7 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
             {...form.getInputProps('fundingAmount')}
           />
         </div>
+        <p>{lastSavedDate && t('form.draft_date') + lastSavedDate.toLocaleString()}</p>
         <Group position="right" mt="xl">
           <Button type="submit" color="violet" variant="light" loading={isSavingLoading}>
             {t('form.save')}

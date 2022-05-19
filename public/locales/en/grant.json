@@ -20,6 +20,7 @@
       "error": "Please enter a funding amount that is at least 1 USD."
     },
     "save": "Save draft",
-    "submit": "Submit application"
+    "submit": "Submit application",
+    "draft_date": "Draft saved on "
   }
 }

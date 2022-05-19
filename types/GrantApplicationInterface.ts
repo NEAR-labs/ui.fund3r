@@ -46,7 +46,7 @@ export default interface GrantApplicationInterface {
   comments?: string;
 
   // Status and date
-  isDraft?: boolean;
+  dateLastDraftSaving?: Date;
   dateSubmission?: Date;
   dateEvaluation?: Date;
   dateInterviewSchedule?: Date;
