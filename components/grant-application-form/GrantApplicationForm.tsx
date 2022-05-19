@@ -120,9 +120,7 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
     }
   };
 
-  if (isSavingLoading) {
-    return <p>Loading...</p>;
-  }
+  const loading = isSavingLoading || isSubmitingLoading;
 
   return (
     <div>
@@ -142,6 +140,7 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
             mt="sm"
             onBlur={validateFieldOnBlur}
             onInput={validateFieldOnInput}
+            disabled={loading}
             {...form.getInputProps('projectName')}
           />
           <Textarea
@@ -152,6 +151,7 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
             mt="sm"
             onBlur={validateFieldOnBlur}
             onInput={validateFieldOnInput}
+            disabled={loading}
             {...form.getInputProps('projectDescription')}
           />
           <NumberInput
@@ -162,14 +162,15 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
             mt="sm"
             onBlur={validateFieldOnBlur}
             onInput={validateFieldOnInput}
+            disabled={loading}
             {...form.getInputProps('fundingAmount')}
           />
         </div>
         <Group position="right" mt="xl">
-          <Button type="submit" color="violet" variant="light">
+          <Button type="submit" color="violet" variant="light" loading={isSavingLoading}>
             {t('form.save')}
           </Button>
-          <Button type="submit" color="violet" onClick={submitApplicationHandler}>
+          <Button type="submit" color="violet" onClick={submitApplicationHandler} disabled={loading} loading={isSubmitingLoading}>
             {t('form.submit')}
           </Button>
         </Group>

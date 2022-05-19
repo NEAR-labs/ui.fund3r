@@ -2,6 +2,8 @@ import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
 import { rest } from 'msw';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_HOST;
+const GET_DELAY = process.env.NEXT_PUBLIC_MOCK_DELAY_GET ? parseInt(process.env.NEXT_PUBLIC_MOCK_DELAY_GET, 10) : 0;
+const POST_PUT_DELAY = process.env.NEXT_PUBLIC_MOCK_DELAY_POST_PUT ? parseInt(process.env.NEXT_PUBLIC_MOCK_DELAY_POST_PUT, 10) : 0;
 
 const getGrantsData = (accountId: string): GrantApplicationInterface[] => [{ id: 0, nearId: accountId }];
 
@@ -21,36 +23,36 @@ const handlers = [
   // It will retrieve the grants from the database
   // If there is no grant, it will create a new one and return an array of grants
   rest.get<never, any>(`${BASE_URL}/grants`, (_req, res, ctx) => {
-    return res(ctx.json(getGrantsData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string)));
+    return res(ctx.delay(GET_DELAY), ctx.json(getGrantsData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string)));
   }),
 
   rest.get<never, any>(`${BASE_URL}/grants/:accountId-:id`, (_req, res, ctx) => {
-    return res(ctx.json(getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10))));
+    return res(ctx.delay(GET_DELAY), ctx.json(getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10))));
   }),
 
   // todo
   rest.put<never, any>(`${BASE_URL}/grants/:id/draft`, (_req, res, ctx) => {
-    return res(ctx.json(getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10))));
+    return res(ctx.delay(POST_PUT_DELAY), ctx.json(getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10))));
   }),
 
   // todo
   rest.put<never, any>(`${BASE_URL}/grants/:id/submit`, (_req, res, ctx) => {
-    return res(ctx.json(getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10))));
+    return res(ctx.delay(POST_PUT_DELAY), ctx.json(getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10))));
   }),
 
   // todo
-  rest.post<never, any>(`${BASE_URL}/grants/:accountId-:id/milestone/:milestoneId`, (_req, res, ctx) => {
-    return res(ctx.json({ todo: true }));
+  rest.post<never, any>(`${BASE_URL}/grants/:id/milestone/:milestoneId`, (_req, res, ctx) => {
+    return res(ctx.delay(POST_PUT_DELAY), ctx.json({ todo: true }));
   }),
 
   // todo
-  rest.post<never, any>(`${BASE_URL}/grants/:accountId-:id/milestone/:milestoneId/attachment`, (_req, res, ctx) => {
-    return res(ctx.json({ todo: true }));
+  rest.post<never, any>(`${BASE_URL}/grants/:id/milestone/:milestoneId/attachment`, (_req, res, ctx) => {
+    return res(ctx.delay(POST_PUT_DELAY), ctx.json({ todo: true }));
   }),
 
   // todo
-  rest.post<never, any>(`${BASE_URL}/grants/:accountId-:id/attachment`, (_req, res, ctx) => {
-    return res(ctx.json({ todo: true }));
+  rest.post<never, any>(`${BASE_URL}/grants/:id/attachment`, (_req, res, ctx) => {
+    return res(ctx.delay(POST_PUT_DELAY), ctx.json({ todo: true }));
   }),
 ];
 
