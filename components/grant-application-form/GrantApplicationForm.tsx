@@ -12,7 +12,7 @@ import useAccountSignature from '@/hooks/useAccountSignature';
 import useSigner from '@/modules/near-api-react/hooks/useSigner';
 import useWallet from '@/modules/near-api-react/hooks/useWallet';
 
-function GrantApplicationForm({ data }: { data: GrantApplicationInterface | undefined | null }) {
+function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
 
   const apiSignature = useAccountSignature();
@@ -57,6 +57,12 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
     {
       refetchOnWindowFocus: false,
       enabled: false,
+      onSuccess: (responseData) => {
+        setData({
+          ...grantData,
+          ...responseData,
+        });
+      },
     },
   );
 
@@ -117,7 +123,7 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
   };
 
   const loading = isSavingLoading || isSubmitingLoading;
-  const lastSavedDate = savedFormResponse?.dateLastDraftSaving || data?.dateLastDraftSaving;
+  const lastSavedDate = data?.dateLastDraftSaving;
 
   return (
     <div>

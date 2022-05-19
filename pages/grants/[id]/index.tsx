@@ -1,5 +1,7 @@
+import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
 import type { NextApiRequest } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { Container } from '@mantine/core';
@@ -20,7 +22,14 @@ function GrantApplication() {
   const apiSignature = useAccountSignature();
   const router = useRouter();
   const { id } = router.query;
-  const { data } = useQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, id));
+
+  const [grantData, setGrantData] = useState<GrantApplicationInterface | undefined | null>(undefined);
+
+  const { data } = useQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, id), {
+    onSuccess: (grant) => {
+      setGrantData(grant);
+    },
+  });
 
   const isSubmitted = data?.dateSubmission;
 
@@ -31,7 +40,7 @@ function GrantApplication() {
           <title>{t('title')}</title>
         </Head>
         <NearAuthenticationGuardWithLoginRedirection>
-          <Container>{isSubmitted ? <GrantApplicationDetails data={data} /> : <GrantApplicationForm data={data} />}</Container>
+          <Container>{isSubmitted ? <GrantApplicationDetails data={grantData} /> : <GrantApplicationForm data={grantData} setData={setGrantData} />}</Container>
         </NearAuthenticationGuardWithLoginRedirection>
       </>
     </DefaultLayout>
