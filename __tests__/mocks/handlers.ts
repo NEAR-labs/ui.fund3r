@@ -31,7 +31,6 @@ const handlers = [
     return res(ctx.delay(GET_DELAY), ctx.json(getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10))));
   }),
 
-  // todo
   rest.put<never, any>(`${BASE_URL}/grants/:id/draft`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
 
@@ -43,9 +42,14 @@ const handlers = [
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),
 
-  // todo
   rest.put<never, any>(`${BASE_URL}/grants/:id/submit`, (_req, res, ctx) => {
-    return res(ctx.delay(POST_PUT_DELAY), ctx.json(getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10))));
+    const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
+    const response = {
+      ...basicData,
+      dateSubmission: new Date(),
+    };
+
+    return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),
 
   // todo

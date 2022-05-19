@@ -83,6 +83,12 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
     {
       refetchOnWindowFocus: false,
       enabled: false,
+      onSuccess: (responseData) => {
+        setData({
+          ...grantData,
+          ...responseData,
+        });
+      },
     },
   );
 

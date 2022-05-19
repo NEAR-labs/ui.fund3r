@@ -25,13 +25,13 @@ function GrantApplication() {
 
   const [grantData, setGrantData] = useState<GrantApplicationInterface | undefined | null>(undefined);
 
-  const { data } = useQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, id), {
+  useQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, id), {
     onSuccess: (grant) => {
       setGrantData(grant);
     },
   });
 
-  const isSubmitted = data?.dateSubmission;
+  const isSubmitted = grantData?.dateSubmission;
 
   return (
     <DefaultLayout>
