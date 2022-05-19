@@ -111,13 +111,9 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
     submitForm();
   };
 
-  const submitApplicationHandler = (e: any) => {
+  const saveDraftHandler = (e: any) => {
     e.preventDefault();
-    form.validate();
-
-    if (Object.keys(form.errors).length === 0) {
-      submit();
-    }
+    saveDraft();
   };
 
   const loading = isSavingLoading || isSubmitingLoading;
@@ -130,7 +126,7 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
         {/* eslint-disable-next-line react/no-danger */}
         <p dangerouslySetInnerHTML={{ __html: t('form.description') }} />
       </div>
-      <form onSubmit={form.onSubmit(() => saveDraft())}>
+      <form onSubmit={form.onSubmit(() => submit())}>
         <div>
           <h2>{t('form.applicationProjectDetailTitle')}</h2>
           <TextInput
@@ -169,10 +165,10 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
         </div>
         <p>{lastSavedDate && t('form.draft_date') + lastSavedDate.toLocaleString()}</p>
         <Group position="right" mt="xl">
-          <Button type="submit" color="violet" variant="light" loading={isSavingLoading}>
+          <Button color="violet" onClick={saveDraftHandler} variant="light" loading={isSavingLoading}>
             {t('form.save')}
           </Button>
-          <Button type="submit" color="violet" onClick={submitApplicationHandler} disabled={loading} loading={isSubmitingLoading}>
+          <Button type="submit" color="violet" disabled={loading} loading={isSubmitingLoading}>
             {t('form.submit')}
           </Button>
         </Group>
