@@ -29,12 +29,12 @@ const handlers = [
   }),
 
   // todo
-  rest.put<never, any>(`${BASE_URL}/grants/:accountId-:id/draft`, (_req, res, ctx) => {
+  rest.put<never, any>(`${BASE_URL}/grants/:id/draft`, (_req, res, ctx) => {
     return res(ctx.json(getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10))));
   }),
 
   // todo
-  rest.put<never, any>(`${BASE_URL}/grants/:accountId-:id/submit`, (_req, res, ctx) => {
+  rest.put<never, any>(`${BASE_URL}/grants/:id/submit`, (_req, res, ctx) => {
     return res(ctx.json(getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10))));
   }),
 
