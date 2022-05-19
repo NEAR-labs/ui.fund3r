@@ -12,7 +12,7 @@ const getAllGrantApplicationsOfUser = async (signature: NearApiSignatureInterfac
   const { data } = await axios.get(`${API_HOST}/grants`, {
     headers: {
       'X-NEAR-ACCOUNT-ID': signature.accountId,
-      'X-NEAR-SIGNATURE': signature.signature,
+      'X-NEAR-SIGNATURE': JSON.stringify(signature.signature),
     },
   });
 
@@ -27,7 +27,7 @@ const getGrantApplication = async (signature: NearApiSignatureInterface | undefi
   const { data } = await axios.get(`${API_HOST}/grants/${grantId}`, {
     headers: {
       'X-NEAR-ACCOUNT-ID': signature.accountId,
-      'X-NEAR-SIGNATURE': signature.signature,
+      'X-NEAR-SIGNATURE': JSON.stringify(signature.signature),
     },
   });
 
@@ -43,9 +43,10 @@ const saveGrantApplicationAsDraft = async (
   }: {
     grantId: string | undefined;
     grantData: GrantApplicationInterface;
-    signStringMessage: any;
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    signStringMessage: Function;
   },
-): Promise<any> => {
+): Promise<GrantApplicationInterface | null> => {
   if (!signature) {
     return null;
   }
@@ -65,7 +66,7 @@ const saveGrantApplicationAsDraft = async (
     {
       headers: {
         'X-NEAR-ACCOUNT-ID': signature.accountId,
-        'X-NEAR-SIGNATURE': signature.signature,
+        'X-NEAR-SIGNATURE': JSON.stringify(signature.signature),
       },
     },
   );
@@ -82,9 +83,10 @@ const submitGrantApplication = async (
   }: {
     grantId: string | undefined;
     grantData: GrantApplicationInterface;
-    signStringMessage: any;
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    signStringMessage: Function;
   },
-): Promise<any> => {
+): Promise<GrantApplicationInterface | null> => {
   if (!signature) {
     return null;
   }
@@ -109,7 +111,7 @@ const submitGrantApplication = async (
     {
       headers: {
         'X-NEAR-ACCOUNT-ID': signature.accountId,
-        'X-NEAR-SIGNATURE': signature.signature,
+        'X-NEAR-SIGNATURE': JSON.stringify(signature.signature),
       },
     },
   );
@@ -117,18 +119,18 @@ const submitGrantApplication = async (
   return data;
 };
 
-const submitMilestoneData = async (signature: NearApiSignatureInterface | undefined, data: any) => {};
+// const submitMilestoneData = async (signature: NearApiSignatureInterface | undefined, data: any) => {};
 
-const submitMilestoneAttachment = async (signature: NearApiSignatureInterface | undefined, data: any) => {};
+// const submitMilestoneAttachment = async (signature: NearApiSignatureInterface | undefined, data: any) => {};
 
-const submitGrantAttachment = async (signature: NearApiSignatureInterface | undefined, data: any) => {};
+// const submitGrantAttachment = async (signature: NearApiSignatureInterface | undefined, data: any) => {};
 
 export {
   getAllGrantApplicationsOfUser,
   getGrantApplication,
   saveGrantApplicationAsDraft,
   submitGrantApplication,
-  submitMilestoneData,
-  submitMilestoneAttachment,
-  submitGrantAttachment,
+  // submitMilestoneData,
+  // submitMilestoneAttachment,
+  // submitGrantAttachment,
 };
