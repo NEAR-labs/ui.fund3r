@@ -21,6 +21,7 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
       projectName: '',
       projectDescription: '',
       fundingAmount: 0,
+      ...data,
     },
   });
 

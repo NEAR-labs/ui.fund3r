@@ -43,7 +43,7 @@ export async function getServerSideProps({ req, locale, params }: { req: NextApi
   const data = parseCookies(req);
   const apiSignature = data[COOKIE_SIGNATURE_KEY] ? JSON.parse(data[COOKIE_SIGNATURE_KEY]) : null;
 
-  await queryClient.prefetchQuery(['grants', apiSignature], () => getGrantApplication(apiSignature, params.id));
+  await queryClient.prefetchQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, params.id));
   const dehydratedState = dehydrate(queryClient);
 
   return {
