@@ -19,7 +19,7 @@ const getAllGrantApplicationsOfUser = async (signature: NearApiSignatureInterfac
   return data;
 };
 
-const getGrantApplication = async (signature: NearApiSignatureInterface | undefined, grantId: string | string[] | undefined): Promise<GrantApplicationInterface | null> => {
+const getGrantApplication = async (signature: NearApiSignatureInterface | undefined, grantId: number | string[] | undefined): Promise<GrantApplicationInterface | null> => {
   if (!signature) {
     return null;
   }
@@ -41,7 +41,7 @@ const saveGrantApplicationAsDraft = async (
     grantData,
     signStringMessage,
   }: {
-    grantId: string | undefined;
+    grantId: number | undefined;
     grantData: GrantApplicationInterface;
     // eslint-disable-next-line @typescript-eslint/ban-types
     signStringMessage: Function;
@@ -81,7 +81,7 @@ const submitGrantApplication = async (
     grantData,
     signStringMessage,
   }: {
-    grantId: string | undefined;
+    grantId: number | undefined;
     grantData: GrantApplicationInterface;
     // eslint-disable-next-line @typescript-eslint/ban-types
     signStringMessage: Function;

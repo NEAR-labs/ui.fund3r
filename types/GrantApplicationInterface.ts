@@ -1,7 +1,7 @@
 import type MilestoneInterface from './MilestoneInterface';
 
 export default interface GrantApplicationInterface {
-  id: number;
+  id: number | undefined;
   nearId: string;
 
   // Member related

@@ -6,9 +6,20 @@ import { z } from 'zod';
 import { useForm, zodResolver } from '@mantine/form';
 import { NumberInput, TextInput, Button, Textarea, Group } from '@mantine/core';
 import { useEffect } from 'react';
+import { saveGrantApplicationAsDraft, submitGrantApplication } from '@/services/apiService';
+import { useQuery } from 'react-query';
+import useAccountSignature from '@/hooks/useAccountSignature';
+import useSigner from '@/modules/near-api-react/hooks/useSigner';
+import useWallet from '@/modules/near-api-react/hooks/useWallet';
 
 function GrantApplicationForm({ data }: { data: GrantApplicationInterface | undefined | null }) {
   const { t } = useTranslation('grant');
+
+  const apiSignature = useAccountSignature();
+  const { signStringMessage } = useSigner();
+  const wallet = useWallet();
+
+  const accountId = wallet && wallet.isSignedIn() && wallet.getAccountId();
 
   const schema = z.object({
     projectName: z.string().min(3, { message: t('form.projectName.error') }),
@@ -25,6 +36,49 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
       ...data,
     },
   });
+
+  const grantId = data?.id;
+  const grantData = { ...form.values, id: grantId, nearId: accountId };
+
+  const {
+    data: savedFormResponse,
+    refetch: saveForm,
+    isLoading: isSavingLoading,
+    isError: isSavingError,
+    isSuccess: isSavingSuccess,
+  } = useQuery(
+    ['saveForm', apiSignature, grantId, grantData, signStringMessage],
+    () =>
+      saveGrantApplicationAsDraft(apiSignature, {
+        grantId,
+        grantData,
+        signStringMessage,
+      }),
+    {
+      refetchOnWindowFocus: false,
+      enabled: false,
+    },
+  );
+
+  const {
+    data: submitFormResponse,
+    refetch: submitForm,
+    isLoading: isSubmitingLoading,
+    isError: isSubmitingError,
+    isSuccess: isSubmitingSuccess,
+  } = useQuery(
+    ['submitForm', apiSignature, grantId, grantData, signStringMessage],
+    () =>
+      submitGrantApplication(apiSignature, {
+        grantId,
+        grantData,
+        signStringMessage,
+      }),
+    {
+      refetchOnWindowFocus: false,
+      enabled: false,
+    },
+  );
 
   useEffect(() => {
     if (data) {
@@ -49,12 +103,12 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
     }
   };
 
-  const saveDraft = (formData) => {
-    alert('Save draft');
+  const saveDraft = () => {
+    saveForm();
   };
 
-  const submit = (formData) => {
-    alert('Submit');
+  const submit = () => {
+    submitForm();
   };
 
   const submitApplicationHandler = (e: any) => {
@@ -62,9 +116,13 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
     form.validate();
 
     if (Object.keys(form.errors).length === 0) {
-      submit(form.values);
+      submit();
     }
   };
+
+  if (isSavingLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div>
@@ -73,7 +131,7 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
         {/* eslint-disable-next-line react/no-danger */}
         <p dangerouslySetInnerHTML={{ __html: t('form.description') }} />
       </div>
-      <form onSubmit={form.onSubmit((values) => saveDraft(values))}>
+      <form onSubmit={form.onSubmit(() => saveDraft())}>
         <div>
           <h2>{t('form.applicationProjectDetailTitle')}</h2>
           <TextInput
