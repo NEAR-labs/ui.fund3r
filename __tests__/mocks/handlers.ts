@@ -47,6 +47,7 @@ const handlers = [
     const response = {
       ...basicData,
       dateSubmission: new Date(),
+      projectName: 'Dummy',
     };
 
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
