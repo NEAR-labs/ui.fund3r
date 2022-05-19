@@ -49,6 +49,23 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
     }
   };
 
+  const saveDraft = (formData) => {
+    alert('Save draft');
+  };
+
+  const submit = (formData) => {
+    alert('Submit');
+  };
+
+  const submitApplicationHandler = (e: any) => {
+    e.preventDefault();
+    form.validate();
+
+    if (Object.keys(form.errors).length === 0) {
+      submit(form.values);
+    }
+  };
+
   return (
     <div>
       <div>
@@ -56,7 +73,7 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
         {/* eslint-disable-next-line react/no-danger */}
         <p dangerouslySetInnerHTML={{ __html: t('form.description') }} />
       </div>
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+      <form onSubmit={form.onSubmit((values) => saveDraft(values))}>
         <div>
           <h2>{t('form.applicationProjectDetailTitle')}</h2>
           <TextInput
@@ -94,7 +111,7 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
           <Button type="submit" color="violet" variant="light">
             {t('form.save')}
           </Button>
-          <Button type="submit" color="violet">
+          <Button type="submit" color="violet" onClick={submitApplicationHandler}>
             {t('form.submit')}
           </Button>
         </Group>

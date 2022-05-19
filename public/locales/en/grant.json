@@ -18,6 +18,8 @@
       "label": "How much funding are you requesting?",
       "placeholder": "10000",
       "error": "Please enter a funding amount that is at least 1 USD."
-    }
+    },
+    "save": "Save draft",
+    "submit": "Submit application"
   }
 }
