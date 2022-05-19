@@ -25,8 +25,10 @@ function GrantApplication() {
 
   const [grantData, setGrantData] = useState<GrantApplicationInterface | undefined | null>(undefined);
 
-  useQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, id), {
+  useQuery(['grant', apiSignature, id], () => getGrantApplication(apiSignature, id), {
+    refetchOnWindowFocus: false,
     onSuccess: (grant) => {
+      console.log('grant', grant);
       setGrantData(grant);
     },
   });

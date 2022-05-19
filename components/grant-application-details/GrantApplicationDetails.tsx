@@ -4,8 +4,6 @@ import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
 
 function GrantApplicationDetails({ data }: { data: GrantApplicationInterface }) {
   //   const { t } = useTranslation('grant');
-  console.log(data);
-
   return <span>Grant Application Details</span>;
 }
 
