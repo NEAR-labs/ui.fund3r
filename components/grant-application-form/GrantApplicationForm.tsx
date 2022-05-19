@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
-import type { FocusEvent, FormEvent } from 'react';
+import type { FocusEvent } from 'react';
 import { useTranslation } from 'next-i18next';
 import { z } from 'zod';
 import { useForm, zodResolver } from '@mantine/form';
