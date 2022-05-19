@@ -1,5 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
+import type { FocusEvent, FormEvent } from 'react';
 import { useTranslation } from 'next-i18next';
 import { z } from 'zod';
 import { useForm, zodResolver } from '@mantine/form';
@@ -10,9 +11,9 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
   const { t } = useTranslation('grant');
 
   const schema = z.object({
-    projectName: z.string().min(2, { message: t('form.applicationProjectDetail.projectName.error') }),
-    projectDescription: z.string().min(2, { message: t('form.applicationProjectDetail.projectDescription.error') }),
-    fundingAmount: z.number().min(1, { message: t('form.applicationProjectDetail.fundingAmount.error') }),
+    projectName: z.string().min(3, { message: t('form.projectName.error') }),
+    projectDescription: z.string().min(10, { message: t('form.projectDescription.error') }),
+    fundingAmount: z.number().min(1, { message: t('form.fundingAmount.error') }),
   });
 
   const form = useForm({
@@ -37,34 +38,55 @@ function GrantApplicationForm({ data }: { data: GrantApplicationInterface | unde
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
+  const validateFieldOnBlur = (e: FocusEvent) => {
+    form.validateField(e.target.id);
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const validateFieldOnInput = (e: any) => {
+    if (form.errors[e.target.id]) {
+      form.validateField(e.target.id);
+    }
+  };
+
   return (
     <div>
       <div>
         <h1>{t('form.title')}</h1>
-        <p>{t('form.description')}</p>
+        {/* eslint-disable-next-line react/no-danger */}
+        <p dangerouslySetInnerHTML={{ __html: t('form.description') }} />
       </div>
       <form onSubmit={form.onSubmit((values) => console.log(values))}>
         <div>
-          <h2>{t('form.applicationProjectDetail.title')}</h2>
+          <h2>{t('form.applicationProjectDetailTitle')}</h2>
           <TextInput
             required
-            label={t('form.applicationProjectDetail.projectName.label')}
-            placeholder={t('form.applicationProjectDetail.projectName.placeholder')}
+            id="projectName"
+            label={t('form.projectName.label')}
+            placeholder={t('form.projectName.placeholder')}
             mt="sm"
+            onBlur={validateFieldOnBlur}
+            onInput={validateFieldOnInput}
             {...form.getInputProps('projectName')}
           />
           <Textarea
             required
-            label={t('form.applicationProjectDetail.projectDescription.label')}
-            placeholder={t('form.applicationProjectDetail.projectDescription.placeholder')}
+            id="projectDescription"
+            label={t('form.projectDescription.label')}
+            placeholder={t('form.projectDescription.placeholder')}
             mt="sm"
+            onBlur={validateFieldOnBlur}
+            onInput={validateFieldOnInput}
             {...form.getInputProps('projectDescription')}
           />
           <NumberInput
             required
-            label={t('form.applicationProjectDetail.fundingAmount.label')}
-            placeholder={t('form.applicationProjectDetail.fundingAmount.placeholder')}
+            id="fundingAmount"
+            label={t('form.fundingAmount.label')}
+            placeholder={t('form.fundingAmount.placeholder')}
             mt="sm"
+            onBlur={validateFieldOnBlur}
+            onInput={validateFieldOnInput}
             {...form.getInputProps('fundingAmount')}
           />
         </div>
