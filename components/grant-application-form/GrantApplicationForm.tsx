@@ -191,7 +191,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
           <Button color="violet" onClick={saveDraftHandler} variant="light" loading={isSavingLoading}>
             {t('form.save')}
           </Button>
-          <Button type="submit" color="violet" disabled={loading} loading={isSubmitingLoading}>
+          <Button type="submit" color="violet" disabled={loading} loading={isSubmitingLoading || isNearLoading}>
             {t('form.submit')}
           </Button>
         </Group>
