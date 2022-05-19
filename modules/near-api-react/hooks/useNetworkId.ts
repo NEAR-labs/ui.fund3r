@@ -4,7 +4,7 @@ import NearContext from '../context/NearContext';
 /**
  * Get the NEAR connection object from the context.
  */
-export const useNetworkId = () => {
+const useNetworkId = () => {
   const context = useContext(NearContext);
 
   if (context === undefined) {
@@ -15,3 +15,5 @@ export const useNetworkId = () => {
 
   return networkId;
 };
+
+export default useNetworkId;

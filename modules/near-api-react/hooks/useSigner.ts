@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
-import { useNear } from './useNear';
+import useNear from './useNear';
 import useWallet from './useWallet';
-import { useNetworkId } from './useNetworkId';
+import useNetworkId from './useNetworkId';
 
 /**
  * Get the signer in order to sign transactions or messages
@@ -29,7 +29,7 @@ const useSigner = () => {
     [signer, accountId, networkId],
   );
 
-  const signObjectMessage = async (message: any) => {
+  const signObjectMessage = async (message: object) => {
     const stringMessage = JSON.stringify(message);
     const signedMessage = await signStringMessage(stringMessage);
     return signedMessage;

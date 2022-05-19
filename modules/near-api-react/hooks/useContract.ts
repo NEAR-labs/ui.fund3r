@@ -19,7 +19,7 @@ interface ContractConfigInterface {
  * @param {string[]} contractConfig.contractMethods.viewMethods The view methods of the smart contract.
  * @param {string[]} contractConfig.contractMethods.changeMethods The change methods of the smart contract.
  */
-export const useContract = ({ contractId, contractMethods: { viewMethods, changeMethods } }: ContractConfigInterface) => {
+const useContract = ({ contractId, contractMethods: { viewMethods, changeMethods } }: ContractConfigInterface) => {
   const wallet = useWallet();
 
   return (
@@ -30,3 +30,5 @@ export const useContract = ({ contractId, contractMethods: { viewMethods, change
     })
   );
 };
+
+export default useContract;

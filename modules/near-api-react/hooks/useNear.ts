@@ -4,7 +4,7 @@ import NearContext from '../context/NearContext';
 /**
  * Get the NEAR connection object from the context.
  */
-export const useNear = () => {
+const useNear = () => {
   const context = useContext(NearContext);
 
   if (context === undefined) {
@@ -15,3 +15,5 @@ export const useNear = () => {
 
   return near;
 };
+
+export default useNear;
