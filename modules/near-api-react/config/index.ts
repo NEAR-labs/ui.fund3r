@@ -6,7 +6,7 @@ import { keyStores, ConnectConfig } from 'near-api-js';
  * @param  {string} networkId='testnet'
  * @return {object}
  */
-export const getConfig = (networkId = 'testnet'): ConnectConfig => {
+const getConfig = (networkId = 'testnet'): ConnectConfig => {
   return {
     keyStore: new keyStores.BrowserLocalStorageKeyStore(),
     networkId,
@@ -16,3 +16,5 @@ export const getConfig = (networkId = 'testnet'): ConnectConfig => {
     headers: {},
   };
 };
+
+export default getConfig;

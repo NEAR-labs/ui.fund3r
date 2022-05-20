@@ -1,26 +1,14 @@
-import { useRouter } from 'next/router';
-import { useCookies } from 'react-cookie';
-import { useCallback } from 'react';
 import Link from 'next/link';
 import { Divider, Button, Menu, useMantineTheme } from '@mantine/core';
 import { Checklist, ChevronDown, Logout, UserCircle } from 'tabler-icons-react';
-import { useWallet } from '@/modules/near-api-react/hooks/useWallet';
+import useWallet from '@/modules/near-api-react/hooks/useWallet';
 import { useTranslation } from 'next-i18next';
 import styles from '@/styles/AccountDropdown.module.css';
-import { COOKIE_SIGNATURE_KEY } from '@/constants';
 
 function AccountDropdown() {
   const theme = useMantineTheme();
   const wallet = useWallet();
   const { t } = useTranslation('common');
-  const router = useRouter();
-  const [, , removeCookie] = useCookies([COOKIE_SIGNATURE_KEY]);
-
-  const logout = useCallback(() => {
-    wallet?.signOut();
-    removeCookie(COOKIE_SIGNATURE_KEY);
-    router.push('/');
-  }, [wallet, router, removeCookie]);
 
   return (
     <Menu
@@ -40,9 +28,11 @@ function AccountDropdown() {
         </Menu.Item>
       </Link>
       <Divider />
-      <Menu.Item icon={<Logout size={16} color={theme.colors.red[6]} />} onClick={logout}>
-        {t('navbar.signout')}
-      </Menu.Item>
+      <Link href="/logout" passHref>
+        <Menu.Item component="a" icon={<Logout size={16} color={theme.colors.red[6]} />}>
+          {t('navbar.signout')}
+        </Menu.Item>
+      </Link>
     </Menu>
   );
 }

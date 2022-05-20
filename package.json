@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix"
+    "lint": "next lint --dir .",
+    "lint:fix": "next lint --dir . --fix"
   },
   "dependencies": {
     "@mantine/core": "^4.2.5",
@@ -27,7 +27,8 @@
     "react-cookie": "^4.1.1",
     "react-dom": "18.1.0",
     "react-query": "^3.39.0",
-    "tabler-icons-react": "^1.48.0"
+    "tabler-icons-react": "^1.48.0",
+    "zod": "^3.16.0"
   },
   "devDependencies": {
     "@types/node": "17.0.33",

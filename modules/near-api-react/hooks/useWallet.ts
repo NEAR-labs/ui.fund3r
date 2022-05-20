@@ -1,10 +1,10 @@
 import { useContext } from 'react';
-import { NearContext } from '../context/NearContext';
+import NearContext from '../context/NearContext';
 
 /**
  * Get the NEAR wallet connection object from the context.
  */
-export const useWallet = () => {
+const useWallet = () => {
   const context = useContext(NearContext);
 
   if (context === undefined) {
@@ -15,3 +15,5 @@ export const useWallet = () => {
 
   return wallet;
 };
+
+export default useWallet;

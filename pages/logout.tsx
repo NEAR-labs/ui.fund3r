@@ -1,24 +1,31 @@
 import Head from 'next/head';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useCookies } from 'react-cookie';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import useWallet from '@/modules/near-api-react/hooks/useWallet';
 import DefaultLayout from '@/layouts/default';
-import LoginContent from '@/components/login/LoginContent';
 import LoadingAnimation from '@/components/common/LoadingAnimation';
+import { COOKIE_SIGNATURE_KEY } from '@/constants';
+import { useRouter } from 'next/router';
 
-function Login() {
-  const { t } = useTranslation('login');
-
+function Logout() {
+  const { t } = useTranslation('logout');
   const wallet = useWallet();
   const router = useRouter();
+  const [, , removeCookie] = useCookies([COOKIE_SIGNATURE_KEY]);
+
+  const logout = useCallback(() => {
+    wallet?.signOut();
+    removeCookie(COOKIE_SIGNATURE_KEY);
+    router.push('/');
+  }, [wallet, router, removeCookie]);
 
   useEffect(() => {
-    if (wallet && wallet.isSignedIn()) {
-      router.push('/grants');
+    if (wallet) {
+      logout();
     }
-  }, [wallet, router]);
+  }, [logout, wallet]);
 
   return (
     <DefaultLayout>
@@ -26,7 +33,7 @@ function Login() {
         <Head>
           <title>{t('title')}</title>
         </Head>
-        {wallet && wallet.isSignedIn() ? <LoadingAnimation /> : <LoginContent />}
+        <LoadingAnimation />
       </>
     </DefaultLayout>
   );
@@ -35,9 +42,9 @@ function Login() {
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'login'])),
+      ...(await serverSideTranslations(locale, ['common', 'logout'])),
     },
   };
 }
 
-export default Login;
+export default Logout;

@@ -1,4 +1,4 @@
 export default interface NearApiSignatureInterface {
-  signature: any;
+  signature: Uint8Array | undefined | null;
   accountId: string;
 }

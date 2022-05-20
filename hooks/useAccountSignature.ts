@@ -1,11 +1,11 @@
 import type NearApiSignatureInterface from '@/types/NearApiSignatureInterface';
 import { useEffect, useState } from 'react';
-import { useSigner } from '@/modules/near-api-react/hooks/useSigner';
-import { useWallet } from '@/modules/near-api-react/hooks/useWallet';
+import useSigner from '@/modules/near-api-react/hooks/useSigner';
+import useWallet from '@/modules/near-api-react/hooks/useWallet';
 import { useCookies } from 'react-cookie';
 import { COOKIE_SIGNATURE_KEY, COOKIE_EXPIRACY_TIME } from '@/constants';
 
-export const useAccountSignature = () => {
+const useAccountSignature = () => {
   const [apiSignature, setApiSignature] = useState<NearApiSignatureInterface>();
   const { signStringMessage } = useSigner();
   const [, setCookie] = useCookies([COOKIE_SIGNATURE_KEY]);
@@ -16,7 +16,7 @@ export const useAccountSignature = () => {
 
     if (accountId) {
       signStringMessage(accountId).then((signature) => {
-        const fullSignature = {
+        const fullSignature: NearApiSignatureInterface = {
           signature,
           accountId,
         };
@@ -30,7 +30,9 @@ export const useAccountSignature = () => {
         });
       });
     }
-  }, [wallet]);
+  }, [setCookie, signStringMessage, wallet]);
 
   return apiSignature;
 };
+
+export default useAccountSignature;

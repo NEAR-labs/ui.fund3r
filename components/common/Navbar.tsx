@@ -4,7 +4,7 @@ import AccountDropdown from '@/components/common/AccountDropdown';
 import { createStyles, Header, Container, Group, Burger, Button } from '@mantine/core';
 import { useBooleanToggle } from '@mantine/hooks';
 import { useTranslation } from 'next-i18next';
-import { useWallet } from '@/modules/near-api-react/hooks/useWallet';
+import useWallet from '@/modules/near-api-react/hooks/useWallet';
 
 const useStyles = createStyles((theme) => ({
   header: {

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const setupWorker = () => {
   if (typeof window === 'undefined') {
     const { server } = require('./server');

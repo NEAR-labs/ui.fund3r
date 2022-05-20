@@ -7,4 +7,6 @@ interface NearContextInterface {
   networkId: string | undefined;
 }
 
-export const NearContext = createContext<NearContextInterface>({ near: null, wallet: null, networkId: undefined });
+const NearContext = createContext<NearContextInterface>({ near: null, wallet: null, networkId: undefined });
+
+export default NearContext;
