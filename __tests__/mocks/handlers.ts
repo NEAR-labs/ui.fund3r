@@ -45,9 +45,14 @@ const handlers = [
 
   rest.put<never, any>(`${BASE_URL}/grants/:id/draft`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
+    const { grantData } = _req.body;
+
     const response = {
       ...basicData,
+      ...grantData,
     };
+
+    localStorage.setItem('fund3r-mock-data', JSON.stringify(grantData));
 
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),
@@ -55,12 +60,17 @@ const handlers = [
   rest.put<never, any>(`${BASE_URL}/grants/:id/submit`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
 
+    const dummyDataString = localStorage.getItem('fund3r-mock-data');
+    const dummyData = dummyDataString ? JSON.parse(dummyDataString) : {};
+
+    const nearFundingAmount: BigInt = BigInt((dummyData.fundingAmount / 5.95) * 10 ** 24);
+
     const response = {
       ...basicData,
       dateSubmission: new Date(),
-      projectName: 'Mocked Dummy Project',
-      projectDescription: 'Mocked Dummy Project Description',
-      nearFundingAmount: '10000000000000',
+      projectName: dummyData.projectName || 'Mocked Dummy Project',
+      projectDescription: dummyData.projectDescription || 'Mocked Dummy Project Description',
+      nearFundingAmount: nearFundingAmount.toString(),
     };
 
     localStorage.setItem('fund3r-mock-sumission', 'true');
