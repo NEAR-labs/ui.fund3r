@@ -33,7 +33,6 @@ const handlers = [
 
   rest.put<never, any>(`${BASE_URL}/grants/:id/draft`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
-
     const response = {
       ...basicData,
       dateLastDraftSaving: new Date(),
@@ -44,10 +43,13 @@ const handlers = [
 
   rest.put<never, any>(`${BASE_URL}/grants/:id/submit`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
+
     const response = {
       ...basicData,
       dateSubmission: new Date(),
-      projectName: 'Dummy',
+      projectName: 'Mocked Dummy Project',
+      projectDescription: 'Mocked Dummy Project Description',
+      nearFundingAmount: '10000000000000',
     };
 
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));

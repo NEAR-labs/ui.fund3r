@@ -14,6 +14,7 @@ import useWallet from '@/modules/near-api-react/hooks/useWallet';
 import useContract from '@/modules/near-api-react/hooks/useContract';
 import { CONTRACT_ID } from '@/constants';
 import { createPayoutProposal } from '@/services/sputnikContractService';
+import { getNearUsdConvertRate } from '@/services/currencyConverter';
 
 function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
@@ -52,6 +53,10 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
 
   const grantId = data?.id;
   const grantData = { ...form.values, id: grantId, nearId: accountId };
+
+  const { data: usdNearConvertRate } = useQuery(['convertUsdToNear'], () => getNearUsdConvertRate(), {
+    refetchOnWindowFocus: false,
+  });
 
   const {
     data: savedFormResponse,
@@ -183,8 +188,11 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
             onBlur={validateFieldOnBlur}
             onInput={validateFieldOnInput}
             disabled={loading}
+            rightSection={<span>USD</span>}
+            rightSectionWidth={50}
             {...form.getInputProps('fundingAmount')}
           />
+          1 NEAR = {usdNearConvertRate} USD
         </div>
         <p>{lastSavedDate && t('form.draft_date') + lastSavedDate.toLocaleString()}</p>
         <Group position="right" mt="xl">

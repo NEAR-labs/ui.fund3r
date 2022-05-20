@@ -24,6 +24,7 @@ export default interface GrantApplicationInterface {
   projectDescription?: string;
   currency?: string; // enum maybe
   fundingAmount?: number;
+  nearFundingAmount?: number;
   whatAndWhy?: string;
   competitionDifference?: string;
   isOpenSource?: boolean;

@@ -1,7 +1,7 @@
 import createProposalDescription from '@/utilities/createProposalDescription';
 
-const createPayoutProposal = async (contract, grantData, payoutNumber: number) => {
-  const description = createProposalDescription(grantData.projectName, payoutNumber);
+const createPayoutProposal = async (contract: any, grantData: any, payoutNumber: number) => {
+  const description = createProposalDescription(grantData.projectName, payoutNumber, grantData.projectDescription);
   const policy = await contract.get_policy();
 
   contract.add_proposal(
@@ -12,7 +12,7 @@ const createPayoutProposal = async (contract, grantData, payoutNumber: number) =
           Transfer: {
             token_id: '',
             receiver_id: grantData.nearId,
-            amount: '10000',
+            amount: grantData.nearFundingAmount,
           },
         },
       },
