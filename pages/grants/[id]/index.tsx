@@ -16,6 +16,7 @@ import { getGrantApplication } from '@/services/apiService';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
 import GrantApplicationForm from '@/components/grant-application-form/GrantApplicationForm';
 import GrantApplicationDetails from '@/components/grant-application-details/GrantApplicationDetails';
+import LoadingAnimation from '@/components/common/LoadingAnimation';
 
 function GrantApplication() {
   const { t } = useTranslation('grant');
@@ -25,7 +26,7 @@ function GrantApplication() {
 
   const [grantData, setGrantData] = useState<GrantApplicationInterface | undefined | null>(undefined);
 
-  useQuery(['grant', apiSignature, id], () => getGrantApplication(apiSignature, id), {
+  const { isLoading } = useQuery(['grant', apiSignature, id], () => getGrantApplication(apiSignature, id), {
     refetchOnWindowFocus: false,
     onSuccess: (grant) => {
       setGrantData(grant);
@@ -41,7 +42,11 @@ function GrantApplication() {
           <title>{t('title')}</title>
         </Head>
         <NearAuthenticationGuardWithLoginRedirection>
-          <Container>{isSubmitted ? <GrantApplicationDetails data={grantData} /> : <GrantApplicationForm data={grantData} setData={setGrantData} />}</Container>
+          {isLoading ? (
+            <LoadingAnimation />
+          ) : (
+            <Container>{isSubmitted ? <GrantApplicationDetails data={grantData} /> : <GrantApplicationForm data={grantData} setData={setGrantData} />}</Container>
+          )}
         </NearAuthenticationGuardWithLoginRedirection>
       </>
     </DefaultLayout>

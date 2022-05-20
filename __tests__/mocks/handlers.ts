@@ -28,14 +28,23 @@ const handlers = [
   }),
 
   rest.get<never, any>(`${BASE_URL}/grants/:accountId-:id`, (_req, res, ctx) => {
-    return res(ctx.delay(GET_DELAY), ctx.json(getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10))));
+    const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
+
+    const response = {
+      ...basicData,
+    };
+
+    if (localStorage.getItem('fund3r-mock-sumission') === 'true') {
+      response.dateSubmission = new Date();
+    }
+
+    return res(ctx.delay(GET_DELAY), ctx.json(response));
   }),
 
   rest.put<never, any>(`${BASE_URL}/grants/:id/draft`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
     const response = {
       ...basicData,
-      dateLastDraftSaving: new Date(),
     };
 
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
@@ -51,6 +60,8 @@ const handlers = [
       projectDescription: 'Mocked Dummy Project Description',
       nearFundingAmount: '10000000000000',
     };
+
+    localStorage.setItem('fund3r-mock-sumission', 'true');
 
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),
