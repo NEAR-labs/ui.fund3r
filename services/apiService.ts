@@ -19,7 +19,10 @@ const getAllGrantApplicationsOfUser = async (signature: NearApiSignatureInterfac
   return data;
 };
 
-const getGrantApplication = async (signature: NearApiSignatureInterface | undefined, grantId: number | string[] | undefined): Promise<GrantApplicationInterface | null> => {
+const getGrantApplication = async (
+  signature: NearApiSignatureInterface | undefined,
+  grantId: number | string[] | string | undefined,
+): Promise<GrantApplicationInterface | null> => {
   if (!signature) {
     return null;
   }
