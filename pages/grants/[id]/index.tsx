@@ -33,7 +33,8 @@ function GrantApplication() {
     },
   });
 
-  const isSubmitted = grantData?.dateSubmission;
+  const showForm = grantData;
+  const showGrantData = grantData && grantData.dateSubmission;
 
   return (
     <DefaultLayout>
@@ -45,7 +46,10 @@ function GrantApplication() {
           {isLoading ? (
             <LoadingAnimation />
           ) : (
-            <Container>{isSubmitted ? <GrantApplicationDetails data={grantData} /> : <GrantApplicationForm data={grantData} setData={setGrantData} />}</Container>
+            <Container>
+              {showForm && !showGrantData && <GrantApplicationForm data={grantData} setData={setGrantData} />}
+              {showGrantData && <GrantApplicationDetails data={grantData} />}
+            </Container>
           )}
         </NearAuthenticationGuardWithLoginRedirection>
       </>
