@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable max-lines-per-function */
 import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
-import type { FocusEvent } from 'react';
+import type { FocusEvent, FormEvent, MouseEvent } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useForm, zodResolver } from '@mantine/form';
-import { NumberInput, TextInput, Button, Textarea, Group } from '@mantine/core';
+import { NumberInput, TextInput, Button, Textarea, Group, Alert } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { saveGrantApplicationAsDraft, submitGrantApplication } from '@/services/apiService';
 import { useQuery } from 'react-query';
@@ -17,6 +16,7 @@ import { createPayoutProposal } from '@/services/sputnikContractService';
 import { getNearUsdConvertRate } from '@/services/currencyConverter';
 import { z } from 'zod';
 import createSchema from '@/form-schemas/grantApplicationFormSchema';
+import { AlertCircle } from 'tabler-icons-react';
 
 function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
@@ -57,11 +57,9 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
   });
 
   const {
-    data: savedFormResponse,
     refetch: saveForm,
     isLoading: isSavingLoading,
     isError: isSavingError,
-    isSuccess: isSavingSuccess,
   } = useQuery(
     ['saveForm', apiSignature, grantId, grantData, signStringMessage],
     () =>
@@ -83,11 +81,9 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
   );
 
   const {
-    data: submitFormResponse,
     refetch: submitForm,
     isLoading: isSubmitingLoading,
     isError: isSubmitingError,
-    isSuccess: isSubmitingSuccess,
   } = useQuery(
     ['submitForm', apiSignature, grantId, grantData, signStringMessage],
     () =>
@@ -104,8 +100,9 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
         setIsNearLoading(true);
         await createPayoutProposal(contract, responseData, 0);
       },
-      onError: (error) => {
-        form.setErrors(error.response.data.errors);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      onError: (error: any) => {
+        form.setErrors(error?.response?.data?.errors);
       },
     },
   );
@@ -126,8 +123,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
     form.validateField(e.target.id);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const validateFieldOnInput = (e: any) => {
+  const validateFieldOnInput = (e: FormEvent) => {
     if (form.errors[e.target.id]) {
       form.validateField(e.target.id);
     }
@@ -141,13 +137,14 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
     submitForm();
   };
 
-  const saveDraftHandler = (e: any) => {
+  const saveDraftHandler = (e: MouseEvent) => {
     e.preventDefault();
     saveDraft();
   };
 
   const loading = isSavingLoading || isSubmitingLoading || isNearLoading;
   const lastSavedDate = data?.dateLastDraftSaving;
+  const error = isSavingError || isSubmitingError;
 
   return (
     <div>
@@ -156,6 +153,11 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
         {/* eslint-disable-next-line react/no-danger */}
         <p dangerouslySetInnerHTML={{ __html: t('form.description') }} />
       </div>
+      {error && (
+        <Alert icon={<AlertCircle size={16} />} title={t('error.generic.title')} color="orange" mt={16}>
+          {t('error.generic.description')}
+        </Alert>
+      )}
       <form onSubmit={form.onSubmit(() => submit())}>
         <div>
           <h2>{t('form.applicationProjectDetailTitle')}</h2>

@@ -1,5 +1,3 @@
-import { z } from 'zod';
-
 const createSchema = (z, t) => {
   return z.object({
     projectName: z.string().min(3, { message: t('form.projectName.error') }),
