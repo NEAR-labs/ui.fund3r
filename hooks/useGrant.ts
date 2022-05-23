@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { useContext, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import GrantContext from '@/contexts/GrantContext';
