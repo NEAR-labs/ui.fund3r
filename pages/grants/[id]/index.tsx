@@ -52,7 +52,9 @@ function GrantApplication() {
 
   useEffect(() => {
     if (transactionHashes) {
-      validateTransactionHash();
+      setTimeout(() => {
+        validateTransactionHash();
+      }, 1);
     }
   }, [transactionHashes, validateTransactionHash]);
 
