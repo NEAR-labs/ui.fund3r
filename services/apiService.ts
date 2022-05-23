@@ -129,7 +129,7 @@ const validateNearTransactionHash = async (
     proposalNearTransactionHash,
   }: {
     grantId: number | undefined;
-    proposalNearTransactionHash: string;
+    proposalNearTransactionHash: string | string[] | undefined;
   },
 ): Promise<GrantApplicationInterface | null> => {
   if (!signature) {
