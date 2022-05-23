@@ -1,7 +1,9 @@
+import type SputnikContractInterface from '@/types/SputnikContractInterface';
+import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
 import createProposalDescription from '@/utilities/createProposalDescription';
 
-const createPayoutProposal = async (contract: any, grantData: any, payoutNumber: number) => {
-  const description = createProposalDescription(grantData.projectName, payoutNumber, grantData.projectDescription);
+const createPayoutProposal = async (contract: SputnikContractInterface, grantData: GrantApplicationInterface, payoutNumber: number) => {
+  const description = createProposalDescription(grantData.projectName || '', payoutNumber, grantData.projectDescription || '');
   const policy = await contract.get_policy();
 
   contract.add_proposal(
