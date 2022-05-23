@@ -15,8 +15,8 @@ import GrantApplicationForm from '@/components/grant-application-form/GrantAppli
 import GrantApplicationProposalSubmission from '@/components/grant-application-form/GrantApplicationProposalSubmission';
 import GrantApplicationDetails from '@/components/grant-application-details/GrantApplicationDetails';
 import LoadingAnimation from '@/components/common/LoadingAnimation';
-// import GrantProvider from '@/providers/GrantProvider';
 import useGrant from '@/hooks/useGrant';
+import { useGrantStatus, STATUS } from '@/hooks/useGrantStatus';
 
 function GrantApplication() {
   const router = useRouter();
@@ -25,10 +25,9 @@ function GrantApplication() {
   const { transactionHashes } = router.query;
 
   const { grant, setGrant, isLoading } = useGrant(id, transactionHashes);
+  const status = useGrantStatus();
 
-  const showForm = grant;
-  const showSubmitProposal = grant && grant.dateSubmission && !grant.isNearProposalValid;
-  const showGrantData = grant && grant.dateSubmission && grant.isNearProposalValid;
+  const { EDIT, OFFCHAIN_SUBMITTED, FULLY_SUBMITTED } = STATUS;
 
   return (
     <DefaultLayout>
@@ -37,17 +36,15 @@ function GrantApplication() {
           <title>{t('title')}</title>
         </Head>
         <NearAuthenticationGuardWithLoginRedirection>
-          {/* <GrantProvider> */}
           {isLoading ? (
             <LoadingAnimation />
           ) : (
             <Container>
-              {showForm && !showGrantData && !showSubmitProposal && <GrantApplicationForm data={grant} setData={setGrant} />}
-              {showSubmitProposal && <GrantApplicationProposalSubmission data={grant} />}
-              {showGrantData && <GrantApplicationDetails data={grant} />}
+              {status === EDIT && <GrantApplicationForm data={grant} setData={setGrant} />}
+              {status === OFFCHAIN_SUBMITTED && <GrantApplicationProposalSubmission data={grant} />}
+              {status === FULLY_SUBMITTED && <GrantApplicationDetails data={grant} />}
             </Container>
           )}
-          {/* </GrantProvider> */}
         </NearAuthenticationGuardWithLoginRedirection>
       </>
     </DefaultLayout>
