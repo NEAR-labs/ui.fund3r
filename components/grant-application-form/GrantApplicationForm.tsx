@@ -1,5 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
+import type SputnikContractInterface from '@/types/SputnikContractInterface';
 import type { FocusEvent, FormEvent, MouseEvent } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useForm, zodResolver } from '@mantine/form';
@@ -27,7 +28,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
 
   const [isNearLoading, setIsNearLoading] = useState(false);
 
-  const contract = useContract({
+  const contract: SputnikContractInterface | null | undefined = useContract({
     contractId: CONTRACT_ID,
     contractMethods: {
       changeMethods: ['add_proposal'],
@@ -98,7 +99,9 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
       retry: false,
       onSuccess: async (responseData) => {
         setIsNearLoading(true);
-        await createPayoutProposal(contract, responseData, 0);
+        if (contract && responseData) {
+          await createPayoutProposal(contract, responseData, 0);
+        }
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {

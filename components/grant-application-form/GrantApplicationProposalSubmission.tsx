@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Button, Alert } from '@mantine/core';
 import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
+import type SputnikContractInterface from '@/types/SputnikContractInterface';
 import useContract from '@/modules/near-api-react/hooks/useContract';
 import { createPayoutProposal } from '@/services/sputnikContractService';
 import { CONTRACT_ID } from '@/constants';
@@ -13,7 +14,7 @@ function GrantApplicationProposalSubmission({ data }: { data: GrantApplicationIn
   const router = useRouter();
   const { errorCode } = router.query;
 
-  const contract = useContract({
+  const contract: SputnikContractInterface | undefined | null = useContract({
     contractId: CONTRACT_ID,
     contractMethods: {
       changeMethods: ['add_proposal'],
@@ -25,7 +26,9 @@ function GrantApplicationProposalSubmission({ data }: { data: GrantApplicationIn
 
   const submitProposal = () => {
     setIsNearLoading(true);
-    createPayoutProposal(contract, data, 0);
+    if (contract && data) {
+      createPayoutProposal(contract, data, 0);
+    }
   };
 
   return (
