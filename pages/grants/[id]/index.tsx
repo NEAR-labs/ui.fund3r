@@ -16,6 +16,7 @@ import useAccountSignature from '@/hooks/useAccountSignature';
 import { getGrantApplication, validateNearTransactionHash } from '@/services/apiService';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
 import GrantApplicationForm from '@/components/grant-application-form/GrantApplicationForm';
+import GrantApplicationProposalSubmission from '@/components/grant-application-form/GrantApplicationProposalSubmission';
 import GrantApplicationDetails from '@/components/grant-application-details/GrantApplicationDetails';
 import LoadingAnimation from '@/components/common/LoadingAnimation';
 
@@ -56,7 +57,8 @@ function GrantApplication() {
   }, [transactionHashes, validateTransactionHash]);
 
   const showForm = grantData;
-  const showGrantData = grantData && grantData.dateSubmission;
+  const showSubmitProposal = grantData && grantData.dateSubmission && !grantData.isNearProposalValid;
+  const showGrantData = grantData && grantData.dateSubmission && grantData.isNearProposalValid;
   const isLoading = isGrantLoading || isValidatingTransactionHash;
 
   return (
@@ -70,7 +72,8 @@ function GrantApplication() {
             <LoadingAnimation />
           ) : (
             <Container>
-              {showForm && !showGrantData && <GrantApplicationForm data={grantData} setData={setGrantData} />}
+              {showForm && !showGrantData && !showSubmitProposal && <GrantApplicationForm data={grantData} setData={setGrantData} />}
+              {showSubmitProposal && <GrantApplicationProposalSubmission data={grantData} />}
               {showGrantData && <GrantApplicationDetails data={grantData} />}
             </Container>
           )}
