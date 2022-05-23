@@ -71,7 +71,6 @@ const handlers = [
 
   rest.put<never, any>(`${BASE_URL}/grants/:id/submit`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
-    const { grantData } = _req.body;
 
     const dummyDataString = localStorage.getItem('fund3r-mock-data');
     const dummyData = dummyDataString ? JSON.parse(dummyDataString) : {};
