@@ -168,6 +168,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
             onBlur={validateFieldOnBlur}
             onInput={validateFieldOnInput}
             disabled={loading}
+            variant="filled"
             {...form.getInputProps('projectName')}
           />
           <Textarea
@@ -179,6 +180,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
             onBlur={validateFieldOnBlur}
             onInput={validateFieldOnInput}
             disabled={loading}
+            variant="filled"
             {...form.getInputProps('projectDescription')}
           />
           <NumberInput
@@ -192,6 +194,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
             disabled={loading}
             rightSection={<span>USD</span>}
             rightSectionWidth={50}
+            variant="filled"
             {...form.getInputProps('fundingAmount')}
           />
           1 NEAR = {usdNearConvertRate} USD
