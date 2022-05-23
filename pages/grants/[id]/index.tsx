@@ -15,7 +15,7 @@ import GrantApplicationForm from '@/components/grant-application-form/GrantAppli
 import GrantApplicationProposalSubmission from '@/components/grant-application-form/GrantApplicationProposalSubmission';
 import GrantApplicationDetails from '@/components/grant-application-details/GrantApplicationDetails';
 import LoadingAnimation from '@/components/common/LoadingAnimation';
-import GrantProvider from '@/providers/GrantProvider';
+// import GrantProvider from '@/providers/GrantProvider';
 import useGrant from '@/hooks/useGrant';
 
 function GrantApplication() {
@@ -37,17 +37,17 @@ function GrantApplication() {
           <title>{t('title')}</title>
         </Head>
         <NearAuthenticationGuardWithLoginRedirection>
-          <GrantProvider>
-            {isLoading ? (
-              <LoadingAnimation />
-            ) : (
-              <Container>
-                {showForm && !showGrantData && !showSubmitProposal && <GrantApplicationForm data={grant} setData={setGrant} />}
-                {showSubmitProposal && <GrantApplicationProposalSubmission data={grant} />}
-                {showGrantData && <GrantApplicationDetails data={grant} />}
-              </Container>
-            )}
-          </GrantProvider>
+          {/* <GrantProvider> */}
+          {isLoading ? (
+            <LoadingAnimation />
+          ) : (
+            <Container>
+              {showForm && !showGrantData && !showSubmitProposal && <GrantApplicationForm data={grant} setData={setGrant} />}
+              {showSubmitProposal && <GrantApplicationProposalSubmission data={grant} />}
+              {showGrantData && <GrantApplicationDetails data={grant} />}
+            </Container>
+          )}
+          {/* </GrantProvider> */}
         </NearAuthenticationGuardWithLoginRedirection>
       </>
     </DefaultLayout>

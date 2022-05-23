@@ -19,7 +19,6 @@ const useGrant = (grantId: any, transactionHashes: string | string[] | undefined
     refetchOnWindowFocus: false,
     onSuccess: (updatedGrantData) => {
       setGrant(updatedGrantData);
-      console.log(grant);
     },
   });
 

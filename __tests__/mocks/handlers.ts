@@ -39,11 +39,14 @@ const handlers = [
 
     const response = {
       ...basicData,
-      dateSubmission: new Date(),
-      projectName: dummyData.projectName || 'Mocked Dummy Project',
-      projectDescription: dummyData.projectDescription || 'Mocked Dummy Project Description',
-      nearFundingAmount: nearFundingAmount.toString(),
     };
+
+    if (localStorage.getItem('fund3r-mock-sumission')) {
+      response.dateSubmission = new Date();
+      response.projectName = dummyData.projectName || 'Mocked Dummy Project';
+      response.projectDescription = dummyData.projectDescription || 'Mocked Dummy Project Description';
+      response.nearFundingAmount = nearFundingAmount.toString();
+    }
 
     if (localStorage.getItem('fund3r-mock-near-tx') === 'true') {
       response.isNearProposalValid = true;

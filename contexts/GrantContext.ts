@@ -6,7 +6,6 @@ interface GrantContextInterface {
   setGrant: (grant: GrantApplicationInterface | null) => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const GrantContext = createContext<GrantContextInterface>({ grant: null, setGrant: () => {} });
+const GrantContext = createContext<GrantContextInterface>({ grant: null, setGrant: () => null });
 
 export default GrantContext;
