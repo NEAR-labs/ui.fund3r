@@ -124,8 +124,11 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
   };
 
   const validateFieldOnInput = (e: FormEvent) => {
-    if (form.errors[e.target.id]) {
-      form.validateField(e.target.id);
+    const element = e.target as HTMLInputElement;
+    const { id } = element;
+
+    if (form.errors[id]) {
+      form.validateField(id);
     }
   };
 
