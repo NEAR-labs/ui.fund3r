@@ -88,6 +88,19 @@ const handlers = [
 
     localStorage.setItem('fund3r-mock-sumission', 'true');
 
+    // uncomment below for testing error management
+    // start
+    // return res(
+    //   ctx.status(400),
+    //   ctx.json({
+    //     ...response,
+    //     errors: {
+    //       projectName: 'Please enter a project name that is at least 3 characters long.',
+    //     },
+    //   }),
+    // );
+    // end
+
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),
 

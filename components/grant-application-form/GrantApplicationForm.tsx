@@ -3,7 +3,6 @@
 import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
 import type { FocusEvent } from 'react';
 import { useTranslation } from 'next-i18next';
-import { z } from 'zod';
 import { useForm, zodResolver } from '@mantine/form';
 import { NumberInput, TextInput, Button, Textarea, Group } from '@mantine/core';
 import { useEffect, useState } from 'react';
@@ -16,6 +15,8 @@ import useContract from '@/modules/near-api-react/hooks/useContract';
 import { CONTRACT_ID } from '@/constants';
 import { createPayoutProposal } from '@/services/sputnikContractService';
 import { getNearUsdConvertRate } from '@/services/currencyConverter';
+import { z } from 'zod';
+import createSchema from '@/form-schemas/grantApplicationFormSchema';
 
 function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
@@ -36,11 +37,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
 
   const accountId = wallet && wallet.isSignedIn() && wallet.getAccountId();
 
-  const schema = z.object({
-    projectName: z.string().min(3, { message: t('form.projectName.error') }),
-    projectDescription: z.string().min(10, { message: t('form.projectDescription.error') }),
-    fundingAmount: z.number().min(1, { message: t('form.fundingAmount.error') }),
-  });
+  const schema = createSchema(z, t);
 
   const form = useForm({
     schema: zodResolver(schema),
@@ -102,9 +99,13 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
     {
       refetchOnWindowFocus: false,
       enabled: false,
+      retry: false,
       onSuccess: async (responseData) => {
         setIsNearLoading(true);
         await createPayoutProposal(contract, responseData, 0);
+      },
+      onError: (error) => {
+        form.setErrors(error.response.data.errors);
       },
     },
   );
