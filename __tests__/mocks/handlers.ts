@@ -41,7 +41,7 @@ const handlers = [
       ...basicData,
     };
 
-    if (localStorage.getItem('fund3r-mock-sumission')) {
+    if (localStorage.getItem('fund3r-mock-submission')) {
       response.dateSubmission = new Date();
       response.projectName = dummyData.projectName || 'Mocked Dummy Project';
       response.projectDescription = dummyData.projectDescription || 'Mocked Dummy Project Description';
@@ -86,7 +86,7 @@ const handlers = [
       nearFundingAmount: nearFundingAmount.toString(),
     };
 
-    localStorage.setItem('fund3r-mock-sumission', 'true');
+    localStorage.setItem('fund3r-mock-submission', 'true');
 
     // uncomment below for testing error management
     // start
