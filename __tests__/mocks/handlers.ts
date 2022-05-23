@@ -59,6 +59,7 @@ const handlers = [
 
   rest.put<never, any>(`${BASE_URL}/grants/:id/submit`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
+    const { grantData } = _req.body;
 
     const dummyDataString = localStorage.getItem('fund3r-mock-data');
     const dummyData = dummyDataString ? JSON.parse(dummyDataString) : {};
@@ -74,6 +75,31 @@ const handlers = [
     };
 
     localStorage.setItem('fund3r-mock-sumission', 'true');
+
+    return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
+  }),
+
+  // When this endpoint is called the backend should verify that the transaction hash is matching the grant
+  rest.put<never, any>(`${BASE_URL}/grants/:id/near-transactions`, (_req, res, ctx) => {
+    const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
+    const { proposalNearTransactionHash } = _req.body;
+
+    const dummyDataString = localStorage.getItem('fund3r-mock-data');
+    const dummyData = dummyDataString ? JSON.parse(dummyDataString) : {};
+
+    const nearFundingAmount: BigInt = BigInt((dummyData.fundingAmount / 5.95) * 10 ** 24);
+
+    const response = {
+      ...basicData,
+      dateSubmission: new Date(),
+      projectName: dummyData.projectName || 'Mocked Dummy Project',
+      projectDescription: dummyData.projectDescription || 'Mocked Dummy Project Description',
+      nearFundingAmount: nearFundingAmount.toString(),
+      proposalNearTransactionHash,
+      isNearProposalValid: true,
+    };
+
+    localStorage.setItem('fund3r-mock-near-tx', 'true');
 
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),

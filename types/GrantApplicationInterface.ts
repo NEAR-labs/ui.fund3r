@@ -49,6 +49,8 @@ export default interface GrantApplicationInterface {
   // Status and date
   dateLastDraftSaving?: Date;
   dateSubmission?: Date;
+  proposalNearTransactionHash: string;
+  isNearProposalValid?: boolean;
   dateEvaluation?: Date;
   dateInterviewSchedule?: Date;
   dateInterview?: Date;

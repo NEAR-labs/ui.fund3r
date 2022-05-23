@@ -1,7 +1,8 @@
+/* eslint-disable max-lines-per-function */
 import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
 import type { NextApiRequest } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { Container } from '@mantine/core';
@@ -12,7 +13,7 @@ import { QueryClient, dehydrate, useQuery } from 'react-query';
 import parseCookies from '@/utilities/parseCookies';
 import { COOKIE_SIGNATURE_KEY } from '@/constants';
 import useAccountSignature from '@/hooks/useAccountSignature';
-import { getGrantApplication } from '@/services/apiService';
+import { getGrantApplication, validateNearTransactionHash } from '@/services/apiService';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
 import GrantApplicationForm from '@/components/grant-application-form/GrantApplicationForm';
 import GrantApplicationDetails from '@/components/grant-application-details/GrantApplicationDetails';
@@ -23,18 +24,40 @@ function GrantApplication() {
   const apiSignature = useAccountSignature();
   const router = useRouter();
   const { id } = router.query;
+  const { transactionHashes } = router.query;
 
   const [grantData, setGrantData] = useState<GrantApplicationInterface | undefined | null>(undefined);
 
-  const { isLoading } = useQuery(['grant', apiSignature, id], () => getGrantApplication(apiSignature, id), {
+  const { isLoading: isGrantLoading } = useQuery(['grant', apiSignature, id], () => getGrantApplication(apiSignature, id), {
     refetchOnWindowFocus: false,
     onSuccess: (grant) => {
       setGrantData(grant);
     },
   });
 
+  const { isLoading: isValidatingTransactionHash, refetch: validateTransactionHash } = useQuery(
+    ['validate-transaction-hash', apiSignature, id],
+    () => {
+      return validateNearTransactionHash(apiSignature, { grantId: id, proposalNearTransactionHash: transactionHashes });
+    },
+    {
+      refetchOnWindowFocus: false,
+      enabled: false,
+      onSuccess: (grant) => {
+        setGrantData(grant);
+      },
+    },
+  );
+
+  useEffect(() => {
+    if (transactionHashes) {
+      validateTransactionHash();
+    }
+  }, [transactionHashes, validateTransactionHash]);
+
   const showForm = grantData;
   const showGrantData = grantData && grantData.dateSubmission;
+  const isLoading = isGrantLoading || isValidatingTransactionHash;
 
   return (
     <DefaultLayout>
