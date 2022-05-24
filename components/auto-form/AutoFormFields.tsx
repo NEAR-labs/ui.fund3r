@@ -1,8 +1,8 @@
 import type { FocusEvent, FormEvent } from 'react';
-import { NumberInput, TextInput, Textarea } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 import { z } from 'zod';
 import type { UseFormReturnType } from '@mantine/form/lib/use-form';
+import GenericField from '@/components/auto-form/GenericField';
 
 // eslint-disable-next-line max-lines-per-function
 function AutoFormFields({ form, schema, fields, loading }: { form: UseFormReturnType<any>; schema: z.ZodObject<any>; fields: string[]; loading: boolean }) {
@@ -24,11 +24,8 @@ function AutoFormFields({ form, schema, fields, loading }: { form: UseFormReturn
   return (
     <>
       {fields.map((field) => {
-        console.log(field);
-        console.log(schema.shape[field]);
-
         return (
-          <TextInput
+          <GenericField
             required
             id={field}
             label={t(`form.${field}.label`)}
