@@ -7,6 +7,7 @@ import NearProvider from '@/modules/near-api-react/providers/NearProvider';
 import { useState } from 'react';
 import { CookiesProvider } from 'react-cookie';
 import GrantProvider from '@/providers/GrantProvider';
+import NextNProgress from 'nextjs-progressbar';
 
 // if (process.env.NODE_ENV === 'development' && process.env.NEXT_PUBLIC_MOCK_API) {
 if (process.env.NEXT_PUBLIC_MOCK_API) {
@@ -28,6 +29,8 @@ const App = (props: AppProps) => {
         <title>FUND3R</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
+
+      <NextNProgress options={{ showSpinner: false }} color="#924fff" height={2} />
 
       <MantineProvider
         withGlobalStyles
