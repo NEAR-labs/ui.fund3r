@@ -15,7 +15,6 @@ import useContract from '@/modules/near-api-react/hooks/useContract';
 import { CONTRACT_ID } from '@/constants';
 import { createPayoutProposal } from '@/services/sputnikContractService';
 import { getNearUsdConvertRate } from '@/services/currencyConverter';
-import { z } from 'zod';
 import createSchema from '@/form-schemas/grantApplicationFormSchema';
 import { AlertCircle } from 'tabler-icons-react';
 
@@ -38,7 +37,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
 
   const accountId = wallet && wallet.isSignedIn() && wallet.getAccountId();
 
-  const schema = createSchema(z, t);
+  const schema = createSchema(t);
 
   const form = useForm({
     schema: zodResolver(schema),
