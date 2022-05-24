@@ -21,9 +21,17 @@ import { useGrantStatus, STATUS } from '@/hooks/useGrantStatus';
 function GrantApplication() {
   const router = useRouter();
   const { t } = useTranslation('grant');
-  const { id } = router.query;
   const { transactionHashes } = router.query;
+  const { daoId } = router.query;
+
+  if (typeof daoId !== 'string') {
+    throw new Error('Invalid URL');
+  }
+
+  const id = daoId.split('-')[1];
   const numberId = parseInt(id as string, 10);
+
+  console.log(router.query);
 
   const { grant, setGrant, isLoading } = useGrant(numberId, transactionHashes);
   const status = useGrantStatus();
@@ -57,7 +65,17 @@ export async function getServerSideProps({ req, locale, params }: { req: NextApi
   const data = parseCookies(req);
   const apiSignature = data[COOKIE_SIGNATURE_KEY] ? JSON.parse(data[COOKIE_SIGNATURE_KEY]) : null;
 
-  await queryClient.prefetchQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, params.id));
+  const { daoId } = params;
+
+  if (typeof daoId !== 'string') {
+    return {
+      notFound: true,
+    };
+  }
+
+  const id = daoId.split('-')[1];
+
+  await queryClient.prefetchQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, id));
   const dehydratedState = dehydrate(queryClient);
 
   return {
