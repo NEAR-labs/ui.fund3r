@@ -4,7 +4,7 @@ import type SputnikContractInterface from '@/types/SputnikContractInterface';
 import type { MouseEvent } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useForm, zodResolver } from '@mantine/form';
-import { Button, Group, Alert, Title, Text } from '@mantine/core';
+import { Button, Group, Alert, Title, Text, Divider } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { saveGrantApplicationAsDraft, submitGrantApplication } from '@/services/apiService';
 import { useQuery } from 'react-query';
@@ -158,8 +158,47 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
           <Title order={2} mt={48} mb={24}>
             {t('form.applicationProjectDetailTitle')}
           </Title>
-          <AutoFormFields form={form} schema={schema} fields={['projectName', 'projectDescription', 'fundingAmount', 'firstname']} loading={loading} />1 NEAR = {usdNearConvertRate}{' '}
-          USD
+          <AutoFormFields
+            form={form}
+            schema={schema}
+            fields={['projectName', 'grantType', 'grantCategory', 'projectUrl', 'githubUrl', 'projectStatus', 'projectLaunchDate', 'projectDescription', 'fundingAmount']}
+            loading={loading}
+          />
+          <Divider mt={32} mb={32} />
+          <div>Milesones coming soon</div>
+          <Divider mt={32} mb={32} />
+          <AutoFormFields
+            form={form}
+            schema={schema}
+            fields={[
+              'whatAndWhy',
+              'competitionDifference',
+              'openSourceState',
+              'opensourceComponentUse',
+              'impactOnEcosystem',
+              'excitementNear',
+              'successMesurement',
+              'isProjectCurrentlyRaising',
+            ]}
+            loading={loading}
+          />
+          <Title order={2} mt={48} mb={24}>
+            {t('form.memmberDetailsTitle')}
+          </Title>
+          <AutoFormFields
+            form={form}
+            schema={schema}
+            fields={['firstname', 'lastname', 'dateOfBirth', 'email', 'github', 'twitter', 'workingAloneOrTeam', 'hasPreviouslyReceivedFundingTokensGrantsFromNear']}
+            loading={loading}
+          />
+          <Title order={2} mt={48} mb={24}>
+            {t('form.addressDetailsTitle')}
+          </Title>
+          <AutoFormFields form={form} schema={schema} fields={['addressCountry', 'addressCity', 'addressStreet', 'addressZip']} loading={loading} />
+          <Divider mt={32} mb={32} />
+          <AutoFormFields form={form} schema={schema} fields={['howHeardGrants', 'referral', 'teamReferral', 'comments']} loading={loading} />
+          <Divider mt={32} mb={32} />
+          <div>1 NEAR = {usdNearConvertRate} USD</div>
         </div>
         <Text>{lastSavedDate && t('form.draft_date') + lastSavedDate.toLocaleString()}</Text>
         <Group position="right" mt="xl">
