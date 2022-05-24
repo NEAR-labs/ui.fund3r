@@ -53,7 +53,7 @@ export default interface GrantApplicationInterface {
   projectStatus?: ProjectStatus;
   projectLaunchDate?: string;
   projectDescription?: string;
-  currency?: string; // enum maybe
+  currency?: string;
   fundingAmount?: number;
   nearFundingAmount?: string;
   whatAndWhy?: string;
@@ -74,7 +74,7 @@ export default interface GrantApplicationInterface {
   // About
   howHeardGrants?: string;
   referral?: string;
-  teamReferral?: string;
+  teamReferral?: string; // update with enum eventually
   comments?: string;
 
   // Status and date

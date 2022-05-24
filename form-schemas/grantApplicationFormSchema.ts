@@ -27,8 +27,14 @@ const createSchema = (t: TFunction) => {
       .max(100, { message: t('form.competitionDifference.error') }),
     openSourceState: z.enum(['fully-open-source', 'partially-open-source', 'closed-source']),
     opensourceComponentUse: z.string().min(1, { message: t('form.opensourceComponentUse.error') }),
-    impactOnEcosystem: z.string().min(1, { message: t('form.impactOnEcosystem.error') }),
-    excitementNear: z.string().min(1, { message: t('form.excitementNear.error') }),
+    impactOnEcosystem: z
+      .string()
+      .min(1, { message: t('form.impactOnEcosystem.error') })
+      .max(1000, { message: t('form.impactOnEcosystem.error') }),
+    excitementNear: z
+      .string()
+      .min(1, { message: t('form.excitementNear.error') })
+      .max(1000, { message: t('form.excitementNear.error') }),
     successMesurement: z.string().min(1, { message: t('form.successMesurement.error') }),
     isProjectCurrentlyRaising: z.boolean(),
 
