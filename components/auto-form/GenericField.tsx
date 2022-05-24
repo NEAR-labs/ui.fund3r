@@ -9,6 +9,10 @@ function GenericField(props: any) {
       return <TextInput {...otherProps} />;
       break;
 
+    case 'ZodNumber':
+      return <NumberInput {...otherProps} />;
+      break;
+
     default:
       return <TextInput {...otherProps} />;
       break;
