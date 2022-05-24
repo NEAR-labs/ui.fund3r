@@ -1,10 +1,11 @@
 import type { FocusEvent, FormEvent } from 'react';
 import { NumberInput, TextInput, Textarea } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
-import type { UseFormReturnType } from '../../node_modules/@mantine/form/lib/use-form';
+import { z } from 'zod';
+import type { UseFormReturnType } from '@mantine/form/lib/use-form';
 
 // eslint-disable-next-line max-lines-per-function
-function AutoFormFields({ form, loading }: { form: UseFormReturnType<any>; loading: boolean }) {
+function AutoFormFields({ form, schema, fields, loading }: { form: UseFormReturnType<any>; schema: z.ZodObject<any>; fields: string[]; loading: boolean }) {
   const { t } = useTranslation('grant');
 
   const validateFieldOnBlur = (e: FocusEvent) => {
@@ -22,7 +23,27 @@ function AutoFormFields({ form, loading }: { form: UseFormReturnType<any>; loadi
 
   return (
     <>
-      <TextInput
+      {fields.map((field) => {
+        console.log(field);
+        console.log(schema.shape[field]);
+
+        return (
+          <TextInput
+            required
+            id={field}
+            label={t(`form.${field}.label`)}
+            placeholder={t(`form.${field}.placeholder`)}
+            mt="sm"
+            onBlur={validateFieldOnBlur}
+            onInput={validateFieldOnInput}
+            disabled={loading}
+            variant="filled"
+            {...form.getInputProps(field)}
+          />
+        );
+      })}
+
+      {/* <TextInput
         required
         id="projectName"
         label={t('form.projectName.label')}
@@ -59,7 +80,7 @@ function AutoFormFields({ form, loading }: { form: UseFormReturnType<any>; loadi
         rightSectionWidth={50}
         variant="filled"
         {...form.getInputProps('fundingAmount')}
-      />
+      /> */}
     </>
   );
 }

@@ -17,7 +17,7 @@ import { createPayoutProposal } from '@/services/sputnikContractService';
 import { getNearUsdConvertRate } from '@/services/currencyConverter';
 import createSchema from '@/form-schemas/grantApplicationFormSchema';
 import { AlertCircle } from 'tabler-icons-react';
-import AutoFormFields from '@/components/common/AutoFormFields';
+import AutoFormFields from '@/components/auto-form/AutoFormFields';
 
 function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
@@ -158,7 +158,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
           <Title order={2} mt={48} mb={24}>
             {t('form.applicationProjectDetailTitle')}
           </Title>
-          <AutoFormFields form={form} loading={loading} />1 NEAR = {usdNearConvertRate} USD
+          <AutoFormFields form={form} schema={schema} fields={['projectName', 'projectDescription']} loading={loading} />1 NEAR = {usdNearConvertRate} USD
         </div>
         <Text>{lastSavedDate && t('form.draft_date') + lastSavedDate.toLocaleString()}</Text>
         <Group position="right" mt="xl">
