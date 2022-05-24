@@ -23,6 +23,7 @@
     "near-api-js": "^0.44.2",
     "next": "12.1.6",
     "next-i18next": "^11.0.0",
+    "nextjs-progressbar": "^0.0.14",
     "react": "18.1.0",
     "react-cookie": "^4.1.1",
     "react-dom": "18.1.0",
