@@ -1,5 +1,5 @@
 import { useTranslation } from 'next-i18next';
-import { Container, SimpleGrid, Button, Center } from '@mantine/core';
+import { Container, SimpleGrid, Button, Center, Title, Text } from '@mantine/core';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '@/styles/Home.module.css';
@@ -12,8 +12,10 @@ function HomeHero() {
       <SimpleGrid cols={2} className={styles.hero}>
         <Center>
           <div>
-            <h1>{t('hero.headline')}</h1>
-            <p>{t('hero.description')}</p>
+            <Title order={1} mb={16}>
+              {t('hero.headline')}
+            </Title>
+            <Text mb={16}>{t('hero.description')}</Text>
             <Link href="/grants" passHref>
               <Button component="a" color="dark" radius="xl" size="md">
                 {t('hero.call_to_action')}

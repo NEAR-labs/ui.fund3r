@@ -4,7 +4,7 @@ import type SputnikContractInterface from '@/types/SputnikContractInterface';
 import type { FocusEvent, FormEvent, MouseEvent } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useForm, zodResolver } from '@mantine/form';
-import { NumberInput, TextInput, Button, Textarea, Group, Alert } from '@mantine/core';
+import { NumberInput, TextInput, Button, Textarea, Group, Alert, Title, Text } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { saveGrantApplicationAsDraft, submitGrantApplication } from '@/services/apiService';
 import { useQuery } from 'react-query';
@@ -154,7 +154,9 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
   return (
     <div>
       <div>
-        <h1>{t('form.title')}</h1>
+        <Title order={1} mt={32} mb={24}>
+          {t('form.title')}
+        </Title>
         {/* eslint-disable-next-line react/no-danger */}
         <p dangerouslySetInnerHTML={{ __html: t('form.description') }} />
       </div>
@@ -165,7 +167,9 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
       )}
       <form onSubmit={form.onSubmit(() => submit())}>
         <div>
-          <h2>{t('form.applicationProjectDetailTitle')}</h2>
+          <Title order={2} mt={48} mb={24}>
+            {t('form.applicationProjectDetailTitle')}
+          </Title>
           <TextInput
             required
             id="projectName"
@@ -206,7 +210,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
           />
           1 NEAR = {usdNearConvertRate} USD
         </div>
-        <p>{lastSavedDate && t('form.draft_date') + lastSavedDate.toLocaleString()}</p>
+        <Text>{lastSavedDate && t('form.draft_date') + lastSavedDate.toLocaleString()}</Text>
         <Group position="right" mt="xl">
           <Button color="violet" onClick={saveDraftHandler} variant="light" loading={isSavingLoading}>
             {t('form.save')}
