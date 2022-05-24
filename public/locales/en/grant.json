@@ -69,7 +69,6 @@
       "placeholder": "Which components of the project will be open source?",
       "error": "Please enter explanation that is at least 1 characters long and less than 100."
     },
-    },
 
     "save": "Save draft",
     "submit": "Submit application",
