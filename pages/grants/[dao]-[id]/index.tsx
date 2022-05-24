@@ -23,8 +23,9 @@ function GrantApplication() {
   const { t } = useTranslation('grant');
   const { id } = router.query;
   const { transactionHashes } = router.query;
+  const numberId = parseInt(id as string, 10);
 
-  const { grant, setGrant, isLoading } = useGrant(id, transactionHashes);
+  const { grant, setGrant, isLoading } = useGrant(numberId, transactionHashes);
   const status = useGrantStatus();
 
   const { EDIT, OFFCHAIN_SUBMITTED, FULLY_SUBMITTED } = STATUS;

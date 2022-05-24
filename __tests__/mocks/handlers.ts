@@ -29,7 +29,7 @@ const handlers = [
 
   // when dateSubmission is true, the backend should check if a proposal really exists
   // maybe we should share the tx id or we can check all the proposals in a dao (?)
-  rest.get<never, any>(`${BASE_URL}/grants/:accountId-:id`, (_req, res, ctx) => {
+  rest.get<never, any>(`${BASE_URL}/grants/:id`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
 
     const dummyDataString = localStorage.getItem('fund3r-mock-data');
