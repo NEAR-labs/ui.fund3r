@@ -62,6 +62,7 @@ const handlers = [
     const response = {
       ...basicData,
       ...grantData,
+      dateLastDraftSaving: new Date(),
     };
 
     localStorage.setItem('fund3r-mock-data', JSON.stringify(grantData));
