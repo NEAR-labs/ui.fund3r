@@ -158,7 +158,8 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
           <Title order={2} mt={48} mb={24}>
             {t('form.applicationProjectDetailTitle')}
           </Title>
-          <AutoFormFields form={form} schema={schema} fields={['projectName', 'projectDescription', 'fundingAmount']} loading={loading} />1 NEAR = {usdNearConvertRate} USD
+          <AutoFormFields form={form} schema={schema} fields={['projectName', 'projectDescription', 'fundingAmount', 'firstname']} loading={loading} />1 NEAR = {usdNearConvertRate}{' '}
+          USD
         </div>
         <Text>{lastSavedDate && t('form.draft_date') + lastSavedDate.toLocaleString()}</Text>
         <Group position="right" mt="xl">

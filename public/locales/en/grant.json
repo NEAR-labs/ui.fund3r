@@ -7,7 +7,7 @@
     "projectName": {
       "label": "Project Name",
       "placeholder": "Project Name",
-      "error": "Please enter a project name that is at least 3 characters long."
+      "error": "Please enter a project name that is at least 1 characters long."
     },
     "grantType": {
       "label": "Are you applying for a grant (non-equity) or venture funding (equity)?",
@@ -52,12 +52,12 @@
     "whatAndWhy": {
       "label": "What are you building & why?",
       "placeholder": "What are you building & why?",
-      "error": "Please enter explanation that is at least 1 characters long and less than 100."
+      "error": "Please enter explanation that is at least 1 character long and less than 100."
     },
     "competitionDifference": {
       "label": "What makes you different from your competitors?",
       "placeholder": "What makes you different from your competitors?",
-      "error": "Please enter explanation that is at least 1 characters long and less than 100."
+      "error": "Please enter explanation that is at least 1 character long and less than 100."
     },
     "openSourceState": {
       "label": "Is your project open-source?",
@@ -67,9 +67,107 @@
     "opensourceComponentUse": {
       "label": "Which components of the project will be open source?",
       "placeholder": "Which components of the project will be open source?",
-      "error": "Please enter explanation that is at least 1 characters long and less than 100."
+      "error": "Please enter explanation that is at least 1 character long and less than 100."
     },
-
+    "impactOnEcosystem": {
+      "label": "How will this impact the NEAR Ecosystem?",
+      "placeholder": "How will this impact the NEAR Ecosystem?",
+      "error": "Please enter explanation that is at least 1 character long and less than 1000."
+    },
+    "excitementNear": {
+      "label": "What makes you excited about NEAR?",
+      "placeholder": "What makes you excited about NEAR?",
+      "error": "Please enter explanation that is at least 1 character long and less than 1000."
+    },
+    "successMesurement": {
+      "label": "How will you measure project success?",
+      "placeholder": "How will you measure project success?",
+      "error": "Please enter explanation that is at least 1 character long."
+    },
+    "isProjectCurrentlyRaising": {
+      "label": "Are you currently raising a round?",
+      "placeholder": "Are you currently raising a round?",
+      "error": "Please select a funding status."
+    },
+    "memmberDetailsTitle": "Member Details",
+    "firstname": {
+      "label": "First Name",
+      "placeholder": "First Name",
+      "error": "Please enter a first name that is at least 1 characters long."
+    },
+    "lastname": {
+      "label": "Last Name",
+      "placeholder": "Last Name",
+      "error": "Please enter a last name that is at least 1 characters long."
+    },
+    "dateOfBirth": {
+      "label": "Date of Birth",
+      "placeholder": "Date of Birth",
+      "error": "Please enter a valid date."
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Email",
+      "error": "Please enter a valid email."
+    },
+    "github": {
+      "label": "GitHub Profile URL",
+      "placeholder": "GitHub Profile URL",
+      "error": "Please enter a valid GitHub profile URL."
+    },
+    "twitter": {
+      "label": "Twitter Profile URL",
+      "placeholder": "Twitter Profile URL",
+      "error": "Please enter a valid Twitter profile URL."
+    },
+    "workingAloneOrTeam": {
+      "label": "Are you working alone or in a team?",
+      "placeholder": "Are you working alone or in a team?",
+      "error": "Please select a team status."
+    },
+    "hasPreviouslyReceivedFundingTokensGrantsFromNear": {
+      "label": "Previously received funding, tokens, or grants from NEAR.",
+      "placeholder": "Previously received funding, tokens, or grants from NEAR."
+    },
+    "addressDetailsTitle": "Address Details",
+    "addressCountry": {
+      "label": "Country",
+      "placeholder": "Country",
+      "error": "Please select a country."
+    },
+    "addressCity": {
+      "label": "City",
+      "placeholder": "City",
+      "error": "Please enter a city."
+    },
+    "addressStreet": {
+      "label": "Street",
+      "placeholder": "Street",
+      "error": "Please enter a street."
+    },
+    "addressZip": {
+      "label": "Zip",
+      "placeholder": "Zip",
+      "error": "Please enter a zip."
+    },
+    "howHeardGrants": {
+      "label": "How did you hear about the NEAR Grants Program?",
+      "placeholder": "How did you hear about the NEAR Grants Program?",
+      "error": "Please select a how did you hear about NEAR Grants."
+    },
+    "referral": {
+      "label": "Did someone refer you to the NF Grants Program?",
+      "placeholder": "Did someone refer you to the NF Grants Program?"
+    },
+    "teamReferral": {
+      "label": "Do any of your team members self-identify as the following?",
+      "placeholder": "Do any of your team members self-identify as the following?"
+    },
+    "comments": {
+      "label": "Comments",
+      "placeholder": "Comments",
+      "error": "Please enter a comment that is at least 1 character long and less than 1000."
+    },
     "save": "Save draft",
     "submit": "Submit application",
     "draft_date": "Draft saved on "
