@@ -11,6 +11,7 @@ export default interface GrantApplicationInterface {
   email?: string;
   linkedin?: string;
   twitter?: string;
+  workingAloneOrTeam?: string; // replace with enums
   hasPreviouslyReceivedFundingTokensGrantsFromNear?: boolean;
 
   // Project related
@@ -19,7 +20,7 @@ export default interface GrantApplicationInterface {
   grantCategory?: string; // enum maybe?
   projectUrl?: string;
   githubUrl?: string;
-  project_status?: string;
+  projectStatus?: string; // enum maybe
   projectLaunchDate?: string;
   projectDescription?: string;
   currency?: string; // enum maybe
