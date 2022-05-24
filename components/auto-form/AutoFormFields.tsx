@@ -24,8 +24,12 @@ function AutoFormFields({ form, schema, fields, loading }: { form: UseFormReturn
   return (
     <>
       {fields.map((field) => {
+        // eslint-disable-next-line no-underscore-dangle
+        const zodType = schema.shape[field]._def.typeName;
+
         return (
           <GenericField
+            key={field}
             required
             id={field}
             label={t(`form.${field}.label`)}
@@ -35,6 +39,7 @@ function AutoFormFields({ form, schema, fields, loading }: { form: UseFormReturn
             onInput={validateFieldOnInput}
             disabled={loading}
             variant="filled"
+            zodType={zodType}
             {...form.getInputProps(field)}
           />
         );
