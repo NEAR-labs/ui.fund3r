@@ -46,8 +46,7 @@ const saveGrantApplicationAsDraft = async (
   }: {
     grantId: number | undefined;
     grantData: GrantApplicationInterface;
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    signStringMessage: Function;
+    signStringMessage: (stringMessage: string) => Promise<Uint8Array | undefined | null>;
   },
 ): Promise<GrantApplicationInterface | null> => {
   if (!signature) {
@@ -86,8 +85,7 @@ const submitGrantApplication = async (
   }: {
     grantId: number | undefined;
     grantData: GrantApplicationInterface;
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    signStringMessage: Function;
+    signStringMessage: (stringMessage: string) => Promise<Uint8Array | undefined | null>;
   },
 ): Promise<GrantApplicationInterface | null> => {
   if (!signature) {

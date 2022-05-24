@@ -31,8 +31,6 @@ function GrantApplication() {
   const id = daoId.split('-')[1];
   const numberId = parseInt(id as string, 10);
 
-  console.log(router.query);
-
   const { grant, setGrant, isLoading } = useGrant(numberId, transactionHashes);
   const status = useGrantStatus();
 
