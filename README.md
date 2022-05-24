@@ -10,6 +10,9 @@
 - Code quality: **[Eslint](https://eslint.org/), [Prettier](https://prettier.io/)**
 - UI Framework: **[Mantine UI](https://mantine.dev/)**
 - Internationalization: **[next-i18nnext](https://github.com/isaachinman/next-i18next)**
+- Form validation: **[zod](https://github.com/colinhacks/zod)**
+- HTTP client: **[Axios](https://github.com/axios/axios)**
+- Query hooks: **[React Query](https://react-query.tanstack.com/)**
 
 ## Guides
 
