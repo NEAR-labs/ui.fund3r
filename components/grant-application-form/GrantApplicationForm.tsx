@@ -1,10 +1,10 @@
 /* eslint-disable max-lines-per-function */
 import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
 import type SputnikContractInterface from '@/types/SputnikContractInterface';
-import type { FocusEvent, FormEvent, MouseEvent } from 'react';
+import type { MouseEvent } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useForm, zodResolver } from '@mantine/form';
-import { NumberInput, TextInput, Button, Textarea, Group, Alert, Title, Text } from '@mantine/core';
+import { Button, Group, Alert, Title, Text } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { saveGrantApplicationAsDraft, submitGrantApplication } from '@/services/apiService';
 import { useQuery } from 'react-query';
@@ -17,6 +17,7 @@ import { createPayoutProposal } from '@/services/sputnikContractService';
 import { getNearUsdConvertRate } from '@/services/currencyConverter';
 import createSchema from '@/form-schemas/grantApplicationFormSchema';
 import { AlertCircle } from 'tabler-icons-react';
+import AutoFormFields from '@/components/common/AutoFormFields';
 
 function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
@@ -121,19 +122,6 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  const validateFieldOnBlur = (e: FocusEvent) => {
-    form.validateField(e.target.id);
-  };
-
-  const validateFieldOnInput = (e: FormEvent) => {
-    const element = e.target as HTMLInputElement;
-    const { id } = element;
-
-    if (form.errors[id]) {
-      form.validateField(id);
-    }
-  };
-
   const saveDraft = () => {
     saveForm();
   };
@@ -170,45 +158,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
           <Title order={2} mt={48} mb={24}>
             {t('form.applicationProjectDetailTitle')}
           </Title>
-          <TextInput
-            required
-            id="projectName"
-            label={t('form.projectName.label')}
-            placeholder={t('form.projectName.placeholder')}
-            mt="sm"
-            onBlur={validateFieldOnBlur}
-            onInput={validateFieldOnInput}
-            disabled={loading}
-            variant="filled"
-            {...form.getInputProps('projectName')}
-          />
-          <Textarea
-            required
-            id="projectDescription"
-            label={t('form.projectDescription.label')}
-            placeholder={t('form.projectDescription.placeholder')}
-            mt="sm"
-            onBlur={validateFieldOnBlur}
-            onInput={validateFieldOnInput}
-            disabled={loading}
-            variant="filled"
-            {...form.getInputProps('projectDescription')}
-          />
-          <NumberInput
-            required
-            id="fundingAmount"
-            label={t('form.fundingAmount.label')}
-            placeholder={t('form.fundingAmount.placeholder')}
-            mt="sm"
-            onBlur={validateFieldOnBlur}
-            onInput={validateFieldOnInput}
-            disabled={loading}
-            rightSection={<span>USD</span>}
-            rightSectionWidth={50}
-            variant="filled"
-            {...form.getInputProps('fundingAmount')}
-          />
-          1 NEAR = {usdNearConvertRate} USD
+          <AutoFormFields form={form} loading={loading} />1 NEAR = {usdNearConvertRate} USD
         </div>
         <Text>{lastSavedDate && t('form.draft_date') + lastSavedDate.toLocaleString()}</Text>
         <Group position="right" mt="xl">
