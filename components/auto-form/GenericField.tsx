@@ -1,4 +1,4 @@
-import { NumberInput, TextInput, Textarea } from '@mantine/core';
+import { NumberInput, TextInput } from '@mantine/core';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function GenericField(props: any) {

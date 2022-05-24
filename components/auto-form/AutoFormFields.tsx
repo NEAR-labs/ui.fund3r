@@ -4,7 +4,7 @@ import { z } from 'zod';
 import type { UseFormReturnType } from '@mantine/form/lib/use-form';
 import GenericField from '@/components/auto-form/GenericField';
 
-// eslint-disable-next-line max-lines-per-function
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function AutoFormFields({ form, schema, fields, loading }: { form: UseFormReturnType<any>; schema: z.ZodObject<any>; fields: string[]; loading: boolean }) {
   const { t } = useTranslation('grant');
 
@@ -45,45 +45,6 @@ function AutoFormFields({ form, schema, fields, loading }: { form: UseFormReturn
           />
         );
       })}
-
-      {/* <TextInput
-        required
-        id="projectName"
-        label={t('form.projectName.label')}
-        placeholder={t('form.projectName.placeholder')}
-        mt="sm"
-        onBlur={validateFieldOnBlur}
-        onInput={validateFieldOnInput}
-        disabled={loading}
-        variant="filled"
-        {...form.getInputProps('projectName')}
-      />
-      <Textarea
-        required
-        id="projectDescription"
-        label={t('form.projectDescription.label')}
-        placeholder={t('form.projectDescription.placeholder')}
-        mt="sm"
-        onBlur={validateFieldOnBlur}
-        onInput={validateFieldOnInput}
-        disabled={loading}
-        variant="filled"
-        {...form.getInputProps('projectDescription')}
-      />
-      <NumberInput
-        required
-        id="fundingAmount"
-        label={t('form.fundingAmount.label')}
-        placeholder={t('form.fundingAmount.placeholder')}
-        mt="sm"
-        onBlur={validateFieldOnBlur}
-        onInput={validateFieldOnInput}
-        disabled={loading}
-        rightSection={<span>USD</span>}
-        rightSectionWidth={50}
-        variant="filled"
-        {...form.getInputProps('fundingAmount')}
-      /> */}
     </>
   );
 }
