@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable max-lines-per-function */
 import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
-import type { FocusEvent } from 'react';
+import type SputnikContractInterface from '@/types/SputnikContractInterface';
+import type { FocusEvent, FormEvent, MouseEvent } from 'react';
 import { useTranslation } from 'next-i18next';
-import { z } from 'zod';
 import { useForm, zodResolver } from '@mantine/form';
-import { NumberInput, TextInput, Button, Textarea, Group } from '@mantine/core';
+import { NumberInput, TextInput, Button, Textarea, Group, Alert } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { saveGrantApplicationAsDraft, submitGrantApplication } from '@/services/apiService';
 import { useQuery } from 'react-query';
@@ -16,6 +15,8 @@ import useContract from '@/modules/near-api-react/hooks/useContract';
 import { CONTRACT_ID } from '@/constants';
 import { createPayoutProposal } from '@/services/sputnikContractService';
 import { getNearUsdConvertRate } from '@/services/currencyConverter';
+import createSchema from '@/form-schemas/grantApplicationFormSchema';
+import { AlertCircle } from 'tabler-icons-react';
 
 function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
@@ -26,7 +27,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
 
   const [isNearLoading, setIsNearLoading] = useState(false);
 
-  const contract = useContract({
+  const contract: SputnikContractInterface | null | undefined = useContract({
     contractId: CONTRACT_ID,
     contractMethods: {
       changeMethods: ['add_proposal'],
@@ -36,11 +37,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
 
   const accountId = wallet && wallet.isSignedIn() && wallet.getAccountId();
 
-  const schema = z.object({
-    projectName: z.string().min(3, { message: t('form.projectName.error') }),
-    projectDescription: z.string().min(10, { message: t('form.projectDescription.error') }),
-    fundingAmount: z.number().min(1, { message: t('form.fundingAmount.error') }),
-  });
+  const schema = createSchema(t);
 
   const form = useForm({
     schema: zodResolver(schema),
@@ -60,11 +57,9 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
   });
 
   const {
-    data: savedFormResponse,
     refetch: saveForm,
     isLoading: isSavingLoading,
     isError: isSavingError,
-    isSuccess: isSavingSuccess,
   } = useQuery(
     ['saveForm', apiSignature, grantId, grantData, signStringMessage],
     () =>
@@ -86,11 +81,9 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
   );
 
   const {
-    data: submitFormResponse,
     refetch: submitForm,
     isLoading: isSubmitingLoading,
     isError: isSubmitingError,
-    isSuccess: isSubmitingSuccess,
   } = useQuery(
     ['submitForm', apiSignature, grantId, grantData, signStringMessage],
     () =>
@@ -102,9 +95,16 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
     {
       refetchOnWindowFocus: false,
       enabled: false,
+      retry: false,
       onSuccess: async (responseData) => {
         setIsNearLoading(true);
-        await createPayoutProposal(contract, responseData, 0);
+        if (contract && responseData) {
+          await createPayoutProposal(contract, responseData, 0);
+        }
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      onError: (error: any) => {
+        form.setErrors(error?.response?.data?.errors);
       },
     },
   );
@@ -125,10 +125,12 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
     form.validateField(e.target.id);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const validateFieldOnInput = (e: any) => {
-    if (form.errors[e.target.id]) {
-      form.validateField(e.target.id);
+  const validateFieldOnInput = (e: FormEvent) => {
+    const element = e.target as HTMLInputElement;
+    const { id } = element;
+
+    if (form.errors[id]) {
+      form.validateField(id);
     }
   };
 
@@ -140,13 +142,14 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
     submitForm();
   };
 
-  const saveDraftHandler = (e: any) => {
+  const saveDraftHandler = (e: MouseEvent) => {
     e.preventDefault();
     saveDraft();
   };
 
   const loading = isSavingLoading || isSubmitingLoading || isNearLoading;
   const lastSavedDate = data?.dateLastDraftSaving;
+  const error = isSavingError || isSubmitingError;
 
   return (
     <div>
@@ -155,6 +158,11 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
         {/* eslint-disable-next-line react/no-danger */}
         <p dangerouslySetInnerHTML={{ __html: t('form.description') }} />
       </div>
+      {error && (
+        <Alert icon={<AlertCircle size={16} />} title={t('error.generic.title')} color="orange" mt={16}>
+          {t('error.generic.description')}
+        </Alert>
+      )}
       <form onSubmit={form.onSubmit(() => submit())}>
         <div>
           <h2>{t('form.applicationProjectDetailTitle')}</h2>
@@ -167,6 +175,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
             onBlur={validateFieldOnBlur}
             onInput={validateFieldOnInput}
             disabled={loading}
+            variant="filled"
             {...form.getInputProps('projectName')}
           />
           <Textarea
@@ -178,6 +187,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
             onBlur={validateFieldOnBlur}
             onInput={validateFieldOnInput}
             disabled={loading}
+            variant="filled"
             {...form.getInputProps('projectDescription')}
           />
           <NumberInput
@@ -191,6 +201,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
             disabled={loading}
             rightSection={<span>USD</span>}
             rightSectionWidth={50}
+            variant="filled"
             {...form.getInputProps('fundingAmount')}
           />
           1 NEAR = {usdNearConvertRate} USD

@@ -24,7 +24,7 @@ export default interface GrantApplicationInterface {
   projectDescription?: string;
   currency?: string; // enum maybe
   fundingAmount?: number;
-  nearFundingAmount?: number;
+  nearFundingAmount?: string;
   whatAndWhy?: string;
   competitionDifference?: string;
   isOpenSource?: boolean;
@@ -49,6 +49,8 @@ export default interface GrantApplicationInterface {
   // Status and date
   dateLastDraftSaving?: Date;
   dateSubmission?: Date;
+  proposalNearTransactionHash?: string;
+  isNearProposalValid?: boolean;
   dateEvaluation?: Date;
   dateInterviewSchedule?: Date;
   dateInterview?: Date;

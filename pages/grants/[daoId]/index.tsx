@@ -1,40 +1,40 @@
-import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
 import type { NextApiRequest } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
-import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { Container } from '@mantine/core';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import DefaultLayout from '@/layouts/default';
-import { QueryClient, dehydrate, useQuery } from 'react-query';
+import { QueryClient, dehydrate } from 'react-query';
 import parseCookies from '@/utilities/parseCookies';
 import { COOKIE_SIGNATURE_KEY } from '@/constants';
-import useAccountSignature from '@/hooks/useAccountSignature';
 import { getGrantApplication } from '@/services/apiService';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
 import GrantApplicationForm from '@/components/grant-application-form/GrantApplicationForm';
+import GrantApplicationProposalSubmission from '@/components/grant-application-form/GrantApplicationProposalSubmission';
 import GrantApplicationDetails from '@/components/grant-application-details/GrantApplicationDetails';
 import LoadingAnimation from '@/components/common/LoadingAnimation';
+import useGrant from '@/hooks/useGrant';
+import { useGrantStatus, STATUS } from '@/hooks/useGrantStatus';
 
 function GrantApplication() {
-  const { t } = useTranslation('grant');
-  const apiSignature = useAccountSignature();
   const router = useRouter();
-  const { id } = router.query;
+  const { t } = useTranslation('grant');
+  const { transactionHashes } = router.query;
+  const { daoId } = router.query;
 
-  const [grantData, setGrantData] = useState<GrantApplicationInterface | undefined | null>(undefined);
+  if (typeof daoId !== 'string') {
+    throw new Error('Invalid URL');
+  }
 
-  const { isLoading } = useQuery(['grant', apiSignature, id], () => getGrantApplication(apiSignature, id), {
-    refetchOnWindowFocus: false,
-    onSuccess: (grant) => {
-      setGrantData(grant);
-    },
-  });
+  const id = daoId.split('-')[1];
+  const numberId = parseInt(id as string, 10);
 
-  const showForm = grantData;
-  const showGrantData = grantData && grantData.dateSubmission;
+  const { grant, setGrant, isLoading } = useGrant(numberId, transactionHashes);
+  const status = useGrantStatus();
+
+  const { EDIT, OFFCHAIN_SUBMITTED, FULLY_SUBMITTED } = STATUS;
 
   return (
     <DefaultLayout>
@@ -47,8 +47,9 @@ function GrantApplication() {
             <LoadingAnimation />
           ) : (
             <Container>
-              {showForm && !showGrantData && <GrantApplicationForm data={grantData} setData={setGrantData} />}
-              {showGrantData && <GrantApplicationDetails data={grantData} />}
+              {status === EDIT && <GrantApplicationForm data={grant} setData={setGrant} />}
+              {status === OFFCHAIN_SUBMITTED && <GrantApplicationProposalSubmission data={grant} />}
+              {status === FULLY_SUBMITTED && <GrantApplicationDetails data={grant} />}
             </Container>
           )}
         </NearAuthenticationGuardWithLoginRedirection>
@@ -62,7 +63,17 @@ export async function getServerSideProps({ req, locale, params }: { req: NextApi
   const data = parseCookies(req);
   const apiSignature = data[COOKIE_SIGNATURE_KEY] ? JSON.parse(data[COOKIE_SIGNATURE_KEY]) : null;
 
-  await queryClient.prefetchQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, params.id));
+  const { daoId } = params;
+
+  if (typeof daoId !== 'string') {
+    return {
+      notFound: true,
+    };
+  }
+
+  const id = daoId.split('-')[1];
+
+  await queryClient.prefetchQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, id));
   const dehydratedState = dehydrate(queryClient);
 
   return {

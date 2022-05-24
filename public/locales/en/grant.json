@@ -22,5 +22,15 @@
     "save": "Save draft",
     "submit": "Submit application",
     "draft_date": "Draft saved on "
+  },
+  "error": {
+    "tx_error": {
+      "title": "The transaction failed",
+      "description": "The transaction failed. Please try again."
+    },
+    "generic": {
+      "title": "The submission failed",
+      "description": "Please review the form errors below, and try again"
+    }
   }
 }

@@ -6,6 +6,7 @@ import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import NearProvider from '@/modules/near-api-react/providers/NearProvider';
 import { useState } from 'react';
 import { CookiesProvider } from 'react-cookie';
+import GrantProvider from '@/providers/GrantProvider';
 
 // if (process.env.NODE_ENV === 'development' && process.env.NEXT_PUBLIC_MOCK_API) {
 if (process.env.NEXT_PUBLIC_MOCK_API) {
@@ -40,7 +41,9 @@ const App = (props: AppProps) => {
           <QueryClientProvider client={queryClient}>
             <Hydrate state={pageProps.dehydratedState}>
               <CookiesProvider>
-                <Component {...pageProps} />
+                <GrantProvider>
+                  <Component {...pageProps} />
+                </GrantProvider>
               </CookiesProvider>
             </Hydrate>
           </QueryClientProvider>
