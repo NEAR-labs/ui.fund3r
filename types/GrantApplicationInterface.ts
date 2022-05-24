@@ -1,5 +1,35 @@
 import type MilestoneInterface from './MilestoneInterface';
 
+enum GrantTypes {
+  Equity = 'equity',
+  NonEquity = 'non-equity',
+}
+
+enum OpenSourceStates {
+  FullyOpenSource = 'fully-open-source',
+  PartiallyOpenSource = 'partially-open-source',
+  ClosedSource = 'closed-source',
+}
+
+enum GrantCategories {
+  ChannelBrandPartnership = 'channel-brand-partnership',
+  Daos = 'daos',
+  GamingMetaverse = 'gaming-metaverse',
+  InfrastructureWallets = 'infrastructure-wallets',
+  InstitutionalFinancial = 'institutional-financial',
+  Nfts = 'nfts',
+  SocialImpact = 'social-impact',
+  Other = 'other',
+}
+
+enum ProjectStatus {
+  Mvp = 'mvp',
+  PreAlpha = 'pre-alpha',
+  Alpha = 'alpha',
+  Beta = 'beta',
+  Live = 'live',
+}
+
 export default interface GrantApplicationInterface {
   id: number | undefined;
   nearId: string;
@@ -9,18 +39,18 @@ export default interface GrantApplicationInterface {
   lastname?: string;
   dateOfBirth?: Date;
   email?: string;
-  linkedin?: string;
+  github?: string;
   twitter?: string;
   workingAloneOrTeam?: string; // replace with enums
   hasPreviouslyReceivedFundingTokensGrantsFromNear?: boolean;
 
   // Project related
   projectName?: string;
-  grantType?: string; // enum maybe?
-  grantCategory?: string; // enum maybe?
+  grantType?: GrantTypes;
+  grantCategory?: GrantCategories;
   projectUrl?: string;
   githubUrl?: string;
-  projectStatus?: string; // enum maybe
+  projectStatus?: ProjectStatus;
   projectLaunchDate?: string;
   projectDescription?: string;
   currency?: string; // enum maybe
@@ -28,7 +58,7 @@ export default interface GrantApplicationInterface {
   nearFundingAmount?: string;
   whatAndWhy?: string;
   competitionDifference?: string;
-  isOpenSource?: boolean;
+  openSourceState?: OpenSourceStates;
   opensourceComponentUse?: string;
   impactOnEcosystem?: string;
   excitementNear?: string;
