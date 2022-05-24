@@ -9,16 +9,68 @@
       "placeholder": "Project Name",
       "error": "Please enter a project name that is at least 3 characters long."
     },
+    "grantType": {
+      "label": "Are you applying for a grant (non-equity) or venture funding (equity)?",
+      "placeholder": "Are you applying for a grant (non-equity) or venture funding (equity)?",
+      "error": "Please select a grant type."
+    },
+    "grantCategory": {
+      "label": "Grant Category",
+      "placeholder": "Grant Category",
+      "error": "Please select a grant category."
+    },
+    "projectUrl": {
+      "label": "Project Website URL",
+      "placeholder": "Project Website URL",
+      "error": "Please enter a valid URL."
+    },
+    "githubUrl": {
+      "label": "GitHub Project URL",
+      "placeholder": "GitHub Project URL",
+      "error": "Please enter a valid URL."
+    },
+    "projectStatus": {
+      "label": "How far is your project?*",
+      "placeholder": "How far is your project?*",
+      "error": "Please select a project status."
+    },
+    "projectLaunchDate": {
+      "label": "Project Launch Date",
+      "placeholder": "Project Launch Date",
+      "error": "Please enter a valid date."
+    },
     "projectDescription": {
       "label": "Project Description",
       "placeholder": "Project Description",
-      "error": "Please enter a project description that is at least 10 characters long."
+      "error": "Please enter a project description that is at least 1 characters long and less than 100."
     },
     "fundingAmount": {
       "label": "How much funding are you requesting?",
       "placeholder": "10000",
       "error": "Please enter a funding amount that is at least 1 USD."
     },
+    "whatAndWhy": {
+      "label": "What are you building & why?",
+      "placeholder": "What are you building & why?",
+      "error": "Please enter explanation that is at least 1 characters long and less than 100."
+    },
+    "competitionDifference": {
+      "label": "What makes you different from your competitors?",
+      "placeholder": "What makes you different from your competitors?",
+      "error": "Please enter explanation that is at least 1 characters long and less than 100."
+    },
+    "openSourceState": {
+      "label": "Is your project open-source?",
+      "placeholder": "Is your project open-source?",
+      "error": "Please select an open source status."
+    },
+    "opensourceComponentUse": {
+      "label": "Which components of the project will be open source?",
+      "placeholder": "Which components of the project will be open source?",
+      "error": "Please enter explanation that is at least 1 characters long and less than 100."
+    },
+    },
+
     "save": "Save draft",
     "submit": "Submit application",
     "draft_date": "Draft saved on "
