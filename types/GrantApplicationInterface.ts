@@ -115,7 +115,7 @@ export interface GrantApplicationInterface {
   reviewMemberDetail?: string;
   reviewAttachments?: string;
 
-  milestones: [MilestoneInterface] | FormList<any>;
+  milestones: FormList<{ budget: number; deliveryDate: string; description: string }>; // A few items of MilestoneInterface
   created_at?: Date;
   updated_at?: Date;
 }
