@@ -50,8 +50,8 @@ function FormFieldsMilestones({ form, loading }: { form: UseFormReturnType<any>;
         {...form.getListInputProps('milestones', index, 'description')}
         onBlur={validateFieldOnBlur}
         onInput={validateFieldOnInput}
-        label={t('form.description.label')}
-        placeholder={t('form.description.placeholder')}
+        label={t('form.milestoneDescription.label')}
+        placeholder={t('form.milestoneDescription.placeholder')}
         variant="filled"
         mt="sm"
       />
@@ -65,7 +65,7 @@ function FormFieldsMilestones({ form, loading }: { form: UseFormReturnType<any>;
   return (
     <>
       {milestonesFields}
-      <Button color="violet" disabled={loading} onClick={addMilestone} mt="md">
+      <Button color="violet" disabled={loading} onClick={addMilestone} mt="md" variant="light">
         {t('form.addMilestone')}
       </Button>
     </>

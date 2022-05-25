@@ -50,6 +50,22 @@
       "error": "Please enter a funding amount that is at least 1 USD.",
       "description": "Please specify the exact amount you are requesting in USD. E.g. $50,000 * Grants will be given in USD value of NEAR tokens. (Benchmark: average grant <$50K USD)"
     },
+    "milestoneTitle": "Milestone",
+    "budget": {
+      "label": "Estimated Budget",
+      "placeholder": "10000",
+      "error": "Please enter a budget that is at least 1 USD."
+    },
+    "deliveryDate": {
+      "label": "Estimated Delivery Date",
+      "placeholder": "Estimated Delivery Date",
+      "error": "Please enter a valid date."
+    },
+    "milestoneDescription": {
+      "label": "Milestone Description",
+      "placeholder": "Milestone Description",
+      "error": "Please enter a description that is at least 1 characters long and less than 100."
+    },
     "whatAndWhy": {
       "label": "What are you building & why?",
       "placeholder": "What are you building & why?",
@@ -175,6 +191,7 @@
     "save": "Save draft",
     "submit": "Submit application",
     "draft_date": "Draft saved on ",
+    "addMilestone": "Add Milestone",
     "labels": {
       "equity": "Equity",
       "non-equity": "Non-Equity",
