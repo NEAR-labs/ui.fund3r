@@ -45,7 +45,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
     schema: zodResolver(schema),
     initialValues: {
       ...data,
-      milestones: formList([{ budget: 0, deliveryDate: '', description: 'This is a test' }]),
+      milestones: formList([]),
     },
   });
 

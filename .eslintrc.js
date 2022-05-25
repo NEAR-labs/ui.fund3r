@@ -24,7 +24,7 @@ module.exports = {
     // ------------------------------
     'no-use-before-define': 'off', // We must disable the base rule (since it can report incorrect errors) and replace it (https://stackoverflow.com/a/64024916/)
     '@typescript-eslint/no-use-before-define': ['error'],
-    'max-lines-per-function': ['error', { max: 50, skipBlankLines: true, skipComments: true }], // https://eslint.org/docs/rules/max-lines-per-function
+    'max-lines-per-function': ['error', { max: 70, skipBlankLines: true, skipComments: true }], // https://eslint.org/docs/rules/max-lines-per-function
     'max-lines': ['error', { max: 300, skipBlankLines: true, skipComments: true }], // https://eslint.org/docs/rules/max-lines
     'no-console': 'off', // Console logging is super helpful for development, and we can have our build process strip out all of those statements for production.
     'no-else-return': 'off',

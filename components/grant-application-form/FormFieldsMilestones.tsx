@@ -17,6 +17,9 @@ function FormFieldsMilestones({ form, loading }: { form: UseFormReturnType<any>;
         {...form.getListInputProps('milestones', index, 'budget')}
         onBlur={validateFieldOnBlur}
         onInput={validateFieldOnInput}
+        label={t('form.budget.label')}
+        placeholder={t('form.budget.placeholder')}
+        variant="filled"
       />
       <TextInput
         id={`milestones.${index}.deliveryDate`}
@@ -25,6 +28,9 @@ function FormFieldsMilestones({ form, loading }: { form: UseFormReturnType<any>;
         {...form.getListInputProps('milestones', index, 'deliveryDate')}
         onBlur={validateFieldOnBlur}
         onInput={validateFieldOnInput}
+        label={t('form.deliveryDate.label')}
+        placeholder={t('form.deliveryDate.placeholder')}
+        variant="filled"
       />
       <TextInput
         id={`milestones.${index}.description`}
@@ -33,6 +39,9 @@ function FormFieldsMilestones({ form, loading }: { form: UseFormReturnType<any>;
         {...form.getListInputProps('milestones', index, 'description')}
         onBlur={validateFieldOnBlur}
         onInput={validateFieldOnInput}
+        label={t('form.description.label')}
+        placeholder={t('form.description.placeholder')}
+        variant="filled"
       />
       <ActionIcon color="red" variant="hover" onClick={() => form.removeListItem('milestones', index)}>
         <Trash size={16} />
