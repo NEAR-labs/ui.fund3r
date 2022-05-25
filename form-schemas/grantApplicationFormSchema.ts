@@ -61,8 +61,14 @@ const createSchema = (t: TFunction) => {
     lastname: z.string({ required_error: t('form.lastname.error') }).min(1, { message: t('form.lastname.error') }),
     dateOfBirth: z.date({ required_error: t('form.dateOfBirth.error'), invalid_type_error: t('form.dateOfBirth.error') }),
     email: z.string({ required_error: t('form.email.error') }).email({ message: t('form.email.error') }),
-    github: z.union([z.string().url({ message: t('form.github.error') }), z.string().nullable()]),
-    twitter: z.union([z.string().url({ message: t('form.twitter.error') }), z.string().nullable()]),
+    github: z
+      .string()
+      .url({ message: t('form.github.error') })
+      .optional(),
+    twitter: z
+      .string()
+      .url({ message: t('form.twitter.error') })
+      .optional(),
     workingAloneOrTeam: z.nativeEnum(WorkingTypes, {
       errorMap: () => {
         return { message: t('form.workingAloneOrTeam.error') };
@@ -78,7 +84,10 @@ const createSchema = (t: TFunction) => {
     howHeardGrants: z.string({ required_error: t('form.howHeardGrants.error') }).min(1, { message: t('form.howHeardGrants.error') }),
     referral: z.string().optional(),
     teamReferral: z.string().optional(), // to update with an enum
-    comments: z.union([z.string().max(1000, { message: t('form.comments.error') }), z.string().optional()]),
+    comments: z
+      .string()
+      .max(1000, { message: t('form.comments.error') })
+      .optional(),
   });
 };
 
