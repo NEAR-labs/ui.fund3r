@@ -47,7 +47,8 @@
     "fundingAmount": {
       "label": "How much funding are you requesting?",
       "placeholder": "10000",
-      "error": "Please enter a funding amount that is at least 1 USD."
+      "error": "Please enter a funding amount that is at least 1 USD.",
+      "description": "Please specify the exact amount you are requesting in USD. E.g. $50,000 * Grants will be given in USD value of NEAR tokens. (Benchmark: average grant <$50K USD)"
     },
     "whatAndWhy": {
       "label": "What are you building & why?",

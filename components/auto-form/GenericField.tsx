@@ -11,6 +11,7 @@ function GenericField(props: any) {
   const { zodTypeDef, ...otherProps } = props;
   const typeName = zodTypeDef.innerType || zodTypeDef.typeName;
   const required = zodTypeDef.typeName !== 'ZodOptional';
+  const description = zodTypeDef.description || null;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   // const maxArray = zodTypeDef.checks?.filter((check: any) => {
@@ -30,6 +31,7 @@ function GenericField(props: any) {
   const sharedProps = {
     required,
     type,
+    description,
   };
 
   switch (typeName) {
