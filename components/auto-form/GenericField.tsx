@@ -1,4 +1,5 @@
 import { NumberInput, TextInput, Select } from '@mantine/core';
+import { DatePicker } from '@mantine/dates';
 import { useTranslation } from 'next-i18next';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -19,11 +20,9 @@ function GenericField(props: any) {
   switch (typeName) {
     case 'ZodString':
       return <TextInput {...sharedProps} {...otherProps} />;
-      break;
 
     case 'ZodNumber':
       return <NumberInput {...sharedProps} {...otherProps} />;
-      break;
 
     case 'ZodNativeEnum':
       // eslint-disable-next-line no-case-declarations
@@ -33,11 +32,12 @@ function GenericField(props: any) {
       }));
 
       return <Select {...sharedProps} {...otherProps} data={data} />;
-      break;
+
+    case 'ZodDate':
+      return <DatePicker {...sharedProps} {...otherProps} />;
 
     default:
       return <TextInput {...sharedProps} {...otherProps} />;
-      break;
   }
 }
 
