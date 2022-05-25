@@ -173,7 +173,27 @@
     "draft_date": "Draft saved on ",
     "labels": {
       "equity": "Equity",
-      "non-equity": "Non-Equity"
+      "non-equity": "Non-Equity",
+      "channel-brand-partnership": "Channel Brand / Partnership",
+      "daos": "DAOs",
+      "gaming-metaverse": "Gaming / Metaverse",
+      "infrastructure-wallets": "Infrastructure / Wallets",
+      "institutional-financial": "Institutional / Financial",
+      "nfts": "NFTs",
+      "social-impact": "Social Impact",
+      "other": "Other",
+      "mvp": "MVP",
+      "pre-alpha": "Pre-Alpha",
+      "alpha": "Alpha",
+      "beta": "Beta",
+      "live": "Live",
+      "fully-open-source": "Fully Open Source",
+      "partially-open-source": "Partially Open Source",
+      "closed-source": "Closed Source",
+      "working-alone": "Working Alone",
+      "working-with-team": "Working With Team",
+      "raising": "Yes",
+      "not-raising": "No"
     }
   },
   "error": {
