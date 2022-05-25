@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 import type SputnikContractInterface from '@/types/SputnikContractInterface';
-import type { MouseEvent } from 'react';
+import type { MouseEvent, FocusEvent, FormEvent } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useForm, zodResolver, formList } from '@mantine/form';
 import { Button, Group, Alert, Title, Text, Divider, TextInput, ActionIcon } from '@mantine/core';
@@ -137,11 +137,50 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
   const lastSavedDate = data?.dateLastDraftSaving;
   const error = isSavingError || isSubmitingError;
 
+  const validateFieldOnBlur = (e: FocusEvent) => {
+    console.log(e.target.id);
+
+    form.validateField(e.target.id);
+
+    // form.validate();
+    // console.log(form.errors);
+  };
+
+  const validateFieldOnInput = (e: FormEvent) => {
+    const element = e.target as HTMLInputElement;
+    const { id } = element;
+
+    if (form.errors[id]) {
+      form.validateField(id);
+    }
+  };
+
   const milestonesFields = form.values.milestones.map((item, index) => (
     <div key={index}>
-      <TextInput required sx={{ flex: 1 }} {...form.getListInputProps('milestones', index, 'budget')} />
-      <TextInput required sx={{ flex: 1 }} {...form.getListInputProps('milestones', index, 'deliveryDate')} />
-      <TextInput required sx={{ flex: 1 }} {...form.getListInputProps('milestones', index, 'description')} />
+      <TextInput
+        id={`milestones.${index}.budget`}
+        required
+        sx={{ flex: 1 }}
+        {...form.getListInputProps('milestones', index, 'budget')}
+        onBlur={validateFieldOnBlur}
+        onInput={validateFieldOnInput}
+      />
+      <TextInput
+        id={`milestones.${index}.deliveryDate`}
+        required
+        sx={{ flex: 1 }}
+        {...form.getListInputProps('milestones', index, 'deliveryDate')}
+        onBlur={validateFieldOnBlur}
+        onInput={validateFieldOnInput}
+      />
+      <TextInput
+        id={`milestones.${index}.description`}
+        required
+        sx={{ flex: 1 }}
+        {...form.getListInputProps('milestones', index, 'description')}
+        onBlur={validateFieldOnBlur}
+        onInput={validateFieldOnInput}
+      />
       <ActionIcon color="red" variant="hover" onClick={() => form.removeListItem('milestones', index)}>
         <Trash size={16} />
       </ActionIcon>
