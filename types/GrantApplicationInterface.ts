@@ -1,3 +1,4 @@
+import type { FormList } from '../node_modules/@mantine/form/lib/form-list/form-list';
 import type MilestoneInterface from './MilestoneInterface';
 
 export enum GrantTypes {
@@ -114,7 +115,7 @@ export interface GrantApplicationInterface {
   reviewMemberDetail?: string;
   reviewAttachments?: string;
 
-  milestones?: [MilestoneInterface];
+  milestones: [MilestoneInterface] | FormList<any>;
   created_at?: Date;
   updated_at?: Date;
 }

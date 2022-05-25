@@ -3,7 +3,7 @@ import type { GrantApplicationInterface } from '@/types/GrantApplicationInterfac
 import type SputnikContractInterface from '@/types/SputnikContractInterface';
 import type { MouseEvent } from 'react';
 import { useTranslation } from 'next-i18next';
-import { useForm, zodResolver } from '@mantine/form';
+import { useForm, zodResolver, formList } from '@mantine/form';
 import { Button, Group, Alert, Title, Text, Divider } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { saveGrantApplicationAsDraft, submitGrantApplication } from '@/services/apiService';
@@ -43,10 +43,8 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
   const form = useForm({
     schema: zodResolver(schema),
     initialValues: {
-      projectName: '',
-      projectDescription: '',
-      fundingAmount: 0,
       ...data,
+      milestones: formList([{ budget: 0, deliveryDate: '', description: 'This is a test' }]),
     },
   });
 
