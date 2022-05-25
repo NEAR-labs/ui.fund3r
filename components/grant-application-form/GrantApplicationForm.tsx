@@ -178,7 +178,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
               'impactOnEcosystem',
               'excitementNear',
               'successMesurement',
-              'isProjectCurrentlyRaising',
+              'projectRaisingRound',
             ]}
             loading={loading}
           />

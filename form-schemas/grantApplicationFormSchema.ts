@@ -1,6 +1,6 @@
 import { TFunction } from 'next-i18next';
 import { z } from 'zod';
-import { GrantTypes, GrantCategories, ProjectStatus, OpenSourceStates, WorkingTypes } from '@/types/GrantApplicationInterface';
+import { GrantTypes, GrantCategories, ProjectStatus, OpenSourceStates, WorkingTypes, RaisingRoundStatus } from '@/types/GrantApplicationInterface';
 
 // eslint-disable-next-line max-lines-per-function
 const createSchema = (t: TFunction) => {
@@ -55,7 +55,11 @@ const createSchema = (t: TFunction) => {
       .min(1, { message: t('form.excitementNear.error') })
       .max(1000, { message: t('form.excitementNear.error') }),
     successMesurement: z.string({ required_error: t('form.successMesurement.error') }).min(1, { message: t('form.successMesurement.error') }),
-    isProjectCurrentlyRaising: z.boolean(),
+    projectRaisingRound: z.nativeEnum(RaisingRoundStatus, {
+      errorMap: () => {
+        return { message: t('form.projectRaisingRound.error') };
+      },
+    }),
 
     firstname: z.string({ required_error: t('form.firstname.error') }).min(1, { message: t('form.firstname.error') }),
     lastname: z.string({ required_error: t('form.lastname.error') }).min(1, { message: t('form.lastname.error') }),

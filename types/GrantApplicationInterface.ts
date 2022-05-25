@@ -35,6 +35,11 @@ export enum WorkingTypes {
   WorkingWithTeam = 'working-with-team',
 }
 
+export enum RaisingRoundStatus {
+  Raising = 'raising',
+  NotRaising = 'not-raising',
+}
+
 export interface GrantApplicationInterface {
   id: number | undefined;
   nearId: string;
@@ -68,7 +73,7 @@ export interface GrantApplicationInterface {
   impactOnEcosystem?: string;
   excitementNear?: string;
   successMesurement?: string;
-  isProjectCurrentlyRaising?: boolean;
+  projectRaisingRound?: RaisingRoundStatus;
 
   // Address
   addressCountry?: string;

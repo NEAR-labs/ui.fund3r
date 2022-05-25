@@ -84,7 +84,7 @@
       "placeholder": "How will you measure project success?",
       "error": "Please enter explanation that is at least 1 character long."
     },
-    "isProjectCurrentlyRaising": {
+    "projectRaisingRound": {
       "label": "Are you currently raising a round?",
       "placeholder": "Are you currently raising a round?",
       "error": "Please select a funding status."
