@@ -30,7 +30,6 @@ function AutoFormFields({ form, schema, fields, loading }: { form: UseFormReturn
         return (
           <GenericField
             key={field}
-            required
             id={field}
             label={t(`form.${field}.label`)}
             placeholder={t(`form.${field}.placeholder`)}
