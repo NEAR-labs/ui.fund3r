@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { NumberInput, TextInput, Select } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { useTranslation } from 'next-i18next';
@@ -11,18 +12,32 @@ function GenericField(props: any) {
   const typeName = zodTypeDef.innerType || zodTypeDef.typeName;
   const required = zodTypeDef.typeName !== 'ZodOptional';
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // const maxArray = zodTypeDef.checks?.filter((check: any) => {
+  //   return check.kind === 'max';
+  // });
+
+  const email = useMemo(
+    () =>
+      zodTypeDef.checks?.filter((check: any) => {
+        return check.kind === 'email';
+      }),
+    [zodTypeDef],
+  );
+
+  const type = useMemo(() => (email?.length > 0 ? 'email' : 'text'), [email]);
+
   const sharedProps = {
     required,
+    type,
   };
-
-  console.log(zodTypeDef);
 
   switch (typeName) {
     case 'ZodString':
-      return <TextInput {...sharedProps} {...otherProps} />;
+      return <TextInput {...otherProps} {...sharedProps} />;
 
     case 'ZodNumber':
-      return <NumberInput {...sharedProps} {...otherProps} />;
+      return <NumberInput {...otherProps} {...sharedProps} />;
 
     case 'ZodNativeEnum':
       // eslint-disable-next-line no-case-declarations
@@ -31,13 +46,13 @@ function GenericField(props: any) {
         value: zodTypeDef.values[key],
       }));
 
-      return <Select {...sharedProps} {...otherProps} data={data} />;
+      return <Select {...otherProps} {...sharedProps} data={data} />;
 
     case 'ZodDate':
-      return <DatePicker {...sharedProps} {...otherProps} />;
+      return <DatePicker {...otherProps} {...sharedProps} />;
 
     default:
-      return <TextInput {...sharedProps} {...otherProps} />;
+      return <TextInput {...otherProps} {...sharedProps} />;
   }
 }
 
