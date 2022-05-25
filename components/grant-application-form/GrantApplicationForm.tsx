@@ -1,10 +1,10 @@
 /* eslint-disable max-lines-per-function */
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 import type SputnikContractInterface from '@/types/SputnikContractInterface';
-import type { MouseEvent, FocusEvent, FormEvent } from 'react';
+import type { MouseEvent } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useForm, zodResolver, formList } from '@mantine/form';
-import { Button, Group, Alert, Title, Text, Divider, TextInput, ActionIcon } from '@mantine/core';
+import { Button, Group, Alert, Title, Text, Divider } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { saveGrantApplicationAsDraft, submitGrantApplication } from '@/services/apiService';
 import { useQuery } from 'react-query';
@@ -16,8 +16,9 @@ import { CONTRACT_ID } from '@/constants';
 import { createPayoutProposal } from '@/services/sputnikContractService';
 import { getNearUsdConvertRate } from '@/services/currencyConverter';
 import createSchema from '@/form-schemas/grantApplicationFormSchema';
-import { AlertCircle, Trash } from 'tabler-icons-react';
+import { AlertCircle } from 'tabler-icons-react';
 import AutoFormFields from '@/components/auto-form/AutoFormFields';
+import FormFieldsMilestones from '@/components/grant-application-form/FormFieldsMilestones';
 
 function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
@@ -137,57 +138,6 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
   const lastSavedDate = data?.dateLastDraftSaving;
   const error = isSavingError || isSubmitingError;
 
-  // THIS PART SHOULD MOVE TO MILESTONE FORM
-  const validateFieldOnBlur = (e: FocusEvent) => {
-    form.validateField(e.target.id);
-  };
-
-  const validateFieldOnInput = (e: FormEvent) => {
-    const element = e.target as HTMLInputElement;
-    const { id } = element;
-
-    if (form.errors[id]) {
-      form.validateField(id);
-    }
-  };
-
-  const milestonesFields = form.values.milestones.map((item, index) => (
-    <div key={index}>
-      <TextInput
-        id={`milestones.${index}.budget`}
-        required
-        sx={{ flex: 1 }}
-        {...form.getListInputProps('milestones', index, 'budget')}
-        onBlur={validateFieldOnBlur}
-        onInput={validateFieldOnInput}
-      />
-      <TextInput
-        id={`milestones.${index}.deliveryDate`}
-        required
-        sx={{ flex: 1 }}
-        {...form.getListInputProps('milestones', index, 'deliveryDate')}
-        onBlur={validateFieldOnBlur}
-        onInput={validateFieldOnInput}
-      />
-      <TextInput
-        id={`milestones.${index}.description`}
-        required
-        sx={{ flex: 1 }}
-        {...form.getListInputProps('milestones', index, 'description')}
-        onBlur={validateFieldOnBlur}
-        onInput={validateFieldOnInput}
-      />
-      <ActionIcon color="red" variant="hover" onClick={() => form.removeListItem('milestones', index)}>
-        <Trash size={16} />
-      </ActionIcon>
-    </div>
-  ));
-
-  const addMilestone = () => {
-    form.addListItem('milestones', { budget: 0, deliveryDate: '', description: 'This is a test' });
-  };
-  // END MILESTONE
-
   return (
     <div>
       <div>
@@ -214,10 +164,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
             loading={loading}
           />
           <Divider mt={32} mb={32} />
-          {milestonesFields}
-          <Button color="violet" disabled={loading} onClick={addMilestone}>
-            {t('form.addMilestone')}
-          </Button>
+          <FormFieldsMilestones form={form} loading={loading} />
           <Divider mt={32} mb={32} />
           <AutoFormFields
             form={form}
