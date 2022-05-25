@@ -2,9 +2,10 @@ import { NumberInput, TextInput } from '@mantine/core';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function GenericField(props: any) {
-  const { zodType, ...otherProps } = props;
+  const { zodTypeDef, ...otherProps } = props;
+  const { typeName } = zodTypeDef;
 
-  switch (zodType) {
+  switch (typeName) {
     case 'ZodString':
       return <TextInput {...otherProps} />;
       break;
