@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { NumberInput, TextInput, Select } from '@mantine/core';
+import { NumberInput, TextInput, Select, Checkbox } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { useTranslation } from 'next-i18next';
 
@@ -32,6 +32,8 @@ function GenericField(props: any) {
     type,
   };
 
+  console.log(typeName);
+
   switch (typeName) {
     case 'ZodString':
       return <TextInput {...otherProps} {...sharedProps} />;
@@ -50,6 +52,9 @@ function GenericField(props: any) {
 
     case 'ZodDate':
       return <DatePicker {...otherProps} {...sharedProps} />;
+
+    case 'ZodBoolean':
+      return <Checkbox {...otherProps} {...sharedProps} color="violet" type="checkbox" />;
 
     default:
       return <TextInput {...otherProps} {...sharedProps} />;
