@@ -46,7 +46,10 @@ const createSchema = (t: TFunction) => {
         return { message: t('form.openSourceState.error') };
       },
     }),
-    opensourceComponentUse: z.string({ required_error: t('form.opensourceComponentUse.error') }).min(1, { message: t('form.opensourceComponentUse.error') }),
+    opensourceComponentUse: z
+      .string({ required_error: t('form.opensourceComponentUse.error') })
+      .min(1, { message: t('form.opensourceComponentUse.error') })
+      .describe(t('form.opensourceComponentUse.description')),
     impactOnEcosystem: z
       .string({ required_error: t('form.impactOnEcosystem.error') })
       .min(1, { message: t('form.impactOnEcosystem.error') })
@@ -55,7 +58,10 @@ const createSchema = (t: TFunction) => {
       .string({ required_error: t('form.excitementNear.error') })
       .min(1, { message: t('form.excitementNear.error') })
       .max(1000, { message: t('form.excitementNear.error') }),
-    successMesurement: z.string({ required_error: t('form.successMesurement.error') }).min(1, { message: t('form.successMesurement.error') }),
+    successMesurement: z
+      .string({ required_error: t('form.successMesurement.error') })
+      .min(1, { message: t('form.successMesurement.error') })
+      .describe(t('form.successMesurement.description')),
     projectRaisingRound: z.nativeEnum(RaisingRoundStatus, {
       errorMap: () => {
         return { message: t('form.projectRaisingRound.error') };
@@ -86,7 +92,10 @@ const createSchema = (t: TFunction) => {
     addressStreet: z.string({ required_error: t('form.addressStreet.error') }).min(1, { message: t('form.addressStreet.error') }),
     addressZip: z.string({ required_error: t('form.addressZip.error') }).min(1, { message: t('form.addressZip.error') }),
 
-    howHeardGrants: z.string({ required_error: t('form.howHeardGrants.error') }).min(1, { message: t('form.howHeardGrants.error') }),
+    howHeardGrants: z
+      .string({ required_error: t('form.howHeardGrants.error') })
+      .min(1, { message: t('form.howHeardGrants.error') })
+      .describe(t('form.howHeardGrants.description')),
     referral: z.string().optional(),
     teamReferral: z.string().optional(), // to update with an enum
     comments: z

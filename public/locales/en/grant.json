@@ -68,7 +68,8 @@
     "opensourceComponentUse": {
       "label": "Which components of the project will be open source?",
       "placeholder": "Which components of the project will be open source?",
-      "error": "Please enter explanation that is at least 1 character long and less than 100."
+      "error": "Please enter explanation that is at least 1 character long and less than 100.",
+      "description": "Please provide as much detail as possible."
     },
     "impactOnEcosystem": {
       "label": "How will this impact the NEAR Ecosystem?",
@@ -83,7 +84,8 @@
     "successMesurement": {
       "label": "How will you measure project success?",
       "placeholder": "How will you measure project success?",
-      "error": "Please enter explanation that is at least 1 character long."
+      "error": "Please enter explanation that is at least 1 character long.",
+      "description": "What will success look like for your project? An example can be number of sign ups, active users, total TVL, NEAR ecosystem impact etc."
     },
     "projectRaisingRound": {
       "label": "Are you currently raising a round?",
@@ -154,7 +156,8 @@
     "howHeardGrants": {
       "label": "How did you hear about the NEAR Grants Program?",
       "placeholder": "How did you hear about the NEAR Grants Program?",
-      "error": "Please select a how did you hear about NEAR Grants."
+      "error": "Please select a how did you hear about NEAR Grants.",
+      "description": "Please tell us how you found this program! Did you hack with us, see us in a newsletter, or something else?"
     },
     "referral": {
       "label": "Did someone refer you to the NF Grants Program?",
