@@ -32,7 +32,18 @@ const createSchema = (t: TFunction) => {
       .number({ invalid_type_error: t('form.fundingAmount.error'), required_error: t('form.fundingAmount.error') })
       .min(1, { message: t('form.fundingAmount.error') })
       .describe(t('form.fundingAmount.description')),
-    // put later the milestones here
+
+    milestones: z.array(
+      z.object({
+        budget: z.number({ invalid_type_error: t('form.budget.error'), required_error: t('form.budget.error') }).min(1, { message: t('form.budget.error') }),
+        deliveryDate: z.date({ invalid_type_error: t('form.deliveryDate.error'), required_error: t('form.deliveryDate.error') }),
+        description: z
+          .string({ required_error: t('form.description.error') })
+          .min(1, { message: t('form.description.error') })
+          .max(100, { message: t('form.description.error') }),
+      }),
+    ),
+
     whatAndWhy: z
       .string({ required_error: t('form.whatAndWhy.error') })
       .min(1, { message: t('form.whatAndWhy.error') })
