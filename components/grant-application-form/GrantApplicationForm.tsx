@@ -137,13 +137,9 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
   const lastSavedDate = data?.dateLastDraftSaving;
   const error = isSavingError || isSubmitingError;
 
+  // THIS PART SHOULD MOVE TO MILESTONE FORM
   const validateFieldOnBlur = (e: FocusEvent) => {
-    console.log(e.target.id);
-
     form.validateField(e.target.id);
-
-    // form.validate();
-    // console.log(form.errors);
   };
 
   const validateFieldOnInput = (e: FormEvent) => {
@@ -190,6 +186,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
   const addMilestone = () => {
     form.addListItem('milestones', { budget: 0, deliveryDate: '', description: 'This is a test' });
   };
+  // END MILESTONE
 
   return (
     <div>
