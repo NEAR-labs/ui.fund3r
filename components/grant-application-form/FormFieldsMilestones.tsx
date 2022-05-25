@@ -1,6 +1,7 @@
 import type { UseFormReturnType } from '@mantine/form/lib/use-form';
 import createValidationUtilities from '@/utilities/createValidationUtilities';
-import { TextInput, ActionIcon, Button, Title, Group } from '@mantine/core';
+import { TextInput, ActionIcon, Button, Title, Group, NumberInput } from '@mantine/core';
+import { DatePicker } from '@mantine/dates';
 import { useTranslation } from 'next-i18next';
 import { Trash } from 'tabler-icons-react';
 
@@ -18,7 +19,7 @@ function FormFieldsMilestones({ form, loading }: { form: UseFormReturnType<any>;
           <Trash size={16} />
         </ActionIcon>
       </Group>
-      <TextInput
+      <NumberInput
         id={`milestones.${index}.budget`}
         required
         sx={{ flex: 1 }}
@@ -30,7 +31,7 @@ function FormFieldsMilestones({ form, loading }: { form: UseFormReturnType<any>;
         variant="filled"
         mt="sm"
       />
-      <TextInput
+      <DatePicker
         id={`milestones.${index}.deliveryDate`}
         required
         sx={{ flex: 1 }}
