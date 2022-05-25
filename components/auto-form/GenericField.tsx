@@ -32,8 +32,6 @@ function GenericField(props: any) {
     type,
   };
 
-  console.log(typeName);
-
   switch (typeName) {
     case 'ZodString':
       return <TextInput {...otherProps} {...sharedProps} />;
