@@ -1,5 +1,4 @@
 import type { FormList } from '../node_modules/@mantine/form/lib/form-list/form-list';
-import type MilestoneInterface from './MilestoneInterface';
 
 export enum GrantTypes {
   Equity = 'equity',

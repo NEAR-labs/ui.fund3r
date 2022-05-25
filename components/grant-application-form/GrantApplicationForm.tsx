@@ -4,7 +4,7 @@ import type SputnikContractInterface from '@/types/SputnikContractInterface';
 import type { MouseEvent } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useForm, zodResolver, formList } from '@mantine/form';
-import { Button, Group, Alert, Title, Text, Divider } from '@mantine/core';
+import { Button, Group, Alert, Title, Text, Divider, TextInput, ActionIcon } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { saveGrantApplicationAsDraft, submitGrantApplication } from '@/services/apiService';
 import { useQuery } from 'react-query';
@@ -16,7 +16,7 @@ import { CONTRACT_ID } from '@/constants';
 import { createPayoutProposal } from '@/services/sputnikContractService';
 import { getNearUsdConvertRate } from '@/services/currencyConverter';
 import createSchema from '@/form-schemas/grantApplicationFormSchema';
-import { AlertCircle } from 'tabler-icons-react';
+import { AlertCircle, Trash } from 'tabler-icons-react';
 import AutoFormFields from '@/components/auto-form/AutoFormFields';
 
 function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
@@ -137,6 +137,21 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
   const lastSavedDate = data?.dateLastDraftSaving;
   const error = isSavingError || isSubmitingError;
 
+  const milestonesFields = form.values.milestones.map((item, index) => (
+    <div key={index}>
+      <TextInput required sx={{ flex: 1 }} {...form.getListInputProps('milestones', index, 'budget')} />
+      <TextInput required sx={{ flex: 1 }} {...form.getListInputProps('milestones', index, 'deliveryDate')} />
+      <TextInput required sx={{ flex: 1 }} {...form.getListInputProps('milestones', index, 'description')} />
+      <ActionIcon color="red" variant="hover" onClick={() => form.removeListItem('milestones', index)}>
+        <Trash size={16} />
+      </ActionIcon>
+    </div>
+  ));
+
+  const addMilestone = () => {
+    form.addListItem('milestones', { budget: 0, deliveryDate: '', description: 'This is a test' });
+  };
+
   return (
     <div>
       <div>
@@ -163,7 +178,10 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
             loading={loading}
           />
           <Divider mt={32} mb={32} />
-          <div>Milesones coming soon</div>
+          {milestonesFields}
+          <Button color="violet" disabled={loading} onClick={addMilestone}>
+            {t('form.addMilestone')}
+          </Button>
           <Divider mt={32} mb={32} />
           <AutoFormFields
             form={form}
