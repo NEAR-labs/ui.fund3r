@@ -1,4 +1,4 @@
-import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
+import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 import { createContext } from 'react';
 
 interface GrantContextInterface {

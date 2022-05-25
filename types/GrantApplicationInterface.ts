@@ -1,17 +1,11 @@
 import type MilestoneInterface from './MilestoneInterface';
 
-enum GrantTypes {
+export enum GrantTypes {
   Equity = 'equity',
   NonEquity = 'non-equity',
 }
 
-enum OpenSourceStates {
-  FullyOpenSource = 'fully-open-source',
-  PartiallyOpenSource = 'partially-open-source',
-  ClosedSource = 'closed-source',
-}
-
-enum GrantCategories {
+export enum GrantCategories {
   ChannelBrandPartnership = 'channel-brand-partnership',
   Daos = 'daos',
   GamingMetaverse = 'gaming-metaverse',
@@ -22,7 +16,7 @@ enum GrantCategories {
   Other = 'other',
 }
 
-enum ProjectStatus {
+export enum ProjectStatus {
   Mvp = 'mvp',
   PreAlpha = 'pre-alpha',
   Alpha = 'alpha',
@@ -30,7 +24,18 @@ enum ProjectStatus {
   Live = 'live',
 }
 
-export default interface GrantApplicationInterface {
+export enum OpenSourceStates {
+  FullyOpenSource = 'fully-open-source',
+  PartiallyOpenSource = 'partially-open-source',
+  ClosedSource = 'closed-source',
+}
+
+export enum WorkingTypes {
+  WorkingAlone = 'working-alone',
+  WorkingWithTeam = 'working-with-team',
+}
+
+export interface GrantApplicationInterface {
   id: number | undefined;
   nearId: string;
 

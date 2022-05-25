@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Button, Alert, Text } from '@mantine/core';
-import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
+import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 import type SputnikContractInterface from '@/types/SputnikContractInterface';
 import useContract from '@/modules/near-api-react/hooks/useContract';
 import { createPayoutProposal } from '@/services/sputnikContractService';

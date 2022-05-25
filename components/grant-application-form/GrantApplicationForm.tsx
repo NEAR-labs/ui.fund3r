@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
+import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 import type SputnikContractInterface from '@/types/SputnikContractInterface';
 import type { MouseEvent } from 'react';
 import { useTranslation } from 'next-i18next';

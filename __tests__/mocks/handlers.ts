@@ -1,4 +1,4 @@
-import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
+import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 import { rest } from 'msw';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_HOST;

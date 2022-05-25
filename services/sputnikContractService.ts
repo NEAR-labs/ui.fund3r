@@ -1,5 +1,5 @@
 import type SputnikContractInterface from '@/types/SputnikContractInterface';
-import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
+import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 import createProposalDescription from '@/utilities/createProposalDescription';
 
 const createPayoutProposal = async (contract: SputnikContractInterface, grantData: GrantApplicationInterface, payoutNumber: number) => {
