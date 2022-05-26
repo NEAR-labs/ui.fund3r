@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
+
 import useNear from './useNear';
-import useWallet from './useWallet';
 import useNetworkId from './useNetworkId';
+import useWallet from './useWallet';
 
 /**
  * Get the signer in order to sign transactions or messages

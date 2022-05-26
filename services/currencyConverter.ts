@@ -10,4 +10,4 @@ const convertUsdToNear = async (amount: number, rate: number) => {
   return amount / rate;
 };
 
-export { getNearUsdConvertRate, convertUsdToNear };
+export { convertUsdToNear, getNearUsdConvertRate };

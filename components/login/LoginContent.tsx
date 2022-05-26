@@ -1,9 +1,10 @@
-import { Container, Center, Text, Title } from '@mantine/core';
+import { Center, Container, Text, Title } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
+
 import NearConnectButton from '@/components/common/NearConnectButton';
-import styles from '@/styles/Login.module.css';
-import { APP_NAME } from '@/constants';
 import signInOptions from '@/config/near';
+import { APP_NAME } from '@/constants';
+import styles from '@/styles/Login.module.css';
 
 function LoginContent() {
   const { t } = useTranslation('login');

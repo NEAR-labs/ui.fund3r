@@ -1,6 +1,7 @@
-import { useState, useMemo } from 'react';
+import { useMemo, useState } from 'react';
+
 import GrantContext from '@/contexts/GrantContext';
-import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
+import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
 const GrantProvider = ({ children }: { children: JSX.Element }) => {
   const [grant, setGrant] = useState<GrantApplicationInterface | null>(null);

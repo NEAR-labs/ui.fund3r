@@ -1,6 +1,7 @@
-import type NearApiSignatureInterface from 'types/NearApiSignatureInterface';
-import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
 import axios from 'axios';
+import type NearApiSignatureInterface from 'types/NearApiSignatureInterface';
+
+import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
 const API_HOST = process.env.NEXT_PUBLIC_BACKEND_HOST;
 

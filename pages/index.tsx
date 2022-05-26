@@ -1,9 +1,10 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
-import DefaultLayout from '@/layouts/default';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import HomeHero from '@/components/home/HomeHero';
+import DefaultLayout from '@/layouts/default';
 
 const Home: NextPage = () => {
   const { t } = useTranslation('home');

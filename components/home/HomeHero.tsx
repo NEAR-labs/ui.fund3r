@@ -1,7 +1,8 @@
-import { useTranslation } from 'next-i18next';
-import { Container, SimpleGrid, Button, Center, Title, Text } from '@mantine/core';
-import Link from 'next/link';
+import { Button, Center, Container, SimpleGrid, Text, Title } from '@mantine/core';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
+
 import styles from '@/styles/Home.module.css';
 
 function HomeHero() {
