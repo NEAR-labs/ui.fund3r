@@ -19,6 +19,7 @@ import FormEditFieldsMembers from '@/components/grant-application-form/FormEditF
 import FormEditFieldsAddress from '@/components/grant-application-form/FormEditFieldsAddress';
 import FormEditFieldsNear from '@/components/grant-application-form/FormEditFieldsNear';
 import useDaoContract from '@/hooks/useDaoContract';
+import parseMilestonesDates from '@/utilities/parseMilestonesDates';
 
 function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
@@ -65,7 +66,9 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
     initialValues: {
       ...defaultData,
       ...data,
-      milestones: formList<{ budget: number | null; deliveryDate: string | null; description: string | null }>([]),
+      projectLaunchDate: data?.projectLaunchDate ? new Date(data.projectLaunchDate) : undefined,
+      dateOfBirth: data?.dateOfBirth ? new Date(data.dateOfBirth) : undefined,
+      milestones: formList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null }>(data?.milestones ? parseMilestonesDates(data.milestones) : []),
     },
   });
 
@@ -91,6 +94,9 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
         setData({
           ...grantData,
           ...responseData,
+          projectLaunchDate: responseData?.projectLaunchDate ? new Date(responseData.projectLaunchDate) : undefined,
+          dateOfBirth: responseData?.dateOfBirth ? new Date(responseData.dateOfBirth) : undefined,
+          milestones: formList(responseData?.milestones ? parseMilestonesDates(responseData.milestones) : []),
         });
       },
     },

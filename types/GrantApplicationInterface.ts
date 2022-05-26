@@ -61,7 +61,7 @@ export interface GrantApplicationInterface {
   projectUrl?: string;
   githubUrl?: string;
   projectStatus?: ProjectStatus;
-  projectLaunchDate?: string;
+  projectLaunchDate?: Date;
   projectDescription?: string;
   currency?: string;
   fundingAmount?: number;
@@ -114,7 +114,7 @@ export interface GrantApplicationInterface {
   reviewMemberDetail?: string;
   reviewAttachments?: string;
 
-  milestones: FormList<{ budget: number | null; deliveryDate: string | null; description: string | null }>;
+  milestones: FormList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null }>;
   created_at?: Date;
   updated_at?: Date;
 }
