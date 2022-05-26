@@ -1,15 +1,17 @@
 import type { UseFormReturnType } from '@mantine/form/lib/use-form';
+import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 import createValidationUtilities from '@/utilities/createValidationUtilities';
 import { TextInput, ActionIcon, Button, Title, Group, NumberInput } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { useTranslation } from 'next-i18next';
 import { Trash } from 'tabler-icons-react';
 
-function FormEditFieldsMilestones({ form, loading }: { form: UseFormReturnType<any>; loading: boolean }) {
+function FormEditFieldsMilestones({ form, loading }: { form: UseFormReturnType<GrantApplicationInterface>; loading: boolean }) {
   const { t } = useTranslation('grant');
   const { validateFieldOnBlur, validateFieldOnInput } = createValidationUtilities(form);
 
   const milestonesFields = form.values.milestones.map((item, index) => (
+    // eslint-disable-next-line react/no-array-index-key
     <div key={index}>
       <Group mt="md">
         <Title order={3}>

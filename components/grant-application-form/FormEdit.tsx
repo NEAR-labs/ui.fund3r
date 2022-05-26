@@ -36,7 +36,7 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
     schema: zodResolver(schema),
     initialValues: {
       ...data,
-      milestones: formList([]),
+      milestones: formList<{ budget: number | null; deliveryDate: string | null; description: string | null }>([]),
     },
   });
 
