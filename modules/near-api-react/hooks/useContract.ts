@@ -1,4 +1,5 @@
 import { Contract } from 'near-api-js';
+
 import useWallet from './useWallet';
 
 interface ContractConfigInterface {

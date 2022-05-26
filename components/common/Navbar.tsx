@@ -1,9 +1,10 @@
+import { Burger, Button, Container, createStyles, Group, Header } from '@mantine/core';
+import { useBooleanToggle } from '@mantine/hooks';
 import Image from 'next/image';
 import Link from 'next/link';
-import AccountDropdown from '@/components/common/AccountDropdown';
-import { createStyles, Header, Container, Group, Burger, Button } from '@mantine/core';
-import { useBooleanToggle } from '@mantine/hooks';
 import { useTranslation } from 'next-i18next';
+
+import AccountDropdown from '@/components/common/AccountDropdown';
 import useWallet from '@/modules/near-api-react/hooks/useWallet';
 
 const useStyles = createStyles((theme) => ({
@@ -60,7 +61,7 @@ function Navbar() {
   const wallet = useWallet();
 
   return (
-    <Header height={60}>
+    <Header height={60} mb="xl">
       <Container className={classes.header}>
         <Link href="/" passHref>
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}

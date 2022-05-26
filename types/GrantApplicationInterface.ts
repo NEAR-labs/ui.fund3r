@@ -1,6 +1,46 @@
-import type MilestoneInterface from './MilestoneInterface';
+import type { FormList } from '../node_modules/@mantine/form/lib/form-list/form-list';
 
-export default interface GrantApplicationInterface {
+export enum GrantTypes {
+  Equity = 'equity',
+  NonEquity = 'non-equity',
+}
+
+export enum GrantCategories {
+  ChannelBrandPartnership = 'channel-brand-partnership',
+  Daos = 'daos',
+  GamingMetaverse = 'gaming-metaverse',
+  InfrastructureWallets = 'infrastructure-wallets',
+  InstitutionalFinancial = 'institutional-financial',
+  Nfts = 'nfts',
+  SocialImpact = 'social-impact',
+  Other = 'other',
+}
+
+export enum ProjectStatus {
+  Mvp = 'mvp',
+  PreAlpha = 'pre-alpha',
+  Alpha = 'alpha',
+  Beta = 'beta',
+  Live = 'live',
+}
+
+export enum OpenSourceStates {
+  FullyOpenSource = 'fully-open-source',
+  PartiallyOpenSource = 'partially-open-source',
+  ClosedSource = 'closed-source',
+}
+
+export enum WorkingTypes {
+  WorkingAlone = 'working-alone',
+  WorkingWithTeam = 'working-with-team',
+}
+
+export enum RaisingRoundStatus {
+  Raising = 'raising',
+  NotRaising = 'not-raising',
+}
+
+export interface GrantApplicationInterface {
   id: number | undefined;
   nearId: string;
 
@@ -9,30 +49,31 @@ export default interface GrantApplicationInterface {
   lastname?: string;
   dateOfBirth?: Date;
   email?: string;
-  linkedin?: string;
+  github?: string;
   twitter?: string;
+  workingAloneOrTeam?: string; // replace with enums
   hasPreviouslyReceivedFundingTokensGrantsFromNear?: boolean;
 
   // Project related
   projectName?: string;
-  grantType?: string; // enum maybe?
-  grantCategory?: string; // enum maybe?
+  grantType?: GrantTypes;
+  grantCategory?: GrantCategories;
   projectUrl?: string;
   githubUrl?: string;
-  project_status?: string;
-  projectLaunchDate?: string;
+  projectStatus?: ProjectStatus;
+  projectLaunchDate?: Date;
   projectDescription?: string;
-  currency?: string; // enum maybe
+  currency?: string;
   fundingAmount?: number;
   nearFundingAmount?: string;
   whatAndWhy?: string;
   competitionDifference?: string;
-  isOpenSource?: boolean;
+  openSourceState?: OpenSourceStates;
   opensourceComponentUse?: string;
   impactOnEcosystem?: string;
   excitementNear?: string;
   successMesurement?: string;
-  isProjectCurrentlyRaising?: boolean;
+  projectRaisingRound?: RaisingRoundStatus;
 
   // Address
   addressCountry?: string;
@@ -43,7 +84,7 @@ export default interface GrantApplicationInterface {
   // About
   howHeardGrants?: string;
   referral?: string;
-  teamReferral?: string;
+  teamReferral?: string; // update with enum eventually
   comments?: string;
 
   // Status and date
@@ -73,7 +114,7 @@ export default interface GrantApplicationInterface {
   reviewMemberDetail?: string;
   reviewAttachments?: string;
 
-  milestones?: [MilestoneInterface];
+  milestones: FormList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null }>;
   created_at?: Date;
   updated_at?: Date;
 }

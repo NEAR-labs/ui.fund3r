@@ -1,4 +1,4 @@
-import { keyStores, ConnectConfig } from 'near-api-js';
+import { ConnectConfig, keyStores } from 'near-api-js';
 
 /**
  * Function that returns a NEAR connection configuration object based on the given networkId.

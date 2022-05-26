@@ -1,5 +1,6 @@
-import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
 import { rest } from 'msw';
+
+import { GrantApplicationInterface, GrantCategories, GrantTypes, OpenSourceStates, ProjectStatus, RaisingRoundStatus, WorkingTypes } from '@/types/GrantApplicationInterface';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_HOST;
 const GET_DELAY = process.env.NEXT_PUBLIC_MOCK_DELAY_GET ? parseInt(process.env.NEXT_PUBLIC_MOCK_DELAY_GET, 10) : 0;
@@ -14,6 +15,39 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       id: 1,
       nearId: accountId,
       dateLastDraftSaving: new Date(),
+      projectName: 'Metaverse Lab',
+      grantType: GrantTypes.Equity,
+      grantCategory: GrantCategories.GamingMetaverse,
+      projectUrl: 'https://san.cx',
+      githubUrl: 'https://github.com/NEAR-labs/ui.fund3r',
+      projectStatus: ProjectStatus.Mvp,
+      projectLaunchDate: new Date(),
+      projectDescription: 'Metaverse Lab is a decentralized, open-source, decentralized gaming platform.',
+      fundingAmount: 100000,
+      whatAndWhy: 'Enable developers to build, test, and deploy decentralized games on the near blockchain.',
+      competitionDifference: 'On the near blockchain.',
+      openSourceState: OpenSourceStates.FullyOpenSource,
+      opensourceComponentUse: 'For the infrastructure and the UI: React and Godot',
+      impactOnEcosystem: 'More wallet created',
+      excitementNear: 'For the speed.',
+      successMesurement: 'Number of daily users.',
+      projectRaisingRound: RaisingRoundStatus.Raising,
+      firstname: 'John',
+      lastname: 'Doe',
+      dateOfBirth: new Date(),
+      email: 'dummy@test.world',
+      github: 'https://github.com/NEAR-labs',
+      twitter: 'https://twitter.com/NEAR_labs',
+      workingAloneOrTeam: WorkingTypes.WorkingWithTeam,
+      hasPreviouslyReceivedFundingTokensGrantsFromNear: true,
+      addressCountry: 'France',
+      addressCity: 'Paris',
+      addressStreet: '1 Rue de la Paix',
+      addressZip: '75001',
+      howHeardGrants: 'Twitter',
+      referral: '',
+      teamReferral: '',
+      comments: '',
     },
   ][id];
 };

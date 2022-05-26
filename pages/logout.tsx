@@ -1,13 +1,14 @@
-import Head from 'next/head';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useCallback, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import { useEffect, useCallback } from 'react';
-import useWallet from '@/modules/near-api-react/hooks/useWallet';
-import DefaultLayout from '@/layouts/default';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import LoadingAnimation from '@/components/common/LoadingAnimation';
 import { COOKIE_SIGNATURE_KEY } from '@/constants';
-import { useRouter } from 'next/router';
+import DefaultLayout from '@/layouts/default';
+import useWallet from '@/modules/near-api-react/hooks/useWallet';
 
 function Logout() {
   const { t } = useTranslation('logout');

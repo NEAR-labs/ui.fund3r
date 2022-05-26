@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+
 import NearContext from '../context/NearContext';
 
 /**

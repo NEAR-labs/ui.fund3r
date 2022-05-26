@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { useQuery } from 'react-query';
+
 import GrantContext from '@/contexts/GrantContext';
 import useAccountSignature from '@/hooks/useAccountSignature';
 import { getGrantApplication, validateNearTransactionHash } from '@/services/apiService';

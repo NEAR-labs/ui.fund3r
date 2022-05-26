@@ -1,4 +1,4 @@
-import type GrantApplicationInterface from '@/types/GrantApplicationInterface';
+import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 // import { useTranslation } from 'next-i18next';
 // import { Container } from '@mantine/core';
 

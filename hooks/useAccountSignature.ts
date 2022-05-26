@@ -1,9 +1,10 @@
-import type NearApiSignatureInterface from '@/types/NearApiSignatureInterface';
 import { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+
+import { COOKIE_EXPIRACY_TIME, COOKIE_SIGNATURE_KEY } from '@/constants';
 import useSigner from '@/modules/near-api-react/hooks/useSigner';
 import useWallet from '@/modules/near-api-react/hooks/useWallet';
-import { useCookies } from 'react-cookie';
-import { COOKIE_SIGNATURE_KEY, COOKIE_EXPIRACY_TIME } from '@/constants';
+import type NearApiSignatureInterface from '@/types/NearApiSignatureInterface';
 
 const useAccountSignature = () => {
   const [apiSignature, setApiSignature] = useState<NearApiSignatureInterface>();

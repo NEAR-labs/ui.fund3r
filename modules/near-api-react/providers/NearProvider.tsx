@@ -1,8 +1,9 @@
+import { useEffect, useMemo, useState } from 'react';
 import type { Near } from 'near-api-js';
-import { useState, useEffect, useMemo } from 'react';
 import { connect, WalletConnection } from 'near-api-js';
-import NearContext from '../context/NearContext';
+
 import getConfig from '../config';
+import NearContext from '../context/NearContext';
 
 const NearProvider = ({ children, networkId = 'tesnet' }: { children: JSX.Element; networkId: string }) => {
   const [near, setNear] = useState<Near | null>(null);
