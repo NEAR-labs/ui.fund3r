@@ -1,4 +1,4 @@
-import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
+import { GrantApplicationInterface, GrantTypes, GrantCategories, ProjectStatus, OpenSourceStates, RaisingRoundStatus } from '@/types/GrantApplicationInterface';
 import { rest } from 'msw';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_HOST;
@@ -14,6 +14,41 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       id: 1,
       nearId: accountId,
       dateLastDraftSaving: new Date(),
+      projectName: 'Metaverse Lab',
+      grantType: GrantTypes.Equity,
+      grantCategory: GrantCategories.GamingMetaverse,
+      projectUrl: 'https://san.cx',
+      githubUrl: 'https://github.com/NEAR-labs/ui.fund3r',
+      projectStatus: ProjectStatus.Mvp,
+      projectLaunchDate: new Date(),
+      projectDescription:
+        'Metaverse Lab is a decentralized, open-source, decentralized gaming platform that enables developers to build, test, and deploy decentralized games on the near blockchain.',
+      fundingAmount: 100000,
+      whatAndWhy: 'Metaverse Lab purpose is to enable developers to build, test, and deploy decentralized games on the near blockchain.',
+      competitionDifference:
+        'Metaverse Lab differs from the competition in that it is a decentralized, open-source, decentralized gaming platform that enables developers to build, test, and deploy decentralized games on the near blockchain.',
+      openSourceState: OpenSourceStates.FullyOpenSource,
+      opensourceComponentUse: 'For the infrastructure and the UI: React and Godot',
+      impactOnEcosystem: 'More wallet created',
+      excitementNear: 'For the speed.',
+      successMesurement: 'Number of daily users.',
+      projectRaisingRound: RaisingRoundStatus.Raising,
+      firstname: 'John',
+      lastname: 'Doe',
+      dateOfBirth: new Date(),
+      email: 'dummy@test.world',
+      github: 'https://github.com/NEAR-labs',
+      twitter: 'https://twitter.com/NEAR_labs',
+      workingAloneOrTeam: 'Team',
+      hasPreviouslyReceivedFundingTokensGrantsFromNear: true,
+      addressCountry: 'France',
+      addressCity: 'Paris',
+      addressStreet: '1 Rue de la Paix',
+      addressZip: '75001',
+      howHeardGrants: 'Twitter',
+      referral: '',
+      teamReferral: '',
+      comments: '',
     },
   ][id];
 };
