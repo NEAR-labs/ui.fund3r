@@ -239,5 +239,17 @@
     "schedule": {
       "title": "Overview"
     }
-  }
+  },
+  "details": {
+    "process-overview": {},
+    "payment-schedule": {},
+    "header": {},
+    "status-actions": {},
+    "project": {},
+    "payments": {},
+    "attachment": {},
+    "member": {},
+    "address": {}
+  },
+  "milestones": {}
 }
