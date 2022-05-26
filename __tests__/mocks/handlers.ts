@@ -2,6 +2,11 @@ import { rest } from 'msw';
 
 import { GrantApplicationInterface, GrantCategories, GrantTypes, OpenSourceStates, ProjectStatus, RaisingRoundStatus, WorkingTypes } from '@/types/GrantApplicationInterface';
 
+if (typeof window === 'undefined') {
+  // eslint-disable-next-line global-require
+  require('localstorage-polyfill');
+}
+
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_HOST;
 const GET_DELAY = process.env.NEXT_PUBLIC_MOCK_DELAY_GET ? parseInt(process.env.NEXT_PUBLIC_MOCK_DELAY_GET, 10) : 0;
 const POST_PUT_DELAY = process.env.NEXT_PUBLIC_MOCK_DELAY_POST_PUT ? parseInt(process.env.NEXT_PUBLIC_MOCK_DELAY_POST_PUT, 10) : 0;
