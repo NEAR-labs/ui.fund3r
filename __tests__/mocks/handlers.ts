@@ -1,4 +1,4 @@
-import { GrantApplicationInterface, GrantTypes, GrantCategories, ProjectStatus, OpenSourceStates, RaisingRoundStatus } from '@/types/GrantApplicationInterface';
+import { GrantApplicationInterface, GrantTypes, GrantCategories, ProjectStatus, OpenSourceStates, RaisingRoundStatus, WorkingTypes } from '@/types/GrantApplicationInterface';
 import { rest } from 'msw';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_HOST;
@@ -21,12 +21,10 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       githubUrl: 'https://github.com/NEAR-labs/ui.fund3r',
       projectStatus: ProjectStatus.Mvp,
       projectLaunchDate: new Date(),
-      projectDescription:
-        'Metaverse Lab is a decentralized, open-source, decentralized gaming platform that enables developers to build, test, and deploy decentralized games on the near blockchain.',
+      projectDescription: 'Metaverse Lab is a decentralized, open-source, decentralized gaming platform.',
       fundingAmount: 100000,
-      whatAndWhy: 'Metaverse Lab purpose is to enable developers to build, test, and deploy decentralized games on the near blockchain.',
-      competitionDifference:
-        'Metaverse Lab differs from the competition in that it is a decentralized, open-source, decentralized gaming platform that enables developers to build, test, and deploy decentralized games on the near blockchain.',
+      whatAndWhy: 'Enable developers to build, test, and deploy decentralized games on the near blockchain.',
+      competitionDifference: 'On the near blockchain.',
       openSourceState: OpenSourceStates.FullyOpenSource,
       opensourceComponentUse: 'For the infrastructure and the UI: React and Godot',
       impactOnEcosystem: 'More wallet created',
@@ -39,7 +37,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       email: 'dummy@test.world',
       github: 'https://github.com/NEAR-labs',
       twitter: 'https://twitter.com/NEAR_labs',
-      workingAloneOrTeam: 'Team',
+      workingAloneOrTeam: WorkingTypes.WorkingWithTeam,
       hasPreviouslyReceivedFundingTokensGrantsFromNear: true,
       addressCountry: 'France',
       addressCity: 'Paris',
