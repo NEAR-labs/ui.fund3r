@@ -1,6 +1,7 @@
+import type { UseFormReturnType } from '@mantine/form/lib/use-form';
 import { useTranslation } from 'next-i18next';
 import { z } from 'zod';
-import type { UseFormReturnType } from '@mantine/form/lib/use-form';
+
 import GenericField from '@/components/auto-form/GenericField';
 import createValidationUtilities from '@/utilities/createValidationUtilities';
 

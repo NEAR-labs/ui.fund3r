@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import type SputnikContractInterface from '@/types/SputnikContractInterface';
+
+import { CONTRACT_ID } from '@/constants';
 import useContract from '@/modules/near-api-react/hooks/useContract';
 import { createPayoutProposal } from '@/services/sputnikContractService';
-import { CONTRACT_ID } from '@/constants';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
+import type SputnikContractInterface from '@/types/SputnikContractInterface';
 
 const useDaoContract = () => {
   const contract: SputnikContractInterface | undefined | null = useContract({

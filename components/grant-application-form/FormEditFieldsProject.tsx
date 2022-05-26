@@ -1,8 +1,9 @@
 import { Title } from '@mantine/core';
-import { useTranslation } from 'next-i18next';
-import AutoFormFields from '@/components/auto-form/AutoFormFields';
-import { z } from 'zod';
 import type { UseFormReturnType } from '@mantine/form/lib/use-form';
+import { useTranslation } from 'next-i18next';
+import { z } from 'zod';
+
+import AutoFormFields from '@/components/auto-form/AutoFormFields';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function FormEditFieldsProject({ form, schema, loading }: { form: UseFormReturnType<any>; schema: z.ZodObject<any>; loading: boolean }) {

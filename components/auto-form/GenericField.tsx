@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { NumberInput, TextInput, Select, Checkbox } from '@mantine/core';
+import { Checkbox, NumberInput, Select, TextInput } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { useTranslation } from 'next-i18next';
 

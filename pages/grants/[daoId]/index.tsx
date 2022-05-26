@@ -1,22 +1,23 @@
-import type { NextApiRequest } from 'next';
-import type { ParsedUrlQuery } from 'querystring';
-import { useRouter } from 'next/router';
-import Head from 'next/head';
+import { dehydrate, QueryClient } from 'react-query';
 import { Container } from '@mantine/core';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import type { NextApiRequest } from 'next';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import DefaultLayout from '@/layouts/default';
-import { QueryClient, dehydrate } from 'react-query';
-import parseCookies from '@/utilities/parseCookies';
-import { COOKIE_SIGNATURE_KEY } from '@/constants';
-import { getGrantApplication } from '@/services/apiService';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import type { ParsedUrlQuery } from 'querystring';
+
+import LoadingAnimation from '@/components/common/LoadingAnimation';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
+import GrantApplicationDetails from '@/components/grant-application-details/GrantApplicationDetails';
 import GrantApplicationForm from '@/components/grant-application-form/GrantApplicationForm';
 import GrantApplicationProposalSubmission from '@/components/grant-application-form/GrantApplicationProposalSubmission';
-import GrantApplicationDetails from '@/components/grant-application-details/GrantApplicationDetails';
-import LoadingAnimation from '@/components/common/LoadingAnimation';
+import { COOKIE_SIGNATURE_KEY } from '@/constants';
 import useGrant from '@/hooks/useGrant';
-import { useGrantStatus, STATUS } from '@/hooks/useGrantStatus';
+import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
+import DefaultLayout from '@/layouts/default';
+import { getGrantApplication } from '@/services/apiService';
+import parseCookies from '@/utilities/parseCookies';
 
 function GrantApplication() {
   const router = useRouter();

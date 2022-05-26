@@ -1,7 +1,8 @@
-import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 import { Grid } from '@mantine/core';
+
 import FormEdit from '@/components/grant-application-form/FormEdit';
 import FormSummary from '@/components/grant-application-form/FormSummary';
+import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
 function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   return (

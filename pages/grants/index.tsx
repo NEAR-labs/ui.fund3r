@@ -1,17 +1,18 @@
+import { useEffect } from 'react';
+import { dehydrate, QueryClient, useQuery } from 'react-query';
 import type { NextApiRequest } from 'next';
 import Head from 'next/head';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
+import LoadingAnimation from '@/components/common/LoadingAnimation';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
-import DefaultLayout from '@/layouts/default';
-import { QueryClient, dehydrate, useQuery } from 'react-query';
-import { getAllGrantApplicationsOfUser } from '@/services/apiService';
-import parseCookies from '@/utilities/parseCookies';
 import { COOKIE_SIGNATURE_KEY } from '@/constants';
 import useAccountSignature from '@/hooks/useAccountSignature';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import LoadingAnimation from '@/components/common/LoadingAnimation';
+import DefaultLayout from '@/layouts/default';
+import { getAllGrantApplicationsOfUser } from '@/services/apiService';
+import parseCookies from '@/utilities/parseCookies';
 
 function Grants() {
   const router = useRouter();

@@ -1,26 +1,27 @@
 /* eslint-disable max-lines-per-function */
-import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 import type { MouseEvent, SyntheticEvent } from 'react';
-import { useTranslation } from 'next-i18next';
-import { useForm, zodResolver, formList } from '@mantine/form';
-import { Button, Group, Alert, Title, Text, Divider } from '@mantine/core';
 import { useEffect } from 'react';
-import { saveGrantApplicationAsDraft, submitGrantApplication } from '@/services/apiService';
 import { useQuery } from 'react-query';
-import useAccountSignature from '@/hooks/useAccountSignature';
-import useSigner from '@/modules/near-api-react/hooks/useSigner';
-import useWallet from '@/modules/near-api-react/hooks/useWallet';
-import createSchema from '@/form-schemas/grantApplicationFormSchema';
+import { Alert, Button, Divider, Group, Text, Title } from '@mantine/core';
+import { formList, useForm, zodResolver } from '@mantine/form';
+import { showNotification } from '@mantine/notifications';
+import { useTranslation } from 'next-i18next';
 import { AlertCircle } from 'tabler-icons-react';
+
+import FormEditFieldsAddress from '@/components/grant-application-form/FormEditFieldsAddress';
+import FormEditFieldsMembers from '@/components/grant-application-form/FormEditFieldsMembers';
 import FormEditFieldsMilestones from '@/components/grant-application-form/FormEditFieldsMilestones';
+import FormEditFieldsNear from '@/components/grant-application-form/FormEditFieldsNear';
 import FormEditFieldsProject from '@/components/grant-application-form/FormEditFieldsProject';
 import FormEditFieldsQuestions from '@/components/grant-application-form/FormEditFieldsQuestions';
-import FormEditFieldsMembers from '@/components/grant-application-form/FormEditFieldsMembers';
-import FormEditFieldsAddress from '@/components/grant-application-form/FormEditFieldsAddress';
-import FormEditFieldsNear from '@/components/grant-application-form/FormEditFieldsNear';
+import createSchema from '@/form-schemas/grantApplicationFormSchema';
+import useAccountSignature from '@/hooks/useAccountSignature';
 import useDaoContract from '@/hooks/useDaoContract';
+import useSigner from '@/modules/near-api-react/hooks/useSigner';
+import useWallet from '@/modules/near-api-react/hooks/useWallet';
+import { saveGrantApplicationAsDraft, submitGrantApplication } from '@/services/apiService';
+import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 import parseMilestonesDates from '@/utilities/parseMilestonesDates';
-import { showNotification } from '@mantine/notifications';
 
 function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');

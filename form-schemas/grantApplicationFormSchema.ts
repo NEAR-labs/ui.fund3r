@@ -1,6 +1,7 @@
 import { TFunction } from 'next-i18next';
 import { z } from 'zod';
-import { GrantTypes, GrantCategories, ProjectStatus, OpenSourceStates, WorkingTypes, RaisingRoundStatus } from '@/types/GrantApplicationInterface';
+
+import { GrantCategories, GrantTypes, OpenSourceStates, ProjectStatus, RaisingRoundStatus, WorkingTypes } from '@/types/GrantApplicationInterface';
 
 // eslint-disable-next-line max-lines-per-function
 const createSchema = (t: TFunction) => {

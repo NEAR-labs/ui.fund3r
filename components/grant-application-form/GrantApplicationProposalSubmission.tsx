@@ -1,9 +1,10 @@
+import { Alert, Button, Text, Title } from '@mantine/core';
 import { useRouter } from 'next/router';
-import { Button, Alert, Text, Title } from '@mantine/core';
-import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 import { useTranslation } from 'next-i18next';
 import { AlertCircle } from 'tabler-icons-react';
+
 import useDaoContract from '@/hooks/useDaoContract';
+import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
 function GrantApplicationProposalSubmission({ data }: { data: GrantApplicationInterface | undefined | null }) {
   const { t } = useTranslation('grant');

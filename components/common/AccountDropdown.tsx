@@ -1,8 +1,9 @@
+import { Button, Divider, Menu, useMantineTheme } from '@mantine/core';
 import Link from 'next/link';
-import { Divider, Button, Menu, useMantineTheme } from '@mantine/core';
-import { Checklist, ChevronDown, Logout, UserCircle } from 'tabler-icons-react';
-import useWallet from '@/modules/near-api-react/hooks/useWallet';
 import { useTranslation } from 'next-i18next';
+import { Checklist, ChevronDown, Logout, UserCircle } from 'tabler-icons-react';
+
+import useWallet from '@/modules/near-api-react/hooks/useWallet';
 import styles from '@/styles/AccountDropdown.module.css';
 
 function AccountDropdown() {

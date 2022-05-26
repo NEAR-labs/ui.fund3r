@@ -1,14 +1,15 @@
-import { AppProps } from 'next/app';
-import Head from 'next/head';
-import { MantineProvider } from '@mantine/core';
-import { appWithTranslation } from 'next-i18next';
-import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
-import NearProvider from '@/modules/near-api-react/providers/NearProvider';
 import { useState } from 'react';
 import { CookiesProvider } from 'react-cookie';
-import GrantProvider from '@/providers/GrantProvider';
-import NextNProgress from 'nextjs-progressbar';
+import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
+import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
+import { AppProps } from 'next/app';
+import Head from 'next/head';
+import { appWithTranslation } from 'next-i18next';
+import NextNProgress from 'nextjs-progressbar';
+
+import NearProvider from '@/modules/near-api-react/providers/NearProvider';
+import GrantProvider from '@/providers/GrantProvider';
 
 // if (process.env.NODE_ENV === 'development' && process.env.NEXT_PUBLIC_MOCK_API) {
 if (process.env.NEXT_PUBLIC_MOCK_API) {

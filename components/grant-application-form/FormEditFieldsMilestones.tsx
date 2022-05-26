@@ -1,8 +1,9 @@
-import createValidationUtilities from '@/utilities/createValidationUtilities';
-import { TextInput, ActionIcon, Button, Title, Group, NumberInput } from '@mantine/core';
+import { ActionIcon, Button, Group, NumberInput, TextInput, Title } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { useTranslation } from 'next-i18next';
 import { Trash } from 'tabler-icons-react';
+
+import createValidationUtilities from '@/utilities/createValidationUtilities';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function FormEditFieldsMilestones({ form, loading }: { form: any; loading: boolean }) {

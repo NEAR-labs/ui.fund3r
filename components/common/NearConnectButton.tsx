@@ -1,5 +1,6 @@
-import useWallet from '@/modules/near-api-react/hooks/useWallet';
 import { Button } from '@mantine/core';
+
+import useWallet from '@/modules/near-api-react/hooks/useWallet';
 
 interface SignInOptionsInterface {
   contractId: string | undefined;
