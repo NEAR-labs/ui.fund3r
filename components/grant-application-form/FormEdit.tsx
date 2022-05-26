@@ -1,19 +1,15 @@
 /* eslint-disable max-lines-per-function */
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
-import type SputnikContractInterface from '@/types/SputnikContractInterface';
 import type { MouseEvent } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useForm, zodResolver, formList } from '@mantine/form';
 import { Button, Group, Alert, Title, Text, Divider } from '@mantine/core';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { saveGrantApplicationAsDraft, submitGrantApplication } from '@/services/apiService';
 import { useQuery } from 'react-query';
 import useAccountSignature from '@/hooks/useAccountSignature';
 import useSigner from '@/modules/near-api-react/hooks/useSigner';
 import useWallet from '@/modules/near-api-react/hooks/useWallet';
-import useContract from '@/modules/near-api-react/hooks/useContract';
-import { CONTRACT_ID } from '@/constants';
-import { createPayoutProposal } from '@/services/sputnikContractService';
 import createSchema from '@/form-schemas/grantApplicationFormSchema';
 import { AlertCircle } from 'tabler-icons-react';
 import FormEditFieldsMilestones from '@/components/grant-application-form/FormEditFieldsMilestones';
@@ -22,6 +18,7 @@ import FormEditFieldsQuestions from '@/components/grant-application-form/FormEdi
 import FormEditFieldsMembers from '@/components/grant-application-form/FormEditFieldsMembers';
 import FormEditFieldsAddress from '@/components/grant-application-form/FormEditFieldsAddress';
 import FormEditFieldsNear from '@/components/grant-application-form/FormEditFieldsNear';
+import useDaoContract from '@/hooks/useDaoContract';
 
 function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
@@ -29,16 +26,7 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
   const apiSignature = useAccountSignature();
   const { signStringMessage } = useSigner();
   const wallet = useWallet();
-
-  const [isNearLoading, setIsNearLoading] = useState(false);
-
-  const contract: SputnikContractInterface | null | undefined = useContract({
-    contractId: CONTRACT_ID,
-    contractMethods: {
-      changeMethods: ['add_proposal'],
-      viewMethods: ['get_policy'],
-    },
-  });
+  const { isNearLoading, submitProposal } = useDaoContract();
 
   const accountId = wallet && wallet.isSignedIn() && wallet.getAccountId();
 
@@ -96,10 +84,7 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
       enabled: false,
       retry: false,
       onSuccess: async (responseData) => {
-        setIsNearLoading(true);
-        if (contract && responseData) {
-          await createPayoutProposal(contract, responseData, 0);
-        }
+        submitProposal(responseData, 0);
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {

@@ -1,34 +1,19 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { Button, Alert, Text } from '@mantine/core';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
-import type SputnikContractInterface from '@/types/SputnikContractInterface';
-import useContract from '@/modules/near-api-react/hooks/useContract';
-import { createPayoutProposal } from '@/services/sputnikContractService';
-import { CONTRACT_ID } from '@/constants';
 import { useTranslation } from 'next-i18next';
 import { AlertCircle } from 'tabler-icons-react';
+import useDaoContract from '@/hooks/useDaoContract';
 
 function GrantApplicationProposalSubmission({ data }: { data: GrantApplicationInterface | undefined | null }) {
   const { t } = useTranslation('grant');
   const router = useRouter();
   const { errorCode } = router.query;
 
-  const contract: SputnikContractInterface | undefined | null = useContract({
-    contractId: CONTRACT_ID,
-    contractMethods: {
-      changeMethods: ['add_proposal'],
-      viewMethods: ['get_policy'],
-    },
-  });
+  const { isNearLoading, submitProposal } = useDaoContract();
 
-  const [isNearLoading, setIsNearLoading] = useState(false);
-
-  const submitProposal = () => {
-    setIsNearLoading(true);
-    if (contract && data) {
-      createPayoutProposal(contract, data, 0);
-    }
+  const submitGrantProposal = () => {
+    submitProposal(data, 0);
   };
 
   return (
@@ -39,7 +24,7 @@ function GrantApplicationProposalSubmission({ data }: { data: GrantApplicationIn
         </Alert>
       )}
       <Text>Click here to resubmit the application on chain</Text>
-      <Button type="submit" color="violet" disabled={isNearLoading} loading={isNearLoading} onClick={submitProposal}>
+      <Button type="submit" color="violet" disabled={isNearLoading} loading={isNearLoading} onClick={submitGrantProposal}>
         {t('form.submit')}
       </Button>
     </>
