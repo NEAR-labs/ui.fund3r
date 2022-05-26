@@ -241,7 +241,33 @@
     }
   },
   "details": {
-    "process-overview": {},
+    "process-overview": {
+      "title": "Process Overview",
+      "submit": {
+        "title": "Submit your application"
+      },
+      "evaluation-approval": {
+        "title": "Evaluation & Approval",
+        "description": "The NEAR Foundation Funding Committee will review your application within two weeks. If your proposal meets the program criteria, you will be invited to an interview with two committee members."
+      },
+      "acceptance": {
+        "title": "Acceptance or Denial Notification",
+        "description": "All applicants will be notified whether their application has been accepted or denied. If your application is accepted, at this point, you will go through the agreement formation process."
+      },
+      "kyc": {
+        "title": "KYC"
+      },
+      "agreement": {
+        "title": "Signing of agreement"
+      },
+      "payout": {
+        "title": "Upfront payout"
+      },
+      "onboarding": {
+        "title": "Onboarding",
+        "description": "Once all your paperwork is complete, your team will onboard to the NF Grants and Funding Program. We’ll align on clear timelines, accountability metrics, and reporting expectations. Finally, the NEAR Foundation Ecosystem Success team will be in contact with you to support your project till completion."
+      }
+    },
     "payment-schedule": {},
     "header": {},
     "status-actions": {},
