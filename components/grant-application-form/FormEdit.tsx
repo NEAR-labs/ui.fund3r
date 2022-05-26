@@ -14,7 +14,6 @@ import useWallet from '@/modules/near-api-react/hooks/useWallet';
 import useContract from '@/modules/near-api-react/hooks/useContract';
 import { CONTRACT_ID } from '@/constants';
 import { createPayoutProposal } from '@/services/sputnikContractService';
-import { getNearUsdConvertRate } from '@/services/currencyConverter';
 import createSchema from '@/form-schemas/grantApplicationFormSchema';
 import { AlertCircle } from 'tabler-icons-react';
 import AutoFormFields from '@/components/auto-form/AutoFormFields';
@@ -51,10 +50,6 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
 
   const grantId = data?.id;
   const grantData = { ...form.values, id: grantId, nearId: accountId };
-
-  const { data: usdNearConvertRate } = useQuery(['convertUsdToNear'], () => getNearUsdConvertRate(), {
-    refetchOnWindowFocus: false,
-  });
 
   const {
     refetch: saveForm,
@@ -141,7 +136,7 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
   return (
     <div>
       <div>
-        <Title order={1} mt={32} mb={24}>
+        <Title order={1} mb={24}>
           {t('form.title')}
         </Title>
         {/* eslint-disable-next-line react/no-danger */}
@@ -197,7 +192,6 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
           <Divider mt={32} mb={32} />
           <AutoFormFields form={form} schema={schema} fields={['howHeardGrants', 'referral', 'teamReferral', 'comments']} loading={loading} />
           <Divider mt={32} mb={32} />
-          <div>1 NEAR = {usdNearConvertRate} USD</div>
         </div>
         <Text>{lastSavedDate && t('form.draft_date') + lastSavedDate.toLocaleString()}</Text>
         <Group position="right" mt="xl">

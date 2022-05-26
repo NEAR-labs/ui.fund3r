@@ -5,7 +5,7 @@ import FormSummary from '@/components/grant-application-form/FormSummary';
 
 function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   return (
-    <Grid>
+    <Grid mt="xl" gutter="xl" mb="xl">
       <Grid.Col span={8}>
         <FormEdit data={data} setData={setData} />
       </Grid.Col>

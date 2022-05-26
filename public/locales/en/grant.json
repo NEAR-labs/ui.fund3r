@@ -226,5 +226,10 @@
       "title": "The submission failed",
       "description": "Please review the form errors below, and try again"
     }
+  },
+  "summary": {
+    "schedule": {
+      "title": "Overview"
+    }
   }
 }
