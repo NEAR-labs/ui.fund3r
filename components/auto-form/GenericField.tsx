@@ -4,7 +4,6 @@ import { DatePicker } from '@mantine/dates';
 import { useTranslation } from 'next-i18next';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-// eslint-disable-next-line max-lines-per-function
 function GenericField(props: any) {
   const { t } = useTranslation('grant');
 
@@ -13,13 +12,13 @@ function GenericField(props: any) {
   const required = zodTypeDef.typeName !== 'ZodOptional';
   const description = zodTypeDef.description || null;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   // const maxArray = zodTypeDef.checks?.filter((check: any) => {
   //   return check.kind === 'max';
   // });
 
   const email = useMemo(
     () =>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       zodTypeDef.checks?.filter((check: any) => {
         return check.kind === 'email';
       }),
