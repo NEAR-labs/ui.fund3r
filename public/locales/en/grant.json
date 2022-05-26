@@ -217,6 +217,11 @@
       "not-raising": "No"
     }
   },
+  "blockchain": {
+    "title": "Submission to the DAO",
+    "description": "In order to continue the Grant Application request, you need to publish your grant application to the NEAR blockchain. In case you need assistance, please contact our team.",
+    "button": "Submit application"
+  },
   "error": {
     "tx_error": {
       "title": "The transaction failed",

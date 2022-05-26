@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Button, Alert, Text } from '@mantine/core';
+import { Button, Alert, Text, Title } from '@mantine/core';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 import { useTranslation } from 'next-i18next';
 import { AlertCircle } from 'tabler-icons-react';
@@ -18,14 +18,15 @@ function GrantApplicationProposalSubmission({ data }: { data: GrantApplicationIn
 
   return (
     <>
+      <Title mb="xl">{t('blockchain.title')}</Title>
       {errorCode && (
-        <Alert icon={<AlertCircle size={16} />} title={t('error.tx_error.title')} color="orange" mt={16}>
+        <Alert icon={<AlertCircle size={16} />} title={t('error.tx_error.title')} color="orange" mb="xl">
           {t('error.tx_error.description')}
         </Alert>
       )}
-      <Text>Click here to resubmit the application on chain</Text>
+      <Text mb="xl">{t('blockchain.description')}</Text>
       <Button type="submit" color="violet" disabled={isNearLoading} loading={isNearLoading} onClick={submitGrantProposal}>
-        {t('form.submit')}
+        {t('blockchain.button')}
       </Button>
     </>
   );
