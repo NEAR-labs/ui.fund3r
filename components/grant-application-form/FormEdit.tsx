@@ -16,9 +16,12 @@ import { CONTRACT_ID } from '@/constants';
 import { createPayoutProposal } from '@/services/sputnikContractService';
 import createSchema from '@/form-schemas/grantApplicationFormSchema';
 import { AlertCircle } from 'tabler-icons-react';
-import AutoFormFields from '@/components/auto-form/AutoFormFields';
 import FormEditFieldsMilestones from '@/components/grant-application-form/FormEditFieldsMilestones';
 import FormEditFieldsProject from '@/components/grant-application-form/FormEditFieldsProject';
+import FormEditFieldsQuestions from '@/components/grant-application-form/FormEditFieldsQuestions';
+import FormEditFieldsMembers from '@/components/grant-application-form/FormEditFieldsMembers';
+import FormEditFieldsAddress from '@/components/grant-application-form/FormEditFieldsAddress';
+import FormEditFieldsNear from '@/components/grant-application-form/FormEditFieldsNear';
 
 function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
@@ -154,36 +157,11 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
           <Divider mt={32} mb={32} />
           <FormEditFieldsMilestones form={form} loading={loading} />
           <Divider mt={32} mb={32} />
-          <AutoFormFields
-            form={form}
-            schema={schema}
-            fields={[
-              'whatAndWhy',
-              'competitionDifference',
-              'openSourceState',
-              'opensourceComponentUse',
-              'impactOnEcosystem',
-              'excitementNear',
-              'successMesurement',
-              'projectRaisingRound',
-            ]}
-            loading={loading}
-          />
-          <Title order={2} mt={48} mb={24}>
-            {t('form.memmberDetailsTitle')}
-          </Title>
-          <AutoFormFields
-            form={form}
-            schema={schema}
-            fields={['firstname', 'lastname', 'dateOfBirth', 'email', 'github', 'twitter', 'workingAloneOrTeam', 'hasPreviouslyReceivedFundingTokensGrantsFromNear']}
-            loading={loading}
-          />
-          <Title order={2} mt={48} mb={24}>
-            {t('form.addressDetailsTitle')}
-          </Title>
-          <AutoFormFields form={form} schema={schema} fields={['addressCountry', 'addressCity', 'addressStreet', 'addressZip']} loading={loading} />
+          <FormEditFieldsQuestions form={form} schema={schema} loading={loading} />
+          <FormEditFieldsMembers form={form} schema={schema} loading={loading} />
+          <FormEditFieldsAddress form={form} schema={schema} loading={loading} />
           <Divider mt={32} mb={32} />
-          <AutoFormFields form={form} schema={schema} fields={['howHeardGrants', 'referral', 'teamReferral', 'comments']} loading={loading} />
+          <FormEditFieldsNear form={form} schema={schema} loading={loading} />
           <Divider mt={32} mb={32} />
         </div>
         <Text>{lastSavedDate && t('form.draft_date') + lastSavedDate.toLocaleString()}</Text>
