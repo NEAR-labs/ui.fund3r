@@ -133,6 +133,9 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
       const mergedValues = {
         ...form.values,
         ...data,
+        projectLaunchDate: data?.projectLaunchDate ? new Date(data.projectLaunchDate) : undefined,
+        dateOfBirth: data?.dateOfBirth ? new Date(data.dateOfBirth) : undefined,
+        milestones: formList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null }>(data?.milestones ? parseMilestonesDates(data.milestones) : []),
       };
 
       form.setValues(mergedValues);
