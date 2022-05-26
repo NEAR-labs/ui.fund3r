@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
-import type { MouseEvent } from 'react';
+import type { MouseEvent, SyntheticEvent } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useForm, zodResolver, formList } from '@mantine/form';
 import { Button, Group, Alert, Title, Text, Divider } from '@mantine/core';
@@ -20,6 +20,7 @@ import FormEditFieldsAddress from '@/components/grant-application-form/FormEditF
 import FormEditFieldsNear from '@/components/grant-application-form/FormEditFieldsNear';
 import useDaoContract from '@/hooks/useDaoContract';
 import parseMilestonesDates from '@/utilities/parseMilestonesDates';
+import { showNotification } from '@mantine/notifications';
 
 function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
@@ -145,7 +146,19 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
     saveForm();
   };
 
-  const submit = () => {
+  const submit = (e: SyntheticEvent) => {
+    e.preventDefault();
+    const validation = form.validate();
+
+    if (validation.hasErrors) {
+      showNotification({
+        color: 'red',
+        message: t('error.form.message'),
+      });
+
+      return;
+    }
+
     submitForm();
   };
 
@@ -172,7 +185,7 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
           {t('error.generic.description')}
         </Alert>
       )}
-      <form onSubmit={form.onSubmit(() => submit())}>
+      <form onSubmit={submit}>
         <div>
           <FormEditFieldsProject form={form} schema={schema} loading={loading} />
           <Divider mt={32} mb={32} />

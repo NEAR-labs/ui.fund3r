@@ -225,6 +225,9 @@
     "generic": {
       "title": "The submission failed",
       "description": "Please review the form errors below, and try again"
+    },
+    "form": {
+      "message": "Your form contains invalid values, please review and submit again"
     }
   },
   "summary": {

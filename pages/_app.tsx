@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { CookiesProvider } from 'react-cookie';
 import GrantProvider from '@/providers/GrantProvider';
 import NextNProgress from 'nextjs-progressbar';
+import { NotificationsProvider } from '@mantine/notifications';
 
 // if (process.env.NODE_ENV === 'development' && process.env.NEXT_PUBLIC_MOCK_API) {
 if (process.env.NEXT_PUBLIC_MOCK_API) {
@@ -40,17 +41,19 @@ const App = (props: AppProps) => {
           colorScheme: 'light',
         }}
       >
-        <NearProvider networkId={nearNetworkEnv}>
-          <QueryClientProvider client={queryClient}>
-            <Hydrate state={pageProps.dehydratedState}>
-              <CookiesProvider>
-                <GrantProvider>
-                  <Component {...pageProps} />
-                </GrantProvider>
-              </CookiesProvider>
-            </Hydrate>
-          </QueryClientProvider>
-        </NearProvider>
+        <NotificationsProvider>
+          <NearProvider networkId={nearNetworkEnv}>
+            <QueryClientProvider client={queryClient}>
+              <Hydrate state={pageProps.dehydratedState}>
+                <CookiesProvider>
+                  <GrantProvider>
+                    <Component {...pageProps} />
+                  </GrantProvider>
+                </CookiesProvider>
+              </Hydrate>
+            </QueryClientProvider>
+          </NearProvider>
+        </NotificationsProvider>
       </MantineProvider>
     </>
   );
