@@ -5,7 +5,7 @@ import { DatePicker } from '@mantine/dates';
 import { useTranslation } from 'next-i18next';
 import { Trash } from 'tabler-icons-react';
 
-function FormFieldsMilestones({ form, loading }: { form: UseFormReturnType<any>; loading: boolean }) {
+function FormEditFieldsMilestones({ form, loading }: { form: UseFormReturnType<any>; loading: boolean }) {
   const { t } = useTranslation('grant');
   const { validateFieldOnBlur, validateFieldOnInput } = createValidationUtilities(form);
 
@@ -72,4 +72,4 @@ function FormFieldsMilestones({ form, loading }: { form: UseFormReturnType<any>;
   );
 }
 
-export default FormFieldsMilestones;
+export default FormEditFieldsMilestones;

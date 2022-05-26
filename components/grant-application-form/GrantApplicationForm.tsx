@@ -18,7 +18,7 @@ import { getNearUsdConvertRate } from '@/services/currencyConverter';
 import createSchema from '@/form-schemas/grantApplicationFormSchema';
 import { AlertCircle } from 'tabler-icons-react';
 import AutoFormFields from '@/components/auto-form/AutoFormFields';
-import FormFieldsMilestones from '@/components/grant-application-form/FormFieldsMilestones';
+import FormEditFieldsMilestones from '@/components/grant-application-form/FormEditFieldsMilestones';
 
 function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
@@ -164,7 +164,7 @@ function GrantApplicationForm({ data, setData }: { data: GrantApplicationInterfa
             loading={loading}
           />
           <Divider mt={32} mb={32} />
-          <FormFieldsMilestones form={form} loading={loading} />
+          <FormEditFieldsMilestones form={form} loading={loading} />
           <Divider mt={32} mb={32} />
           <AutoFormFields
             form={form}
