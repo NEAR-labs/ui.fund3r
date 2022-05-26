@@ -1,4 +1,3 @@
-import type { FocusEvent, FormEvent } from 'react';
 import { useTranslation } from 'next-i18next';
 import { z } from 'zod';
 import type { UseFormReturnType } from '@mantine/form/lib/use-form';

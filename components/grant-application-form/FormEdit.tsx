@@ -18,6 +18,7 @@ import createSchema from '@/form-schemas/grantApplicationFormSchema';
 import { AlertCircle } from 'tabler-icons-react';
 import AutoFormFields from '@/components/auto-form/AutoFormFields';
 import FormEditFieldsMilestones from '@/components/grant-application-form/FormEditFieldsMilestones';
+import FormEditFieldsProject from '@/components/grant-application-form/FormEditFieldsProject';
 
 function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
@@ -149,15 +150,7 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
       )}
       <form onSubmit={form.onSubmit(() => submit())}>
         <div>
-          <Title order={2} mt={48} mb={24}>
-            {t('form.applicationProjectDetailTitle')}
-          </Title>
-          <AutoFormFields
-            form={form}
-            schema={schema}
-            fields={['projectName', 'grantType', 'grantCategory', 'projectUrl', 'githubUrl', 'projectStatus', 'projectLaunchDate', 'projectDescription', 'fundingAmount']}
-            loading={loading}
-          />
+          <FormEditFieldsProject form={form} schema={schema} loading={loading} />
           <Divider mt={32} mb={32} />
           <FormEditFieldsMilestones form={form} loading={loading} />
           <Divider mt={32} mb={32} />

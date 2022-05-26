@@ -54,6 +54,7 @@ function FormEditFieldsMilestones({ form, loading }: { form: UseFormReturnType<a
         placeholder={t('form.milestoneDescription.placeholder')}
         variant="filled"
         mt="sm"
+        mb="xl"
       />
     </div>
   ));
@@ -65,7 +66,7 @@ function FormEditFieldsMilestones({ form, loading }: { form: UseFormReturnType<a
   return (
     <>
       {milestonesFields}
-      <Button color="violet" disabled={loading} onClick={addMilestone} mt="md" variant="light">
+      <Button color="violet" disabled={loading} onClick={addMilestone} variant="light">
         {t('form.addMilestone')}
       </Button>
     </>
