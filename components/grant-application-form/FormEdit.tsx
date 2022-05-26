@@ -32,9 +32,38 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
 
   const schema = createSchema(t);
 
+  // The following is required to avoid warnings
+  const defaultData = {
+    projectName: '',
+    projectUrl: '',
+    githubUrl: '',
+    projectDescription: '',
+    whatAndWhy: '',
+    competitionDifference: '',
+    opensourceComponentUse: '',
+    impactOnEcosystem: '',
+    excitementNear: '',
+    successMesurement: '',
+    firstname: '',
+    lastname: '',
+    email: '',
+    github: '',
+    twitter: '',
+    hasPreviouslyReceivedFundingTokensGrantsFromNear: false,
+    addressCountry: '',
+    addressCity: '',
+    addressStreet: '',
+    addressZip: '',
+    howHeardGrants: '',
+    referral: '',
+    teamReferral: '',
+    comments: '',
+  };
+
   const form = useForm({
     schema: zodResolver(schema),
     initialValues: {
+      ...defaultData,
       ...data,
       milestones: formList<{ budget: number | null; deliveryDate: string | null; description: string | null }>([]),
     },
