@@ -23,7 +23,7 @@ function AutoFormFields({ form, schema, fields, loading }: { form: UseFormReturn
             id={field}
             label={t(`form.${field}.label`)}
             placeholder={t(`form.${field}.placeholder`)}
-            mt="sm"
+            mt="md"
             onBlur={validateFieldOnBlur}
             onInput={validateFieldOnInput}
             disabled={loading}

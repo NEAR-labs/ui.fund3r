@@ -31,7 +31,7 @@ function FormEditFieldsMilestones({ form, loading }: { form: any; loading: boole
         label={t('form.budget.label')}
         placeholder={t('form.budget.placeholder')}
         variant="filled"
-        mt="sm"
+        mt="md"
       />
       <DatePicker
         id={`milestones.${index}.deliveryDate`}
@@ -43,7 +43,7 @@ function FormEditFieldsMilestones({ form, loading }: { form: any; loading: boole
         label={t('form.deliveryDate.label')}
         placeholder={t('form.deliveryDate.placeholder')}
         variant="filled"
-        mt="sm"
+        mt="md"
       />
       <TextInput
         id={`milestones.${index}.description`}
@@ -55,7 +55,7 @@ function FormEditFieldsMilestones({ form, loading }: { form: any; loading: boole
         label={t('form.milestoneDescription.label')}
         placeholder={t('form.milestoneDescription.placeholder')}
         variant="filled"
-        mt="sm"
+        mt="md"
         mb="xl"
       />
     </div>
