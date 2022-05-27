@@ -241,6 +241,9 @@
     }
   },
   "details": {
+    "header": {
+      "by": "By"
+    },
     "process-overview": {
       "title": "Process Overview",
       "submit": {
