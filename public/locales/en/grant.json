@@ -304,6 +304,7 @@
         "title": "Your account has been approved. To continue please sign the grant agreement.",
         "button": "Sign agreement"
       },
+      "kyc-denied": {},
       "agreement-signed": {
         "message": "You successfully signed the agreement and we are ready to payouts you up front part of grant."
       },
