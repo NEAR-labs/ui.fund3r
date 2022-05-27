@@ -268,14 +268,103 @@
         "description": "Once all your paperwork is complete, your team will onboard to the NF Grants and Funding Program. We’ll align on clear timelines, accountability metrics, and reporting expectations. Finally, the NEAR Foundation Ecosystem Success team will be in contact with you to support your project till completion."
       }
     },
-    "payment-schedule": {},
-    "header": {},
-    "status-actions": {},
-    "project": {},
-    "payments": {},
-    "attachment": {},
-    "member": {},
-    "address": {}
-  },
-  "milestones": {}
+    "payment-schedule": {
+      "launch": "Project launch",
+      "milestone": "Milestone",
+      "total": "Total requested"
+    },
+    "status-actions": {
+      "submitted": {
+        "message": "You have successfully completed the application",
+        "description": "You will receive a follow up email to confirm your application has been received and separately when the review process has started. If you have questions that aren’t answered on near.org/grants, please contact us via email at grants@near.foundation."
+      },
+      "evaluated": {
+        "message": "You was invited to an intervie. Please, select available date.",
+        "button": "Select date"
+      },
+      "interview-scheduled": {
+        "title": "Waiting for a interview"
+      },
+      "interview-completed": {
+        "title": "Interview completed",
+        "message": "You will receive a follow up email to confirm your application has been approved. If you have questions that aren’t answered on near.org/grants, please contact us via email at grants@near.foundation.,"
+      },
+      "denied": {
+        "message": "Your application has been denied. Please, check comments and submit your application again."
+      },
+      "approved": {
+        "message": "Your funding has been approved, pleace verify your account.",
+        "button": "Verify account"
+      },
+      "kyc-completed": {
+        "title": "Thank you! We are currently checking your data",
+        "description": "We will send you an email once your account has been confirmed. It can take a few days..."
+      },
+      "kyc-approved": {
+        "title": "Your account has been approved. To continue please sign the grant agreement.",
+        "button": "Sign agreement"
+      },
+      "agreement-signed": {
+        "message": "You successfully signed the agreement and we are ready to payouts you up front part of grant."
+      },
+      "first-payment-sent": {
+        "message": "We have successfully completed the first payment. We are waiting for you at the onboarding meeting."
+      }
+    },
+    "milestones": {
+      "title": "Let’s start to work",
+      "milestone": {
+        "working": "Working on milestone",
+        "status": {
+          "submit": "Submit",
+          "review": "Review",
+          "payout": "Payout"
+        }
+      },
+      "waiting-submit": {
+        "message": "Let us know when you are done with milestone 1 and we will start the review.",
+        "button": "Sumbit Milestone 1"
+      },
+      "submitted": {
+        "message": "You have successfully submit Milestone 1",
+        "description": "You will receive a follow up email to confirm Milestone 1 has been approved. If you have questions that aren’t answered on near.org/grants, please contact us via email at grants@near.foundation."
+      }
+    },
+    "project": {
+      "tab": "Project Details",
+      "requested": "Requested",
+      "launch": "Launch date",
+      "project-url": "Project Website URL",
+      "github-url": "Github Project URL",
+      "milestone": {
+        "title": "Milestone",
+        "budget": "Estimated budget",
+        "date": "Expected delivery date",
+        "description": "Milesone description"
+      }
+    },
+    "payments": {
+      "tab": "Payments",
+      "payment": {
+        "title": "Payment",
+        "statuses": {
+          "pending": "Pending",
+          "paid": "Paid"
+        },
+        "amount": "Amount"
+      }
+    },
+    "attachment": {
+      "title": "Additional File(s)"
+    },
+    "member": {
+      "title": "Member details"
+    },
+    "address": {
+      "title": "Address details"
+    },
+    "comments": {
+      "no-comments": "No comments posted yet"
+    }
+  }
 }
