@@ -1,4 +1,4 @@
-import { Divider, Space, Title } from '@mantine/core';
+import { Divider, Group, Space, Title } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
 import LabelValue from '@/components/common/LabelValue';
@@ -26,11 +26,14 @@ function DetailsMilestones({
           <Title order={4} mb="lg">
             {t('details.project.milestone.title', { number: index + 1 })}
           </Title>
-          <LabelValue label={t('details.project.milestone.budget')} value={`${milestone.budget?.toFixed(0)} ${currency}`} />
-          {/* <LabelValue
-            label={t('details.project.milestone.deliveryDate')}
-            value={milestone.deliveryDate && typeof milestone.deliveryDate === 'string' ? milestone.deliveryDate : milestone.deliveryDate?.toDateString()}
-          /> */}
+          <Group>
+            <LabelValue label={t('details.project.milestone.budget')} value={`${milestone.budget?.toFixed(0)} ${currency}`} />
+            <Divider sx={{ height: '42px' }} orientation="vertical" />
+            <LabelValue
+              label={t('details.project.milestone.date')}
+              value={typeof milestone.deliveryDate === 'number' || typeof milestone.deliveryDate === 'string' ? milestone.deliveryDate : milestone.deliveryDate?.toDateString()}
+            />
+          </Group>
           <Space h="md" />
           <LabelValue label={t('details.project.milestone.description')} value={milestone.description} />
         </div>
