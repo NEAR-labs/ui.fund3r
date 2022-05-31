@@ -18,7 +18,7 @@ function FormSummary({ data, setData }: { data: GrantApplicationInterface | unde
       <Title order={2} mb="sm">
         {t('summary.schedule.title')}
       </Title>
-      <Paper shadow="0" p="md" withBorder>
+      <Paper shadow="0" p="lg" radius="lg" withBorder>
         <Text>1 NEAR = {usdNearConvertRate} USD</Text>
       </Paper>
     </>
