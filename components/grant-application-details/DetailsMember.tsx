@@ -8,7 +8,7 @@ function DetailsMember({ github, twitter }: { github: string | undefined; twitte
 
   return (
     <>
-      <Title order={3} mb="lg">
+      <Title order={3} mb="lg" mt="xl">
         {t('details.member.title')}
       </Title>
       <SimpleGrid cols={2}>

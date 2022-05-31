@@ -18,7 +18,7 @@ function DetailsAddress({
 
   return (
     <>
-      <Title order={3} mb="lg">
+      <Title order={3} mb="lg" mt="xl">
         {t('details.address.title')}
       </Title>
       <SimpleGrid cols={2}>

@@ -2,7 +2,6 @@ import { Grid, Tabs } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
 import DetailsAddress from '@/components/grant-application-details/DetailsAddress';
-import DetailsAttachment from '@/components/grant-application-details/DetailsAttachment';
 import DetailsHeader from '@/components/grant-application-details/DetailsHeader';
 import DetailsMember from '@/components/grant-application-details/DetailsMember';
 import DetailsPayments from '@/components/grant-application-details/DetailsPayments';
@@ -27,21 +26,11 @@ function GrantApplicationDetails({ data }: { data: GrantApplicationInterface | u
           grantType={data?.grantType}
           openSourceState={data?.openSourceState}
         />
-        <br />
-        <br />
-        <br />
         <DetailsStatusActions />
-        <br />
-        <br />
-        <br />
         <Tabs color="violet" tabPadding="xl">
           <Tabs.Tab label={t('details.project.tab')}>
             <DetailsProject />
-            <br />
-            <DetailsAttachment />
-            <br />
             <DetailsMember github={data?.github} twitter={data?.twitter} />
-            <br />
             <DetailsAddress addressCountry={data?.addressCountry} addressCity={data?.addressCity} addressStreet={data?.addressStreet} addressZip={data?.addressZip} />{' '}
           </Tabs.Tab>
           <Tabs.Tab label={t('details.payments.tab')}>
