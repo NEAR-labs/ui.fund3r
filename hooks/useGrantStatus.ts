@@ -41,50 +41,50 @@ const useGrantStatus = () => {
   const grantFirstPaymentSent = grantAgreementSigned && grant.dateFirstPaymentSent;
 
   if (grantFirstPaymentSent) {
-    return STATUS.FULLY_SUBMITTED;
+    return { status: STATUS.FULLY_SUBMITTED, step: 6 };
   }
 
   if (grantAgreementSigned) {
-    return STATUS.AGREEMENT_SIGNED;
+    return { status: STATUS.AGREEMENT_SIGNED, step: 5 };
   }
 
   if (grantKycDenied) {
-    return STATUS.KYC_DENIED;
+    return { status: STATUS.KYC_DENIED, step: 4 };
   }
 
   if (grantKycCompleted) {
-    return STATUS.KYC_COMPLETED;
+    return { status: STATUS.KYC_COMPLETED, step: 4 };
   }
 
   if (grantApproved) {
-    return STATUS.APPROVED;
+    return { status: STATUS.APPROVED, step: 3 };
   }
 
   if (grantDenied) {
-    return STATUS.DENIED;
+    return { status: STATUS.DENIED, step: 3 };
   }
 
   if (grantInterviewCompleted) {
-    return STATUS.INTERVIEW_COMPLETED;
+    return { status: STATUS.INTERVIEW_COMPLETED, step: 2 };
   }
 
   if (grantInterviewScheduled) {
-    return STATUS.INTERVIEW_SCHEDULED;
+    return { status: STATUS.INTERVIEW_SCHEDULED, step: 2 };
   }
 
   if (grantEvaluated) {
-    return STATUS.EVALUATED;
+    return { status: STATUS.EVALUATED, step: 2 };
   }
 
   if (grantFullySubmitted) {
-    return STATUS.FULLY_SUBMITTED;
+    return { status: STATUS.FULLY_SUBMITTED, step: 1 };
   }
 
   if (grantOnlySubmittedOffChain) {
-    return STATUS.OFFCHAIN_SUBMITTED;
+    return { status: STATUS.OFFCHAIN_SUBMITTED, step: 0 };
   }
 
-  return STATUS.EDIT;
+  return { status: STATUS.EDIT, step: 0 };
 };
 
 export { STATUS, useGrantStatus };

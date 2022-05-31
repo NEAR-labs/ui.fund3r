@@ -5,7 +5,7 @@ import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 
 function DetailsStatusActions() {
   const { t } = useTranslation('grant');
-  const status = useGrantStatus();
+  const { status } = useGrantStatus();
 
   const { FULLY_SUBMITTED } = STATUS;
 
