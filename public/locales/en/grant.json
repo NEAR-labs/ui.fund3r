@@ -244,6 +244,10 @@
     "header": {
       "by": "By"
     },
+    "common": {
+      "show_more": "Read more",
+      "show_less": "Show less"
+    },
     "process-overview": {
       "title": "Process Overview",
       "submit": {
@@ -272,6 +276,7 @@
       }
     },
     "payment-schedule": {
+      "title": "Payment schedule",
       "launch": "Project launch",
       "milestone": "Milestone",
       "total": "Total requested"
@@ -341,7 +346,7 @@
       "project-url": "Project Website URL",
       "github-url": "Github Project URL",
       "milestone": {
-        "title": "Milestone",
+        "title": "Milestone {{ number }}",
         "budget": "Estimated budget",
         "date": "Expected delivery date",
         "description": "Milesone description"

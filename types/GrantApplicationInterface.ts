@@ -40,6 +40,19 @@ export enum RaisingRoundStatus {
   NotRaising = 'not-raising',
 }
 
+export enum PaymentStatuses {
+  Pending = 'pending',
+  Paid = 'paid',
+}
+
+export interface PaymentInterface {
+  id: string;
+  date: Date;
+  amount: number;
+  currency: string;
+  status: PaymentStatuses;
+}
+
 export interface GrantApplicationInterface {
   id: number | undefined;
   nearId: string;
@@ -99,8 +112,8 @@ export interface GrantApplicationInterface {
   dateDenial?: Date;
   dateApproval?: Date;
   dateKycCompletion?: Date;
-  dateKycApproved?: Date;
   dateKycDenied?: Date;
+  dateKycApproved?: Date;
   dateAgreementSignature?: Date;
   dateFirstPaymentSent?: Date;
   dateOnboardingCompletion?: Date;
@@ -117,6 +130,7 @@ export interface GrantApplicationInterface {
   reviewAttachments?: string;
 
   milestones: FormList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null }>;
+  payments?: PaymentInterface[];
   created_at?: Date;
   updated_at?: Date;
 }

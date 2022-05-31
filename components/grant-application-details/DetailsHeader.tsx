@@ -5,6 +5,7 @@ import { GrantCategories, GrantTypes, OpenSourceStates } from '@/types/GrantAppl
 
 function DetailsHeader({
   projectName,
+  email,
   firstname,
   lastname,
   grantCategory,
@@ -12,6 +13,7 @@ function DetailsHeader({
   openSourceState,
 }: {
   projectName: string | undefined;
+  email: string | undefined;
   firstname: string | undefined;
   lastname: string | undefined;
   grantCategory: GrantCategories | undefined;
@@ -24,7 +26,7 @@ function DetailsHeader({
     <>
       <Title mb="lg">{projectName}</Title>
       <Text mb="lg">
-        {t('details.header.by')} {firstname} {lastname}
+        {t('details.header.by')} {firstname} {lastname} | {email}
       </Text>
       <Group>
         <Badge color="gray" size="lg">

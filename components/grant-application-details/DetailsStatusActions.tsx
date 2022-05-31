@@ -1,9 +1,27 @@
-// import { useTranslation } from 'next-i18next';
+import { Paper, Text } from '@mantine/core';
+import { useTranslation } from 'next-i18next';
+
+import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 
 function DetailsStatusActions() {
-  //   const { t } = useTranslation('grant');
+  const { t } = useTranslation('grant');
+  const status = useGrantStatus();
 
-  return <span>DetailsStatusActions</span>;
+  const { FULLY_SUBMITTED } = STATUS;
+
+  if (status === FULLY_SUBMITTED) {
+    return (
+      <>
+        <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+          <Text>{t('details.status-actions.submitted.message')}</Text>
+        </Paper>
+        <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+          <Text>{t('details.status-actions.submitted.description')}</Text>
+        </Paper>
+      </>
+    );
+  }
+  return null;
 }
 
 export default DetailsStatusActions;
