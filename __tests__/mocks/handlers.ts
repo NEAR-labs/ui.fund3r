@@ -66,6 +66,15 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
           description: 'Beta of the Metaverse',
         },
       ],
+      payments: [
+        {
+          id: '00001',
+          amount: 40000,
+          currency: 'NEAR',
+          date: new Date(),
+          status: 'pending',
+        },
+      ],
     },
   ][id];
 };

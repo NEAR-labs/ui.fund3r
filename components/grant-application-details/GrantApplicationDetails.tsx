@@ -43,7 +43,7 @@ function GrantApplicationDetails({ data }: { data: GrantApplicationInterface | u
             <DetailsAddress addressCountry={data?.addressCountry} addressCity={data?.addressCity} addressStreet={data?.addressStreet} addressZip={data?.addressZip} />{' '}
           </Tabs.Tab>
           <Tabs.Tab label={t('details.payments.tab')}>
-            <DetailsPayments />
+            <DetailsPayments payments={data?.payments} />
           </Tabs.Tab>
         </Tabs>
       </Grid.Col>
