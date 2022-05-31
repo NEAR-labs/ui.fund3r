@@ -40,7 +40,7 @@ function GrantApplicationDetails({ data }: { data: GrantApplicationInterface | u
             <br />
             <DetailsAttachment />
             <br />
-            <DetailsMember />
+            <DetailsMember github={data?.github} twitter={data?.twitter} />
             <br />
             <DetailsAddress addressCountry={data?.addressCountry} addressCity={data?.addressCity} addressStreet={data?.addressStreet} addressZip={data?.addressZip} />{' '}
           </Tabs.Tab>
