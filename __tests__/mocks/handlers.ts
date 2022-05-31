@@ -72,6 +72,7 @@ const fullProjectData = {
 
 const getGrantsData = (accountId: string): GrantApplicationInterface[] => [{ id: 0, nearId: accountId }];
 
+// eslint-disable-next-line max-lines-per-function
 const getGrantData = (accountId: string, id: number): GrantApplicationInterface => {
   return [
     { id: 0, nearId: accountId },

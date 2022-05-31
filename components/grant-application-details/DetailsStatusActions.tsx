@@ -1,6 +1,7 @@
-import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 import { Paper, Text } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
+
+import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 
 function DetailsStatusActions() {
   const { t } = useTranslation('grant');
