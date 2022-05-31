@@ -11,7 +11,7 @@ function DetailsProcessOverview() {
         {t('details.process-overview.title')}
       </Title>
 
-      <Paper shadow="0" p="lg" radius="lg" withBorder>
+      <Paper shadow="0" p="lg" radius="lg" withBorder mb="xl">
         <Timeline active={0} bulletSize={24} lineWidth={2} color="violet">
           <Timeline.Item bullet={<Check size={12} />} title={t('details.process-overview.submit.title')} />
           <Timeline.Item title={t('details.process-overview.evaluation-approval.title')}>
