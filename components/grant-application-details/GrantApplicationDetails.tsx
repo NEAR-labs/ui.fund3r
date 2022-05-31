@@ -29,7 +29,15 @@ function GrantApplicationDetails({ data }: { data: GrantApplicationInterface | u
         <DetailsStatusActions />
         <Tabs color="violet" tabPadding="xl">
           <Tabs.Tab label={t('details.project.tab')}>
-            <DetailsProject />
+            <DetailsProject
+              projectDescription={data?.projectDescription}
+              fundingAmount={data?.fundingAmount}
+              currency={data?.currency}
+              projectLaunchDate={data?.projectLaunchDate}
+              projectUrl={data?.projectUrl}
+              githubUrl={data?.githubUrl}
+              milestones={data?.milestones}
+            />
             <DetailsMember github={data?.github} twitter={data?.twitter} />
             <DetailsAddress addressCountry={data?.addressCountry} addressCity={data?.addressCity} addressStreet={data?.addressStreet} addressZip={data?.addressZip} />{' '}
           </Tabs.Tab>
@@ -40,7 +48,6 @@ function GrantApplicationDetails({ data }: { data: GrantApplicationInterface | u
       </Grid.Col>
       <Grid.Col span={4}>
         <DetailsProcessOverview />
-        <br />
         <DetailsPaymentSchedule />
       </Grid.Col>
     </Grid>

@@ -1,9 +1,42 @@
-// import { useTranslation } from 'next-i18next';
+import { SimpleGrid, Spoiler } from '@mantine/core';
+import { useTranslation } from 'next-i18next';
 
-function DetailsProject() {
-  //   const { t } = useTranslation('grant');
+import LabelValue from '@/components/common/LabelValue';
 
-  return <span>DetailsProject</span>;
+import type { FormList } from '../node_modules/@mantine/form/lib/form-list/form-list';
+
+function DetailsProject({
+  projectDescription,
+  fundingAmount,
+  currency,
+  projectLaunchDate,
+  projectUrl,
+  githubUrl,
+  milestones,
+}: {
+  projectDescription: string | undefined;
+  fundingAmount: number | undefined;
+  currency: string | undefined;
+  projectLaunchDate: Date | string | undefined;
+  projectUrl: string | undefined;
+  githubUrl: string | undefined;
+  milestones: FormList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null }>;
+}) {
+  const { t } = useTranslation('grant');
+
+  return (
+    <>
+      <Spoiler mb="xl" maxHeight={120} showLabel={t('details.common.show_more')} hideLabel={t('details.common.show_less')}>
+        {projectDescription}
+      </Spoiler>
+      <SimpleGrid cols={2}>
+        <LabelValue label={t('details.project.requested')} value={`${fundingAmount?.toFixed(0)} ${currency}`} />
+        <LabelValue label={t('details.project.launch')} value={typeof projectLaunchDate === 'string' ? projectLaunchDate : projectLaunchDate?.toDateString()} />
+        <LabelValue label={t('details.project.project-url')} value={projectUrl} />
+        <LabelValue label={t('details.project.github-url')} value={githubUrl} />
+      </SimpleGrid>
+    </>
+  );
 }
 
 export default DetailsProject;

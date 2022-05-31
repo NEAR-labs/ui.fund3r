@@ -53,6 +53,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       referral: '',
       teamReferral: '',
       comments: '',
+      currency: 'USD',
     },
   ][id];
 };
