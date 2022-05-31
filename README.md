@@ -1,5 +1,7 @@
 # ui.fund3r
 
+> Easy to set up end to end grant application form for DAOs on NEAR Protocol
+
 ## Technology stack
 
 - Blockchain: **[NEAR](https://near.org/)**

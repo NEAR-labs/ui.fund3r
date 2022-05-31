@@ -3,8 +3,12 @@ import { useTranslation } from 'next-i18next';
 
 import type { PaymentInterface } from '@/types/GrantApplicationInterface';
 
-function DetailsPayments({ payments }: { payments: PaymentInterface[] }) {
+function DetailsPayments({ payments }: { payments: PaymentInterface[] | undefined }) {
   const { t } = useTranslation('grant');
+
+  if (!payments) {
+    return null;
+  }
 
   const paymentsItems = payments.map((payment) => {
     return (
