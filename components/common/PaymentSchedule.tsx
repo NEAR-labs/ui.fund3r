@@ -1,5 +1,7 @@
+import { useQuery } from 'react-query';
 import { Divider, Paper, SimpleGrid, Text, Timeline } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
+import { getNearUsdConvertRate } from '@/services/currencyConverter';
 
 import type { FormList } from '../../node_modules/@mantine/form/lib/form-list/form-list';
 
@@ -16,6 +18,10 @@ function GrantMilestoneOverview({
 }) {
   const { t } = useTranslation('grant');
 
+  const { data: usdNearConvertRate } = useQuery(['convertUsdToNear'], () => getNearUsdConvertRate(), {
+    refetchOnWindowFocus: false,
+  });
+
   const timelineItems = milestones?.map((milestone, index) => {
     const { budget, deliveryDate } = milestone;
 
@@ -27,6 +33,10 @@ function GrantMilestoneOverview({
           </Text>
           <Text color="dimmed" size="sm" align="right">
             {budget} {currency}
+          </Text>
+          <div>&nbsp;</div>
+          <Text color="dimmed" size="sm" align="right">
+            ≈ {((budget || 0) / (usdNearConvertRate || 1)).toFixed(2)} NEAR
           </Text>
         </SimpleGrid>
       </Timeline.Item>
@@ -47,6 +57,10 @@ function GrantMilestoneOverview({
             <Text color="dimmed" size="sm" align="right">
               {initialBudget} {currency}
             </Text>
+            <div>&nbsp;</div>
+            <Text color="dimmed" size="sm" align="right">
+              ≈ {(initialBudget / (usdNearConvertRate || 1)).toFixed(2)} NEAR
+            </Text>
           </SimpleGrid>
         </Timeline.Item>
         {timelineItems}
@@ -56,6 +70,10 @@ function GrantMilestoneOverview({
         <Text weight="bold">{t('details.payment-schedule.total')}</Text>
         <Text color="dimmed" size="sm" align="right">
           {fundingAmount} {currency}
+        </Text>
+        <div>&nbsp;</div>
+        <Text color="dimmed" size="sm" align="right">
+          ≈ {((fundingAmount || 0) / (usdNearConvertRate || 1)).toFixed(2)} NEAR
         </Text>
       </SimpleGrid>
     </Paper>

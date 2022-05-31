@@ -2,7 +2,7 @@
 import type { MouseEvent, SyntheticEvent } from 'react';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { Alert, Button, Divider, Group, Text, Title } from '@mantine/core';
+import { Alert, Button, Divider, Grid, Group, Text, Title } from '@mantine/core';
 import { formList, useForm, zodResolver } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { useTranslation } from 'next-i18next';
@@ -14,6 +14,7 @@ import FormEditFieldsMilestones from '@/components/grant-application-form/FormEd
 import FormEditFieldsNear from '@/components/grant-application-form/FormEditFieldsNear';
 import FormEditFieldsProject from '@/components/grant-application-form/FormEditFieldsProject';
 import FormEditFieldsQuestions from '@/components/grant-application-form/FormEditFieldsQuestions';
+import FormSummary from '@/components/grant-application-form/FormSummary';
 import createSchema from '@/form-schemas/grantApplicationFormSchema';
 import useAccountSignature from '@/hooks/useAccountSignature';
 import useDaoContract from '@/hooks/useDaoContract';
@@ -173,43 +174,48 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
   const error = isSavingError || isSubmitingError;
 
   return (
-    <div>
-      <div>
-        <Title order={1} mb={24}>
-          {t('form.title')}
-        </Title>
-        {/* eslint-disable-next-line react/no-danger */}
-        <p dangerouslySetInnerHTML={{ __html: t('form.description') }} />
-      </div>
-      {error && (
-        <Alert icon={<AlertCircle size={16} />} title={t('error.generic.title')} color="orange" mt={16}>
-          {t('error.generic.description')}
-        </Alert>
-      )}
-      <form onSubmit={submit}>
+    <Grid gutter="xl" mb="xl">
+      <Grid.Col span={8}>
         <div>
-          <FormEditFieldsProject form={form} schema={schema} loading={loading} />
-          <Divider mt={32} mb={32} />
-          <FormEditFieldsMilestones form={form} loading={loading} />
-          <Divider mt={32} mb={32} />
-          <FormEditFieldsQuestions form={form} schema={schema} loading={loading} />
-          <FormEditFieldsMembers form={form} schema={schema} loading={loading} />
-          <FormEditFieldsAddress form={form} schema={schema} loading={loading} />
-          <Divider mt={32} mb={32} />
-          <FormEditFieldsNear form={form} schema={schema} loading={loading} />
-          <Divider mt={32} mb={32} />
+          <Title order={1} mb={24}>
+            {t('form.title')}
+          </Title>
+          {/* eslint-disable-next-line react/no-danger */}
+          <p dangerouslySetInnerHTML={{ __html: t('form.description') }} />
         </div>
-        <Text>{lastSavedDate && t('form.draft_date') + lastSavedDate.toLocaleString()}</Text>
-        <Group position="right" mt="xl">
-          <Button color="violet" onClick={saveDraftHandler} variant="light" loading={isSavingLoading}>
-            {t('form.save')}
-          </Button>
-          <Button type="submit" color="violet" disabled={loading} loading={isSubmitingLoading || isNearLoading}>
-            {t('form.submit')}
-          </Button>
-        </Group>
-      </form>
-    </div>
+        {error && (
+          <Alert icon={<AlertCircle size={16} />} title={t('error.generic.title')} color="orange" mt={16}>
+            {t('error.generic.description')}
+          </Alert>
+        )}
+        <form onSubmit={submit}>
+          <div>
+            <FormEditFieldsProject form={form} schema={schema} loading={loading} />
+            <Divider mt={32} mb={32} />
+            <FormEditFieldsMilestones form={form} loading={loading} />
+            <Divider mt={32} mb={32} />
+            <FormEditFieldsQuestions form={form} schema={schema} loading={loading} />
+            <FormEditFieldsMembers form={form} schema={schema} loading={loading} />
+            <FormEditFieldsAddress form={form} schema={schema} loading={loading} />
+            <Divider mt={32} mb={32} />
+            <FormEditFieldsNear form={form} schema={schema} loading={loading} />
+            <Divider mt={32} mb={32} />
+          </div>
+          <Text>{lastSavedDate && t('form.draft_date') + lastSavedDate.toLocaleString()}</Text>
+          <Group position="right" mt="xl">
+            <Button color="violet" onClick={saveDraftHandler} variant="light" loading={isSavingLoading}>
+              {t('form.save')}
+            </Button>
+            <Button type="submit" color="violet" disabled={loading} loading={isSubmitingLoading || isNearLoading}>
+              {t('form.submit')}
+            </Button>
+          </Group>
+        </form>
+      </Grid.Col>
+      <Grid.Col span={4}>
+        <FormSummary data={form.values} />
+      </Grid.Col>
+    </Grid>
   );
 }
 
