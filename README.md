@@ -18,6 +18,13 @@
 
 ## Guides
 
+### Configuration
+
+```bash
+cp .env.dist .env
+# set up variables on .env
+```
+
 ### Installation
 
 ```bash
@@ -33,6 +40,13 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Deployment
+
+```bash
+npm install && npm run build
+npm run start
+```
 
 ### Testing
 
