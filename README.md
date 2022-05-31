@@ -38,3 +38,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 No tested are implemented yet.
 Check the [Manual Testing](__tests__/MANUAL_TESTING.md) guide.
+
