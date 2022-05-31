@@ -49,7 +49,7 @@ function GrantApplicationDetails({ data }: { data: GrantApplicationInterface | u
       </Grid.Col>
       <Grid.Col span={4}>
         <DetailsProcessOverview />
-        <DetailsPaymentSchedule />
+        <DetailsPaymentSchedule milestones={data?.milestones} fundingAmount={data?.fundingAmount} currency={data?.currency} projectLaunchDate={data?.projectLaunchDate} />
       </Grid.Col>
     </Grid>
   );

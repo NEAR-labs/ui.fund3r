@@ -276,6 +276,7 @@
       }
     },
     "payment-schedule": {
+      "title": "Payment schedule",
       "launch": "Project launch",
       "milestone": "Milestone",
       "total": "Total requested"
