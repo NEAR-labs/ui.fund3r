@@ -28,7 +28,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       projectStatus: ProjectStatus.Mvp,
       projectLaunchDate: new Date(),
       projectDescription: 'Metaverse Lab is a decentralized, open-source, decentralized gaming platform.',
-      fundingAmount: 100000,
+      fundingAmount: 500000,
       whatAndWhy: 'Enable developers to build, test, and deploy decentralized games on the near blockchain.',
       competitionDifference: 'On the near blockchain.',
       openSourceState: OpenSourceStates.FullyOpenSource,

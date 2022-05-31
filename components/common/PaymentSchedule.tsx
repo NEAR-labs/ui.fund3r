@@ -33,6 +33,9 @@ function GrantMilestoneOverview({
     );
   });
 
+  const totalMilestones = milestones?.reduce((acc, milestone) => acc + (milestone.budget || 0), 0);
+  const initialBudget = (fundingAmount || 0) - (totalMilestones || 0);
+
   return (
     <Paper shadow="0" p="lg" radius="lg" withBorder mt="xl">
       <Timeline bulletSize={24} lineWidth={2} color="violet">
@@ -42,7 +45,7 @@ function GrantMilestoneOverview({
               {typeof projectLaunchDate === 'number' || typeof projectLaunchDate === 'string' ? projectLaunchDate : projectLaunchDate?.toDateString()}
             </Text>
             <Text color="dimmed" size="sm" align="right">
-              {fundingAmount} {currency}
+              {initialBudget} {currency}
             </Text>
           </SimpleGrid>
         </Timeline.Item>
