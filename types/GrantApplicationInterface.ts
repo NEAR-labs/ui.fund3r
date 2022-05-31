@@ -106,7 +106,7 @@ export interface GrantApplicationInterface {
   proposalNearTransactionHash?: string;
   isNearProposalValid?: boolean;
   dateEvaluation?: Date;
-  dateInterviewSchedule?: Date;
+  dateInterviewScheduled?: Date;
   dateInterview?: Date;
   dateInterviewCompletionConfirmation?: Date;
   dateDenial?: Date;
