@@ -13,9 +13,6 @@ function FormSummary({ data }: { data: any }) {
         {t('summary.schedule.title')}
       </Title>
       <PaymentSchedule milestones={data?.milestones} fundingAmount={data?.fundingAmount} currency={data?.currency} projectLaunchDate={data?.projectLaunchDate} />
-      {/* <Paper shadow="0" p="lg" radius="lg" withBorder>
-        <Text>1 NEAR = {usdNearConvertRate} USD</Text>
-      </Paper> */}
     </>
   );
 }
