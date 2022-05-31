@@ -345,7 +345,7 @@
       "project-url": "Project Website URL",
       "github-url": "Github Project URL",
       "milestone": {
-        "title": "Milestone",
+        "title": "Milestone {{ number }}",
         "budget": "Estimated budget",
         "date": "Expected delivery date",
         "description": "Milesone description"

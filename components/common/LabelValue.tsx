@@ -1,6 +1,6 @@
 import { Text } from '@mantine/core';
 
-function LabelValue({ label, value }: { label: string | undefined; value: string | undefined }) {
+function LabelValue({ label, value }: { label: string | null | undefined; value: string | null | undefined }) {
   return (
     <div>
       <Text size="xs">{label}</Text>

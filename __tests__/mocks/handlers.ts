@@ -54,6 +54,18 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       teamReferral: '',
       comments: '',
       currency: 'USD',
+      milestones: [
+        {
+          budget: 100000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
+          description: 'Alpha of the Metaverse',
+        },
+        {
+          budget: 200000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 2),
+          description: 'Beta of the Metaverse',
+        },
+      ],
     },
   ][id];
 };

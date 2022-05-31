@@ -3,8 +3,6 @@ import { useTranslation } from 'next-i18next';
 
 import LabelValue from '@/components/common/LabelValue';
 
-import type { FormList } from '../node_modules/@mantine/form/lib/form-list/form-list';
-
 function DetailsProject({
   projectDescription,
   fundingAmount,
@@ -12,7 +10,6 @@ function DetailsProject({
   projectLaunchDate,
   projectUrl,
   githubUrl,
-  milestones,
 }: {
   projectDescription: string | undefined;
   fundingAmount: number | undefined;
@@ -20,7 +17,6 @@ function DetailsProject({
   projectLaunchDate: Date | string | undefined;
   projectUrl: string | undefined;
   githubUrl: string | undefined;
-  milestones: FormList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null }>;
 }) {
   const { t } = useTranslation('grant');
 

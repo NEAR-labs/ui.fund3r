@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next';
 import DetailsAddress from '@/components/grant-application-details/DetailsAddress';
 import DetailsHeader from '@/components/grant-application-details/DetailsHeader';
 import DetailsMember from '@/components/grant-application-details/DetailsMember';
+import DetailsMilestones from '@/components/grant-application-details/DetailsMilestones';
 import DetailsPayments from '@/components/grant-application-details/DetailsPayments';
 import DetailsPaymentSchedule from '@/components/grant-application-details/DetailsPaymentSchedule';
 import DetailsProcessOverview from '@/components/grant-application-details/DetailsProcessOverview';
@@ -36,8 +37,8 @@ function GrantApplicationDetails({ data }: { data: GrantApplicationInterface | u
               projectLaunchDate={data?.projectLaunchDate}
               projectUrl={data?.projectUrl}
               githubUrl={data?.githubUrl}
-              milestones={data?.milestones}
             />
+            <DetailsMilestones milestones={data?.milestones} currency={data?.currency} />
             <DetailsMember github={data?.github} twitter={data?.twitter} />
             <DetailsAddress addressCountry={data?.addressCountry} addressCity={data?.addressCity} addressStreet={data?.addressStreet} addressZip={data?.addressZip} />{' '}
           </Tabs.Tab>
