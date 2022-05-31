@@ -40,7 +40,7 @@ const useGrant = (grantId: number, transactionHashes: string | string[] | undefi
     if (transactionHashes) {
       setTimeout(() => {
         validateTransactionHash();
-      }, 1);
+      }, 50);
     }
   }, [transactionHashes, validateTransactionHash]);
 
