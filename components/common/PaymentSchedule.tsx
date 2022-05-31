@@ -1,6 +1,7 @@
 import { useQuery } from 'react-query';
 import { Divider, Paper, SimpleGrid, Text, Timeline } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
+
 import { getNearUsdConvertRate } from '@/services/currencyConverter';
 
 import type { FormList } from '../../node_modules/@mantine/form/lib/form-list/form-list';

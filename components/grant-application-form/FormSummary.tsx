@@ -1,17 +1,11 @@
-// import { useQuery } from 'react-query';
 import { Title } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
 import PaymentSchedule from '@/components/common/PaymentSchedule';
-// import { getNearUsdConvertRate } from '@/services/currencyConverter';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function FormSummary({ data }: { data: any }) {
   const { t } = useTranslation('grant');
-
-  // const { data: usdNearConvertRate } = useQuery(['convertUsdToNear'], () => getNearUsdConvertRate(), {
-  //   refetchOnWindowFocus: false,
-  // });
 
   return (
     <>
