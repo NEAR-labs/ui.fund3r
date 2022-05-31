@@ -20,6 +20,7 @@ function GrantApplicationDetails({ data }: { data: GrantApplicationInterface | u
       <Grid.Col span={8}>
         <DetailsHeader
           projectName={data?.projectName}
+          email={data?.email}
           firstname={data?.firstname}
           lastname={data?.lastname}
           grantCategory={data?.grantCategory}
