@@ -112,8 +112,8 @@ export interface GrantApplicationInterface {
   dateDenial?: Date;
   dateApproval?: Date;
   dateKycCompletion?: Date;
-  dateKycApproved?: Date;
   dateKycDenied?: Date;
+  dateKycApproved?: Date;
   dateAgreementSignature?: Date;
   dateFirstPaymentSent?: Date;
   dateOnboardingCompletion?: Date;
