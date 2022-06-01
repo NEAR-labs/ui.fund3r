@@ -1,6 +1,7 @@
 import { Button, Paper, Text } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
+import StatusActionEvaluated from '@/components/grant-application-details/StatusActionEvaluated';
 import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 
 // eslint-disable-next-line max-lines-per-function
@@ -93,12 +94,7 @@ function DetailsStatusActions() {
   }
 
   if (status === EVALUATED) {
-    return (
-      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-        <Text mb="sm">{t('details.status-actions.evaluated.message')}</Text>
-        <Button color="violet">{t('details.status-actions.evaluated.button')}</Button>
-      </Paper>
-    );
+    return <StatusActionEvaluated />;
   }
 
   if (status === FULLY_SUBMITTED) {
