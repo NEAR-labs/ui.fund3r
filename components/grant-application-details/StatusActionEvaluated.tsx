@@ -60,7 +60,7 @@ function StatusActionEvaluated({
   });
 
   if (isLoading) {
-    return 'Please wait';
+    return <div>Please wait</div>;
   }
 
   return (

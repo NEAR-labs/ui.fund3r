@@ -11,12 +11,14 @@ function DetailsStatusActions({
   email,
   firstname,
   lastname,
+  dateInterview,
   setGrant,
 }: {
   id: number | undefined;
   email: string | undefined;
   firstname: string | undefined;
   lastname: string | undefined;
+  dateInterview: Date | string | undefined;
   setGrant: (data: GrantApplicationInterface) => void;
 }) {
   const { t } = useTranslation('grant');
@@ -102,6 +104,7 @@ function DetailsStatusActions({
     return (
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
         <Text>{t('details.status-actions.interview-scheduled.title')}</Text>
+        <Text>{typeof dateInterview === 'string' ? dateInterview : dateInterview?.toISOString()}</Text>
       </Paper>
     );
   }
