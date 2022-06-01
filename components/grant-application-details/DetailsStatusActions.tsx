@@ -7,7 +7,16 @@ function DetailsStatusActions() {
   const { t } = useTranslation('grant');
   const { status } = useGrantStatus();
 
-  const { FULLY_SUBMITTED, EVALUATED, INTERVIEW_SCHEDULED, INTERVIEW_COMPLETED, DENIED } = STATUS;
+  const { FULLY_SUBMITTED, EVALUATED, INTERVIEW_SCHEDULED, INTERVIEW_COMPLETED, DENIED, APPROVED } = STATUS;
+
+  if (status === APPROVED) {
+    return (
+      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+        <Text mb="sm">{t('details.status-actions.approved.message')}</Text>
+        <Button color="violet">{t('details.status-actions.approved.button')}</Button>
+      </Paper>
+    );
+  }
 
   if (status === DENIED) {
     return (

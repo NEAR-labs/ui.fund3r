@@ -57,7 +57,7 @@ const useGrantStatus = () => {
   }
 
   if (grantApproved) {
-    return { status: STATUS.APPROVED, step: 3 };
+    return { status: STATUS.APPROVED, step: 2 };
   }
 
   if (grantDenied) {

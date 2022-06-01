@@ -34,7 +34,7 @@ function DetailsProcessOverview() {
               {t('details.process-overview.evaluation-approval.description')}
             </Text>
           </Timeline.Item>
-          <Timeline.Item bullet={getIcon(2)}>
+          <Timeline.Item bullet={getIcon(2)} title={t('details.process-overview.acceptance.title')}>
             <Text color="dimmed" size="sm">
               {t('details.process-overview.acceptance.description')}
             </Text>

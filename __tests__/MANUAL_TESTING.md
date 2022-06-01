@@ -29,6 +29,8 @@ First complete the full form process then go to these URLs
 
 - http://localhost:3000/grants/t3st.testnet-5 | Should show "Your application has been denied. Please, check comments and submit your application again." and the comments
 
+- http://localhost:3000/grants/t3st.testnet-6 | Should show "Your funding has been approved, pleace verivy your account." and a "Verify account" button and "Acceptance or Denial Notification" should be checked
+
 ## API Implementation informations
 
 - Check `__tests__/mocks/handlers.ts` to see how the API should behave
