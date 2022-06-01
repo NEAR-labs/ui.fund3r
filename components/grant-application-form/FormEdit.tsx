@@ -174,7 +174,7 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
   const error = isSavingError || isSubmitingError;
 
   return (
-    <Grid gutter="xl" mb="xl">
+    <Grid gutter={48} mb="xl">
       <Grid.Col span={8}>
         <div>
           <Title order={1} mb={24}>

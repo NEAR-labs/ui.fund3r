@@ -7,7 +7,7 @@ import { getNearUsdConvertRate } from '@/services/currencyConverter';
 
 import type { FormList } from '../../node_modules/@mantine/form/lib/form-list/form-list';
 
-function GrantMilestoneOverview({
+function PaymentSchedule({
   milestones,
   fundingAmount,
   currency = DEFAULT_CURRENCY,
@@ -28,7 +28,8 @@ function GrantMilestoneOverview({
     const { budget, deliveryDate } = milestone;
 
     return (
-      <Timeline.Item title={t('details.project.milestone.title', { number: index + 1 })}>
+      // eslint-disable-next-line react/no-array-index-key
+      <Timeline.Item title={t('details.project.milestone.title', { number: index + 1 })} key={index}>
         <SimpleGrid cols={2}>
           <Text color="dimmed" size="sm">
             {typeof deliveryDate === 'number' || typeof deliveryDate === 'string' ? deliveryDate : deliveryDate?.toDateString()}
@@ -83,4 +84,4 @@ function GrantMilestoneOverview({
   );
 }
 
-export default GrantMilestoneOverview;
+export default PaymentSchedule;

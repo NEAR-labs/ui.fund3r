@@ -33,7 +33,7 @@ function GrantApplication() {
   const numberId = parseInt(id as string, 10);
 
   const { grant, setGrant, isLoading } = useGrant(numberId, transactionHashes);
-  const { status } = useGrantStatus();
+  const { status, step } = useGrantStatus();
 
   const { EDIT, OFFCHAIN_SUBMITTED, FULLY_SUBMITTED } = STATUS;
 
@@ -47,10 +47,10 @@ function GrantApplication() {
           {isLoading ? (
             <LoadingAnimation />
           ) : (
-            <Container>
+            <Container size="lg">
               {status === EDIT && <GrantApplicationForm data={grant} setData={setGrant} />}
               {status === OFFCHAIN_SUBMITTED && <GrantApplicationProposalSubmission data={grant} />}
-              {status === FULLY_SUBMITTED && <GrantApplicationDetails data={grant} />}
+              {(status === FULLY_SUBMITTED || step >= 1) && <GrantApplicationDetails data={grant} />}
             </Container>
           )}
         </NearAuthenticationGuardWithLoginRedirection>

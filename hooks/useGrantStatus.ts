@@ -16,6 +16,7 @@ const STATUS = {
   KYC_DENIED: 'KYC_DENIED',
   AGREEMENT_SIGNED: 'AGREEMENT_SIGNED',
   FIRST_PAYMENT_SENT: 'FIRST_PAYMENT_SENT',
+  ONBOARDING_COMPLETED: 'ONBOARDING_COMPLETED',
 };
 
 const useGrantStatus = () => {
@@ -39,45 +40,54 @@ const useGrantStatus = () => {
   const grantKycDenied = grantKycCompleted && grant.dateKycDenied;
   const grantAgreementSigned = grantKycApproved && grant.dateAgreementSignature;
   const grantFirstPaymentSent = grantAgreementSigned && grant.dateFirstPaymentSent;
+  const grantOnboardingCompleted = grantFirstPaymentSent && grant?.dateOnboardingCompletion;
+
+  if (grantOnboardingCompleted) {
+    return { status: STATUS.ONBOARDING_COMPLETED, step: 6 };
+  }
 
   if (grantFirstPaymentSent) {
-    return { status: STATUS.FULLY_SUBMITTED, step: 6 };
+    return { status: STATUS.FIRST_PAYMENT_SENT, step: 5, pendingStep: 6 };
   }
 
   if (grantAgreementSigned) {
-    return { status: STATUS.AGREEMENT_SIGNED, step: 5 };
+    return { status: STATUS.AGREEMENT_SIGNED, step: 4, pendingStep: 5 };
+  }
+
+  if (grantKycApproved) {
+    return { status: STATUS.KYC_APPROVED, step: 3 };
   }
 
   if (grantKycDenied) {
-    return { status: STATUS.KYC_DENIED, step: 4 };
+    return { status: STATUS.KYC_DENIED, step: 2 };
   }
 
   if (grantKycCompleted) {
-    return { status: STATUS.KYC_COMPLETED, step: 4 };
+    return { status: STATUS.KYC_COMPLETED, step: 2, pendingStep: 3 };
   }
 
   if (grantApproved) {
-    return { status: STATUS.APPROVED, step: 3 };
+    return { status: STATUS.APPROVED, step: 2 };
   }
 
   if (grantDenied) {
-    return { status: STATUS.DENIED, step: 3 };
+    return { status: STATUS.DENIED, step: 1, pendingStep: 2 };
   }
 
   if (grantInterviewCompleted) {
-    return { status: STATUS.INTERVIEW_COMPLETED, step: 2 };
+    return { status: STATUS.INTERVIEW_COMPLETED, step: 1, pendingStep: 2 };
   }
 
   if (grantInterviewScheduled) {
-    return { status: STATUS.INTERVIEW_SCHEDULED, step: 2 };
+    return { status: STATUS.INTERVIEW_SCHEDULED, step: 1 };
   }
 
   if (grantEvaluated) {
-    return { status: STATUS.EVALUATED, step: 2 };
+    return { status: STATUS.EVALUATED, step: 1 };
   }
 
   if (grantFullySubmitted) {
-    return { status: STATUS.FULLY_SUBMITTED, step: 1 };
+    return { status: STATUS.FULLY_SUBMITTED, step: 0 };
   }
 
   if (grantOnlySubmittedOffChain) {

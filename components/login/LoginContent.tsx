@@ -10,7 +10,7 @@ function LoginContent() {
   const { t } = useTranslation('login');
 
   return (
-    <Container>
+    <Container size="lg">
       <Center className={styles.container}>
         <Text align="center">
           <Title order={1} mb={16}>
