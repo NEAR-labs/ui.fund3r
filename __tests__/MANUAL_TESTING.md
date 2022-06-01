@@ -27,6 +27,8 @@ First complete the full form process then go to these URLs
 
 - http://localhost:3000/grants/t3st.testnet-4 | Should show "You have successfully completed the interview" and "You will receive a follow up email to confirm your application has been approved. If you have questions that aren’t answered on near.org/grants, please contact us via email at grants@near.foundation." with "Evaluation & Approval" checked and "Acceptance or Denial Notification" with a logo pending
 
+- http://localhost:3000/grants/t3st.testnet-5 | Should show "Your application has been denied. Please, check comments and submit your application again." and the comments
+
 ## API Implementation informations
 
 - Check `__tests__/mocks/handlers.ts` to see how the API should behave

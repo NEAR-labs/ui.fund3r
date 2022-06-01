@@ -61,7 +61,7 @@ const useGrantStatus = () => {
   }
 
   if (grantDenied) {
-    return { status: STATUS.DENIED, step: 3 };
+    return { status: STATUS.DENIED, step: 1, pendingStep: 2 };
   }
 
   if (grantInterviewCompleted) {
