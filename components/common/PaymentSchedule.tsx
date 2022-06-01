@@ -9,7 +9,7 @@ import type { FormList } from '../../node_modules/@mantine/form/lib/form-list/fo
 function GrantMilestoneOverview({
   milestones,
   fundingAmount,
-  currency,
+  currency = 'USD',
   projectLaunchDate,
 }: {
   milestones: FormList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null }> | undefined;
