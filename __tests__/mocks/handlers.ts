@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { rest } from 'msw';
 
 import { GrantApplicationInterface, GrantCategories, GrantTypes, OpenSourceStates, ProjectStatus, RaisingRoundStatus, WorkingTypes } from '@/types/GrantApplicationInterface';
@@ -333,6 +334,32 @@ const handlers = [
     };
 
     localStorage.setItem('fund3r-mock-near-tx', 'true');
+
+    return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
+  }),
+
+  // This endpoint will save the interview url & return date of interview and other info updated
+  rest.put<never, any>(`${BASE_URL}/grants/:id/calendly/interview`, (_req, res, ctx) => {
+    const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
+    const { proposalNearTransactionHash } = _req.body;
+
+    const dummyDataString = localStorage.getItem('fund3r-mock-data');
+    const dummyData = dummyDataString ? JSON.parse(dummyDataString) : {};
+
+    const nearFundingAmount: BigInt = BigInt((dummyData.fundingAmount / 5.95) * 10 ** 24);
+
+    const response = {
+      ...basicData,
+      dateSubmission: new Date(),
+      projectName: dummyData.projectName || 'Mocked Dummy Project',
+      projectDescription: dummyData.projectDescription || 'Mocked Dummy Project Description',
+      nearFundingAmount: nearFundingAmount.toString(),
+      proposalNearTransactionHash,
+      isNearProposalValid: true,
+      dateEvaluation: new Date(),
+      dateInterviewScheduled: new Date(),
+      dateInterview: new Date(),
+    };
 
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),
