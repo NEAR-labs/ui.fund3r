@@ -65,19 +65,19 @@ const useGrantStatus = () => {
   }
 
   if (grantInterviewCompleted) {
-    return { status: STATUS.INTERVIEW_COMPLETED, step: 2 };
+    return { status: STATUS.INTERVIEW_COMPLETED, step: 1 };
   }
 
   if (grantInterviewScheduled) {
-    return { status: STATUS.INTERVIEW_SCHEDULED, step: 2 };
+    return { status: STATUS.INTERVIEW_SCHEDULED, step: 1 };
   }
 
   if (grantEvaluated) {
-    return { status: STATUS.EVALUATED, step: 2 };
+    return { status: STATUS.EVALUATED, step: 1 };
   }
 
   if (grantFullySubmitted) {
-    return { status: STATUS.FULLY_SUBMITTED, step: 1 };
+    return { status: STATUS.FULLY_SUBMITTED, step: 0 };
   }
 
   if (grantOnlySubmittedOffChain) {

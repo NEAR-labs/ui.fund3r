@@ -97,6 +97,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       isNearProposalValid: true,
       dateEvaluation: new Date(),
       dateInterviewScheduled: new Date(),
+      dateInterview: new Date(),
     },
     {
       ...fullProjectData,
@@ -107,6 +108,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateEvaluation: new Date(),
       dateInterviewScheduled: new Date(),
       dateInterview: new Date(),
+      dateInterviewCompletionConfirmation: new Date(),
     },
     {
       ...fullProjectData,
@@ -118,6 +120,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateInterviewScheduled: new Date(),
       dateInterview: new Date(),
       dateInterviewCompletionConfirmation: new Date(),
+      dateDenial: new Date(),
     },
     {
       ...fullProjectData,
@@ -129,7 +132,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateInterviewScheduled: new Date(),
       dateInterview: new Date(),
       dateInterviewCompletionConfirmation: new Date(),
-      dateDenial: new Date(),
+      dateApproval: new Date(),
     },
     {
       ...fullProjectData,
@@ -142,6 +145,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateInterview: new Date(),
       dateInterviewCompletionConfirmation: new Date(),
       dateApproval: new Date(),
+      dateKycCompletion: new Date(),
     },
     {
       ...fullProjectData,
@@ -155,6 +159,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateInterviewCompletionConfirmation: new Date(),
       dateApproval: new Date(),
       dateKycCompletion: new Date(),
+      dateKycDenied: new Date(),
     },
     {
       ...fullProjectData,
@@ -168,7 +173,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateInterviewCompletionConfirmation: new Date(),
       dateApproval: new Date(),
       dateKycCompletion: new Date(),
-      dateKycDenied: new Date(),
+      dateKycApproved: new Date(),
     },
     {
       ...fullProjectData,
@@ -183,6 +188,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateApproval: new Date(),
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
+      dateAgreementSignature: new Date(),
     },
     {
       ...fullProjectData,
@@ -198,26 +204,11 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
       dateAgreementSignature: new Date(),
-    },
-    {
-      ...fullProjectData,
-      id: 12,
-      nearId: accountId,
-      dateSubmission: new Date(),
-      isNearProposalValid: true,
-      dateEvaluation: new Date(),
-      dateInterviewScheduled: new Date(),
-      dateInterview: new Date(),
-      dateInterviewCompletionConfirmation: new Date(),
-      dateApproval: new Date(),
-      dateKycCompletion: new Date(),
-      dateKycApproved: new Date(),
-      dateAgreementSignature: new Date(),
       dateFirstPaymentSent: new Date(),
     },
     {
       ...fullProjectData,
-      id: 13,
+      id: 12,
       nearId: accountId,
       dateSubmission: new Date(),
       isNearProposalValid: true,
