@@ -8,7 +8,16 @@ function DetailsStatusActions() {
   const { t } = useTranslation('grant');
   const { status } = useGrantStatus();
 
-  const { FULLY_SUBMITTED, EVALUATED, INTERVIEW_SCHEDULED, INTERVIEW_COMPLETED, DENIED, APPROVED, KYC_COMPLETED, KYC_DENIED, KYC_APPROVED, AGREEMENT_SIGNED } = STATUS;
+  const { FULLY_SUBMITTED, EVALUATED, INTERVIEW_SCHEDULED, INTERVIEW_COMPLETED, DENIED, APPROVED, KYC_COMPLETED, KYC_DENIED, KYC_APPROVED, AGREEMENT_SIGNED, FIRST_PAYMENT_SENT } =
+    STATUS;
+
+  if (status === FIRST_PAYMENT_SENT) {
+    return (
+      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+        <Text>{t('details.status-actions.first-payment-sent.message')}</Text>
+      </Paper>
+    );
+  }
 
   if (status === AGREEMENT_SIGNED) {
     return (

@@ -39,6 +39,10 @@ First complete the full form process then go to these URLs
 
 - http://localhost:3000/grants/t3st.testnet-10 | Should show "You successfully signed the agreement and we are ready to payouts you up front part of grant." and Signing of agreement should be checked and Upfront payout should be pending
 
+- http://localhost:3000/grants/t3st.testnet-11 | Should show "We have successfully completed the first payment. We are waiting for you at the onboarding meeting." and Upfront payout should be checked and Onboarding pending
+
+- http://localhost:3000/grants/t3st.testnet-12
+
 ## API Implementation informations
 
 - Check `__tests__/mocks/handlers.ts` to see how the API should behave

@@ -16,6 +16,7 @@ const STATUS = {
   KYC_DENIED: 'KYC_DENIED',
   AGREEMENT_SIGNED: 'AGREEMENT_SIGNED',
   FIRST_PAYMENT_SENT: 'FIRST_PAYMENT_SENT',
+  ONBOARDING_COMPLETED: 'ONBOARDING_COMPLETED',
 };
 
 const useGrantStatus = () => {
@@ -39,9 +40,14 @@ const useGrantStatus = () => {
   const grantKycDenied = grantKycCompleted && grant.dateKycDenied;
   const grantAgreementSigned = grantKycApproved && grant.dateAgreementSignature;
   const grantFirstPaymentSent = grantAgreementSigned && grant.dateFirstPaymentSent;
+  const grantOnboardingCompleted = grantFirstPaymentSent && grant?.dateOnboardingCompletion;
+
+  if (grantOnboardingCompleted) {
+    return { status: STATUS.ONBOARDING_COMPLETED, step: 6 };
+  }
 
   if (grantFirstPaymentSent) {
-    return { status: STATUS.FULLY_SUBMITTED, step: 5 };
+    return { status: STATUS.FIRST_PAYMENT_SENT, step: 5, pendingStep: 6 };
   }
 
   if (grantAgreementSigned) {
