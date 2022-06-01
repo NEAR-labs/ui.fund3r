@@ -52,10 +52,10 @@ function StatusActionEvaluated({
 
   useCalendlyEventListener({
     onEventScheduled: (e) => {
-      console.log(e);
-      console.log(e.data.payload.event.uri);
       setEventUrl(e.data.payload.event.uri);
-      refetch();
+      setTimeout(() => {
+        refetch();
+      }, 1);
     },
   });
 
