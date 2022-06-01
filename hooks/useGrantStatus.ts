@@ -65,7 +65,7 @@ const useGrantStatus = () => {
   }
 
   if (grantInterviewCompleted) {
-    return { status: STATUS.INTERVIEW_COMPLETED, step: 1 };
+    return { status: STATUS.INTERVIEW_COMPLETED, step: 1, pendingStep: 2 };
   }
 
   if (grantInterviewScheduled) {
