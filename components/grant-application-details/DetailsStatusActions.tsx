@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next';
 
 import StatusActionEvaluated from '@/components/grant-application-details/StatusActionEvaluated';
 import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
+import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
 // eslint-disable-next-line max-lines-per-function
 function DetailsStatusActions({
@@ -10,11 +11,13 @@ function DetailsStatusActions({
   email,
   firstname,
   lastname,
+  setGrant,
 }: {
   id: number | undefined;
   email: string | undefined;
   firstname: string | undefined;
   lastname: string | undefined;
+  setGrant: (data: GrantApplicationInterface) => void;
 }) {
   const { t } = useTranslation('grant');
   const { status } = useGrantStatus();
@@ -104,7 +107,7 @@ function DetailsStatusActions({
   }
 
   if (status === EVALUATED) {
-    return <StatusActionEvaluated email={email} firstname={firstname} lastname={lastname} />;
+    return <StatusActionEvaluated id={id} email={email} firstname={firstname} lastname={lastname} setGrant={setGrant} />;
   }
 
   if (status === FULLY_SUBMITTED) {

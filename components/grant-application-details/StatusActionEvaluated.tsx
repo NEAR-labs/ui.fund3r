@@ -1,33 +1,67 @@
+import { useState } from 'react';
 import { PopupButton, useCalendlyEventListener } from 'react-calendly';
 import { useQuery } from 'react-query';
 import { Paper, Text } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
+import useAccountSignature from '@/hooks/useAccountSignature';
+import useSigner from '@/modules/near-api-react/hooks/useSigner';
 import { submitCalendlyUrl } from '@/services/apiService';
+import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
 function StatusActionEvaluated({
   id,
   email,
   firstname,
   lastname,
+  setGrant,
 }: {
   id: number | undefined;
   email: string | undefined;
   firstname: string | undefined;
   lastname: string | undefined;
+  setGrant: (data: GrantApplicationInterface) => void;
 }) {
   const { t } = useTranslation('grant');
-
+  const { signStringMessage } = useSigner();
+  const apiSignature = useAccountSignature();
   const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL;
-
-  useCalendlyEventListener({
-    onEventScheduled: (e) => console.log(e.data),
-  });
+  const [eventUrl, setEventUrl] = useState(null);
 
   const prefilledData = {
     email,
     name: `${firstname} ${lastname}`,
   };
+
+  const { isLoading, refetch } = useQuery(
+    ['submit-calendly-url', apiSignature, id, eventUrl],
+    () => {
+      return submitCalendlyUrl(apiSignature, { grantId: id, calendlyUrl: eventUrl, signStringMessage });
+    },
+    {
+      refetchOnWindowFocus: false,
+      enabled: false,
+      onSuccess: (updatedGrantData) => {
+        console.log(updatedGrantData);
+        if (updatedGrantData) {
+          setGrant(updatedGrantData);
+        }
+      },
+    },
+  );
+
+  useCalendlyEventListener({
+    onEventScheduled: (e) => {
+      console.log(e);
+      console.log(e.data.payload.event.uri);
+      setEventUrl(e.data.payload.event.uri);
+      refetch();
+    },
+  });
+
+  if (isLoading) {
+    return 'Please wait';
+  }
 
   return (
     <Paper shadow="sm" p="lg" radius="lg" mt="xl">

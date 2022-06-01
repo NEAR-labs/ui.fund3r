@@ -160,7 +160,7 @@ const submitCalendlyUrl = async (
     signStringMessage,
   }: {
     grantId: number | undefined;
-    calendlyUrl: string | undefined;
+    calendlyUrl: string | null | undefined;
     signStringMessage: (stringMessage: string) => Promise<Uint8Array | undefined | null>;
   },
 ): Promise<GrantApplicationInterface | null> => {
@@ -171,7 +171,7 @@ const submitCalendlyUrl = async (
   const signedCalendlyUrl = calendlyUrl && signStringMessage(calendlyUrl);
 
   const { data } = await axios.put(
-    `${API_HOST}/grants/${grantId}/near-transactions`,
+    `${API_HOST}/grants/${grantId}/calendly/interview`,
     {
       grantId,
       calendlyUrl,

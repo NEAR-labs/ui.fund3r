@@ -12,7 +12,7 @@ import DetailsProject from '@/components/grant-application-details/DetailsProjec
 import DetailsStatusActions from '@/components/grant-application-details/DetailsStatusActions';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
-function GrantApplicationDetails({ data }: { data: GrantApplicationInterface | undefined | null }) {
+function GrantApplicationDetails({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
 
   return (
@@ -28,7 +28,7 @@ function GrantApplicationDetails({ data }: { data: GrantApplicationInterface | u
           openSourceState={data?.openSourceState}
         />
         <Space h="xs" />
-        <DetailsStatusActions id={data?.id} email={data?.email} firstname={data?.firstname} lastname={data?.lastname} />
+        <DetailsStatusActions id={data?.id} email={data?.email} firstname={data?.firstname} lastname={data?.lastname} setGrant={setData} />
         <Space h="xl" />
         <Tabs color="violet" tabPadding="xl" mt="xl">
           <Tabs.Tab label={t('details.project.tab')}>
