@@ -8,7 +8,24 @@ function DetailsStatusActions() {
   const { t } = useTranslation('grant');
   const { status } = useGrantStatus();
 
-  const { FULLY_SUBMITTED, EVALUATED, INTERVIEW_SCHEDULED, INTERVIEW_COMPLETED, DENIED, APPROVED, KYC_COMPLETED, KYC_DENIED } = STATUS;
+  const { FULLY_SUBMITTED, EVALUATED, INTERVIEW_SCHEDULED, INTERVIEW_COMPLETED, DENIED, APPROVED, KYC_COMPLETED, KYC_DENIED, KYC_APPROVED, AGREEMENT_SIGNED } = STATUS;
+
+  if (status === AGREEMENT_SIGNED) {
+    return (
+      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+        <Text>{t('details.status-actions.agreement-signed.message')}</Text>
+      </Paper>
+    );
+  }
+
+  if (status === KYC_APPROVED) {
+    return (
+      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+        <Text mb="sm">{t('details.status-actions.kyc-approved.message')}</Text>
+        <Button color="violet">{t('details.status-actions.kyc-approved.button')}</Button>
+      </Paper>
+    );
+  }
 
   if (status === KYC_DENIED) {
     return (
@@ -40,7 +57,7 @@ function DetailsStatusActions() {
   if (status === DENIED) {
     return (
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-        <Text mb="sm">{t('details.status-actions.denied.message')}</Text>
+        <Text>{t('details.status-actions.denied.message')}</Text>
       </Paper>
     );
   }
@@ -61,7 +78,7 @@ function DetailsStatusActions() {
   if (status === INTERVIEW_SCHEDULED) {
     return (
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-        <Text mb="sm">{t('details.status-actions.interview-scheduled.title')}</Text>
+        <Text>{t('details.status-actions.interview-scheduled.title')}</Text>
       </Paper>
     );
   }

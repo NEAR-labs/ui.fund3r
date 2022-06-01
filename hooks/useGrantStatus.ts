@@ -41,11 +41,15 @@ const useGrantStatus = () => {
   const grantFirstPaymentSent = grantAgreementSigned && grant.dateFirstPaymentSent;
 
   if (grantFirstPaymentSent) {
-    return { status: STATUS.FULLY_SUBMITTED, step: 6 };
+    return { status: STATUS.FULLY_SUBMITTED, step: 5 };
   }
 
   if (grantAgreementSigned) {
-    return { status: STATUS.AGREEMENT_SIGNED, step: 5 };
+    return { status: STATUS.AGREEMENT_SIGNED, step: 4, pendingStep: 5 };
+  }
+
+  if (grantKycApproved) {
+    return { status: STATUS.KYC_APPROVED, step: 3 };
   }
 
   if (grantKycDenied) {

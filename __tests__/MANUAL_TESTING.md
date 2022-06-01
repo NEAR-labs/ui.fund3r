@@ -35,6 +35,10 @@ First complete the full form process then go to these URLs
 
 - http://localhost:3000/grants/t3st.testnet-8 | Should show "Sorry, the KYC has been denied" and a button button and "Acceptance or Denial Notification" should be checked
 
+- http://localhost:3000/grants/t3st.testnet-9 | Should show "Your account has been approved. To continue please sign the grant agreement." and a sign agreement button, KYC should be checked
+
+- http://localhost:3000/grants/t3st.testnet-10 | Should show "You successfully signed the agreement and we are ready to payouts you up front part of grant." and Signing of agreement should be checked and Upfront payout should be pending
+
 ## API Implementation informations
 
 - Check `__tests__/mocks/handlers.ts` to see how the API should behave

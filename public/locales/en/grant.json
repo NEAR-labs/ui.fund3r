@@ -309,7 +309,7 @@
         "description": "We will send you an email once your account has been confirmed. It can take a few days..."
       },
       "kyc-approved": {
-        "title": "Your account has been approved. To continue please sign the grant agreement.",
+        "message": "Your account has been approved. To continue please sign the grant agreement.",
         "button": "Sign agreement"
       },
       "kyc-denied": {
