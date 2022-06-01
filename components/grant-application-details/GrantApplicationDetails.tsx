@@ -28,7 +28,7 @@ function GrantApplicationDetails({ data }: { data: GrantApplicationInterface | u
           openSourceState={data?.openSourceState}
         />
         <Space h="xs" />
-        <DetailsStatusActions />
+        <DetailsStatusActions email={data?.email} firstname={data?.firstname} lastname={data?.lastname} />
         <Space h="xl" />
         <Tabs color="violet" tabPadding="xl" mt="xl">
           <Tabs.Tab label={t('details.project.tab')}>

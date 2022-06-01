@@ -5,7 +5,7 @@ import StatusActionEvaluated from '@/components/grant-application-details/Status
 import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 
 // eslint-disable-next-line max-lines-per-function
-function DetailsStatusActions() {
+function DetailsStatusActions({ email, firstname, lastname }: { email: string | undefined; firstname: string | undefined; lastname: string | undefined }) {
   const { t } = useTranslation('grant');
   const { status } = useGrantStatus();
 
@@ -94,7 +94,7 @@ function DetailsStatusActions() {
   }
 
   if (status === EVALUATED) {
-    return <StatusActionEvaluated />;
+    return <StatusActionEvaluated email={email} firstname={firstname} lastname={lastname} />;
   }
 
   if (status === FULLY_SUBMITTED) {
