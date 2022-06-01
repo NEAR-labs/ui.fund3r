@@ -5,7 +5,17 @@ import StatusActionEvaluated from '@/components/grant-application-details/Status
 import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 
 // eslint-disable-next-line max-lines-per-function
-function DetailsStatusActions({ email, firstname, lastname }: { email: string | undefined; firstname: string | undefined; lastname: string | undefined }) {
+function DetailsStatusActions({
+  id,
+  email,
+  firstname,
+  lastname,
+}: {
+  id: number | undefined;
+  email: string | undefined;
+  firstname: string | undefined;
+  lastname: string | undefined;
+}) {
   const { t } = useTranslation('grant');
   const { status } = useGrantStatus();
 
