@@ -31,6 +31,8 @@ First complete the full form process then go to these URLs
 
 - http://localhost:3000/grants/t3st.testnet-6 | Should show "Your funding has been approved, pleace verivy your account." and a "Verify account" button and "Acceptance or Denial Notification" should be checked
 
+- http://localhost:3000/grants/t3st.testnet-7 | Should show "Thank you! We are currently checking your data" and its description, "Acceptance or Denial Notification" should be checked and "KYC" have a pending icon
+
 ## API Implementation informations
 
 - Check `__tests__/mocks/handlers.ts` to see how the API should behave

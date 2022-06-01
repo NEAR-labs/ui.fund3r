@@ -53,7 +53,7 @@ const useGrantStatus = () => {
   }
 
   if (grantKycCompleted) {
-    return { status: STATUS.KYC_COMPLETED, step: 4 };
+    return { status: STATUS.KYC_COMPLETED, step: 2, pendingStep: 3 };
   }
 
   if (grantApproved) {

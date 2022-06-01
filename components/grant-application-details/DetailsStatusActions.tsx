@@ -7,7 +7,16 @@ function DetailsStatusActions() {
   const { t } = useTranslation('grant');
   const { status } = useGrantStatus();
 
-  const { FULLY_SUBMITTED, EVALUATED, INTERVIEW_SCHEDULED, INTERVIEW_COMPLETED, DENIED, APPROVED } = STATUS;
+  const { FULLY_SUBMITTED, EVALUATED, INTERVIEW_SCHEDULED, INTERVIEW_COMPLETED, DENIED, APPROVED, KYC_COMPLETED } = STATUS;
+
+  if (status === KYC_COMPLETED) {
+    return (
+      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+        <Text mb="sm">{t('details.status-actions.kyc-completed.title')}</Text>
+        <Text>{t('details.status-actions.kyc-completed.description')}</Text>
+      </Paper>
+    );
+  }
 
   if (status === APPROVED) {
     return (
