@@ -152,7 +152,7 @@ const validateNearTransactionHash = async (
   return data;
 };
 
-const sendCalendlyUrl = async (
+const submitCalendlyUrl = async (
   signature: NearApiSignatureInterface | undefined,
   {
     grantId,
@@ -198,7 +198,7 @@ export {
   getAllGrantApplicationsOfUser,
   getGrantApplication,
   saveGrantApplicationAsDraft,
-  sendCalendlyUrl,
+  submitCalendlyUrl,
   submitGrantApplication,
   validateNearTransactionHash,
   // submitMilestoneData,
