@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { PopupButton, useCalendlyEventListener } from 'react-calendly';
 import { useQuery } from 'react-query';
-import { Paper, Text } from '@mantine/core';
+import { Button, Paper, Text } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
 import useAccountSignature from '@/hooks/useAccountSignature';
@@ -69,7 +69,14 @@ function StatusActionEvaluated({
     <Paper shadow="sm" p="lg" radius="lg" mt="xl">
       <Text mb="sm">{t('details.status-actions.evaluated.message')}</Text>
       {typeof window !== 'undefined' && calendlyUrl && (
-        <PopupButton url={calendlyUrl} rootElement={document.getElementById('__next') as HTMLElement} text={t('details.status-actions.evaluated.button')} prefill={prefilledData} />
+        <Button<typeof PopupButton>
+          color="violet"
+          component={PopupButton}
+          url={calendlyUrl}
+          rootElement={document.getElementById('__next') as HTMLElement}
+          text={t('details.status-actions.evaluated.button')}
+          prefill={prefilledData}
+        />
       )}
     </Paper>
   );
