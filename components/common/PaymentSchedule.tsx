@@ -2,6 +2,7 @@ import { useQuery } from 'react-query';
 import { Divider, Paper, SimpleGrid, Text, Timeline } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
+import DEFAULT_CURRENCY from '@/config/currency';
 import { getNearUsdConvertRate } from '@/services/currencyConverter';
 
 import type { FormList } from '../../node_modules/@mantine/form/lib/form-list/form-list';
@@ -9,7 +10,7 @@ import type { FormList } from '../../node_modules/@mantine/form/lib/form-list/fo
 function GrantMilestoneOverview({
   milestones,
   fundingAmount,
-  currency = 'USD',
+  currency = DEFAULT_CURRENCY,
   projectLaunchDate,
 }: {
   milestones: FormList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null }> | undefined;
@@ -70,7 +71,7 @@ function GrantMilestoneOverview({
       <SimpleGrid cols={2}>
         <Text weight="bold">{t('details.payment-schedule.total')}</Text>
         <Text color="dimmed" size="sm" align="right">
-          {fundingAmount} {currency}
+          {fundingAmount || 0} {currency}
         </Text>
         <div>&nbsp;</div>
         <Text color="dimmed" size="sm" align="right">
