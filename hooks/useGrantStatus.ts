@@ -49,7 +49,7 @@ const useGrantStatus = () => {
   }
 
   if (grantKycDenied) {
-    return { status: STATUS.KYC_DENIED, step: 4 };
+    return { status: STATUS.KYC_DENIED, step: 2 };
   }
 
   if (grantKycCompleted) {

@@ -3,11 +3,21 @@ import { useTranslation } from 'next-i18next';
 
 import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 
+// eslint-disable-next-line max-lines-per-function
 function DetailsStatusActions() {
   const { t } = useTranslation('grant');
   const { status } = useGrantStatus();
 
-  const { FULLY_SUBMITTED, EVALUATED, INTERVIEW_SCHEDULED, INTERVIEW_COMPLETED, DENIED, APPROVED, KYC_COMPLETED } = STATUS;
+  const { FULLY_SUBMITTED, EVALUATED, INTERVIEW_SCHEDULED, INTERVIEW_COMPLETED, DENIED, APPROVED, KYC_COMPLETED, KYC_DENIED } = STATUS;
+
+  if (status === KYC_DENIED) {
+    return (
+      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+        <Text mb="sm">{t('details.status-actions.kyc-denied.message')}</Text>
+        <Button color="violet">{t('details.status-actions.kyc-denied.button')}</Button>
+      </Paper>
+    );
+  }
 
   if (status === KYC_COMPLETED) {
     return (
