@@ -1,3 +1,4 @@
+import React from 'react';
 import { Divider, Group, Space, Title } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
@@ -20,7 +21,8 @@ function DetailsMilestones({
 
   const milestonesComponents = milestones.map((milestone, index) => {
     return (
-      <>
+      // eslint-disable-next-line react/no-array-index-key
+      <React.Fragment key={index}>
         <Divider mt="xl" mb="xl" />
         <div>
           <Title order={4} mb="lg">
@@ -37,7 +39,7 @@ function DetailsMilestones({
           <Space h="md" />
           <LabelValue label={t('details.project.milestone.description')} value={milestone.description} />
         </div>
-      </>
+      </React.Fragment>
     );
   });
 
