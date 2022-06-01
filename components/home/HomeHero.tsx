@@ -9,7 +9,7 @@ function HomeHero() {
   const { t } = useTranslation('home');
 
   return (
-    <Container>
+    <Container size="lg">
       <SimpleGrid cols={2} className={styles.hero}>
         <Center>
           <div>

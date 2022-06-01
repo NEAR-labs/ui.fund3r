@@ -62,7 +62,7 @@ function Navbar() {
 
   return (
     <Header height={60} mb="xl">
-      <Container className={classes.header}>
+      <Container className={classes.header} size="lg">
         <Link href="/" passHref>
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a className={classes.branding}>

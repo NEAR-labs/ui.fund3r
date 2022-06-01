@@ -47,7 +47,7 @@ function GrantApplication() {
           {isLoading ? (
             <LoadingAnimation />
           ) : (
-            <Container>
+            <Container size="lg">
               {status === EDIT && <GrantApplicationForm data={grant} setData={setGrant} />}
               {status === OFFCHAIN_SUBMITTED && <GrantApplicationProposalSubmission data={grant} />}
               {(status === FULLY_SUBMITTED || step >= 1) && <GrantApplicationDetails data={grant} />}
