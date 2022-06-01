@@ -34,7 +34,7 @@ function GrantMilestoneOverview({
             {typeof deliveryDate === 'number' || typeof deliveryDate === 'string' ? deliveryDate : deliveryDate?.toDateString()}
           </Text>
           <Text color="dimmed" size="sm" align="right">
-            {budget} {currency}
+            {budget || 0} {currency}
           </Text>
           <div>&nbsp;</div>
           <Text color="dimmed" size="sm" align="right">
@@ -45,8 +45,9 @@ function GrantMilestoneOverview({
     );
   });
 
+  const initialBudget = fundingAmount || 0;
   const totalMilestones = milestones?.reduce((acc, milestone) => acc + (milestone.budget || 0), 0);
-  const initialBudget = (fundingAmount || 0) - (totalMilestones || 0);
+  const totalFundingAmount = (totalMilestones || 0) + initialBudget;
 
   return (
     <Paper shadow="0" p="lg" radius="lg" withBorder mt="xl">
@@ -71,11 +72,11 @@ function GrantMilestoneOverview({
       <SimpleGrid cols={2}>
         <Text weight="bold">{t('details.payment-schedule.total')}</Text>
         <Text color="dimmed" size="sm" align="right">
-          {fundingAmount || 0} {currency}
+          {totalFundingAmount || 0} {currency}
         </Text>
         <div>&nbsp;</div>
         <Text color="dimmed" size="sm" align="right">
-          ≈ {((fundingAmount || 0) / (usdNearConvertRate || 1)).toFixed(2)} NEAR
+          ≈ {((totalFundingAmount || 0) / (usdNearConvertRate || 1)).toFixed(2)} NEAR
         </Text>
       </SimpleGrid>
     </Paper>

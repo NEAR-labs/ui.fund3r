@@ -45,10 +45,10 @@
       "error": "Please enter a project description that is at least 1 characters long and less than 100."
     },
     "fundingAmount": {
-      "label": "How much funding are you requesting?",
+      "label": "How much initial funding do you need?",
       "placeholder": "10000",
-      "error": "Please enter a funding amount that is at least 1 USD.",
-      "description": "Please specify the exact amount you are requesting in USD. E.g. $50,000 * Grants will be given in USD value of NEAR tokens. (Benchmark: average grant <$50K USD)"
+      "error": "Please enter an initial funding amount that is at least 1 USD.",
+      "description": "Please specify the initial amount you are requesting in USD. Extra funding should be added as milestone. E.g. $50,000 * Grants will be given in USD value of NEAR tokens. (Benchmark: average grant <$50K USD)"
     },
     "milestoneTitle": "Milestone",
     "budget": {
