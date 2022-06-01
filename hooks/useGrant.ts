@@ -22,7 +22,7 @@ const useGrant = (grantId: number, transactionHashes: string | string[] | undefi
     },
   });
 
-  const { isLoading: isValidatingTransactionHash, refetch: fetchCalidateTransactionHash } = useQuery(
+  const { isLoading: isValidatingTransactionHash, refetch: fetchValidateTransactionHash } = useQuery(
     ['validate-transaction-hash', apiSignature, grantId],
     () => {
       return validateNearTransactionHash(apiSignature, { grantId, proposalNearTransactionHash: transactionHashes });
@@ -39,10 +39,10 @@ const useGrant = (grantId: number, transactionHashes: string | string[] | undefi
   useEffect(() => {
     if (transactionHashes) {
       setTimeout(() => {
-        fetchCalidateTransactionHash();
+        fetchValidateTransactionHash();
       }, 1);
     }
-  }, [transactionHashes, fetchCalidateTransactionHash]);
+  }, [transactionHashes, fetchValidateTransactionHash]);
 
   const isLoading = isGrantLoading || isValidatingTransactionHash;
 
