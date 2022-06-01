@@ -2,6 +2,7 @@ import { useQuery } from 'react-query';
 import { Divider, Paper, SimpleGrid, Text, Timeline } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
+import DEFAULT_CURRENCY from '@/config/currency';
 import { getNearUsdConvertRate } from '@/services/currencyConverter';
 
 import type { FormList } from '../../node_modules/@mantine/form/lib/form-list/form-list';
@@ -9,7 +10,7 @@ import type { FormList } from '../../node_modules/@mantine/form/lib/form-list/fo
 function GrantMilestoneOverview({
   milestones,
   fundingAmount,
-  currency,
+  currency = DEFAULT_CURRENCY,
   projectLaunchDate,
 }: {
   milestones: FormList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null }> | undefined;
@@ -33,7 +34,7 @@ function GrantMilestoneOverview({
             {typeof deliveryDate === 'number' || typeof deliveryDate === 'string' ? deliveryDate : deliveryDate?.toDateString()}
           </Text>
           <Text color="dimmed" size="sm" align="right">
-            {budget} {currency}
+            {budget || 0} {currency}
           </Text>
           <div>&nbsp;</div>
           <Text color="dimmed" size="sm" align="right">
@@ -44,8 +45,9 @@ function GrantMilestoneOverview({
     );
   });
 
+  const initialBudget = fundingAmount || 0;
   const totalMilestones = milestones?.reduce((acc, milestone) => acc + (milestone.budget || 0), 0);
-  const initialBudget = (fundingAmount || 0) - (totalMilestones || 0);
+  const totalFundingAmount = (totalMilestones || 0) + initialBudget;
 
   return (
     <Paper shadow="0" p="lg" radius="lg" withBorder mt="xl">
@@ -70,11 +72,11 @@ function GrantMilestoneOverview({
       <SimpleGrid cols={2}>
         <Text weight="bold">{t('details.payment-schedule.total')}</Text>
         <Text color="dimmed" size="sm" align="right">
-          {fundingAmount} {currency}
+          {totalFundingAmount || 0} {currency}
         </Text>
         <div>&nbsp;</div>
         <Text color="dimmed" size="sm" align="right">
-          ≈ {((fundingAmount || 0) / (usdNearConvertRate || 1)).toFixed(2)} NEAR
+          ≈ {((totalFundingAmount || 0) / (usdNearConvertRate || 1)).toFixed(2)} NEAR
         </Text>
       </SimpleGrid>
     </Paper>
