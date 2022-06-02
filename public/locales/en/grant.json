@@ -326,7 +326,7 @@
     "milestones": {
       "title": "Let’s start to work",
       "milestone": {
-        "working": "Working on milestone",
+        "working": "Working on Milestone {{ number }}",
         "status": {
           "submit": "Submit",
           "review": "Review",

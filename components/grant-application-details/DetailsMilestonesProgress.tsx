@@ -1,8 +1,30 @@
-import { Paper, Title } from '@mantine/core';
+import { Paper, Text, Timeline, Title } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
+
+import { useMilestonesStatus } from '@/hooks/useMilestonesStatus';
 
 function DetailsMilestonesProgress() {
   const { t } = useTranslation('grant');
+
+  const { currentMilestone, milestones } = useMilestonesStatus();
+
+  if (!milestones || milestones.length === 0) {
+    return null;
+  }
+
+  const milestoneTimelines = milestones.map((milestone, index) => {
+    return (
+      <Timeline.Item title={t('details.milestones.milestone.working', { number: index + 1 })}>
+        {currentMilestone === index && (
+          <Timeline active={1} bulletSize={24} lineWidth={2} mt="lg">
+            <Timeline.Item title={t('details.milestones.milestone.status.submit')} />
+            <Timeline.Item title={t('details.milestones.milestone.status.review')} />
+            <Timeline.Item title={t('details.milestones.milestone.status.payout')} />
+          </Timeline>
+        )}
+      </Timeline.Item>
+    );
+  });
 
   return (
     <>
@@ -11,7 +33,9 @@ function DetailsMilestonesProgress() {
       </Title>
 
       <Paper shadow="0" p="lg" radius="lg" withBorder mb="xl">
-        Coming soon
+        <Timeline active={currentMilestone} bulletSize={24} lineWidth={2}>
+          {milestoneTimelines}
+        </Timeline>
       </Paper>
     </>
   );
