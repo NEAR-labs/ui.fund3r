@@ -2,6 +2,7 @@ import { Grid, Space, Tabs } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
 import DetailsAddress from '@/components/grant-application-details/DetailsAddress';
+import DetailsAgreements from '@/components/grant-application-details/DetailsAgreements';
 import DetailsHeader from '@/components/grant-application-details/DetailsHeader';
 import DetailsMember from '@/components/grant-application-details/DetailsMember';
 import DetailsMilestones from '@/components/grant-application-details/DetailsMilestones';
@@ -51,6 +52,12 @@ function GrantApplicationDetails({ data, setData }: { data: GrantApplicationInte
             <Space h="xl" />
             <DetailsMilestones milestones={data?.milestones} currency={data?.currency} />
             <Space h="xs" />
+            {data?.helloSignRequestId && data?.dateAgreementSignature && (
+              <>
+                <DetailsAgreements helloSignRequestId={data.helloSignRequestId} />
+                <Space h="xl" />
+              </>
+            )}
             <DetailsMember github={data?.github} twitter={data?.twitter} />
             <Space h="xl" />
             <DetailsAddress addressCountry={data?.addressCountry} addressCity={data?.addressCity} addressStreet={data?.addressStreet} addressZip={data?.addressZip} />{' '}

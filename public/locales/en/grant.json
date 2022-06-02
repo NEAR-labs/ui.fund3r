@@ -366,6 +366,10 @@
         "amount": "Amount"
       }
     },
+    "agreements": {
+      "title": "Agreements",
+      "filename": "agreement.pdf"
+    },
     "attachment": {
       "title": "Additional File(s)"
     },
