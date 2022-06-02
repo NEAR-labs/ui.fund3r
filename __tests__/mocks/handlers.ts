@@ -135,7 +135,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
           budget: 200000,
           deliveryDate: new Date().setFullYear(new Date().getFullYear() + 2),
           description: 'Beta of the Metaverse',
-          review: 'We would like more details about this milestone',
+          reviewMilestone: 'We would like more details about this milestone',
         },
       ],
     },

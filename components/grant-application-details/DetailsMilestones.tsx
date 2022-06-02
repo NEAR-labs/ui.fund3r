@@ -2,6 +2,7 @@ import React from 'react';
 import { Divider, Group, Space, Title } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
+import FeedbackComment from '@/components/common/FeedbackComment';
 import LabelValue from '@/components/common/LabelValue';
 
 import type { FormList } from '../../node_modules/@mantine/form/lib/form-list/form-list';
@@ -10,7 +11,7 @@ function DetailsMilestones({
   milestones,
   currency,
 }: {
-  milestones: FormList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null }> | undefined;
+  milestones: FormList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null; reviewMilestone?: string | null }> | undefined;
   currency: string | undefined;
 }) {
   const { t } = useTranslation('grant');
@@ -28,6 +29,7 @@ function DetailsMilestones({
           <Title order={4} mb="lg">
             {t('details.project.milestone.title', { number: index + 1 })}
           </Title>
+          {milestone.reviewMilestone && <FeedbackComment comment={milestone.reviewMilestone} />}
           <Group>
             <LabelValue label={t('details.project.milestone.budget')} value={`${milestone.budget?.toFixed(0)} ${currency}`} />
             <Divider sx={{ height: '42px' }} orientation="vertical" />
