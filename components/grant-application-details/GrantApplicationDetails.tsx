@@ -48,6 +48,7 @@ function GrantApplicationDetails({ data, setData }: { data: GrantApplicationInte
               projectLaunchDate={data?.projectLaunchDate}
               projectUrl={data?.projectUrl}
               githubUrl={data?.githubUrl}
+              reviewProject={data?.reviewProject}
             />
             <Space h="xl" />
             <DetailsMilestones milestones={data?.milestones} currency={data?.currency} />
@@ -58,7 +59,7 @@ function GrantApplicationDetails({ data, setData }: { data: GrantApplicationInte
                 <Space h="xl" />
               </>
             )}
-            <DetailsMember github={data?.github} twitter={data?.twitter} />
+            <DetailsMember github={data?.github} twitter={data?.twitter} reviewMemberDetail={data?.reviewMemberDetail} />
             <Space h="xl" />
             <DetailsAddress addressCountry={data?.addressCountry} addressCity={data?.addressCity} addressStreet={data?.addressStreet} addressZip={data?.addressZip} />{' '}
           </Tabs.Tab>

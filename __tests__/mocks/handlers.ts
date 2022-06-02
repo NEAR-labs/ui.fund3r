@@ -122,6 +122,22 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateInterview: new Date(),
       dateInterviewCompletionConfirmation: new Date(),
       dateDenial: new Date(),
+      reviewProject: 'How are you differentiating with the competition',
+      reviewMemberDetail: 'We would like the github of the project',
+      reviewAttachments: 'We would like a demo video',
+      milestones: [
+        {
+          budget: 100000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
+          description: 'Alpha of the Metaverse',
+        },
+        {
+          budget: 200000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 2),
+          description: 'Beta of the Metaverse',
+          review: 'We would like more details about this milestone',
+        },
+      ],
     },
     {
       ...fullProjectData,

@@ -1,6 +1,7 @@
 import { SimpleGrid, Spoiler } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
+import FeedbackComment from '@/components/common/FeedbackComment';
 import LabelValue from '@/components/common/LabelValue';
 
 function DetailsProject({
@@ -10,6 +11,7 @@ function DetailsProject({
   projectLaunchDate,
   projectUrl,
   githubUrl,
+  reviewProject,
 }: {
   projectDescription: string | undefined;
   fundingAmount: number | undefined;
@@ -17,11 +19,13 @@ function DetailsProject({
   projectLaunchDate: Date | string | undefined;
   projectUrl: string | undefined;
   githubUrl: string | undefined;
+  reviewProject: string | undefined;
 }) {
   const { t } = useTranslation('grant');
 
   return (
     <>
+      {reviewProject && <FeedbackComment comment={reviewProject} />}
       <Spoiler mb="xl" maxHeight={120} showLabel={t('details.common.show_more')} hideLabel={t('details.common.show_less')}>
         {projectDescription}
       </Spoiler>

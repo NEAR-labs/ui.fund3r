@@ -133,7 +133,7 @@ export interface GrantApplicationInterface {
   reviewMemberDetail?: string;
   reviewAttachments?: string;
 
-  milestones: FormList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null }>;
+  milestones: FormList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null; reviewMilestone?: string | null }>;
   payments?: PaymentInterface[];
   created_at?: Date;
   updated_at?: Date;
