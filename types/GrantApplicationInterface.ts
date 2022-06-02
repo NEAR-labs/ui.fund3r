@@ -119,6 +119,9 @@ export interface GrantApplicationInterface {
   dateFirstPaymentSent?: Date;
   dateOnboardingCompletion?: Date;
 
+  // Hellosign
+  helloSignRequestId?: string;
+
   // Links
   interviewUrl?: string;
   kycUrl?: string;

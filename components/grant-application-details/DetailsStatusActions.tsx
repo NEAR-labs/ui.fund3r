@@ -2,6 +2,7 @@ import { Button, Paper, Text } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
 import StatusActionEvaluated from '@/components/grant-application-details/StatusActionEvaluated';
+import StatusActionKycApproved from '@/components/grant-application-details/StatusActionKycApproved';
 import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
@@ -12,6 +13,7 @@ function DetailsStatusActions({
   firstname,
   lastname,
   dateInterview,
+  helloSignRequestId,
   setGrant,
 }: {
   id: number | undefined;
@@ -19,6 +21,7 @@ function DetailsStatusActions({
   firstname: string | undefined;
   lastname: string | undefined;
   dateInterview: Date | string | undefined;
+  helloSignRequestId: string | undefined;
   setGrant: (data: GrantApplicationInterface) => void;
 }) {
   const { t } = useTranslation('grant');
@@ -44,12 +47,7 @@ function DetailsStatusActions({
   }
 
   if (status === KYC_APPROVED) {
-    return (
-      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-        <Text mb="sm">{t('details.status-actions.kyc-approved.message')}</Text>
-        <Button color="violet">{t('details.status-actions.kyc-approved.button')}</Button>
-      </Paper>
-    );
+    return <StatusActionKycApproved helloSignRequestId={helloSignRequestId} />;
   }
 
   if (status === KYC_DENIED) {
