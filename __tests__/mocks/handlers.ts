@@ -63,7 +63,7 @@ const fullProjectData = {
   payments: [
     {
       id: '00001',
-      amount: 40000,
+      amount: 94161,
       currency: 'NEAR',
       date: new Date(),
       status: 'pending',
@@ -225,6 +225,15 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateAgreementSignature: new Date(),
       dateFirstPaymentSent: new Date(),
       helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      payments: [
+        {
+          id: '00001',
+          amount: 94161,
+          currency: 'NEAR',
+          date: new Date(),
+          status: 'paid',
+        },
+      ],
     },
     {
       ...fullProjectData,
@@ -243,6 +252,15 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateFirstPaymentSent: new Date(),
       dateOnboardingCompletion: new Date(),
       helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      payments: [
+        {
+          id: '00001',
+          amount: 94161,
+          currency: 'NEAR',
+          date: new Date(),
+          status: 'paid',
+        },
+      ],
     },
   ][id];
 };
