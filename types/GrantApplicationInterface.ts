@@ -142,6 +142,9 @@ export interface GrantApplicationInterface {
     dateSubmission?: Date | null;
     dataRejection?: Date | null;
     dateValidation?: Date | null;
+    datePayout?: Date | null;
+    status?: string | null;
+    pendingStep?: number | null;
   }>;
   payments?: PaymentInterface[];
   created_at?: Date;
