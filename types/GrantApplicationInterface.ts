@@ -48,6 +48,7 @@ export enum PaymentStatuses {
 export interface PaymentInterface {
   id: string;
   date: Date;
+  milestoneId: string; // to link a milestone to a payment should be 0 if initial payment
   amount: number;
   currency: string;
   status: PaymentStatuses;
@@ -133,7 +134,15 @@ export interface GrantApplicationInterface {
   reviewMemberDetail?: string;
   reviewAttachments?: string;
 
-  milestones: FormList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null; reviewMilestone?: string | null }>;
+  milestones: FormList<{
+    budget?: number | null;
+    deliveryDate?: Date | null;
+    description?: string | null;
+    reviewMilestone?: string | null;
+    dateSubmission?: Date | null;
+    dataRejection?: Date | null;
+    dateValidation?: Date | null;
+  }>;
   payments?: PaymentInterface[];
   created_at?: Date;
   updated_at?: Date;

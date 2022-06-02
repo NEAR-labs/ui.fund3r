@@ -43,6 +43,22 @@ First complete the full form process then go to these URLs
 
 - http://localhost:3000/grants/t3st.testnet-12
 
+### Payments tab
+
+- Should show the initial payment by default
+- Should show the extra payment for submitted milestones
+- Should mark the initial payment as pending until paid
+- Should mark the extra payment for submitted miletone pending until sent
+
+### Project details milestone part
+
+- Should show a checkmark when milestone is paid
+- Should show a cross and a comment when milestone rejected
+
+### Payment schedule
+
+- Should show a checkmark when milestone is paid
+
 ## API Implementation informations
 
 - Check `__tests__/mocks/handlers.ts` to see how the API should behave
