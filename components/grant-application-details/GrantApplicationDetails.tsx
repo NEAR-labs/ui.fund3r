@@ -6,15 +6,18 @@ import DetailsAgreements from '@/components/grant-application-details/DetailsAgr
 import DetailsHeader from '@/components/grant-application-details/DetailsHeader';
 import DetailsMember from '@/components/grant-application-details/DetailsMember';
 import DetailsMilestones from '@/components/grant-application-details/DetailsMilestones';
+import DetailsMilestonesProgress from '@/components/grant-application-details/DetailsMilestonesProgress';
 import DetailsPayments from '@/components/grant-application-details/DetailsPayments';
 import DetailsPaymentSchedule from '@/components/grant-application-details/DetailsPaymentSchedule';
 import DetailsProcessOverview from '@/components/grant-application-details/DetailsProcessOverview';
 import DetailsProject from '@/components/grant-application-details/DetailsProject';
 import DetailsStatusActions from '@/components/grant-application-details/DetailsStatusActions';
+import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
 function GrantApplicationDetails({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
+  const { status } = useGrantStatus();
 
   return (
     <Grid gutter={48} mb="xl">
@@ -69,7 +72,7 @@ function GrantApplicationDetails({ data, setData }: { data: GrantApplicationInte
         </Tabs>
       </Grid.Col>
       <Grid.Col span={4}>
-        <DetailsProcessOverview />
+        {status === STATUS.ONBOARDING_COMPLETED ? <DetailsMilestonesProgress /> : <DetailsProcessOverview />}
         <DetailsPaymentSchedule milestones={data?.milestones} fundingAmount={data?.fundingAmount} currency={data?.currency} projectLaunchDate={data?.projectLaunchDate} />
       </Grid.Col>
     </Grid>
