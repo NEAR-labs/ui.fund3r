@@ -9,6 +9,7 @@ import type { ParsedUrlQuery } from 'querystring';
 
 import LoadingAnimation from '@/components/common/LoadingAnimation';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
+import MilestoneForm from '@/components/milestone-submission/MilestoneForm';
 import { COOKIE_SIGNATURE_KEY } from '@/constants';
 import useGrant from '@/hooks/useGrant';
 import DefaultLayout from '@/layouts/default';
@@ -45,7 +46,13 @@ function SubmitMilestone() {
           <title>{t('title')}</title>
         </Head>
         <NearAuthenticationGuardWithLoginRedirection>
-          {isLoading ? <LoadingAnimation /> : <Container size="lg">Milestone submission form here</Container>}
+          {isLoading ? (
+            <LoadingAnimation />
+          ) : (
+            <Container size="lg">
+              <MilestoneForm />
+            </Container>
+          )}
         </NearAuthenticationGuardWithLoginRedirection>
       </>
     </DefaultLayout>
