@@ -55,4 +55,3 @@ First complete the full form process then go to these URLs
 ## API Implementation informations
 
 - Check `__tests__/mocks/handlers.ts` to see how the API should behave
-  7
