@@ -326,7 +326,7 @@
     "milestones": {
       "title": "Let’s start to work",
       "milestone": {
-        "working": "Working on milestone",
+        "working": "Working on Milestone {{ number }}",
         "status": {
           "submit": "Submit",
           "review": "Review",
@@ -334,12 +334,19 @@
         }
       },
       "waiting-submit": {
-        "message": "Let us know when you are done with milestone 1 and we will start the review.",
-        "button": "Sumbit Milestone 1"
+        "message": "Let us know when you are done with Milestone {{ number }} and we will start the review.",
+        "button": "Submit Milestone {{ number }}"
+      },
+      "waiting-blockchain": {
+        "message": "Please submit your milestone to the DAO",
+        "button": "Submit milestone"
+      },
+      "rejection": {
+        "message": "Your milestone application has been denied. Please, check comments and submit your application again."
       },
       "submitted": {
-        "message": "You have successfully submit Milestone 1",
-        "description": "You will receive a follow up email to confirm Milestone 1 has been approved. If you have questions that aren’t answered on near.org/grants, please contact us via email at grants@near.foundation."
+        "message": "You have successfully submit Milestone {{ number }}",
+        "description": "You will receive a follow up email to confirm Milestone {{ number }} has been approved. If you have questions that aren’t answered on near.org/grants, please contact us via email at grants@near.foundation."
       }
     },
     "project": {
@@ -365,6 +372,10 @@
         },
         "amount": "Amount"
       }
+    },
+    "agreements": {
+      "title": "Agreements",
+      "filename": "agreement.pdf"
     },
     "attachment": {
       "title": "Additional File(s)"

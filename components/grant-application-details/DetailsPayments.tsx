@@ -12,7 +12,7 @@ function DetailsPayments({ payments }: { payments: PaymentInterface[] | undefine
 
   const paymentsItems = payments.map((payment) => {
     return (
-      <Paper shadow="xs" radius="md" p="lg">
+      <Paper shadow="xs" radius="md" p="lg" mt="lg">
         <SimpleGrid cols={2}>
           <Title order={4} mb="lg">
             {t('details.payments.payment.title')} #{payment.id}

@@ -128,10 +128,10 @@ const validateNearTransactionHash = async (
     proposalNearTransactionHash,
   }: {
     grantId: number | undefined;
-    proposalNearTransactionHash: string | string[] | undefined;
+    proposalNearTransactionHash: string | string[] | null | undefined;
   },
 ): Promise<GrantApplicationInterface | null> => {
-  if (!signature) {
+  if (!signature || !proposalNearTransactionHash) {
     return null;
   }
 
@@ -140,6 +140,42 @@ const validateNearTransactionHash = async (
     {
       grantId,
       proposalNearTransactionHash,
+    },
+    {
+      headers: {
+        'X-NEAR-ACCOUNT-ID': signature.accountId,
+        'X-NEAR-SIGNATURE': JSON.stringify(signature.signature),
+      },
+    },
+  );
+
+  return data;
+};
+
+const submitCalendlyUrl = async (
+  signature: NearApiSignatureInterface | undefined,
+  {
+    grantId,
+    calendlyUrl,
+    signStringMessage,
+  }: {
+    grantId: number | undefined;
+    calendlyUrl: string | null | undefined;
+    signStringMessage: (stringMessage: string) => Promise<Uint8Array | undefined | null>;
+  },
+): Promise<GrantApplicationInterface | null> => {
+  if (!signature) {
+    return null;
+  }
+
+  const signedCalendlyUrl = calendlyUrl && signStringMessage(calendlyUrl);
+
+  const { data } = await axios.put(
+    `${API_HOST}/grants/${grantId}/calendly/interview`,
+    {
+      grantId,
+      calendlyUrl,
+      signedCalendlyUrl,
     },
     {
       headers: {
@@ -162,6 +198,7 @@ export {
   getAllGrantApplicationsOfUser,
   getGrantApplication,
   saveGrantApplicationAsDraft,
+  submitCalendlyUrl,
   submitGrantApplication,
   validateNearTransactionHash,
   // submitMilestoneData,

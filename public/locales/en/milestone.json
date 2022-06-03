@@ -1,0 +1,20 @@
+{
+  "title": "Submit Milestone",
+  "form": {
+    "title": "Milestone {{ number }}",
+    "attachment": {
+      "label": "Please, add a video presentation of your demo",
+      "placeholder": "Demo video URL",
+      "error": "Please share a valid URL"
+    },
+    "githubUrl": {
+      "label": "Github URL",
+      "placeholder": "Github URL",
+      "error": "Please a valid Github URL"
+    },
+    "comments": {
+      "label": "Comments",
+      "placeholder": "Commments"
+    }
+  }
+}

@@ -1,10 +1,16 @@
 // import { useTranslation } from 'next-i18next';
+import FeedbackComment from '@/components/common/FeedbackComment';
 
 // THIS COMPONENT WILL BE IMPLEMENTED LATER
-function DetailsAttachment() {
+function DetailsAttachment({ reviewAttachments }: { reviewAttachments: string | undefined }) {
   //   const { t } = useTranslation('grant');
 
-  return <span>DetailsAttachment</span>;
+  return (
+    <>
+      {reviewAttachments && <FeedbackComment comment={reviewAttachments} />}
+      <span>DetailsAttachment</span>
+    </>
+  );
 }
 
 export default DetailsAttachment;

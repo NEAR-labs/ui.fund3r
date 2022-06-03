@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { rest } from 'msw';
 
 import { GrantApplicationInterface, GrantCategories, GrantTypes, OpenSourceStates, ProjectStatus, RaisingRoundStatus, WorkingTypes } from '@/types/GrantApplicationInterface';
@@ -62,7 +63,7 @@ const fullProjectData = {
   payments: [
     {
       id: '00001',
-      amount: 40000,
+      amount: 94161,
       currency: 'NEAR',
       date: new Date(),
       status: 'pending',
@@ -121,6 +122,22 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateInterview: new Date(),
       dateInterviewCompletionConfirmation: new Date(),
       dateDenial: new Date(),
+      reviewProject: 'How are you differentiating with the competition',
+      reviewMemberDetail: 'We would like the github of the project',
+      reviewAttachments: 'We would like a demo video',
+      milestones: [
+        {
+          budget: 100000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
+          description: 'Alpha of the Metaverse',
+        },
+        {
+          budget: 200000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 2),
+          description: 'Beta of the Metaverse',
+          reviewMilestone: 'We would like more details about this milestone',
+        },
+      ],
     },
     {
       ...fullProjectData,
@@ -174,6 +191,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateApproval: new Date(),
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
+      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6', // Should be created by the backend and passing the redirect url
     },
     {
       ...fullProjectData,
@@ -188,7 +206,8 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateApproval: new Date(),
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
-      dateAgreementSignature: new Date(),
+      dateAgreementSignature: new Date(), // Should be checked by the backend using hello sign api
+      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
     },
     {
       ...fullProjectData,
@@ -205,6 +224,16 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateKycApproved: new Date(),
       dateAgreementSignature: new Date(),
       dateFirstPaymentSent: new Date(),
+      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      payments: [
+        {
+          id: '00001',
+          amount: 94161,
+          currency: 'NEAR',
+          date: new Date(),
+          status: 'paid',
+        },
+      ],
     },
     {
       ...fullProjectData,
@@ -222,6 +251,190 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateAgreementSignature: new Date(),
       dateFirstPaymentSent: new Date(),
       dateOnboardingCompletion: new Date(),
+      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      payments: [
+        {
+          id: '00001',
+          amount: 94161,
+          currency: 'NEAR',
+          date: new Date(),
+          status: 'paid',
+        },
+      ],
+    },
+    {
+      ...fullProjectData,
+      id: 13,
+      nearId: accountId,
+      dateSubmission: new Date(),
+      isNearProposalValid: true,
+      dateEvaluation: new Date(),
+      dateInterviewScheduled: new Date(),
+      dateInterview: new Date(),
+      dateInterviewCompletionConfirmation: new Date(),
+      dateApproval: new Date(),
+      dateKycCompletion: new Date(),
+      dateKycApproved: new Date(),
+      dateAgreementSignature: new Date(),
+      dateFirstPaymentSent: new Date(),
+      dateOnboardingCompletion: new Date(),
+      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      payments: [
+        {
+          id: '00001',
+          amount: 94161,
+          currency: 'NEAR',
+          date: new Date(),
+          status: 'paid',
+        },
+      ],
+      milestones: [
+        {
+          budget: 100000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
+          description: 'Alpha of the Metaverse',
+          dateSubmission: new Date(),
+        },
+        {
+          budget: 200000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 2),
+          description: 'Beta of the Metaverse',
+        },
+      ],
+    },
+    {
+      ...fullProjectData,
+      id: 14,
+      nearId: accountId,
+      dateSubmission: new Date(),
+      isNearProposalValid: true,
+      dateEvaluation: new Date(),
+      dateInterviewScheduled: new Date(),
+      dateInterview: new Date(),
+      dateInterviewCompletionConfirmation: new Date(),
+      dateApproval: new Date(),
+      dateKycCompletion: new Date(),
+      dateKycApproved: new Date(),
+      dateAgreementSignature: new Date(),
+      dateFirstPaymentSent: new Date(),
+      dateOnboardingCompletion: new Date(),
+      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      payments: [
+        {
+          id: '00001',
+          amount: 94161,
+          currency: 'NEAR',
+          date: new Date(),
+          status: 'paid',
+        },
+      ],
+      milestones: [
+        {
+          budget: 100000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
+          description: 'Alpha of the Metaverse',
+          dateSubmission: new Date(),
+          dateSubmissionOnChain: new Date(),
+        },
+        {
+          budget: 200000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 2),
+          description: 'Beta of the Metaverse',
+        },
+      ],
+    },
+    {
+      ...fullProjectData,
+      id: 15,
+      nearId: accountId,
+      dateSubmission: new Date(),
+      isNearProposalValid: true,
+      dateEvaluation: new Date(),
+      dateInterviewScheduled: new Date(),
+      dateInterview: new Date(),
+      dateInterviewCompletionConfirmation: new Date(),
+      dateApproval: new Date(),
+      dateKycCompletion: new Date(),
+      dateKycApproved: new Date(),
+      dateAgreementSignature: new Date(),
+      dateFirstPaymentSent: new Date(),
+      dateOnboardingCompletion: new Date(),
+      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      payments: [
+        {
+          id: '00001',
+          amount: 94161,
+          currency: 'NEAR',
+          date: new Date(),
+          status: 'paid',
+        },
+      ],
+      milestones: [
+        {
+          budget: 100000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
+          description: 'Alpha of the Metaverse',
+          dateSubmission: new Date(),
+          dateSubmissionOnChain: new Date(),
+          dateRejection: new Date(),
+          reviewMilestone: 'We would like more details about this milestone',
+        },
+        {
+          budget: 200000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 2),
+          description: 'Beta of the Metaverse',
+        },
+      ],
+    },
+    {
+      ...fullProjectData,
+      id: 16,
+      nearId: accountId,
+      dateSubmission: new Date(),
+      isNearProposalValid: true,
+      dateEvaluation: new Date(),
+      dateInterviewScheduled: new Date(),
+      dateInterview: new Date(),
+      dateInterviewCompletionConfirmation: new Date(),
+      dateApproval: new Date(),
+      dateKycCompletion: new Date(),
+      dateKycApproved: new Date(),
+      dateAgreementSignature: new Date(),
+      dateFirstPaymentSent: new Date(),
+      dateOnboardingCompletion: new Date(),
+      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      payments: [
+        {
+          id: '00001',
+          amount: 94161,
+          currency: 'NEAR',
+          date: new Date(),
+          status: 'paid',
+        },
+        {
+          id: '00002',
+          amount: 188300,
+          currency: 'NEAR',
+          date: new Date(),
+          status: 'paid',
+        },
+      ],
+      milestones: [
+        {
+          budget: 100000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
+          description: 'Alpha of the Metaverse',
+          dateSubmission: new Date(),
+          dateSubmissionOnChain: new Date(),
+          dateRejection: new Date(),
+          dateValidation: new Date(),
+        },
+        {
+          budget: 200000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 2),
+          description: 'Beta of the Metaverse',
+        },
+      ],
     },
   ][id];
 };
@@ -333,6 +546,32 @@ const handlers = [
     };
 
     localStorage.setItem('fund3r-mock-near-tx', 'true');
+
+    return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
+  }),
+
+  // This endpoint will save the interview url & return date of interview and other info updated
+  rest.put<never, any>(`${BASE_URL}/grants/:id/calendly/interview`, (_req, res, ctx) => {
+    const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
+    const { proposalNearTransactionHash } = _req.body;
+
+    const dummyDataString = localStorage.getItem('fund3r-mock-data');
+    const dummyData = dummyDataString ? JSON.parse(dummyDataString) : {};
+
+    const nearFundingAmount: BigInt = BigInt((dummyData.fundingAmount / 5.95) * 10 ** 24);
+
+    const response = {
+      ...basicData,
+      dateSubmission: new Date(),
+      projectName: dummyData.projectName || 'Mocked Dummy Project',
+      projectDescription: dummyData.projectDescription || 'Mocked Dummy Project Description',
+      nearFundingAmount: nearFundingAmount.toString(),
+      proposalNearTransactionHash,
+      isNearProposalValid: true,
+      dateEvaluation: new Date(),
+      dateInterviewScheduled: new Date(),
+      dateInterview: new Date(),
+    };
 
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),

@@ -23,13 +23,13 @@ function GrantApplication() {
   const router = useRouter();
   const { t } = useTranslation('grant');
   const { transactionHashes } = router.query;
-  const { daoId } = router.query;
+  const { grantRequestSlug } = router.query;
 
-  if (typeof daoId !== 'string') {
+  if (typeof grantRequestSlug !== 'string') {
     throw new Error('Invalid URL');
   }
 
-  const id = daoId.split('-')[1];
+  const id = grantRequestSlug.split('-')[1];
   const numberId = parseInt(id as string, 10);
 
   const { grant, setGrant, isLoading } = useGrant(numberId, transactionHashes);
@@ -50,7 +50,7 @@ function GrantApplication() {
             <Container size="lg">
               {status === EDIT && <GrantApplicationForm data={grant} setData={setGrant} />}
               {status === OFFCHAIN_SUBMITTED && <GrantApplicationProposalSubmission data={grant} />}
-              {(status === FULLY_SUBMITTED || step >= 1) && <GrantApplicationDetails data={grant} />}
+              {(status === FULLY_SUBMITTED || step >= 1) && <GrantApplicationDetails data={grant} setData={setGrant} />}
             </Container>
           )}
         </NearAuthenticationGuardWithLoginRedirection>
@@ -64,15 +64,15 @@ export async function getServerSideProps({ req, locale, params }: { req: NextApi
   const data = parseCookies(req);
   const apiSignature = data[COOKIE_SIGNATURE_KEY] ? JSON.parse(data[COOKIE_SIGNATURE_KEY]) : null;
 
-  const { daoId } = params;
+  const { grantRequestSlug } = params;
 
-  if (typeof daoId !== 'string') {
+  if (typeof grantRequestSlug !== 'string') {
     return {
       notFound: true,
     };
   }
 
-  const id = daoId.split('-')[1];
+  const id = grantRequestSlug.split('-')[1];
 
   await queryClient.prefetchQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, id));
   const dehydratedState = dehydrate(queryClient);

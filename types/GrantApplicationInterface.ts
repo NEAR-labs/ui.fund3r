@@ -48,6 +48,7 @@ export enum PaymentStatuses {
 export interface PaymentInterface {
   id: string;
   date: Date;
+  milestoneId: string; // to link a milestone to a payment should be 0 if initial payment
   amount: number;
   currency: string;
   status: PaymentStatuses;
@@ -119,6 +120,9 @@ export interface GrantApplicationInterface {
   dateFirstPaymentSent?: Date;
   dateOnboardingCompletion?: Date;
 
+  // Hellosign
+  helloSignRequestId?: string;
+
   // Links
   interviewUrl?: string;
   kycUrl?: string;
@@ -130,7 +134,19 @@ export interface GrantApplicationInterface {
   reviewMemberDetail?: string;
   reviewAttachments?: string;
 
-  milestones: FormList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null }>;
+  milestones: FormList<{
+    budget?: number | null;
+    deliveryDate?: Date | null;
+    description?: string | null;
+    reviewMilestone?: string | null;
+    dateSubmission?: Date | null;
+    dateSubmissionOnChain?: Date | null;
+    dateRejection?: Date | null;
+    dateValidation?: Date | null;
+    status?: string | null;
+    step?: number | null;
+    pendingStep?: number | null;
+  }>;
   payments?: PaymentInterface[];
   created_at?: Date;
   updated_at?: Date;
