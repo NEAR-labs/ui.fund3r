@@ -28,7 +28,7 @@ function SubmitMilestone() {
   const id = grantRequestSlug.split('-')[1];
   const numberId = parseInt(id as string, 10);
 
-  const { isLoading } = useGrant(numberId, null);
+  const { isLoading } = useGrant(numberId);
 
   /*
     5 Cases to handle here
