@@ -143,7 +143,6 @@ export interface GrantApplicationInterface {
     dateSubmissionOnChain?: Date | null;
     dateRejection?: Date | null;
     dateValidation?: Date | null;
-    datePayout?: Date | null;
     status?: string | null;
     step?: number | null;
     pendingStep?: number | null;

@@ -73,7 +73,13 @@ function GrantApplicationDetails({ data, setData }: { data: GrantApplicationInte
       </Grid.Col>
       <Grid.Col span={4}>
         {status === STATUS.ONBOARDING_COMPLETED ? <DetailsMilestonesProgress /> : <DetailsProcessOverview />}
-        <DetailsPaymentSchedule milestones={data?.milestones} fundingAmount={data?.fundingAmount} currency={data?.currency} projectLaunchDate={data?.projectLaunchDate} />
+        <DetailsPaymentSchedule
+          milestones={data?.milestones}
+          fundingAmount={data?.fundingAmount}
+          currency={data?.currency}
+          projectLaunchDate={data?.projectLaunchDate}
+          payments={data?.payments}
+        />
       </Grid.Col>
     </Grid>
   );

@@ -40,9 +40,9 @@ function DetailsMilestonesProgress() {
   const milestoneTimelines = milestonesStatus.map((milestone, index) => {
     return (
       // eslint-disable-next-line react/no-array-index-key
-      <Timeline.Item key={index} bullet={getIconMilestone(index, milestone.status)} title={t('details.milestones.milestone.working', { number: index + 1 })}>
+      <Timeline.Item color="violet" key={index} bullet={getIconMilestone(index, milestone.status)} title={t('details.milestones.milestone.working', { number: index + 1 })}>
         {currentMilestone === index && (
-          <Timeline active={milestone.step || 0} bulletSize={24} lineWidth={2} mt="lg">
+          <Timeline active={milestone.step || 0} bulletSize={24} lineWidth={2} mt="lg" color="violet">
             <Timeline.Item bullet={getStepIcon(milestone.step, 0, milestone.pendingStep)} title={t('details.milestones.milestone.status.submit')} />
             <Timeline.Item bullet={getStepIcon(milestone.step, 1, milestone.pendingStep)} title={t('details.milestones.milestone.status.review')} />
             <Timeline.Item bullet={getStepIcon(milestone.step, 2, milestone.pendingStep)} title={t('details.milestones.milestone.status.payout')} />
@@ -59,7 +59,7 @@ function DetailsMilestonesProgress() {
       </Title>
 
       <Paper shadow="0" p="lg" radius="lg" withBorder mb="xl">
-        <Timeline active={currentMilestone} bulletSize={24} lineWidth={2}>
+        <Timeline color="violet" active={currentMilestone} bulletSize={24} lineWidth={2}>
           {milestoneTimelines}
         </Timeline>
       </Paper>
