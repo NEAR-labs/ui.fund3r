@@ -1,11 +1,11 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useQuery } from 'react-query';
 
 import GrantContext from '@/contexts/GrantContext';
 import useAccountSignature from '@/hooks/useAccountSignature';
-import { getGrantApplication, validateNearTransactionHash } from '@/services/apiService';
+import { getGrantApplication } from '@/services/apiService';
 
-const useGrant = (grantId: number, transactionHashes: string | string[] | undefined | null) => {
+const useGrant = (grantId: number) => {
   const context = useContext(GrantContext);
 
   if (context === undefined) {
@@ -22,29 +22,7 @@ const useGrant = (grantId: number, transactionHashes: string | string[] | undefi
     },
   });
 
-  const { isLoading: isValidatingTransactionHash, refetch: fetchValidateTransactionHash } = useQuery(
-    ['validate-transaction-hash', apiSignature, grantId, transactionHashes],
-    () => {
-      return validateNearTransactionHash(apiSignature, { grantId, proposalNearTransactionHash: transactionHashes });
-    },
-    {
-      refetchOnWindowFocus: false,
-      enabled: false,
-      onSuccess: (updatedGrantData) => {
-        setGrant(updatedGrantData);
-      },
-    },
-  );
-
-  useEffect(() => {
-    if (transactionHashes) {
-      setTimeout(() => {
-        fetchValidateTransactionHash();
-      }, 1);
-    }
-  }, [transactionHashes, fetchValidateTransactionHash]);
-
-  const isLoading = isGrantLoading || isValidatingTransactionHash;
+  const isLoading = isGrantLoading;
 
   return {
     grant,

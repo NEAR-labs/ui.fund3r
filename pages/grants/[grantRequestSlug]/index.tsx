@@ -22,7 +22,7 @@ import parseCookies from '@/utilities/parseCookies';
 function GrantApplication() {
   const router = useRouter();
   const { t } = useTranslation('grant');
-  const { transactionHashes } = router.query;
+
   const { grantRequestSlug } = router.query;
 
   if (typeof grantRequestSlug !== 'string') {
@@ -32,7 +32,7 @@ function GrantApplication() {
   const id = grantRequestSlug.split('-')[1];
   const numberId = parseInt(id as string, 10);
 
-  const { grant, setGrant, isLoading } = useGrant(numberId, transactionHashes);
+  const { grant, setGrant, isLoading } = useGrant(numberId);
   const { status, step } = useGrantStatus();
 
   const { EDIT, OFFCHAIN_SUBMITTED, FULLY_SUBMITTED } = STATUS;
@@ -49,7 +49,7 @@ function GrantApplication() {
           ) : (
             <Container size="lg">
               {status === EDIT && <GrantApplicationForm data={grant} setData={setGrant} />}
-              {status === OFFCHAIN_SUBMITTED && <GrantApplicationProposalSubmission data={grant} />}
+              {status === OFFCHAIN_SUBMITTED && <GrantApplicationProposalSubmission data={grant} setData={setGrant} />}
               {(status === FULLY_SUBMITTED || step >= 1) && <GrantApplicationDetails data={grant} setData={setGrant} />}
             </Container>
           )}
