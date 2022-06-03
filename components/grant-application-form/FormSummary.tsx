@@ -12,7 +12,7 @@ function FormSummary({ data }: { data: any }) {
       <Title order={2} mb="sm">
         {t('summary.schedule.title')}
       </Title>
-      <PaymentSchedule milestones={data?.milestones} fundingAmount={data?.fundingAmount} currency={data?.currency} projectLaunchDate={data?.projectLaunchDate} />
+      <PaymentSchedule milestones={data?.milestones} fundingAmount={data?.fundingAmount} currency={data?.currency} projectLaunchDate={data?.projectLaunchDate} payments={[]} />
     </>
   );
 }
