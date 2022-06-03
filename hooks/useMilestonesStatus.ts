@@ -4,6 +4,7 @@ import GrantContext from '@/contexts/GrantContext';
 
 const MILESTONE_STATUS = {
   ERROR: 'ERROR',
+  STARTED: 'STARTED',
   SUBMIT: 'SUBMIT',
   REVIEW: 'REVIEW',
   PAYOUT: 'PAYOUT',
@@ -30,6 +31,15 @@ const useMilestonesStatus = () => {
 
   /* eslint-disable no-param-reassign */
   const milestonesStatus = milestones.map((milestone, index) => {
+    milestone.status = MILESTONE_STATUS.STARTED;
+    milestone.step = 0;
+    milestone.pendingStep = 0;
+
+    // if (milestone.dateSubmissionOnChain) {
+    //   milestone.status = MILESTONE_STATUS.SUBMIT;
+    //   milestone.pendingStep = 1;
+    // }
+
     if (milestone.dateSubmission) {
       milestone.status = MILESTONE_STATUS.SUBMIT;
       milestone.pendingStep = 1;
