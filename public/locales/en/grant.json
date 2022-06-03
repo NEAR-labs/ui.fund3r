@@ -342,8 +342,8 @@
         "button": "Submit milestone"
       },
       "submitted": {
-        "message": "You have successfully submit Milestone 1",
-        "description": "You will receive a follow up email to confirm Milestone 1 has been approved. If you have questions that aren’t answered on near.org/grants, please contact us via email at grants@near.foundation."
+        "message": "You have successfully submit Milestone {{ number }}",
+        "description": "You will receive a follow up email to confirm Milestone {{ number }} has been approved. If you have questions that aren’t answered on near.org/grants, please contact us via email at grants@near.foundation."
       }
     },
     "project": {

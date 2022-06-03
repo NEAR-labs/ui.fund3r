@@ -25,15 +25,27 @@ function DetailsMilestonesProgress() {
     }
   };
 
+  const getStepIcon = (currentStep: number | null | undefined, timelineStep: number, pendingStep: number | null | undefined) => {
+    if (timelineStep === pendingStep) {
+      return <Clock size={12} />;
+    }
+
+    if ((currentStep || 0) >= timelineStep) {
+      return <Check size={12} />;
+    }
+
+    return null;
+  };
+
   const milestoneTimelines = milestonesStatus.map((milestone, index) => {
     return (
       // eslint-disable-next-line react/no-array-index-key
       <Timeline.Item key={index} bullet={getIconMilestone(index, milestone.status)} title={t('details.milestones.milestone.working', { number: index + 1 })}>
         {currentMilestone === index && (
           <Timeline active={milestone.step || 0} bulletSize={24} lineWidth={2} mt="lg">
-            <Timeline.Item bullet={milestone.pendingStep === 0 && <Clock size={12} />} title={t('details.milestones.milestone.status.submit')} />
-            <Timeline.Item bullet={milestone.pendingStep === 1 && <Clock size={12} />} title={t('details.milestones.milestone.status.review')} />
-            <Timeline.Item bullet={milestone.pendingStep === 2 && <Clock size={12} />} title={t('details.milestones.milestone.status.payout')} />
+            <Timeline.Item bullet={getStepIcon(milestone.step, 0, milestone.pendingStep)} title={t('details.milestones.milestone.status.submit')} />
+            <Timeline.Item bullet={getStepIcon(milestone.step, 1, milestone.pendingStep)} title={t('details.milestones.milestone.status.review')} />
+            <Timeline.Item bullet={getStepIcon(milestone.step, 2, milestone.pendingStep)} title={t('details.milestones.milestone.status.payout')} />
           </Timeline>
         )}
       </Timeline.Item>

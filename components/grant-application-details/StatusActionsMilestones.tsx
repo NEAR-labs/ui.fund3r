@@ -32,6 +32,19 @@ function StatusActionsMilestones() {
     );
   }
 
+  if (status === MILESTONE_STATUS.SUBMIT) {
+    return (
+      <>
+        <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+          <Text>{t('details.milestones.submitted.message')}</Text>
+        </Paper>
+        <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+          <Text>{t('details.milestones.submitted.description')}</Text>
+        </Paper>
+      </>
+    );
+  }
+
   return null;
 }
 
