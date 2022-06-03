@@ -30,10 +30,11 @@ function SubmitMilestone() {
   const { isLoading } = useGrant(numberId, null);
 
   /*
-    4 Cases to handle here
-    - Previous milestone not submitted
-    - Already submitted
-    - Milestone does not exist
+    5 Cases to handle here
+    - Previous milestone not submitted / Error
+    - Already submitted / Error
+    - Milestone does not exist / Error
+    - Milestone form
     - Milestone submitted but not onchain
   */
 
