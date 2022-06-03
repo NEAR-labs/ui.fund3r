@@ -23,6 +23,15 @@ function StatusActionsMilestones() {
     );
   }
 
+  if (status === MILESTONE_STATUS.PARTLY_SUBMITTED) {
+    return (
+      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+        <Text mb="sm">{t('details.milestones.waiting-blockchain.message')}</Text>
+        <Button color="violet">{t('details.milestones.waiting-blockchain.button')}</Button>
+      </Paper>
+    );
+  }
+
   return null;
 }
 

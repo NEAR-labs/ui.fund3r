@@ -27,12 +27,13 @@ function DetailsMilestonesProgress() {
 
   const milestoneTimelines = milestonesStatus.map((milestone, index) => {
     return (
-      <Timeline.Item bullet={getIconMilestone(index, milestone.status)} title={t('details.milestones.milestone.working', { number: index + 1 })}>
+      // eslint-disable-next-line react/no-array-index-key
+      <Timeline.Item key={index} bullet={getIconMilestone(index, milestone.status)} title={t('details.milestones.milestone.working', { number: index + 1 })}>
         {currentMilestone === index && (
           <Timeline active={milestone.step || 0} bulletSize={24} lineWidth={2} mt="lg">
-            <Timeline.Item title={t('details.milestones.milestone.status.submit')} />
-            <Timeline.Item title={t('details.milestones.milestone.status.review')} />
-            <Timeline.Item title={t('details.milestones.milestone.status.payout')} />
+            <Timeline.Item bullet={milestone.pendingStep === 0 && <Clock size={12} />} title={t('details.milestones.milestone.status.submit')} />
+            <Timeline.Item bullet={milestone.pendingStep === 1 && <Clock size={12} />} title={t('details.milestones.milestone.status.review')} />
+            <Timeline.Item bullet={milestone.pendingStep === 2 && <Clock size={12} />} title={t('details.milestones.milestone.status.payout')} />
           </Timeline>
         )}
       </Timeline.Item>

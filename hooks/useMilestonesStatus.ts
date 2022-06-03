@@ -5,6 +5,7 @@ import GrantContext from '@/contexts/GrantContext';
 const MILESTONE_STATUS = {
   ERROR: 'ERROR',
   STARTED: 'STARTED',
+  PARTLY_SUBMITTED: 'PARTLY_SUBMITTED',
   SUBMIT: 'SUBMIT',
   REVIEW: 'REVIEW',
   PAYOUT: 'PAYOUT',
@@ -35,12 +36,12 @@ const useMilestonesStatus = () => {
     milestone.step = 0;
     milestone.pendingStep = 0;
 
-    // if (milestone.dateSubmissionOnChain) {
-    //   milestone.status = MILESTONE_STATUS.SUBMIT;
-    //   milestone.pendingStep = 1;
-    // }
-
     if (milestone.dateSubmission) {
+      milestone.status = MILESTONE_STATUS.PARTLY_SUBMITTED;
+      milestone.pendingStep = 0;
+    }
+
+    if (milestone.dateSubmission && milestone.dateSubmissionOnChain) {
       milestone.status = MILESTONE_STATUS.SUBMIT;
       milestone.pendingStep = 1;
     }

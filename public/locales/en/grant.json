@@ -337,6 +337,10 @@
         "message": "Let us know when you are done with Milestone {{ number }} and we will start the review.",
         "button": "Sumbit Milestone {{ number }}"
       },
+      "waiting-blockchain": {
+        "message": "Please submit your milestone to the DAO",
+        "button": "Submit milestone"
+      },
       "submitted": {
         "message": "You have successfully submit Milestone 1",
         "description": "You will receive a follow up email to confirm Milestone 1 has been approved. If you have questions that aren’t answered on near.org/grants, please contact us via email at grants@near.foundation."

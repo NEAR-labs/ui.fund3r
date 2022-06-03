@@ -262,6 +262,47 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
         },
       ],
     },
+    {
+      ...fullProjectData,
+      id: 13,
+      nearId: accountId,
+      dateSubmission: new Date(),
+      isNearProposalValid: true,
+      dateEvaluation: new Date(),
+      dateInterviewScheduled: new Date(),
+      dateInterview: new Date(),
+      dateInterviewCompletionConfirmation: new Date(),
+      dateApproval: new Date(),
+      dateKycCompletion: new Date(),
+      dateKycApproved: new Date(),
+      dateAgreementSignature: new Date(),
+      dateFirstPaymentSent: new Date(),
+      dateOnboardingCompletion: new Date(),
+      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      payments: [
+        {
+          id: '00001',
+          amount: 94161,
+          currency: 'NEAR',
+          date: new Date(),
+          status: 'paid',
+        },
+      ],
+      milestones: [
+        {
+          budget: 100000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
+          description: 'Alpha of the Metaverse',
+          dateSubmission: new Date(),
+        },
+        {
+          budget: 200000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 2),
+          description: 'Beta of the Metaverse',
+          reviewMilestone: 'We would like more details about this milestone',
+        },
+      ],
+    },
   ][id];
 };
 

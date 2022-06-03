@@ -42,7 +42,6 @@ function StatusActionEvaluated({
       refetchOnWindowFocus: false,
       enabled: false,
       onSuccess: (updatedGrantData) => {
-        console.log(updatedGrantData);
         if (updatedGrantData) {
           setGrant(updatedGrantData);
         }
