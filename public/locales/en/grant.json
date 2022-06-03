@@ -335,7 +335,7 @@
       },
       "waiting-submit": {
         "message": "Let us know when you are done with Milestone {{ number }} and we will start the review.",
-        "button": "Sumbit Milestone {{ number }}"
+        "button": "Submit Milestone {{ number }}"
       },
       "waiting-blockchain": {
         "message": "Please submit your milestone to the DAO",

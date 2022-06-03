@@ -5,7 +5,7 @@ import GrantContext from '@/contexts/GrantContext';
 import useAccountSignature from '@/hooks/useAccountSignature';
 import { getGrantApplication, validateNearTransactionHash } from '@/services/apiService';
 
-const useGrant = (grantId: number, transactionHashes: string | string[] | undefined) => {
+const useGrant = (grantId: number, transactionHashes: string | string[] | undefined | null) => {
   const context = useContext(GrantContext);
 
   if (context === undefined) {

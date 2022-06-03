@@ -1,10 +1,14 @@
 import { Button, Paper, Text } from '@mantine/core';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
 import { MILESTONE_STATUS, useMilestonesStatus } from '@/hooks/useMilestonesStatus';
 
 function StatusActionsMilestones() {
+  const router = useRouter();
   const { t } = useTranslation('grant');
+  const { grantRequestSlug } = router.query;
 
   const { currentMilestone, milestonesStatus } = useMilestonesStatus();
 
@@ -20,7 +24,11 @@ function StatusActionsMilestones() {
     return (
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
         <Text mb="sm">{t('details.milestones.waiting-submit.message', { number })}</Text>
-        <Button color="violet">{t('details.milestones.waiting-submit.button', { number })}</Button>
+        <Link href={`/grants/${grantRequestSlug}/milestones/${currentMilestone}`} passHref>
+          <Button component="a" color="violet">
+            {t('details.milestones.waiting-submit.button', { number })}
+          </Button>
+        </Link>
       </Paper>
     );
   }
@@ -56,7 +64,11 @@ function StatusActionsMilestones() {
         {/* To move to a different component */}
         <Paper shadow="sm" p="lg" radius="lg" mt="xl">
           <Text mb="sm">{t('details.milestones.waiting-submit.message', { number })}</Text>
-          <Button color="violet">{t('details.milestones.waiting-submit.button')}</Button>
+          <Link href={`/grants/${grantRequestSlug}/milestones/${currentMilestone}`} passHref>
+            <Button component="a" color="violet">
+              {t('details.milestones.waiting-submit.button', { number })}
+            </Button>
+          </Link>
         </Paper>
       </>
     );
