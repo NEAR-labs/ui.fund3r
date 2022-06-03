@@ -33,8 +33,12 @@ function PaymentSchedule({
     const { budget, deliveryDate } = milestone;
 
     return (
-      // eslint-disable-next-line react/no-array-index-key
-      <Timeline.Item bullet={payments && payments[index + 1] && <Check />} title={t('details.project.milestone.title', { number: index + 1 })} key={index}>
+      <Timeline.Item
+        // eslint-disable-next-line react/no-array-index-key
+        key={index}
+        bullet={payments && payments[index + 1] && payments[index + 1].status === 'paid' && <Check />}
+        title={t('details.project.milestone.title', { number: index + 1 })}
+      >
         <SimpleGrid cols={2}>
           <Text color="dimmed" size="sm">
             {typeof deliveryDate === 'number' || typeof deliveryDate === 'string' ? deliveryDate : deliveryDate?.toDateString()}
@@ -60,7 +64,7 @@ function PaymentSchedule({
   return (
     <Paper shadow="0" p="lg" radius="lg" withBorder mt="xl">
       <Timeline active={numberOfPayouts} bulletSize={24} lineWidth={2} color="violet">
-        <Timeline.Item bullet={payments && payments[0] && <Check />} title={t('details.payment-schedule.launch')}>
+        <Timeline.Item bullet={payments && payments[0] && payments[0].status === 'paid' && <Check />} title={t('details.payment-schedule.launch')}>
           <SimpleGrid cols={2}>
             <Text color="dimmed" size="sm">
               {typeof projectLaunchDate === 'number' || typeof projectLaunchDate === 'string' ? projectLaunchDate : projectLaunchDate?.toDateString()}

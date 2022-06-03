@@ -13,13 +13,14 @@ function StatusActionsMilestones() {
   }
 
   const { status } = milestonesStatus[currentMilestone];
+  const number = currentMilestone + 1;
 
   if (status === MILESTONE_STATUS.STARTED) {
     // to move to a different component
     return (
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-        <Text mb="sm">{t('details.milestones.waiting-submit.message', { number: currentMilestone + 1 })}</Text>
-        <Button color="violet">{t('details.milestones.waiting-submit.button', { number: currentMilestone + 1 })}</Button>
+        <Text mb="sm">{t('details.milestones.waiting-submit.message', { number })}</Text>
+        <Button color="violet">{t('details.milestones.waiting-submit.button', { number })}</Button>
       </Paper>
     );
   }
@@ -37,10 +38,10 @@ function StatusActionsMilestones() {
     return (
       <>
         <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-          <Text>{t('details.milestones.submitted.message', { number: currentMilestone + 1 })}</Text>
+          <Text>{t('details.milestones.submitted.message', { number })}</Text>
         </Paper>
         <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-          <Text>{t('details.milestones.submitted.description')}</Text>
+          <Text>{t('details.milestones.submitted.description', { number })}</Text>
         </Paper>
       </>
     );
@@ -54,8 +55,8 @@ function StatusActionsMilestones() {
         </Paper>
         {/* To move to a different component */}
         <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-          <Text mb="sm">{t('details.milestones.waiting-submit.message', { number: currentMilestone + 1 })}</Text>
-          <Button color="violet">{t('details.milestones.waiting-submit.button', { number: currentMilestone + 1 })}</Button>
+          <Text mb="sm">{t('details.milestones.waiting-submit.message', { number })}</Text>
+          <Button color="violet">{t('details.milestones.waiting-submit.button')}</Button>
         </Paper>
       </>
     );

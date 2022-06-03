@@ -377,6 +377,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
           dateSubmission: new Date(),
           dateSubmissionOnChain: new Date(),
           dateRejection: new Date(),
+          reviewMilestone: 'We would like more details about this milestone',
         },
         {
           budget: 200000,
