@@ -13,18 +13,6 @@ function DetailsMilestonesProgress() {
     return null;
   }
 
-  // const getIcon = (timelineStep: number, currentStep: number, pendingStep?: number) => {
-  //   if (timelineStep === pendingStep) {
-  //     return <Clock size={12} />;
-  //   }
-
-  //   if (currentStep >= timelineStep) {
-  //     return <Check size={12} />;
-  //   }
-
-  //   return null;
-  // };
-
   const getIconMilestone = (milestoneNumber: number, status?: string | null) => {
     if (milestoneNumber > currentMilestone) {
       return null;

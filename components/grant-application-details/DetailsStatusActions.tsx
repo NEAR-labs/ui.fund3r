@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next';
 
 import StatusActionEvaluated from '@/components/grant-application-details/StatusActionEvaluated';
 import StatusActionKycApproved from '@/components/grant-application-details/StatusActionKycApproved';
+import StatusActionsMilestones from '@/components/grant-application-details/StatusActionsMilestones';
 import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
@@ -27,8 +28,24 @@ function DetailsStatusActions({
   const { t } = useTranslation('grant');
   const { status } = useGrantStatus();
 
-  const { FULLY_SUBMITTED, EVALUATED, INTERVIEW_SCHEDULED, INTERVIEW_COMPLETED, DENIED, APPROVED, KYC_COMPLETED, KYC_DENIED, KYC_APPROVED, AGREEMENT_SIGNED, FIRST_PAYMENT_SENT } =
-    STATUS;
+  const {
+    FULLY_SUBMITTED,
+    EVALUATED,
+    INTERVIEW_SCHEDULED,
+    INTERVIEW_COMPLETED,
+    DENIED,
+    APPROVED,
+    KYC_COMPLETED,
+    KYC_DENIED,
+    KYC_APPROVED,
+    AGREEMENT_SIGNED,
+    FIRST_PAYMENT_SENT,
+    ONBOARDING_COMPLETED,
+  } = STATUS;
+
+  if (status === ONBOARDING_COMPLETED) {
+    return <StatusActionsMilestones />;
+  }
 
   if (status === FIRST_PAYMENT_SENT) {
     return (

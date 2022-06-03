@@ -30,10 +30,10 @@ First complete the full form process then go to these URLs
 - [ ] http://localhost:3000/grants/t3st.testnet-9 | Should show "Your account has been approved. To continue please sign the grant agreement." and a sign agreement button, KYC should be checked
 - [ ] http://localhost:3000/grants/t3st.testnet-10 | Should show "You successfully signed the agreement and we are ready to payouts you up front part of grant." and Signing of agreement should be checked and Upfront payout should be pending
 - [ ] http://localhost:3000/grants/t3st.testnet-11 | Should show "We have successfully completed the first payment. We are waiting for you at the onboarding meeting." and Upfront payout should be checked and Onboarding pending
+- [ ] http://localhost:3000/grants/t3st.testnet-12 | Should show "Let us know when you are done with milestone 1 and we will start the review." with a submit button and "Let’s start to work" instead of the process overview with only "Working on Milestone 1" marked as pending
 
 ### Non implemented yet
 
-- [ ] http://localhost:3000/grants/t3st.testnet-12 | Should show "Let us know when you are done with milestone 1 and we will start the review." with a submit button and "Let’s start to work" instead of the process overview with only "Working on Milestone 1" marked as pending
 - [ ] http://localhost:3000/grants/t3st.testnet-13 | Should show "You have successfully submit Milestone 1" and the message "You will receive a follow up email to confirm Milestone 1 has been approved. If you have questions that aren’t answered on near.org/grants, please contact us via email at grants@near.foundation.", "Working on Milestone 1" should be marked as done and "Submit" aswell, "Review" should be marked as pending
 - [ ] http://localhost:3000/grants/t3st.testnet-14 | Should show "Your application has been denied. Please, check comments and submit your application again." and the submit component below with only "Working on Milestone 1" marked as pending
 - [ ] http://localhost:3000/grants/t3st.testnet-15 | Should show a message about waiting for payment and the review as done and Payout as pending
