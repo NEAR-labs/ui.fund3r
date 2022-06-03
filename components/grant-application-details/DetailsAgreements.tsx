@@ -1,7 +1,6 @@
 import { Button, Title } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
-import LabelValue from '@/components/common/LabelValue';
 import { getFileDownloadUrl } from '@/services/helloSignService';
 
 function DetailsAgreements({ helloSignRequestId }: { helloSignRequestId: string }) {
