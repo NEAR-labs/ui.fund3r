@@ -9,10 +9,17 @@ export default interface MilestoneInterface {
   // submission
   githubUrl?: string;
   attachment?: AttachmentInterface;
+  comments?: string;
 
   // status
-  submissionDate?: Date;
-  reviewDate?: Date;
-  payoutDate?: Date;
-  reviewComment?: string;
+  reviewMilestone?: string | null;
+  dateSubmission?: Date | null;
+  dateSubmissionOnChain?: Date | null;
+  dateRejection?: Date | null;
+  dateValidation?: Date | null;
+
+  // computed
+  status?: string | null;
+  step?: number | null;
+  pendingStep?: number | null;
 }
