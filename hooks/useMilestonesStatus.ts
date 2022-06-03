@@ -54,10 +54,6 @@ const useMilestonesStatus = () => {
 
     if (milestone.dateValidation) {
       milestone.status = MILESTONE_STATUS.REVIEW;
-    }
-
-    if (milestone.datePayout) {
-      milestone.status = MILESTONE_STATUS.PAYOUT;
       currentMilestone = Math.min(milestones.length - 1, index + 1);
     }
 

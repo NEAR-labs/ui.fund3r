@@ -37,7 +37,7 @@ function StatusActionsMilestones() {
     return (
       <>
         <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-          <Text>{t('details.milestones.submitted.message')}</Text>
+          <Text>{t('details.milestones.submitted.message', { number: currentMilestone + 1 })}</Text>
         </Paper>
         <Paper shadow="sm" p="lg" radius="lg" mt="xl">
           <Text>{t('details.milestones.submitted.description')}</Text>
