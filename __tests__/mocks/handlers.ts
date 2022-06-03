@@ -410,6 +410,13 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
           date: new Date(),
           status: 'paid',
         },
+        {
+          id: '00002',
+          amount: 188300,
+          currency: 'NEAR',
+          date: new Date(),
+          status: 'paid',
+        },
       ],
       milestones: [
         {
