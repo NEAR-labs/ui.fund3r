@@ -15,6 +15,7 @@ function StatusActionsMilestones() {
   const { status } = milestonesStatus[currentMilestone];
 
   if (status === MILESTONE_STATUS.STARTED) {
+    // to move to a different component
     return (
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
         <Text mb="sm">{t('details.milestones.waiting-submit.message', { number: currentMilestone + 1 })}</Text>
@@ -40,6 +41,21 @@ function StatusActionsMilestones() {
         </Paper>
         <Paper shadow="sm" p="lg" radius="lg" mt="xl">
           <Text>{t('details.milestones.submitted.description')}</Text>
+        </Paper>
+      </>
+    );
+  }
+
+  if (status === MILESTONE_STATUS.REJECTED) {
+    return (
+      <>
+        <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+          <Text>{t('details.milestones.rejection.message')}</Text>
+        </Paper>
+        {/* To move to a different component */}
+        <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+          <Text mb="sm">{t('details.milestones.waiting-submit.message', { number: currentMilestone + 1 })}</Text>
+          <Button color="violet">{t('details.milestones.waiting-submit.button', { number: currentMilestone + 1 })}</Button>
         </Paper>
       </>
     );

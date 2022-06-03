@@ -341,6 +341,9 @@
         "message": "Please submit your milestone to the DAO",
         "button": "Submit milestone"
       },
+      "rejection": {
+        "message": "Your milestone application has been denied. Please, check comments and submit your application again."
+      },
       "submitted": {
         "message": "You have successfully submit Milestone {{ number }}",
         "description": "You will receive a follow up email to confirm Milestone {{ number }} has been approved. If you have questions that aren’t answered on near.org/grants, please contact us via email at grants@near.foundation."

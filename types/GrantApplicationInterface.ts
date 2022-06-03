@@ -141,7 +141,7 @@ export interface GrantApplicationInterface {
     reviewMilestone?: string | null;
     dateSubmission?: Date | null;
     dateSubmissionOnChain?: Date | null;
-    dataRejection?: Date | null;
+    dateRejection?: Date | null;
     dateValidation?: Date | null;
     datePayout?: Date | null;
     status?: string | null;

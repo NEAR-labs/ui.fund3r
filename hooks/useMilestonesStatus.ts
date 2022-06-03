@@ -6,6 +6,7 @@ const MILESTONE_STATUS = {
   ERROR: 'ERROR',
   STARTED: 'STARTED',
   PARTLY_SUBMITTED: 'PARTLY_SUBMITTED',
+  REJECTED: 'REJECTED',
   SUBMIT: 'SUBMIT',
   REVIEW: 'REVIEW',
   PAYOUT: 'PAYOUT',
@@ -46,8 +47,9 @@ const useMilestonesStatus = () => {
       milestone.pendingStep = 1;
     }
 
-    if (milestone.dataRejection) {
-      milestone.status = MILESTONE_STATUS.SUBMIT;
+    if (milestone.dateRejection) {
+      milestone.status = MILESTONE_STATUS.REJECTED;
+      milestone.pendingStep = 0;
     }
 
     if (milestone.dateValidation) {
