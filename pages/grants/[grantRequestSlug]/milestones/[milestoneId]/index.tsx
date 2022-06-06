@@ -19,16 +19,16 @@ import parseCookies from '@/utilities/parseCookies';
 function SubmitMilestone() {
   const router = useRouter();
   const { t } = useTranslation('milestone');
-  const { grantRequestSlug } = router.query;
+  const { grantRequestSlug, milestoneId } = router.query;
 
-  if (typeof grantRequestSlug !== 'string') {
+  if (typeof grantRequestSlug !== 'string' || typeof milestoneId !== 'string') {
     throw new Error('Invalid URL');
   }
 
   const id = grantRequestSlug.split('-')[1];
-  const numberId = parseInt(id as string, 10);
+  const grantId = parseInt(id as string, 10);
 
-  const { isLoading } = useGrant(numberId);
+  const { grant, isLoading } = useGrant(grantId);
 
   /*
     5 Cases to handle here
@@ -38,6 +38,9 @@ function SubmitMilestone() {
     - Milestone form
     - Milestone submitted but not onchain
   */
+
+  // const milestone = grant.milestones.find((m) => m.id === milestoneId);
+  const milestoneIdInteger = parseInt(milestoneId as string, 10);
 
   return (
     <DefaultLayout>
@@ -50,7 +53,7 @@ function SubmitMilestone() {
             <LoadingAnimation />
           ) : (
             <Container size="lg">
-              <MilestoneForm />
+              <MilestoneForm grantId={grantId} milestoneId={milestoneIdInteger} />
             </Container>
           )}
         </NearAuthenticationGuardWithLoginRedirection>
