@@ -14,7 +14,8 @@
     },
     "comments": {
       "label": "Comments",
-      "placeholder": "Commments"
-    }
+      "placeholder": "Comments"
+    },
+    "submit": "Submit milestone"
   }
 }

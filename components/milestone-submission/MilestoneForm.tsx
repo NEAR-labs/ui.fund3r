@@ -1,8 +1,10 @@
+import type { SyntheticEvent } from 'react';
 import { useQuery } from 'react-query';
-import { Title } from '@mantine/core';
+import { Button, Group, Title } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
 import { useTranslation } from 'next-i18next';
 
+import AutoFormFields from '@/components/auto-form/AutoFormFields';
 import createSchema from '@/form-schemas/milestoneSubmissionFormSchema';
 import useAccountSignature from '@/hooks/useAccountSignature';
 import useDaoContract from '@/hooks/useDaoContract';
@@ -36,7 +38,7 @@ function MilestoneForm({ grantId, milestoneId }: { grantId: number; milestoneId:
   const {
     refetch: submitForm,
     isLoading: isSubmitingLoading,
-    isError: isSubmitingError,
+    // isError: isSubmitingError,
   } = useQuery(
     ['submitMilestoneData', apiSignature, grantId, milestoneId, form.values, signObjectMessage],
     () =>
@@ -61,11 +63,24 @@ function MilestoneForm({ grantId, milestoneId }: { grantId: number; milestoneId:
   );
 
   const loading = isSubmitingLoading || isNearLoading;
-  const error = isSubmitingError;
+  // const error = isSubmitingError;
+
+  const submit = (e: SyntheticEvent) => {
+    e.preventDefault();
+    submitForm();
+  };
 
   return (
     <div>
       <Title>{t('form.title', { number: milestoneNumber })}</Title>
+      <form onSubmit={submit}>
+        <AutoFormFields form={form} schema={schema} fields={['attachment', 'githubUrl', 'comments']} loading={loading} translationNamespace="milestone" />
+        <Group position="right" mt="xl">
+          <Button type="submit" color="violet" disabled={loading} loading={isSubmitingLoading || isNearLoading}>
+            {t('form.submit')}
+          </Button>
+        </Group>
+      </form>
     </div>
   );
 }

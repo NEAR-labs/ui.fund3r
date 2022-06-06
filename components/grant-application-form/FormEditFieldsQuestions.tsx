@@ -16,7 +16,7 @@ function FormEditFieldsQuestions({ form, schema, loading }: { form: UseFormRetur
     'projectRaisingRound',
   ];
 
-  return <AutoFormFields form={form} schema={schema} fields={fields} loading={loading} />;
+  return <AutoFormFields form={form} schema={schema} fields={fields} loading={loading} translationNamespace="grant" />;
 }
 
 export default FormEditFieldsQuestions;

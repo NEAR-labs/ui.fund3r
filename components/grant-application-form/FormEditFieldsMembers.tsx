@@ -16,7 +16,7 @@ function FormEditFieldsMembers({ form, schema, loading }: { form: UseFormReturnT
       <Title order={2} mt={48} mb={24}>
         {t('form.memmberDetailsTitle')}
       </Title>
-      <AutoFormFields form={form} schema={schema} fields={fields} loading={loading} />
+      <AutoFormFields form={form} schema={schema} fields={fields} loading={loading} translationNamespace="grant" />
     </>
   );
 }
