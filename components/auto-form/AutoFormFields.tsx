@@ -5,7 +5,6 @@ import { z } from 'zod';
 import GenericField from '@/components/auto-form/GenericField';
 import createValidationUtilities from '@/utilities/createValidationUtilities';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function AutoFormFields({
   form,
   schema,
@@ -13,7 +12,9 @@ function AutoFormFields({
   loading,
   translationNamespace,
 }: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   form: UseFormReturnType<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   schema: z.ZodObject<any>;
   fields: string[];
   loading: boolean;
