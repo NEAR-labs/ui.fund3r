@@ -2,7 +2,7 @@ import axios from 'axios';
 import type NearApiSignatureInterface from 'types/NearApiSignatureInterface';
 
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
-import type { MilestoneInterface } from '@/types/MilestoneInterface';
+import type MilestoneInterface from '@/types/MilestoneInterface';
 
 const API_HOST = process.env.NEXT_PUBLIC_BACKEND_HOST;
 

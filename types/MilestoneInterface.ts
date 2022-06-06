@@ -1,4 +1,4 @@
-import type AttachmentInterface from './AttachmentInterface';
+// import type AttachmentInterface from './AttachmentInterface';
 
 export default interface MilestoneInterface {
   // plan
@@ -8,7 +8,7 @@ export default interface MilestoneInterface {
 
   // submission
   githubUrl?: string;
-  attachment?: AttachmentInterface;
+  attachment?: string; // to replace with AttachmentInterface;
   comments?: string;
 
   // status
