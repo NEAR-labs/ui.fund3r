@@ -139,7 +139,6 @@ const validateNearTransactionHash = async (
   const { data } = await axios.put(
     `${API_HOST}/grants/${grantId}/near-transactions`,
     {
-      grantId,
       proposalNearTransactionHash,
     },
     {
@@ -227,6 +226,38 @@ const submitMilestoneData = async (
   return data;
 };
 
+const validateMilestoneNearTransactionHash = async (
+  signature: NearApiSignatureInterface | undefined,
+  {
+    grantId,
+    milestoneId,
+    proposalNearTransactionHash,
+  }: {
+    grantId: number | undefined;
+    milestoneId: number | undefined;
+    proposalNearTransactionHash: string | string[] | null | undefined;
+  },
+): Promise<GrantApplicationInterface | null> => {
+  if (!signature || !proposalNearTransactionHash) {
+    return null;
+  }
+
+  const { data } = await axios.put(
+    `${API_HOST}/grants/${grantId}/milestones/${milestoneId}/near-transactions`,
+    {
+      proposalNearTransactionHash,
+    },
+    {
+      headers: {
+        'X-NEAR-ACCOUNT-ID': signature.accountId,
+        'X-NEAR-SIGNATURE': JSON.stringify(signature.signature),
+      },
+    },
+  );
+
+  return data;
+};
+
 // const submitMilestoneAttachment = async (signature: NearApiSignatureInterface | undefined, data: any) => {};
 
 // const submitGrantAttachment = async (signature: NearApiSignatureInterface | undefined, data: any) => {};
@@ -238,6 +269,7 @@ export {
   submitCalendlyUrl,
   submitGrantApplication,
   submitMilestoneData,
+  validateMilestoneNearTransactionHash,
   validateNearTransactionHash,
   // submitMilestoneAttachment,
   // submitGrantAttachment,

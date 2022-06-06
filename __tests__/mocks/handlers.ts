@@ -483,6 +483,10 @@ const handlers = [
       response.milestones[0].dateSubmission = new Date();
     }
 
+    if (localStorage.getItem('fund3r-milestone-mock-near-tx') === 'true' && response.milestones && response.milestones[0].budget) {
+      response.milestones[0].dateSubmissionOnChain = new Date();
+    }
+
     return res(ctx.delay(GET_DELAY), ctx.json(response));
   }),
 
@@ -593,6 +597,19 @@ const handlers = [
     };
 
     localStorage.setItem('fund3r-milestone-submission-mock', 'true');
+
+    return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
+  }),
+
+  // When this endpoint is called the backend should verify that the transaction hash is matching the milestone
+  rest.put<never, any>(`${BASE_URL}/grants/:id/milestones/:milestoneId/near-transactions`, (_req, res, ctx) => {
+    const response = {
+      ...milestoneData,
+      dateSubmission: new Date(),
+      dateSubmissionOnChain: new Date(),
+    };
+
+    localStorage.setItem('fund3r-milestone-mock-near-tx', 'true');
 
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),
