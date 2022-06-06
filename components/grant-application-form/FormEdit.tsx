@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { Alert, Button, Divider, Grid, Group, Text, Title } from '@mantine/core';
 import { formList, useForm, zodResolver } from '@mantine/form';
+import type { UseFormReturnType } from '@mantine/form/lib/use-form';
 import { showNotification } from '@mantine/notifications';
 import { useTranslation } from 'next-i18next';
 import { AlertCircle } from 'tabler-icons-react';
@@ -62,6 +63,7 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
     referral: '',
     teamReferral: '',
     comments: '',
+    aboutTokensReceivedFromNear: '',
   };
 
   const form = useForm({
@@ -148,11 +150,25 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
     saveForm();
   };
 
+  // to move to a separate file
+  const customValidate = (form: UseFormReturnType<any>) => {
+    if (form.values.hasPreviouslyReceivedFundingTokensGrantsFromNear && form.values.aboutTokensReceivedFromNear.length === 0) {
+      form.setErrors({
+        ...form.errors,
+        aboutTokensReceivedFromNear: t('form.aboutTokensReceivedFromNear.error'),
+      });
+
+      return false;
+    }
+
+    return true;
+  };
+
   const submit = (e: SyntheticEvent) => {
     e.preventDefault();
     const validation = form.validate();
 
-    if (validation.hasErrors) {
+    if (validation.hasErrors || !customValidate(form)) {
       showNotification({
         color: 'red',
         message: t('error.form.message'),
