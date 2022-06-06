@@ -10,8 +10,10 @@ import type { ParsedUrlQuery } from 'querystring';
 import LoadingAnimation from '@/components/common/LoadingAnimation';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
 import MilestoneForm from '@/components/milestone-submission/MilestoneForm';
+import MilestoneProposalSubmission from '@/components/milestone-submission/MilestoneProposalSubmission';
 import { COOKIE_SIGNATURE_KEY } from '@/constants';
 import useGrant from '@/hooks/useGrant';
+import { MILESTONE_STATUS, useMilestonesStatus } from '@/hooks/useMilestonesStatus';
 import DefaultLayout from '@/layouts/default';
 import { getGrantApplication } from '@/services/apiService';
 import parseCookies from '@/utilities/parseCookies';
@@ -20,6 +22,7 @@ function SubmitMilestone() {
   const router = useRouter();
   const { t } = useTranslation('milestone');
   const { grantRequestSlug, milestoneId } = router.query;
+  const { milestonesStatus } = useMilestonesStatus();
 
   if (typeof grantRequestSlug !== 'string' || typeof milestoneId !== 'string') {
     throw new Error('Invalid URL');
@@ -39,8 +42,9 @@ function SubmitMilestone() {
     - Milestone submitted but not onchain
   */
 
-  // const milestone = grant.milestones.find((m) => m.id === milestoneId);
   const milestoneIdInteger = parseInt(milestoneId as string, 10);
+  // const milestone = grant.milestones.find((m) => m.id === milestoneId);
+  const status = milestonesStatus && milestonesStatus[milestoneIdInteger] && milestonesStatus[milestoneIdInteger].status;
 
   return (
     <DefaultLayout>
@@ -53,7 +57,8 @@ function SubmitMilestone() {
             <LoadingAnimation />
           ) : (
             <Container size="lg">
-              <MilestoneForm grantData={grant} milestoneId={milestoneIdInteger} />
+              {status === MILESTONE_STATUS.STARTED && <MilestoneForm grantData={grant} milestoneId={milestoneIdInteger} />}
+              {status === MILESTONE_STATUS.PARTLY_SUBMITTED && <MilestoneProposalSubmission />}
             </Container>
           )}
         </NearAuthenticationGuardWithLoginRedirection>

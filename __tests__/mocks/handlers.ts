@@ -479,6 +479,10 @@ const handlers = [
       response.isNearProposalValid = true;
     }
 
+    if (localStorage.getItem('fund3r-milestone-submission-mock') === 'true' && response.milestones && response.milestones[0].budget) {
+      response.milestones[0].dateSubmission = new Date();
+    }
+
     return res(ctx.delay(GET_DELAY), ctx.json(response));
   }),
 
@@ -587,6 +591,8 @@ const handlers = [
       ...milestoneData,
       dateSubmission: new Date(),
     };
+
+    localStorage.setItem('fund3r-milestone-submission-mock', 'true');
 
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),
