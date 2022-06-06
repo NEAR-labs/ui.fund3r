@@ -98,6 +98,7 @@ const createSchema = (t: TFunction) => {
       },
     }),
     hasPreviouslyReceivedFundingTokensGrantsFromNear: z.boolean(),
+    aboutTokensReceivedFromNear: z.string().optional(),
 
     addressCountry: z.string({ required_error: t('form.addressCountry.error') }).min(1, { message: t('form.addressCountry.error') }),
     addressCity: z.string({ required_error: t('form.addressCity.error') }).min(1, { message: t('form.addressCity.error') }),

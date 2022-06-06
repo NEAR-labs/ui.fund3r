@@ -17,6 +17,9 @@ function FormEditFieldsMembers({ form, schema, loading }: { form: UseFormReturnT
         {t('form.memmberDetailsTitle')}
       </Title>
       <AutoFormFields form={form} schema={schema} fields={fields} loading={loading} translationNamespace="grant" />
+      {form.values.hasPreviouslyReceivedFundingTokensGrantsFromNear && (
+        <AutoFormFields form={form} schema={schema} fields={['aboutTokensReceivedFromNear']} loading={loading} translationNamespace="grant" />
+      )}
     </>
   );
 }

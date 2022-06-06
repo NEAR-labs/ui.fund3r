@@ -67,6 +67,7 @@ export interface GrantApplicationInterface {
   twitter?: string;
   workingAloneOrTeam?: string; // replace with enums
   hasPreviouslyReceivedFundingTokensGrantsFromNear?: boolean;
+  aboutTokensReceivedFromNear?: string;
 
   // Project related
   projectName?: string;

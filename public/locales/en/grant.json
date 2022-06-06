@@ -148,6 +148,11 @@
       "label": "Previously received funding, tokens, or grants from NEAR.",
       "placeholder": "Previously received funding, tokens, or grants from NEAR."
     },
+    "aboutTokensReceivedFromNear": {
+      "label": "Tell us about your received funding, tokens, or grants from NEAR*",
+      "placeholder": "Tell us about your received funding, tokens, or grants from NEAR*",
+      "error": "Please enter explanation that is at least 1 character long and less than 100."
+    },
     "addressDetailsTitle": "Address Details",
     "addressCountry": {
       "label": "Country",
