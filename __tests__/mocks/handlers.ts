@@ -439,6 +439,12 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
   ][id];
 };
 
+const milestoneData = {
+  budget: 100000,
+  deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
+  description: 'Alpha of the Metaverse',
+};
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const handlers = [
   // The backend will verify the signature following this https://stackoverflow.com/questions/61982163/jwt-authentication-for-near-protocol-in-a-python-backend
@@ -471,6 +477,14 @@ const handlers = [
 
     if (localStorage.getItem('fund3r-mock-near-tx') === 'true') {
       response.isNearProposalValid = true;
+    }
+
+    if (localStorage.getItem('fund3r-milestone-submission-mock') === 'true' && response.milestones && response.milestones[0].budget) {
+      response.milestones[0].dateSubmission = new Date();
+    }
+
+    if (localStorage.getItem('fund3r-milestone-mock-near-tx') === 'true' && response.milestones && response.milestones[0].budget) {
+      response.milestones[0].dateSubmissionOnChain = new Date();
     }
 
     return res(ctx.delay(GET_DELAY), ctx.json(response));
@@ -576,20 +590,39 @@ const handlers = [
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),
 
-  // todo
-  rest.post<never, any>(`${BASE_URL}/grants/:id/milestone/:milestoneId`, (_req, res, ctx) => {
-    return res(ctx.delay(POST_PUT_DELAY), ctx.json({ todo: true }));
+  rest.put<never, any>(`${BASE_URL}/grants/:id/milestones/:milestoneId`, (_req, res, ctx) => {
+    const response = {
+      ...milestoneData,
+      dateSubmission: new Date(),
+    };
+
+    localStorage.setItem('fund3r-milestone-submission-mock', 'true');
+
+    return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
+  }),
+
+  // When this endpoint is called the backend should verify that the transaction hash is matching the milestone
+  rest.put<never, any>(`${BASE_URL}/grants/:id/milestones/:milestoneId/near-transactions`, (_req, res, ctx) => {
+    const response = {
+      ...milestoneData,
+      dateSubmission: new Date(),
+      dateSubmissionOnChain: new Date(),
+    };
+
+    localStorage.setItem('fund3r-milestone-mock-near-tx', 'true');
+
+    return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),
 
   // todo
-  rest.post<never, any>(`${BASE_URL}/grants/:id/milestone/:milestoneId/attachment`, (_req, res, ctx) => {
-    return res(ctx.delay(POST_PUT_DELAY), ctx.json({ todo: true }));
-  }),
+  // rest.post<never, any>(`${BASE_URL}/grants/:id/milestones/:milestoneId/attachment`, (_req, res, ctx) => {
+  //   return res(ctx.delay(POST_PUT_DELAY), ctx.json({ todo: true }));
+  // }),
 
   // todo
-  rest.post<never, any>(`${BASE_URL}/grants/:id/attachment`, (_req, res, ctx) => {
-    return res(ctx.delay(POST_PUT_DELAY), ctx.json({ todo: true }));
-  }),
+  // rest.post<never, any>(`${BASE_URL}/grants/:id/attachment`, (_req, res, ctx) => {
+  //   return res(ctx.delay(POST_PUT_DELAY), ctx.json({ todo: true }));
+  // }),
 ];
 
 export default handlers;

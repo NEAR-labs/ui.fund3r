@@ -1,5 +1,10 @@
 {
-  "title": "Submit Milestone",
+  "title": "Submit Milestone | FUND3R",
+  "blockchain": {
+    "title": "Milestone submission to the DAO",
+    "description": "In order to submit this Milestone, you need to publish it to the NEAR Blockhain.",
+    "button": "Submit milestone"
+  },
   "form": {
     "title": "Milestone {{ number }}",
     "attachment": {
@@ -14,7 +19,27 @@
     },
     "comments": {
       "label": "Comments",
-      "placeholder": "Commments"
+      "placeholder": "Comments"
+    },
+    "submit": "Submit milestone"
+  },
+  "error": {
+    "button": "Back to the grant application",
+    "generic": {
+      "description": "An error occurred while submitting the milestone. Please, try again later."
+    },
+    "already": {
+      "description": "You have already submitted this milestone."
+    },
+    "not_found": {
+      "description": "The milestone you are trying to submit does not exist."
+    },
+    "previous_not_submitted": {
+      "description": "You need to submit the previous milestone before submitting this one."
+    },
+    "tx_error": {
+      "title": "Transaction error",
+      "description": "The transaction was not submitted. Please, try again."
     }
   }
 }

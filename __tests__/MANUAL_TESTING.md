@@ -36,6 +36,14 @@ First complete the full form process then go to these URLs
 - [ ] http://localhost:3000/grants/t3st.testnet-15 | Should show "Your application has been denied. Please, check comments and submit your application again." and the submit component below with only "Working on Milestone 1" marked as pending
 - [ ] http://localhost:3000/grants/t3st.testnet-16 | Should show "Working on Milestone 1" as done, "Working on Milestone 2" as pending and "Let us know when you are done with milestone 2 and we will start the review." with a submit button; it should have 2 payments in the payment part and have ticks in the 2 first items of payment schedule
 
+### Milestones submission
+
+- [ ] Milestone submission page should give an error if the milestone doesn't exist
+- [ ] Milestone submission page should only allow milestones that has not been submitted
+- [ ] Milestone submission page will not let you submit milestone i + 1 if milestone i had not been submitted
+- [ ] Milestone submission page will show you the page to submit it to the DAO if it has only been sent to the backend
+- [ ] Milestone submission page should show the form if it has not been submitted at all
+
 ### Payments tab
 
 - [ ] Should show the initial payment by default

@@ -339,7 +339,7 @@
       },
       "waiting-blockchain": {
         "message": "Please submit your milestone to the DAO",
-        "button": "Submit milestone"
+        "button": "Submit Milestone {{ number }} on NEAR"
       },
       "rejection": {
         "message": "Your milestone application has been denied. Please, check comments and submit your application again."

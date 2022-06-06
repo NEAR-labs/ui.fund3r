@@ -9,9 +9,12 @@ import type { ParsedUrlQuery } from 'querystring';
 
 import LoadingAnimation from '@/components/common/LoadingAnimation';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
+import MilestoneError from '@/components/milestone-submission/MilestoneError';
 import MilestoneForm from '@/components/milestone-submission/MilestoneForm';
+import MilestoneProposalSubmission from '@/components/milestone-submission/MilestoneProposalSubmission';
 import { COOKIE_SIGNATURE_KEY } from '@/constants';
 import useGrant from '@/hooks/useGrant';
+import { MILESTONE_STATUS, useMilestonesStatus } from '@/hooks/useMilestonesStatus';
 import DefaultLayout from '@/layouts/default';
 import { getGrantApplication } from '@/services/apiService';
 import parseCookies from '@/utilities/parseCookies';
@@ -19,25 +22,25 @@ import parseCookies from '@/utilities/parseCookies';
 function SubmitMilestone() {
   const router = useRouter();
   const { t } = useTranslation('milestone');
-  const { grantRequestSlug } = router.query;
+  const { grantRequestSlug, milestoneId } = router.query;
+  const { milestonesStatus } = useMilestonesStatus();
 
-  if (typeof grantRequestSlug !== 'string') {
+  if (typeof grantRequestSlug !== 'string' || typeof milestoneId !== 'string') {
     throw new Error('Invalid URL');
   }
 
   const id = grantRequestSlug.split('-')[1];
-  const numberId = parseInt(id as string, 10);
+  const grantId = parseInt(id as string, 10);
 
-  const { isLoading } = useGrant(numberId);
+  const { grant, isLoading } = useGrant(grantId);
 
-  /*
-    5 Cases to handle here
-    - Previous milestone not submitted / Error
-    - Already submitted / Error
-    - Milestone does not exist / Error
-    - Milestone form
-    - Milestone submitted but not onchain
-  */
+  const milestoneIdInteger = parseInt(milestoneId as string, 10);
+  const status = milestonesStatus && milestonesStatus[milestoneIdInteger] && milestonesStatus[milestoneIdInteger].status;
+
+  const previousMilestoneId = milestoneIdInteger - 1;
+  const previousStatus = milestonesStatus && milestonesStatus[previousMilestoneId] && milestonesStatus[previousMilestoneId].status;
+
+  const previousMilestoneNotSubmitted = milestoneIdInteger > 0 && (previousStatus === MILESTONE_STATUS.STARTED || previousStatus === MILESTONE_STATUS.PARTLY_SUBMITTED);
 
   return (
     <DefaultLayout>
@@ -50,7 +53,11 @@ function SubmitMilestone() {
             <LoadingAnimation />
           ) : (
             <Container size="lg">
-              <MilestoneForm />
+              {!previousMilestoneNotSubmitted && status === MILESTONE_STATUS.STARTED && <MilestoneForm grantData={grant} milestoneId={milestoneIdInteger} />}
+              {!previousMilestoneNotSubmitted && status === MILESTONE_STATUS.PARTLY_SUBMITTED && <MilestoneProposalSubmission grantData={grant} milestoneId={milestoneIdInteger} />}
+              {(previousMilestoneNotSubmitted || (status !== MILESTONE_STATUS.PARTLY_SUBMITTED && status !== MILESTONE_STATUS.STARTED)) && (
+                <MilestoneError milestoneId={milestoneIdInteger} previousMilestoneNotSubmitted={previousMilestoneNotSubmitted} />
+              )}
             </Container>
           )}
         </NearAuthenticationGuardWithLoginRedirection>

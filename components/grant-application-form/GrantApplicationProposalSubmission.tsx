@@ -42,8 +42,6 @@ function GrantApplicationProposalSubmission({ data, setData }: { data: GrantAppl
   );
 
   useEffect(() => {
-    console.log(transactionHashes && apiSignature && grantId && grantId >= 0);
-
     if (transactionHashes && apiSignature && typeof grantId !== 'undefined' && grantId >= 0) {
       fetchValidateTransactionHash();
     }

@@ -6,8 +6,20 @@ import GenericField from '@/components/auto-form/GenericField';
 import createValidationUtilities from '@/utilities/createValidationUtilities';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function AutoFormFields({ form, schema, fields, loading }: { form: UseFormReturnType<any>; schema: z.ZodObject<any>; fields: string[]; loading: boolean }) {
-  const { t } = useTranslation('grant');
+function AutoFormFields({
+  form,
+  schema,
+  fields,
+  loading,
+  translationNamespace,
+}: {
+  form: UseFormReturnType<any>;
+  schema: z.ZodObject<any>;
+  fields: string[];
+  loading: boolean;
+  translationNamespace: string;
+}) {
+  const { t } = useTranslation(translationNamespace);
 
   const { validateFieldOnBlur, validateFieldOnInput } = createValidationUtilities(form);
 

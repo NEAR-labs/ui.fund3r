@@ -16,6 +16,10 @@
 - HTTP client: **[Axios](https://github.com/axios/axios)**
 - Query hooks: **[React Query](https://react-query.tanstack.com/)**
 
+## Project status
+
+Project under construction
+
 ## Guides
 
 ### Configuration
