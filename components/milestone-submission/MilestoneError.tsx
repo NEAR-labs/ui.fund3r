@@ -5,11 +5,6 @@ import { useTranslation } from 'next-i18next';
 
 import { MILESTONE_STATUS, useMilestonesStatus } from '@/hooks/useMilestonesStatus';
 
-/*
-    5 Cases to handle here
-    - Milestone does not exist / Error
-  */
-
 function MilestoneError({ milestoneId, previousMilestoneNotSubmitted }: { milestoneId: number; previousMilestoneNotSubmitted: boolean }) {
   const { t } = useTranslation('milestone');
   const { milestonesStatus } = useMilestonesStatus();
