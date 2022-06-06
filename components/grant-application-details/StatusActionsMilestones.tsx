@@ -37,7 +37,11 @@ function StatusActionsMilestones() {
     return (
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
         <Text mb="sm">{t('details.milestones.waiting-blockchain.message')}</Text>
-        <Button color="violet">{t('details.milestones.waiting-blockchain.button')}</Button>
+        <Link href={`/grants/${grantRequestSlug}/milestones/${currentMilestone}`} passHref>
+          <Button component="a" color="violet">
+            {t('details.milestones.waiting-blockchain.button', { number })}
+          </Button>
+        </Link>
       </Paper>
     );
   }

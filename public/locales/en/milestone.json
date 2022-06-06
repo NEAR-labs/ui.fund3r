@@ -24,6 +24,19 @@
     "submit": "Submit milestone"
   },
   "error": {
+    "button": "Back to the grant application",
+    "generic": {
+      "description": "An error occurred while submitting the milestone. Please, try again later."
+    },
+    "already": {
+      "description": "You have already submitted this milestone."
+    },
+    "not_found": {
+      "description": "The milestone you are trying to submit does not exist."
+    },
+    "previous_not_submitted": {
+      "description": "You need to submit the previous milestone before submitting this one."
+    },
     "tx_error": {
       "title": "Transaction error",
       "description": "The transaction was not submitted. Please, try again."

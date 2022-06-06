@@ -17,9 +17,10 @@ function MilestoneProposalSubmission({ grantData, milestoneId }: { grantData: Gr
   const { grantRequestSlug, errorCode, transactionHashes } = router.query;
   const { isNearLoading, submitProposal } = useDaoContract();
   const apiSignature = useAccountSignature();
+  const milestoneNumber = milestoneId + 1;
 
   const submitGrantProposal = () => {
-    submitProposal(grantData, milestoneId);
+    submitProposal(grantData, milestoneNumber);
   };
 
   const grantId = grantData?.id;

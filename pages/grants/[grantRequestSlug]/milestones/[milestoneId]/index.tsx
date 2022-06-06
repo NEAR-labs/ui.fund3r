@@ -9,6 +9,7 @@ import type { ParsedUrlQuery } from 'querystring';
 
 import LoadingAnimation from '@/components/common/LoadingAnimation';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
+import MilestoneError from '@/components/milestone-submission/MilestoneError';
 import MilestoneForm from '@/components/milestone-submission/MilestoneForm';
 import MilestoneProposalSubmission from '@/components/milestone-submission/MilestoneProposalSubmission';
 import { COOKIE_SIGNATURE_KEY } from '@/constants';
@@ -33,18 +34,13 @@ function SubmitMilestone() {
 
   const { grant, isLoading } = useGrant(grantId);
 
-  /*
-    5 Cases to handle here
-    - Previous milestone not submitted / Error
-    - Already submitted / Error
-    - Milestone does not exist / Error
-    - Milestone form
-    - Milestone submitted but not onchain
-  */
-
   const milestoneIdInteger = parseInt(milestoneId as string, 10);
-  // const milestone = grant.milestones.find((m) => m.id === milestoneId);
   const status = milestonesStatus && milestonesStatus[milestoneIdInteger] && milestonesStatus[milestoneIdInteger].status;
+
+  const previousMilestoneId = milestoneIdInteger - 1;
+  const previousStatus = milestonesStatus && milestonesStatus[previousMilestoneId] && milestonesStatus[previousMilestoneId].status;
+
+  const previousMilestoneNotSubmitted = milestoneIdInteger > 0 && (previousStatus === MILESTONE_STATUS.STARTED || previousStatus === MILESTONE_STATUS.PARTLY_SUBMITTED);
 
   return (
     <DefaultLayout>
@@ -57,8 +53,11 @@ function SubmitMilestone() {
             <LoadingAnimation />
           ) : (
             <Container size="lg">
-              {status === MILESTONE_STATUS.STARTED && <MilestoneForm grantData={grant} milestoneId={milestoneIdInteger} />}
-              {status === MILESTONE_STATUS.PARTLY_SUBMITTED && <MilestoneProposalSubmission grantData={grant} milestoneId={milestoneIdInteger} />}
+              {!previousMilestoneNotSubmitted && status === MILESTONE_STATUS.STARTED && <MilestoneForm grantData={grant} milestoneId={milestoneIdInteger} />}
+              {!previousMilestoneNotSubmitted && status === MILESTONE_STATUS.PARTLY_SUBMITTED && <MilestoneProposalSubmission grantData={grant} milestoneId={milestoneIdInteger} />}
+              {(previousMilestoneNotSubmitted || (status !== MILESTONE_STATUS.PARTLY_SUBMITTED && status !== MILESTONE_STATUS.STARTED)) && (
+                <MilestoneError milestoneId={milestoneIdInteger} previousMilestoneNotSubmitted={previousMilestoneNotSubmitted} />
+              )}
             </Container>
           )}
         </NearAuthenticationGuardWithLoginRedirection>
