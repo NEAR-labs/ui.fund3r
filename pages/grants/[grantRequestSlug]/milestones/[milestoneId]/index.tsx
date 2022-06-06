@@ -58,7 +58,7 @@ function SubmitMilestone() {
           ) : (
             <Container size="lg">
               {status === MILESTONE_STATUS.STARTED && <MilestoneForm grantData={grant} milestoneId={milestoneIdInteger} />}
-              {status === MILESTONE_STATUS.PARTLY_SUBMITTED && <MilestoneProposalSubmission />}
+              {status === MILESTONE_STATUS.PARTLY_SUBMITTED && <MilestoneProposalSubmission grantData={grant} milestoneId={milestoneIdInteger} />}
             </Container>
           )}
         </NearAuthenticationGuardWithLoginRedirection>

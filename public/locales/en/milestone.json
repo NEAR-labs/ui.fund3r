@@ -1,5 +1,10 @@
 {
   "title": "Submit Milestone | FUND3R",
+  "blockchain": {
+    "title": "Milestone submission to the DAO",
+    "description": "In order to submit this Milestone, you need to publish it to the NEAR Blockhain.",
+    "button": "Submit milestone"
+  },
   "form": {
     "title": "Milestone {{ number }}",
     "attachment": {
@@ -17,5 +22,11 @@
       "placeholder": "Comments"
     },
     "submit": "Submit milestone"
+  },
+  "error": {
+    "tx_error": {
+      "title": "Transaction error",
+      "description": "The transaction was not submitted. Please, try again."
+    }
   }
 }
