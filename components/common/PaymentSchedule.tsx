@@ -6,6 +6,7 @@ import { Check } from 'tabler-icons-react';
 import DEFAULT_CURRENCY from '@/config/currency';
 import { getNearUsdConvertRate } from '@/services/currencyConverter';
 import type { PaymentInterface } from '@/types/GrantApplicationInterface';
+import budgetCalculator from '@/utilities/budgetCalculator';
 
 import type { FormList } from '../../node_modules/@mantine/form/lib/form-list/form-list';
 
@@ -56,8 +57,7 @@ function PaymentSchedule({
   });
 
   const initialBudget = fundingAmount || 0;
-  const totalMilestones = milestones?.reduce((acc, milestone) => acc + (milestone.budget || 0), 0);
-  const totalFundingAmount = (totalMilestones || 0) + initialBudget;
+  const totalFundingAmount = budgetCalculator(fundingAmount, milestones);
 
   const numberOfPayouts = payments && payments.length > 0 ? payments.length - 1 : 0;
 
