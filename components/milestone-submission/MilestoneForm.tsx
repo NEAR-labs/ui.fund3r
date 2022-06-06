@@ -1,8 +1,9 @@
 import type { SyntheticEvent } from 'react';
 import { useQuery } from 'react-query';
-import { Button, Group, Title } from '@mantine/core';
+import { Alert, Button, Group, Title } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
 import { useTranslation } from 'next-i18next';
+import { AlertCircle } from 'tabler-icons-react';
 
 import AutoFormFields from '@/components/auto-form/AutoFormFields';
 import createSchema from '@/form-schemas/milestoneSubmissionFormSchema';
@@ -10,8 +11,9 @@ import useAccountSignature from '@/hooks/useAccountSignature';
 import useDaoContract from '@/hooks/useDaoContract';
 import useSigner from '@/modules/near-api-react/hooks/useSigner';
 import { submitMilestoneData } from '@/services/apiService';
+import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
-function MilestoneForm({ grantId, milestoneId }: { grantId: number; milestoneId: number }) {
+function MilestoneForm({ grantData, milestoneId }: { grantData: GrantApplicationInterface | null; milestoneId: number }) {
   const { t } = useTranslation('milestone');
   const apiSignature = useAccountSignature();
   const { signObjectMessage } = useSigner();
@@ -34,11 +36,12 @@ function MilestoneForm({ grantId, milestoneId }: { grantId: number; milestoneId:
   });
 
   const milestoneNumber = milestoneId + 1;
+  const grantId = grantData?.id;
 
   const {
     refetch: submitForm,
     isLoading: isSubmitingLoading,
-    // isError: isSubmitingError,
+    isError: isSubmitingError,
   } = useQuery(
     ['submitMilestoneData', apiSignature, grantId, milestoneId, form.values, signObjectMessage],
     () =>
@@ -52,8 +55,8 @@ function MilestoneForm({ grantId, milestoneId }: { grantId: number; milestoneId:
       refetchOnWindowFocus: false,
       enabled: false,
       retry: false,
-      onSuccess: async (responseData) => {
-        submitProposal(responseData, milestoneNumber);
+      onSuccess: async () => {
+        submitProposal(grantData, milestoneNumber);
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {
@@ -63,7 +66,7 @@ function MilestoneForm({ grantId, milestoneId }: { grantId: number; milestoneId:
   );
 
   const loading = isSubmitingLoading || isNearLoading;
-  // const error = isSubmitingError;
+  const error = isSubmitingError;
 
   const submit = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -73,6 +76,11 @@ function MilestoneForm({ grantId, milestoneId }: { grantId: number; milestoneId:
   return (
     <div>
       <Title>{t('form.title', { number: milestoneNumber })}</Title>
+      {error && (
+        <Alert icon={<AlertCircle size={16} />} title={t('error.generic.title')} color="orange" mt={16}>
+          {t('error.generic.description')}
+        </Alert>
+      )}
       <form onSubmit={submit}>
         <AutoFormFields form={form} schema={schema} fields={['attachment', 'githubUrl', 'comments']} loading={loading} translationNamespace="milestone" />
         <Group position="right" mt="xl">

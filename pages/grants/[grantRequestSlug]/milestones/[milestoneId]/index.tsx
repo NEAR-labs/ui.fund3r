@@ -53,7 +53,7 @@ function SubmitMilestone() {
             <LoadingAnimation />
           ) : (
             <Container size="lg">
-              <MilestoneForm grantId={grantId} milestoneId={milestoneIdInteger} />
+              <MilestoneForm grantData={grant} milestoneId={milestoneIdInteger} />
             </Container>
           )}
         </NearAuthenticationGuardWithLoginRedirection>
