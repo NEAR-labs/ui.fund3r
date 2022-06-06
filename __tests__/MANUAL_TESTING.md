@@ -15,6 +15,12 @@
 - [ ] Submission to the blockchain should create a proposal to the DAO
 - [ ] If submission to the blockchain and to the backend we should see the details
 
+### Conditional form rendering
+
+- [ ] If member part of a team add field about the team and team members
+- [ ] If total amount requested above 100 000 ask for a video
+- [ ] If member already got a grant ask about
+
 ## Status testing URLs
 
 First complete the full form process then go to these URLs
