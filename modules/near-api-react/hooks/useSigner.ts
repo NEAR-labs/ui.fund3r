@@ -30,7 +30,7 @@ const useSigner = () => {
     [signer, accountId, networkId],
   );
 
-  const signObjectMessage = async (message: object) => {
+  const signObjectMessage = async (message: unknown) => {
     const stringMessage = JSON.stringify(message);
     const signedMessage = await signStringMessage(stringMessage);
     return signedMessage;
