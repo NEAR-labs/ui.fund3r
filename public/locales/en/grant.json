@@ -149,6 +149,16 @@
       "placeholder": "Are you working alone or in a team?",
       "error": "Please select a team status."
     },
+    "aboutTeam": {
+      "label": "Tell us more about your rockstar team and your achievements*",
+      "placeholder": "Tell us more about your rockstar team and your achievements*",
+      "error": "Please enter a team description that is at least 1 characters long."
+    },
+    "membersGithubUrl": {
+      "label": "Github URL of Team Member",
+      "placeholder": "Github URL of Team Member",
+      "error": "Please enter a valid GitHub profile URL."
+    },
     "hasPreviouslyReceivedFundingTokensGrantsFromNear": {
       "label": "Previously received funding, tokens, or grants from NEAR.",
       "placeholder": "Previously received funding, tokens, or grants from NEAR."
@@ -225,7 +235,8 @@
       "working-with-team": "Working With Team",
       "raising": "Yes",
       "not-raising": "No"
-    }
+    },
+    "addTeamMember": "Add Team Member"
   },
   "blockchain": {
     "title": "Submission to the DAO",
