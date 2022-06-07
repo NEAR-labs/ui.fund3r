@@ -56,6 +56,8 @@ function PaymentSchedule({
     );
   });
 
+  // to replace by an utility function
+
   const initialBudget = fundingAmount || 0;
   const totalFundingAmount = budgetCalculator(fundingAmount, milestones);
 
