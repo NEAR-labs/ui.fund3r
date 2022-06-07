@@ -55,6 +55,8 @@ function PaymentSchedule({
     );
   });
 
+  // to replace by an utility function
+
   const initialBudget = fundingAmount || 0;
   const totalMilestones = milestones?.reduce((acc, milestone) => acc + (milestone.budget || 0), 0);
   const totalFundingAmount = (totalMilestones || 0) + initialBudget;
