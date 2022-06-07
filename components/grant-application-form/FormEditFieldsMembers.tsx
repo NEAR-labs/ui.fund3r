@@ -4,12 +4,13 @@ import { useTranslation } from 'next-i18next';
 import { z } from 'zod';
 
 import AutoFormFields from '@/components/auto-form/AutoFormFields';
+import { WorkingTypes } from '@/types/GrantApplicationInterface';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function FormEditFieldsMembers({ form, schema, loading }: { form: UseFormReturnType<any>; schema: z.ZodObject<any>; loading: boolean }) {
   const { t } = useTranslation('grant');
 
-  const fields = ['firstname', 'lastname', 'dateOfBirth', 'email', 'github', 'twitter', 'workingAloneOrTeam', 'hasPreviouslyReceivedFundingTokensGrantsFromNear'];
+  const fields = ['firstname', 'lastname', 'dateOfBirth', 'email', 'github', 'twitter', 'workingAloneOrTeam'];
 
   return (
     <>
@@ -17,6 +18,12 @@ function FormEditFieldsMembers({ form, schema, loading }: { form: UseFormReturnT
         {t('form.memmberDetailsTitle')}
       </Title>
       <AutoFormFields form={form} schema={schema} fields={fields} loading={loading} translationNamespace="grant" />
+      {form.values.workingAloneOrTeam === WorkingTypes.WorkingWithTeam && (
+        <>
+          <AutoFormFields form={form} schema={schema} fields={['aboutTeam']} loading={loading} translationNamespace="grant" />
+        </>
+      )}
+      <AutoFormFields form={form} schema={schema} fields={['hasPreviouslyReceivedFundingTokensGrantsFromNear']} loading={loading} translationNamespace="grant" />
       {form.values.hasPreviouslyReceivedFundingTokensGrantsFromNear && (
         <AutoFormFields form={form} schema={schema} fields={['aboutTokensReceivedFromNear']} loading={loading} translationNamespace="grant" />
       )}
