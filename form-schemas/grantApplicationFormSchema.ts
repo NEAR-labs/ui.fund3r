@@ -79,26 +79,14 @@ const createSchema = (t: TFunction) => {
         return { message: t('form.projectRaisingRound.error') };
       },
     }),
-    attachment: z
-      .string({ required_error: t('form.attachment.error') })
-      .url({ message: t('form.attachment.error') })
-      .nullable()
-      .optional(),
+    attachment: z.string({ required_error: t('form.attachment.error') }).optional(),
 
     firstname: z.string({ required_error: t('form.firstname.error') }).min(1, { message: t('form.firstname.error') }),
     lastname: z.string({ required_error: t('form.lastname.error') }).min(1, { message: t('form.lastname.error') }),
     dateOfBirth: z.date({ required_error: t('form.dateOfBirth.error'), invalid_type_error: t('form.dateOfBirth.error') }),
     email: z.string({ required_error: t('form.email.error') }).email({ message: t('form.email.error') }),
-    github: z
-      .string()
-      .url({ message: t('form.github.error') })
-      .nullable()
-      .optional(),
-    twitter: z
-      .string()
-      .url({ message: t('form.twitter.error') })
-      .nullable()
-      .optional(),
+    github: z.string().optional(),
+    twitter: z.string().optional(),
     workingAloneOrTeam: z.nativeEnum(WorkingTypes, {
       errorMap: () => {
         return { message: t('form.workingAloneOrTeam.error') };
