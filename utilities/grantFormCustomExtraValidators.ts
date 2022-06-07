@@ -12,8 +12,12 @@ const validate = (form: UseFormReturnType<any>, t: TFunction) => {
       aboutTokensReceivedFromNear: t('form.aboutTokensReceivedFromNear.error'),
     });
 
+    console.log(form.errors);
+
     return true;
   }
+
+  console.log(validation.errors);
 
   return validation.hasErrors;
 };

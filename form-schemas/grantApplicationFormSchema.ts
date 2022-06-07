@@ -82,6 +82,7 @@ const createSchema = (t: TFunction) => {
     attachment: z
       .string({ required_error: t('form.attachment.error') })
       .url({ message: t('form.attachment.error') })
+      .nullable()
       .optional(),
 
     firstname: z.string({ required_error: t('form.firstname.error') }).min(1, { message: t('form.firstname.error') }),
@@ -91,10 +92,12 @@ const createSchema = (t: TFunction) => {
     github: z
       .string()
       .url({ message: t('form.github.error') })
+      .nullable()
       .optional(),
     twitter: z
       .string()
       .url({ message: t('form.twitter.error') })
+      .nullable()
       .optional(),
     workingAloneOrTeam: z.nativeEnum(WorkingTypes, {
       errorMap: () => {
@@ -103,7 +106,7 @@ const createSchema = (t: TFunction) => {
     }),
     aboutTeam: z
       .string({ required_error: t('form.aboutTeam.error') })
-      .min(1, { message: t('form.aboutTeam.error') })
+      .nullable()
       .optional(),
     teamMembers: z.array(
       z.object({
