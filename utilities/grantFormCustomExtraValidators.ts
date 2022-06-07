@@ -1,25 +1,39 @@
 import type { UseFormReturnType } from '@mantine/form/lib/use-form';
 import type { TFunction } from 'next-i18next';
 
+import { WorkingTypes } from '@/types/GrantApplicationInterface';
+
 const validate = (form: UseFormReturnType<any>, t: TFunction) => {
   const validation = form.validate();
+  let hasCustomErrors = false;
+  let customErrors = {};
 
   if (form.values.hasPreviouslyReceivedFundingTokensGrantsFromNear && form.values.aboutTokensReceivedFromNear.length === 0) {
-    form.setErrors({
-      ...validation.errors,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+    customErrors = {
+      ...customErrors,
       aboutTokensReceivedFromNear: t('form.aboutTokensReceivedFromNear.error'),
-    });
+    };
 
-    console.log(form.errors);
-
-    return true;
+    hasCustomErrors = true;
   }
+
+  if (form.values.workingAloneOrTeam === WorkingTypes.WorkingWithTeam && form.values.aboutTeam === '') {
+    customErrors = {
+      ...customErrors,
+      aboutTeam: t('form.aboutTeam.error'),
+    };
+
+    hasCustomErrors = true;
+  }
+
+  form.setErrors({
+    ...validation.errors,
+    ...customErrors,
+  });
 
   console.log(validation.errors);
 
-  return validation.hasErrors;
+  return validation.hasErrors || hasCustomErrors;
 };
 
 export default validate;
