@@ -5,6 +5,7 @@ import VIDEO_REQUIRED_USD_GRANT_TRESHOLD from '@/config/grants';
 import { WorkingTypes } from '@/types/GrantApplicationInterface';
 import budgetCalculator from '@/utilities/budgetCalculator';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const validate = (form: UseFormReturnType<any>, t: TFunction) => {
   const validation = form.validate();
   const totalBudget = budgetCalculator(form.values.fundingAmount, form.values.milestones);

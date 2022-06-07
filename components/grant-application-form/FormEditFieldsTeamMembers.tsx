@@ -1,4 +1,4 @@
-import { ActionIcon, Button, Group, TextInput, Title } from '@mantine/core';
+import { ActionIcon, Button, Group, TextInput } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 import { Trash } from 'tabler-icons-react';
 
