@@ -69,6 +69,14 @@ const fullProjectData = {
       status: 'pending',
     },
   ],
+  attachment: 'https://san.cx/',
+  teamMembers: [
+    {
+      githubUrl: 'https://github.com/sandoche',
+    },
+  ],
+  aboutTeam: 'We are a team of developers who love to play & build games.',
+  aboutTokensReceivedFromNear: 'We got a grant for building a library to help developers to build decentralized games.',
 };
 
 const getGrantsData = (accountId: string): GrantApplicationInterface[] => [{ id: 0, nearId: accountId }];
