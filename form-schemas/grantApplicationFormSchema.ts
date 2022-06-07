@@ -101,6 +101,16 @@ const createSchema = (t: TFunction) => {
         return { message: t('form.workingAloneOrTeam.error') };
       },
     }),
+    aboutTeam: z
+      .string({ required_error: t('form.aboutTeam.error') })
+      .min(1, { message: t('form.aboutTeam.error') })
+      .optional(),
+    teamMembers: z.array(
+      z.object({
+        githubUrl: z.string().url({ message: t('form.githubUrl.error') }),
+      }),
+    ),
+
     hasPreviouslyReceivedFundingTokensGrantsFromNear: z.boolean(),
     aboutTokensReceivedFromNear: z.string().optional(),
 

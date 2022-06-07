@@ -65,7 +65,10 @@ export interface GrantApplicationInterface {
   email?: string;
   github?: string;
   twitter?: string;
-  workingAloneOrTeam?: string; // replace with enums
+  workingAloneOrTeam?: WorkingTypes;
+  aboutTeam?: string;
+  teamMembers?: FormList<{ githubUrl: string }>;
+
   hasPreviouslyReceivedFundingTokensGrantsFromNear?: boolean;
   aboutTokensReceivedFromNear?: string;
 
