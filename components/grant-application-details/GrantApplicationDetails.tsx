@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next';
 
 import DetailsAddress from '@/components/grant-application-details/DetailsAddress';
 import DetailsAgreements from '@/components/grant-application-details/DetailsAgreements';
+import DetailsAttachment from '@/components/grant-application-details/DetailsAttachment';
 import DetailsHeader from '@/components/grant-application-details/DetailsHeader';
 import DetailsMember from '@/components/grant-application-details/DetailsMember';
 import DetailsMilestones from '@/components/grant-application-details/DetailsMilestones';
@@ -55,6 +56,7 @@ function GrantApplicationDetails({ data, setData }: { data: GrantApplicationInte
             />
             <Space h="xl" />
             <DetailsMilestones milestones={data?.milestones} currency={data?.currency} />
+            {data?.attachment && <DetailsAttachment reviewAttachments={data?.reviewAttachments} attachment={data?.attachment} />}
             <Space h="xs" />
             {data?.helloSignRequestId && data?.dateAgreementSignature && (
               <>

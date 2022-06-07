@@ -15,11 +15,11 @@ function DetailsMember({
   github: string | undefined;
   twitter: string | undefined;
   reviewMemberDetail: string | undefined;
-  teamMembers: FormList<{ githubUrl?: string }>;
+  teamMembers: FormList<{ githubUrl?: string }> | undefined;
 }) {
   const { t } = useTranslation('grant');
 
-  const teamMembersComponents = teamMembers.map((teamMember, index) => {
+  const teamMembersComponents = teamMembers?.map((teamMember, index) => {
     // eslint-disable-next-line react/no-array-index-key
     return <LabelValue key={index} label={t('form.team.label', { number: index + 1 })} value={teamMember.githubUrl} />;
   });
