@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { Alert, Button, Divider, Grid, Group, Text, Title } from '@mantine/core';
 import { formList, useForm, zodResolver } from '@mantine/form';
-import type { UseFormReturnType } from '@mantine/form/lib/use-form';
 import { showNotification } from '@mantine/notifications';
 import { useTranslation } from 'next-i18next';
 import { AlertCircle } from 'tabler-icons-react';
@@ -23,6 +22,7 @@ import useSigner from '@/modules/near-api-react/hooks/useSigner';
 import useWallet from '@/modules/near-api-react/hooks/useWallet';
 import { saveGrantApplicationAsDraft, submitGrantApplication } from '@/services/apiService';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
+import validate from '@/utilities/grantFormCustomExtraValidators';
 import parseMilestonesDates from '@/utilities/parseMilestonesDates';
 
 function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
@@ -155,25 +155,11 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
     saveForm();
   };
 
-  // to move to a separate file
-  const customValidate = (form: UseFormReturnType<any>) => {
-    if (form.values.hasPreviouslyReceivedFundingTokensGrantsFromNear && form.values.aboutTokensReceivedFromNear.length === 0) {
-      form.setErrors({
-        ...form.errors,
-        aboutTokensReceivedFromNear: t('form.aboutTokensReceivedFromNear.error'),
-      });
-
-      return false;
-    }
-
-    return true;
-  };
-
   const submit = (e: SyntheticEvent) => {
     e.preventDefault();
-    const validation = form.validate();
+    const hasErrors = validate(form, t);
 
-    if (validation.hasErrors || !customValidate(form)) {
+    if (hasErrors) {
       showNotification({
         color: 'red',
         message: t('error.form.message'),

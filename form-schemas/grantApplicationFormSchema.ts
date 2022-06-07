@@ -1,4 +1,4 @@
-import { TFunction } from 'next-i18next';
+import type { TFunction } from 'next-i18next';
 import { z } from 'zod';
 
 import { GrantCategories, GrantTypes, OpenSourceStates, ProjectStatus, RaisingRoundStatus, WorkingTypes } from '@/types/GrantApplicationInterface';
