@@ -1,10 +1,14 @@
 import type { UseFormReturnType } from '@mantine/form/lib/use-form';
 import type { TFunction } from 'next-i18next';
 
+import VIDEO_REQUIRED_USD_GRANT_TRESHOLD from '@/config/grants';
 import { WorkingTypes } from '@/types/GrantApplicationInterface';
+import budgetCalculator from '@/utilities/budgetCalculator';
 
 const validate = (form: UseFormReturnType<any>, t: TFunction) => {
   const validation = form.validate();
+  const totalBudget = budgetCalculator(form.values.fundingAmount, form.values.milestones);
+
   let hasCustomErrors = false;
   let customErrors = {};
 
@@ -17,10 +21,19 @@ const validate = (form: UseFormReturnType<any>, t: TFunction) => {
     hasCustomErrors = true;
   }
 
-  if (form.values.workingAloneOrTeam === WorkingTypes.WorkingWithTeam && form.values.aboutTeam === '') {
+  if (form.values.workingAloneOrTeam === WorkingTypes.WorkingWithTeam && form.values.aboutTeam.trim() === '') {
     customErrors = {
       ...customErrors,
       aboutTeam: t('form.aboutTeam.error'),
+    };
+
+    hasCustomErrors = true;
+  }
+
+  if (totalBudget >= VIDEO_REQUIRED_USD_GRANT_TRESHOLD && form.values.attachment.trim() === '') {
+    customErrors = {
+      ...customErrors,
+      attachment: t('form.attachment.error'),
     };
 
     hasCustomErrors = true;
