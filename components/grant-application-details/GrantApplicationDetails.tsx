@@ -62,7 +62,7 @@ function GrantApplicationDetails({ data, setData }: { data: GrantApplicationInte
                 <Space h="xl" />
               </>
             )}
-            <DetailsMember github={data?.github} twitter={data?.twitter} reviewMemberDetail={data?.reviewMemberDetail} />
+            <DetailsMember github={data?.github} twitter={data?.twitter} reviewMemberDetail={data?.reviewMemberDetail} teamMembers={data?.teamMembers} />
             <Space h="xl" />
             <DetailsAddress addressCountry={data?.addressCountry} addressCity={data?.addressCity} addressStreet={data?.addressStreet} addressZip={data?.addressZip} />{' '}
           </Tabs.Tab>

@@ -208,6 +208,9 @@
       "placeholder": "Comments",
       "error": "Please enter a comment that is at least 1 character long and less than 1000."
     },
+    "team": {
+      "label": "Team Member {{ number }} Github URL"
+    },
     "save": "Save draft",
     "submit": "Submit application",
     "draft_date": "Draft saved on ",
@@ -402,7 +405,7 @@
       "title": "Additional File(s)"
     },
     "member": {
-      "title": "Member details"
+      "title": "Member(s) details"
     },
     "address": {
       "title": "Address details"
