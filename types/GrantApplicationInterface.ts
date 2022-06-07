@@ -65,8 +65,12 @@ export interface GrantApplicationInterface {
   email?: string;
   github?: string;
   twitter?: string;
-  workingAloneOrTeam?: string; // replace with enums
+  workingAloneOrTeam?: WorkingTypes;
+  aboutTeam?: string;
+  teamMembers?: FormList<{ githubUrl?: string }>;
+
   hasPreviouslyReceivedFundingTokensGrantsFromNear?: boolean;
+  aboutTokensReceivedFromNear?: string;
 
   // Project related
   projectName?: string;
@@ -88,6 +92,7 @@ export interface GrantApplicationInterface {
   excitementNear?: string;
   successMesurement?: string;
   projectRaisingRound?: RaisingRoundStatus;
+  attachment?: string; // to replace with AttachmentInterface;
 
   // Address
   addressCountry?: string;

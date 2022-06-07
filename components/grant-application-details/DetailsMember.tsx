@@ -4,8 +4,25 @@ import { useTranslation } from 'next-i18next';
 import FeedbackComment from '@/components/common/FeedbackComment';
 import LabelValue from '@/components/common/LabelValue';
 
-function DetailsMember({ github, twitter, reviewMemberDetail }: { github: string | undefined; twitter: string | undefined; reviewMemberDetail: string | undefined }) {
+import type { FormList } from '../../node_modules/@mantine/form/lib/form-list/form-list';
+
+function DetailsMember({
+  github,
+  twitter,
+  reviewMemberDetail,
+  teamMembers,
+}: {
+  github: string | undefined;
+  twitter: string | undefined;
+  reviewMemberDetail: string | undefined;
+  teamMembers: FormList<{ githubUrl?: string }> | undefined;
+}) {
   const { t } = useTranslation('grant');
+
+  const teamMembersComponents = teamMembers?.map((teamMember, index) => {
+    // eslint-disable-next-line react/no-array-index-key
+    return <LabelValue key={index} label={t('form.team.label', { number: index + 1 })} value={teamMember.githubUrl} />;
+  });
 
   return (
     <>
@@ -16,6 +33,7 @@ function DetailsMember({ github, twitter, reviewMemberDetail }: { github: string
       <SimpleGrid cols={2}>
         <LabelValue label={t('form.github.label')} value={github} />
         <LabelValue label={t('form.twitter.label')} value={twitter} />
+        {teamMembersComponents}
       </SimpleGrid>
     </>
   );

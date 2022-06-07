@@ -1,4 +1,4 @@
-import { TFunction } from 'next-i18next';
+import type { TFunction } from 'next-i18next';
 import { z } from 'zod';
 
 import { GrantCategories, GrantTypes, OpenSourceStates, ProjectStatus, RaisingRoundStatus, WorkingTypes } from '@/types/GrantApplicationInterface';
@@ -79,25 +79,31 @@ const createSchema = (t: TFunction) => {
         return { message: t('form.projectRaisingRound.error') };
       },
     }),
+    attachment: z.string({ required_error: t('form.attachment.error') }).optional(),
 
     firstname: z.string({ required_error: t('form.firstname.error') }).min(1, { message: t('form.firstname.error') }),
     lastname: z.string({ required_error: t('form.lastname.error') }).min(1, { message: t('form.lastname.error') }),
     dateOfBirth: z.date({ required_error: t('form.dateOfBirth.error'), invalid_type_error: t('form.dateOfBirth.error') }),
     email: z.string({ required_error: t('form.email.error') }).email({ message: t('form.email.error') }),
-    github: z
-      .string()
-      .url({ message: t('form.github.error') })
-      .optional(),
-    twitter: z
-      .string()
-      .url({ message: t('form.twitter.error') })
-      .optional(),
+    github: z.string().optional(),
+    twitter: z.string().optional(),
     workingAloneOrTeam: z.nativeEnum(WorkingTypes, {
       errorMap: () => {
         return { message: t('form.workingAloneOrTeam.error') };
       },
     }),
+    aboutTeam: z
+      .string({ required_error: t('form.aboutTeam.error') })
+      .nullable()
+      .optional(),
+    teamMembers: z.array(
+      z.object({
+        githubUrl: z.string().url({ message: t('form.githubUrl.error') }),
+      }),
+    ),
+
     hasPreviouslyReceivedFundingTokensGrantsFromNear: z.boolean(),
+    aboutTokensReceivedFromNear: z.string().optional(),
 
     addressCountry: z.string({ required_error: t('form.addressCountry.error') }).min(1, { message: t('form.addressCountry.error') }),
     addressCity: z.string({ required_error: t('form.addressCity.error') }).min(1, { message: t('form.addressCity.error') }),

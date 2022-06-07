@@ -22,6 +22,7 @@ import useSigner from '@/modules/near-api-react/hooks/useSigner';
 import useWallet from '@/modules/near-api-react/hooks/useWallet';
 import { saveGrantApplicationAsDraft, submitGrantApplication } from '@/services/apiService';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
+import validate from '@/utilities/grantFormCustomExtraValidators';
 import parseMilestonesDates from '@/utilities/parseMilestonesDates';
 
 function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
@@ -62,6 +63,9 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
     referral: '',
     teamReferral: '',
     comments: '',
+    aboutTokensReceivedFromNear: '',
+    attachment: '',
+    aboutTeam: '',
   };
 
   const form = useForm({
@@ -70,6 +74,7 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
       ...defaultData,
       ...data,
       milestones: formList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null }>([]),
+      teamMembers: formList<{ githubUrl?: string }>([]),
     },
   });
 
@@ -98,6 +103,7 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
           projectLaunchDate: responseData?.projectLaunchDate ? new Date(responseData.projectLaunchDate) : undefined,
           dateOfBirth: responseData?.dateOfBirth ? new Date(responseData.dateOfBirth) : undefined,
           milestones: formList(responseData?.milestones ? parseMilestonesDates(responseData.milestones) : []),
+          teamMembers: formList(responseData?.teamMembers || []),
         });
       },
     },
@@ -137,6 +143,7 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
         projectLaunchDate: data?.projectLaunchDate ? new Date(data.projectLaunchDate) : undefined,
         dateOfBirth: data?.dateOfBirth ? new Date(data.dateOfBirth) : undefined,
         milestones: formList<{ budget?: number | null; deliveryDate?: Date | null; description?: string | null }>(data?.milestones ? parseMilestonesDates(data.milestones) : []),
+        teamMembers: formList<{ githubUrl?: string }>(data?.teamMembers || []),
       };
 
       form.setValues(mergedValues);
@@ -150,9 +157,9 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
 
   const submit = (e: SyntheticEvent) => {
     e.preventDefault();
-    const validation = form.validate();
+    const hasErrors = validate(form, t);
 
-    if (validation.hasErrors) {
+    if (hasErrors) {
       showNotification({
         color: 'red',
         message: t('error.form.message'),

@@ -53,7 +53,7 @@ function GenericField(props: any) {
       return <DatePicker {...otherProps} {...sharedProps} />;
 
     case 'ZodBoolean':
-      return <Checkbox {...otherProps} {...sharedProps} color="violet" type="checkbox" required={false} />;
+      return <Checkbox {...otherProps} {...sharedProps} color="violet" type="checkbox" checked={otherProps.value} required={false} />;
 
     default:
       return <TextInput {...otherProps} {...sharedProps} />;
