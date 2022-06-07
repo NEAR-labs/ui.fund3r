@@ -89,6 +89,7 @@ export interface GrantApplicationInterface {
   excitementNear?: string;
   successMesurement?: string;
   projectRaisingRound?: RaisingRoundStatus;
+  attachment?: string; // to replace with AttachmentInterface;
 
   // Address
   addressCountry?: string;

@@ -79,6 +79,10 @@ const createSchema = (t: TFunction) => {
         return { message: t('form.projectRaisingRound.error') };
       },
     }),
+    attachment: z
+      .string({ required_error: t('form.attachment.error') })
+      .url({ message: t('form.attachment.error') })
+      .optional(),
 
     firstname: z.string({ required_error: t('form.firstname.error') }).min(1, { message: t('form.firstname.error') }),
     lastname: z.string({ required_error: t('form.lastname.error') }).min(1, { message: t('form.lastname.error') }),
