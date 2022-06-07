@@ -67,7 +67,7 @@ export interface GrantApplicationInterface {
   twitter?: string;
   workingAloneOrTeam?: WorkingTypes;
   aboutTeam?: string;
-  teamMembers?: FormList<{ githubUrl: string }>;
+  teamMembers?: FormList<{ githubUrl?: string }>;
 
   hasPreviouslyReceivedFundingTokensGrantsFromNear?: boolean;
   aboutTokensReceivedFromNear?: string;
