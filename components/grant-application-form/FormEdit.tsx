@@ -17,7 +17,6 @@ import FormEditFieldsQuestions from '@/components/grant-application-form/FormEdi
 import FormSummary from '@/components/grant-application-form/FormSummary';
 import createSchema from '@/form-schemas/grantApplicationFormSchema';
 import useAccountSignature from '@/hooks/useAccountSignature';
-import useDaoContract from '@/hooks/useDaoContract';
 import useSigner from '@/modules/near-api-react/hooks/useSigner';
 import useWallet from '@/modules/near-api-react/hooks/useWallet';
 import { saveGrantApplicationAsDraft, submitGrantApplication } from '@/services/apiService';
@@ -31,7 +30,6 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
   const apiSignature = useAccountSignature();
   const { signStringMessage } = useSigner();
   const wallet = useWallet();
-  const { isNearLoading, submitProposal } = useDaoContract();
 
   const accountId = wallet && wallet.isSignedIn() && wallet.getAccountId();
 
@@ -126,7 +124,9 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
       enabled: false,
       retry: false,
       onSuccess: async (responseData) => {
-        submitProposal(responseData, 0);
+        if (responseData) {
+          setData(responseData);
+        }
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {
@@ -176,7 +176,7 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
     saveDraft();
   };
 
-  const loading = isSavingLoading || isSubmitingLoading || isNearLoading;
+  const loading = isSavingLoading || isSubmitingLoading;
   const lastSavedDate = data?.dateLastDraftSaving;
   const error = isSavingError || isSubmitingError;
 
@@ -213,7 +213,7 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
             <Button color="violet" onClick={saveDraftHandler} variant="light" loading={isSavingLoading}>
               {t('form.save')}
             </Button>
-            <Button type="submit" color="violet" disabled={loading} loading={isSubmitingLoading || isNearLoading}>
+            <Button type="submit" color="violet" disabled={loading} loading={isSubmitingLoading}>
               {t('form.submit')}
             </Button>
           </Group>
