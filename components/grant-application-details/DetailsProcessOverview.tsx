@@ -2,6 +2,7 @@ import { Paper, Text, Timeline, Title } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 import { Check, Clock } from 'tabler-icons-react';
 
+import { SKIP_EVALUATION_APPROVAL } from '@/config/grants';
 import { useGrantStatus } from '@/hooks/useGrantStatus';
 
 function DetailsProcessOverview() {
@@ -30,9 +31,11 @@ function DetailsProcessOverview() {
         <Timeline active={step} bulletSize={24} lineWidth={2} color="violet">
           <Timeline.Item bullet={getIcon(0)} title={t('details.process-overview.submit.title')} />
           <Timeline.Item bullet={getIcon(1)} title={t('details.process-overview.evaluation-approval.title')}>
-            <Text color="dimmed" size="sm">
-              {t('details.process-overview.evaluation-approval.description')}
-            </Text>
+            {!SKIP_EVALUATION_APPROVAL && (
+              <Text color="dimmed" size="sm">
+                {t('details.process-overview.evaluation-approval.description')}
+              </Text>
+            )}
           </Timeline.Item>
           <Timeline.Item bullet={getIcon(2)} title={t('details.process-overview.acceptance.title')}>
             <Text color="dimmed" size="sm">

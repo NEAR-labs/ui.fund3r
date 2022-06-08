@@ -96,7 +96,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       nearId: accountId,
       dateSubmission: new Date(),
       isNearProposalValid: true,
-      dateEvaluation: new Date(),
+      dateEvaluation: new Date(), // the date evaluation will automatically maybe with a specical env variable to skip the evaluation
     },
     {
       ...fullProjectData,

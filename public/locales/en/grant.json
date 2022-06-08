@@ -311,7 +311,7 @@
         "description": "You will receive a follow up email to confirm your application has been received and separately when the review process has started. If you have questions that aren’t answered on near.org/grants, please contact us via email at grants@near.foundation."
       },
       "evaluated": {
-        "message": "You was invited to an interview. Please, select available date.",
+        "message": "You are invited to an interview. Please, select available date.",
         "button": "Select date"
       },
       "interview-scheduled": {

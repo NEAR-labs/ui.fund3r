@@ -1,7 +1,7 @@
 import type { UseFormReturnType } from '@mantine/form/lib/use-form';
 import type { TFunction } from 'next-i18next';
 
-import VIDEO_REQUIRED_USD_GRANT_TRESHOLD from '@/config/grants';
+import { VIDEO_REQUIRED_USD_GRANT_TRESHOLD } from '@/config/grants';
 import { WorkingTypes } from '@/types/GrantApplicationInterface';
 import budgetCalculator from '@/utilities/budgetCalculator';
 

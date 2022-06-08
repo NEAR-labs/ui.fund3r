@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next';
 import StatusActionEvaluated from '@/components/grant-application-details/StatusActionEvaluated';
 import StatusActionKycApproved from '@/components/grant-application-details/StatusActionKycApproved';
 import StatusActionsMilestones from '@/components/grant-application-details/StatusActionsMilestones';
+import { SKIP_EVALUATION_APPROVAL } from '@/config/grants';
 import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
@@ -125,7 +126,16 @@ function DetailsStatusActions({
   }
 
   if (status === EVALUATED) {
-    return <StatusActionEvaluated id={id} email={email} firstname={firstname} lastname={lastname} setGrant={setGrant} />;
+    return (
+      <>
+        {SKIP_EVALUATION_APPROVAL && (
+          <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+            <Text>{t('details.status-actions.submitted.message')}</Text>
+          </Paper>
+        )}
+        <StatusActionEvaluated id={id} email={email} firstname={firstname} lastname={lastname} setGrant={setGrant} />
+      </>
+    );
   }
 
   if (status === FULLY_SUBMITTED) {
