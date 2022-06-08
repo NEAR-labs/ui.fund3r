@@ -296,7 +296,8 @@
       },
       "onboarding": {
         "title": "Onboarding",
-        "description": "Once all your paperwork is complete, your team will onboard to the NF Grants and Funding Program. We’ll align on clear timelines, accountability metrics, and reporting expectations. Finally, the NEAR Foundation Ecosystem Success team will be in contact with you to support your project till completion."
+        "description": "Once all your paperwork is complete, your team will onboard to the NF Grants and Funding Program. We’ll align on clear timelines, accountability metrics, and reporting expectations. Finally, the NEAR Foundation Ecosystem Success team will be in contact with you to support your project till completion.",
+        "description-skip": "Once all your paperwork is complete, you will receive some onboarding instructions by email."
       }
     },
     "payment-schedule": {
@@ -344,7 +345,7 @@
         "message": "👍 You successfully signed the agreement and we are ready to payouts you up front part of grant."
       },
       "first-payment-sent": {
-        "message": "👍 We have successfully completed the first payment. We are waiting for you at the onboarding meeting."
+        "message": "👍 We have successfully completed the first payment. The team will contact you soon for the onboarding process."
       }
     },
     "milestones": {
