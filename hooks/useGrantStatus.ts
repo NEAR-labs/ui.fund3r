@@ -4,8 +4,7 @@ import GrantContext from '@/contexts/GrantContext';
 
 const STATUS = {
   EDIT: 'EDIT',
-  OFFCHAIN_SUBMITTED: 'OFFCHAIN_SUBMITTED',
-  FULLY_SUBMITTED: 'FULLY_SUBMITTED',
+  SUBMITTED: 'SUBMITTED',
   EVALUATED: 'EVALUATED',
   INTERVIEW_SCHEDULED: 'INTERVIEW_SCHEDULED',
   INTERVIEW_COMPLETED: 'INTERVIEW_COMPLETED',
@@ -28,13 +27,12 @@ const useGrantStatus = () => {
 
   const { grant } = context;
 
-  const grantOnlySubmittedOffChain = grant && grant.dateSubmission && !grant.isNearProposalValid;
-  const grantFullySubmitted = grant && grant.dateSubmission && grant.isNearProposalValid;
-  const grantEvaluated = grantFullySubmitted && grant.dateEvaluation;
+  const grantSubmitted = grant && grant.dateSubmission;
+  const grantEvaluated = grantSubmitted && grant.dateEvaluation;
   const grantInterviewScheduled = grantEvaluated && grant.dateInterviewScheduled;
   const grantInterviewCompleted = grantInterviewScheduled && grant.dateInterviewCompletionConfirmation;
-  const grantDenied = grantFullySubmitted && grant.dateDenial;
-  const grantApproved = grantFullySubmitted && grant.dateApproval;
+  const grantDenied = grantSubmitted && grant.dateDenial;
+  const grantApproved = grantSubmitted && grant.dateApproval;
   const grantKycCompleted = grantApproved && grant.dateKycCompletion;
   const grantKycApproved = grantKycCompleted && grant.dateKycApproved;
   const grantKycDenied = grantKycCompleted && grant.dateKycDenied;
@@ -86,12 +84,8 @@ const useGrantStatus = () => {
     return { status: STATUS.EVALUATED, step: 1 };
   }
 
-  if (grantFullySubmitted) {
-    return { status: STATUS.FULLY_SUBMITTED, step: 0 };
-  }
-
-  if (grantOnlySubmittedOffChain) {
-    return { status: STATUS.OFFCHAIN_SUBMITTED, step: 0 };
+  if (grantSubmitted) {
+    return { status: STATUS.SUBMITTED, step: 0 };
   }
 
   return { status: STATUS.EDIT, step: 0 };

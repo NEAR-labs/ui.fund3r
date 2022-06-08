@@ -30,7 +30,7 @@ function DetailsStatusActions({
   const { status } = useGrantStatus();
 
   const {
-    FULLY_SUBMITTED,
+    SUBMITTED,
     EVALUATED,
     INTERVIEW_SCHEDULED,
     INTERVIEW_COMPLETED,
@@ -138,7 +138,7 @@ function DetailsStatusActions({
     );
   }
 
-  if (status === FULLY_SUBMITTED) {
+  if (status === SUBMITTED) {
     return (
       <>
         <Paper shadow="sm" p="lg" radius="lg" mt="xl">
