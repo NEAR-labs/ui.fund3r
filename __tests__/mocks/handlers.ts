@@ -96,7 +96,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       nearId: accountId,
       dateSubmission: new Date(),
       isNearProposalValid: true,
-      dateEvaluation: new Date(),
+      dateEvaluation: new Date(), // the date evaluation will automatically set if SKIP_EVALUATION_APPROVAL is true
     },
     {
       ...fullProjectData,
@@ -258,7 +258,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateKycApproved: new Date(),
       dateAgreementSignature: new Date(),
       dateFirstPaymentSent: new Date(),
-      dateOnboardingCompletion: new Date(),
+      dateOnboardingCompletion: new Date(), // Will be automatically set as date if SKIP_ONBOARDING is set to true and the first payment sent
       helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       payments: [
         {
