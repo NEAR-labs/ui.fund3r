@@ -109,7 +109,7 @@
       "error": "Please select a funding status."
     },
     "attachment": {
-      "label": "Please share a dropbox, google drive, or youtube link with any helpful material such as roadmap, video demonstration, pitch deck etc",
+      "label": "Do you have any documents to share with us? (Pitch Deck, Demo Video, ...)",
       "placeholder": "Dropbox, Google Drive, or YouTube Link",
       "error": "Please share a valid url."
     },
