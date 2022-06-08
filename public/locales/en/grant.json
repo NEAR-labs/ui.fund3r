@@ -242,7 +242,6 @@
     "addTeamMember": "Add Team Member"
   },
   "blockchain": {
-    "title": "Submission to the DAO",
     "description": "In order to continue the Grant Application request, you need to publish your grant application to the NEAR blockchain. In case you need assistance, please contact our team.",
     "button": "Submit application"
   },
@@ -345,7 +344,7 @@
         "button": "Submit KYC again"
       },
       "agreement-signed": {
-        "message": "👍 You successfully signed the agreement, in order to receive the first payment, please submit the proposal to the DAO"
+        "message": "👍 You successfully signed the agreement, in order to receive the first payment"
       },
       "submitted-onchain": {
         "message": "👍 You have successfully completed the application. You will receive soon the first payout."

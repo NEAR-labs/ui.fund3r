@@ -33,15 +33,7 @@ function GrantApplicationDetails({ data, setData }: { data: GrantApplicationInte
           openSourceState={data?.openSourceState}
         />
         <Space h="xs" />
-        <DetailsStatusActions
-          id={data?.id}
-          email={data?.email}
-          firstname={data?.firstname}
-          lastname={data?.lastname}
-          dateInterview={data?.dateInterview}
-          helloSignRequestId={data?.helloSignRequestId}
-          setGrant={setData}
-        />
+        <DetailsStatusActions grant={data} setGrant={setData} />
         <Space h="xl" />
         <Tabs color="violet" tabPadding="xl" mt="xl">
           <Tabs.Tab label={t('details.project.tab')}>

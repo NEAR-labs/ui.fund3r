@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { Alert, Button, Text, Title } from '@mantine/core';
+import { Alert, Button, Paper, Text } from '@mantine/core';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { AlertCircle } from 'tabler-icons-react';
@@ -52,8 +52,7 @@ function StatusActionProposalSubmission({ data, setData }: { data: GrantApplicat
   }
 
   return (
-    <>
-      <Title mb="xl">{t('blockchain.title')}</Title>
+    <Paper shadow="sm" p="lg" radius="lg" mt="xl">
       {errorCode && (
         <Alert icon={<AlertCircle size={16} />} title={t('error.tx_error.title')} color="orange" mb="xl">
           {t('error.tx_error.description')}
@@ -63,7 +62,7 @@ function StatusActionProposalSubmission({ data, setData }: { data: GrantApplicat
       <Button type="submit" color="violet" disabled={isNearLoading} loading={isNearLoading} onClick={submitGrantProposal}>
         {t('blockchain.button')}
       </Button>
-    </>
+    </Paper>
   );
 }
 
