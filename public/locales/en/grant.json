@@ -344,6 +344,9 @@
       "agreement-signed": {
         "message": "👍 You successfully signed the agreement, in order to receive the first payment, please submit the proposal to the DAO"
       },
+      "submitted-onchain": {
+        "message": "👍 You have successfully completed the application. You will receive soon the first payout."
+      },
       "first-payment-sent": {
         "message": "👍 We have successfully completed the first payment. The team will contact you soon for the onboarding process."
       }

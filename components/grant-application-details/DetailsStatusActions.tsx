@@ -60,6 +60,14 @@ function DetailsStatusActions({
     );
   }
 
+  if (status === ONCHAIN_SUBMITTED) {
+    return (
+      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+        <Text>{t('details.status-actions.submitted-onchain.message')}</Text>
+      </Paper>
+    );
+  }
+
   if (status === AGREEMENT_SIGNED) {
     return (
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
