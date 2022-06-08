@@ -38,7 +38,8 @@ const useGrantStatus = () => {
   const grantKycApproved = grantKycCompleted && grant.dateKycApproved;
   const grantKycDenied = grantKycCompleted && grant.dateKycDenied;
   const grantAgreementSigned = grantKycApproved && grant.dateAgreementSignature;
-  const grantFirstPaymentSent = grantAgreementSigned && grant.dateFirstPaymentSent;
+  const grantAgreementSubmitedOnChain = grantAgreementSigned && grant && grant.isNearProposalValid;
+  const grantFirstPaymentSent = grantAgreementSubmitedOnChain && grant.dateFirstPaymentSent;
   const grantOnboardingCompleted = grantFirstPaymentSent && grant?.dateOnboardingCompletion;
 
   if (grantOnboardingCompleted) {
@@ -47,6 +48,10 @@ const useGrantStatus = () => {
 
   if (grantFirstPaymentSent) {
     return { status: STATUS.FIRST_PAYMENT_SENT, step: 5, pendingStep: 6 };
+  }
+
+  if (grantAgreementSubmitedOnChain) {
+    return { status: STATUS.ONCHAIN_SUBMITTED, step: 4, pendingStep: 5 };
   }
 
   if (grantAgreementSigned) {

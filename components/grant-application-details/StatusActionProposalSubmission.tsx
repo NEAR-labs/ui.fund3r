@@ -11,7 +11,7 @@ import useDaoContract from '@/hooks/useDaoContract';
 import { validateNearTransactionHash } from '@/services/apiService';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
-function GrantApplicationProposalSubmission({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
+function StatusActionProposalSubmission({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
   const router = useRouter();
   const { errorCode } = router.query;
@@ -67,4 +67,4 @@ function GrantApplicationProposalSubmission({ data, setData }: { data: GrantAppl
   );
 }
 
-export default GrantApplicationProposalSubmission;
+export default StatusActionProposalSubmission;
