@@ -307,7 +307,7 @@
     },
     "status-actions": {
       "submitted": {
-        "message": "You have successfully completed the application",
+        "message": "👍 You have successfully completed the application",
         "description": "You will receive a follow up email to confirm your application has been received and separately when the review process has started. If you have questions that aren’t answered on near.org/grants, please contact us via email at grants@near.foundation."
       },
       "evaluated": {
@@ -315,36 +315,36 @@
         "button": "Select date"
       },
       "interview-scheduled": {
-        "title": "Waiting for a interview"
+        "title": "Waiting for an interview"
       },
       "interview-completed": {
-        "title": "Interview completed",
+        "title": "👍 You have successfully completed the interview",
         "message": "You will receive a follow up email to confirm your application has been approved. If you have questions that aren’t answered on near.org/grants, please contact us via email at grants@near.foundation.,"
       },
       "denied": {
-        "message": "Your application has been denied. Please, check comments and submit your application again."
+        "message": "🤷‍♂️ Your application has been denied. Please, check comments and submit your application again."
       },
       "approved": {
-        "message": "Your funding has been approved, pleace verify your account.",
+        "message": "👍 Your funding has been approved, pleace verify your account.",
         "button": "Verify account"
       },
       "kyc-completed": {
-        "title": "Thank you! We are currently checking your data",
+        "title": "🧐 Thank you! We are currently checking your data",
         "description": "We will send you an email once your account has been confirmed. It can take a few days..."
       },
       "kyc-approved": {
-        "message": "Your account has been approved. To continue please sign the grant agreement.",
+        "message": "👍 Your account has been approved. To continue please sign the grant agreement.",
         "button": "Sign agreement"
       },
       "kyc-denied": {
-        "message": "Sorry, the KYC has been denied",
+        "message": "🤷‍♂️ Sorry, the KYC has been denied",
         "button": "Submit KYC again"
       },
       "agreement-signed": {
-        "message": "You successfully signed the agreement and we are ready to payouts you up front part of grant."
+        "message": "👍 You successfully signed the agreement and we are ready to payouts you up front part of grant."
       },
       "first-payment-sent": {
-        "message": "We have successfully completed the first payment. We are waiting for you at the onboarding meeting."
+        "message": "👍 We have successfully completed the first payment. We are waiting for you at the onboarding meeting."
       }
     },
     "milestones": {
