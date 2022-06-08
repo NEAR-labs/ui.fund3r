@@ -342,7 +342,7 @@
         "button": "Submit KYC again"
       },
       "agreement-signed": {
-        "message": "👍 You successfully signed the agreement and we are ready to payouts you up front part of grant."
+        "message": "👍 You successfully signed the agreement, in order to receive the first payment, please submit the proposal to the DAO"
       },
       "first-payment-sent": {
         "message": "👍 We have successfully completed the first payment. The team will contact you soon for the onboarding process."
