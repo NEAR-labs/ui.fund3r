@@ -43,15 +43,15 @@ const useGrantStatus = () => {
   const grantOnboardingCompleted = grantFirstPaymentSent && grant?.dateOnboardingCompletion;
 
   if (grantOnboardingCompleted) {
-    return { status: STATUS.ONBOARDING_COMPLETED, step: 6 };
+    return { status: STATUS.ONBOARDING_COMPLETED, step: 7 };
   }
 
   if (grantFirstPaymentSent) {
-    return { status: STATUS.FIRST_PAYMENT_SENT, step: 5, pendingStep: 6 };
+    return { status: STATUS.FIRST_PAYMENT_SENT, step: 6, pendingStep: 7 };
   }
 
   if (grantAgreementSubmitedOnChain) {
-    return { status: STATUS.ONCHAIN_SUBMITTED, step: 4, pendingStep: 5 };
+    return { status: STATUS.ONCHAIN_SUBMITTED, step: 5, pendingStep: 6 };
   }
 
   if (grantAgreementSigned) {

@@ -291,6 +291,9 @@
       "agreement": {
         "title": "Signing of agreement"
       },
+      "on-chain-submission": {
+        "title": "On-chain submission"
+      },
       "payout": {
         "title": "Upfront payout"
       },
