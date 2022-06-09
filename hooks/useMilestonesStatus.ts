@@ -6,7 +6,7 @@ const MILESTONE_STATUS = {
   ERROR: 'ERROR',
   STARTED: 'STARTED',
   PARTLY_SUBMITTED: 'PARTLY_SUBMITTED',
-  INTERVIEW_SCHEDULED: 'INTERVIEW_SCHEDULED',
+  INTERVIEW_NOT_SCHEDULED: 'INTERVIEW_NOT_SCHEDULED',
   REJECTED: 'REJECTED',
   SUBMIT: 'SUBMIT',
   REVIEW: 'REVIEW',
@@ -44,7 +44,7 @@ const useMilestonesStatus = () => {
     }
 
     if (milestone.dateSubmission && milestone.isNearProposalValid) {
-      milestone.status = MILESTONE_STATUS.INTERVIEW_SCHEDULED;
+      milestone.status = MILESTONE_STATUS.INTERVIEW_NOT_SCHEDULED;
       milestone.pendingStep = 0;
     }
 

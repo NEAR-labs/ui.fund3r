@@ -36,10 +36,8 @@ function DetailsStatusActions({ grant, setGrant }: { grant: GrantApplicationInte
     ONBOARDING_COMPLETED,
   } = STATUS;
 
-  console.log(status);
-
   if (status === ONBOARDING_COMPLETED) {
-    return <StatusActionsMilestones />;
+    return <StatusActionsMilestones grant={grant} setGrant={setGrant} />;
   }
 
   if (status === FIRST_PAYMENT_SENT) {

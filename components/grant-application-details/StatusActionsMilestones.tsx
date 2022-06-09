@@ -3,9 +3,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
+import MilestoneStatusActionInterviewBooking from '@/components/grant-application-details/MilestoneStatusActionInterviewBooking';
 import { MILESTONE_STATUS, useMilestonesStatus } from '@/hooks/useMilestonesStatus';
+import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
-function StatusActionsMilestones() {
+function StatusActionsMilestones({ grant, setGrant }: { grant: GrantApplicationInterface | undefined; setGrant: (data: GrantApplicationInterface) => void }) {
   const router = useRouter();
   const { t } = useTranslation('grant');
   const { grantRequestSlug } = router.query;
@@ -19,7 +21,9 @@ function StatusActionsMilestones() {
   const { status } = milestonesStatus[currentMilestone];
   const number = currentMilestone + 1;
 
-  if (status === MILESTONE_STATUS.STARTED) {
+  const { STARTED, PARTLY_SUBMITTED, INTERVIEW_NOT_SCHEDULED, SUBMIT, REJECTED } = MILESTONE_STATUS;
+
+  if (status === STARTED) {
     // to move to a different component
     return (
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
@@ -33,7 +37,7 @@ function StatusActionsMilestones() {
     );
   }
 
-  if (status === MILESTONE_STATUS.PARTLY_SUBMITTED) {
+  if (status === PARTLY_SUBMITTED) {
     return (
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
         <Text mb="sm">{t('details.milestones.waiting-blockchain.message')}</Text>
@@ -46,7 +50,11 @@ function StatusActionsMilestones() {
     );
   }
 
-  if (status === MILESTONE_STATUS.SUBMIT) {
+  if (status === INTERVIEW_NOT_SCHEDULED) {
+    return <MilestoneStatusActionInterviewBooking grant={grant} setGrant={setGrant} milestoneId={currentMilestone} />;
+  }
+
+  if (status === SUBMIT) {
     return (
       <>
         <Paper shadow="sm" p="lg" radius="lg" mt="xl">
@@ -59,7 +67,7 @@ function StatusActionsMilestones() {
     );
   }
 
-  if (status === MILESTONE_STATUS.REJECTED) {
+  if (status === REJECTED) {
     return (
       <>
         <Paper shadow="sm" p="lg" radius="lg" mt="xl">
