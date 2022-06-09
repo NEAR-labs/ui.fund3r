@@ -8,8 +8,8 @@
   "form": {
     "title": "Milestone {{ number }}",
     "attachment": {
-      "label": "Please, add a video presentation of your demo",
-      "placeholder": "Demo video URL",
+      "label": "Do you have any documents to share with us? (Pitch Deck, Demo Video, ...)",
+      "placeholder": "Dropbox, Google Drive, Youtube ...",
       "error": "Please share a valid URL"
     },
     "githubUrl": {

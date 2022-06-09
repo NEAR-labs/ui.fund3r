@@ -82,7 +82,7 @@ function MilestoneForm({ grantData, milestoneId }: { grantData: GrantApplication
         </Alert>
       )}
       <form onSubmit={submit}>
-        <AutoFormFields form={form} schema={schema} fields={['attachment', 'githubUrl', 'comments']} loading={loading} translationNamespace="milestone" />
+        <AutoFormFields form={form} schema={schema} fields={['githubUrl', 'attachment', 'comments']} loading={loading} translationNamespace="milestone" />
         <Group position="right" mt="xl">
           <Button type="submit" color="violet" disabled={loading} loading={isSubmitingLoading || isNearLoading}>
             {t('form.submit')}
