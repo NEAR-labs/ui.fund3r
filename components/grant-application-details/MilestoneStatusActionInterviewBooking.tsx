@@ -6,20 +6,16 @@ import { useTranslation } from 'next-i18next';
 
 import useAccountSignature from '@/hooks/useAccountSignature';
 import useSigner from '@/modules/near-api-react/hooks/useSigner';
-import { submitCalendlyUrl } from '@/services/apiService';
+import { submitMilestoneCalendlyUrl } from '@/services/apiService';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
-function StatusActionEvaluated({
-  id,
-  email,
-  firstname,
-  lastname,
+function MilestoneStatusActionInterviewBooking({
+  milestoneId,
+  grant,
   setGrant,
 }: {
-  id: number | undefined;
-  email: string | undefined;
-  firstname: string | undefined;
-  lastname: string | undefined;
+  milestoneId: number | undefined;
+  grant: GrantApplicationInterface | undefined;
   setGrant: (data: GrantApplicationInterface) => void;
 }) {
   const { t } = useTranslation('grant');
@@ -28,22 +24,34 @@ function StatusActionEvaluated({
   const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL;
   const [eventUrl, setEventUrl] = useState(null);
 
+  const { id: grantId, email, firstname, lastname } = grant || {};
+
   const prefilledData = {
     email,
     name: `${firstname} ${lastname}`,
   };
 
   const { isLoading, refetch } = useQuery(
-    ['submit-calendly-url', apiSignature, id, eventUrl],
+    ['submit-milestone-calendly-url', apiSignature, milestoneId, grantId, eventUrl],
     () => {
-      return submitCalendlyUrl(apiSignature, { grantId: id, calendlyUrl: eventUrl, signStringMessage });
+      return submitMilestoneCalendlyUrl(apiSignature, { grantId, calendlyUrl: eventUrl, signStringMessage, milestoneId });
     },
     {
       refetchOnWindowFocus: false,
       enabled: false,
-      onSuccess: (updatedGrantData) => {
-        if (updatedGrantData) {
-          setGrant(updatedGrantData);
+      onSuccess: (updatedMilestoneData) => {
+        if (updatedMilestoneData) {
+          const data = {
+            ...grant,
+          };
+
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          data.milestones[milestoneId] = updatedMilestoneData;
+
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          setGrant(data);
         }
       },
     },
@@ -62,14 +70,14 @@ function StatusActionEvaluated({
 
   return (
     <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-      <Text mb="sm">{t('details.status-actions.evaluated.message')}</Text>
+      <Text mb="sm">{t('details.milestones.waiting-booking.message')}</Text>
       {typeof window !== 'undefined' && calendlyUrl && (
         <Button<typeof PopupButton>
           color="violet"
           component={PopupButton}
           url={calendlyUrl}
           rootElement={document.getElementById('__next') as HTMLElement}
-          text={t('details.status-actions.evaluated.button')}
+          text={t('details.milestones.waiting-booking.button')}
           prefill={prefilledData}
           loading={isLoading}
           disabled={isLoading}
@@ -79,4 +87,4 @@ function StatusActionEvaluated({
   );
 }
 
-export default StatusActionEvaluated;
+export default MilestoneStatusActionInterviewBooking;

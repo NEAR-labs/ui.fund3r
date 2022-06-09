@@ -44,8 +44,9 @@ function DetailsProcessOverview() {
           </Timeline.Item>
           <Timeline.Item bullet={getIcon(3)} title={t('details.process-overview.kyc.title')} />
           <Timeline.Item bullet={getIcon(4)} title={t('details.process-overview.agreement.title')} />
-          <Timeline.Item bullet={getIcon(5)} title={t('details.process-overview.payout.title')} />
-          <Timeline.Item bullet={getIcon(6)} title={t('details.process-overview.onboarding.title')}>
+          <Timeline.Item bullet={getIcon(5)} title={t('details.process-overview.on-chain-submission.title')} />
+          <Timeline.Item bullet={getIcon(6)} title={t('details.process-overview.payout.title')} />
+          <Timeline.Item bullet={getIcon(7)} title={t('details.process-overview.onboarding.title')}>
             <Text color="dimmed" size="sm">
               {SKIP_ONBOARDING ? t('details.process-overview.onboarding.description-skip') : t('details.process-overview.onboarding.description')}
             </Text>

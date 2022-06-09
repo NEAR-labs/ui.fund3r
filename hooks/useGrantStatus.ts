@@ -4,8 +4,7 @@ import GrantContext from '@/contexts/GrantContext';
 
 const STATUS = {
   EDIT: 'EDIT',
-  OFFCHAIN_SUBMITTED: 'OFFCHAIN_SUBMITTED',
-  FULLY_SUBMITTED: 'FULLY_SUBMITTED',
+  SUBMITTED: 'SUBMITTED',
   EVALUATED: 'EVALUATED',
   INTERVIEW_SCHEDULED: 'INTERVIEW_SCHEDULED',
   INTERVIEW_COMPLETED: 'INTERVIEW_COMPLETED',
@@ -15,6 +14,7 @@ const STATUS = {
   KYC_APPROVED: 'KYC_APPROVED',
   KYC_DENIED: 'KYC_DENIED',
   AGREEMENT_SIGNED: 'AGREEMENT_SIGNED',
+  ONCHAIN_SUBMITTED: 'ONCHAIN_SUBMITTED',
   FIRST_PAYMENT_SENT: 'FIRST_PAYMENT_SENT',
   ONBOARDING_COMPLETED: 'ONBOARDING_COMPLETED',
 };
@@ -28,26 +28,30 @@ const useGrantStatus = () => {
 
   const { grant } = context;
 
-  const grantOnlySubmittedOffChain = grant && grant.dateSubmission && !grant.isNearProposalValid;
-  const grantFullySubmitted = grant && grant.dateSubmission && grant.isNearProposalValid;
-  const grantEvaluated = grantFullySubmitted && grant.dateEvaluation;
+  const grantSubmitted = grant && grant.dateSubmission;
+  const grantEvaluated = grantSubmitted && grant.dateEvaluation;
   const grantInterviewScheduled = grantEvaluated && grant.dateInterviewScheduled;
   const grantInterviewCompleted = grantInterviewScheduled && grant.dateInterviewCompletionConfirmation;
-  const grantDenied = grantFullySubmitted && grant.dateDenial;
-  const grantApproved = grantFullySubmitted && grant.dateApproval;
+  const grantDenied = grantSubmitted && grant.dateDenial;
+  const grantApproved = grantSubmitted && grant.dateApproval;
   const grantKycCompleted = grantApproved && grant.dateKycCompletion;
   const grantKycApproved = grantKycCompleted && grant.dateKycApproved;
   const grantKycDenied = grantKycCompleted && grant.dateKycDenied;
   const grantAgreementSigned = grantKycApproved && grant.dateAgreementSignature;
-  const grantFirstPaymentSent = grantAgreementSigned && grant.dateFirstPaymentSent;
+  const grantAgreementSubmitedOnChain = grantAgreementSigned && grant && grant.isNearProposalValid;
+  const grantFirstPaymentSent = grantAgreementSubmitedOnChain && grant.dateFirstPaymentSent;
   const grantOnboardingCompleted = grantFirstPaymentSent && grant?.dateOnboardingCompletion;
 
   if (grantOnboardingCompleted) {
-    return { status: STATUS.ONBOARDING_COMPLETED, step: 6 };
+    return { status: STATUS.ONBOARDING_COMPLETED, step: 7 };
   }
 
   if (grantFirstPaymentSent) {
-    return { status: STATUS.FIRST_PAYMENT_SENT, step: 5, pendingStep: 6 };
+    return { status: STATUS.FIRST_PAYMENT_SENT, step: 6, pendingStep: 7 };
+  }
+
+  if (grantAgreementSubmitedOnChain) {
+    return { status: STATUS.ONCHAIN_SUBMITTED, step: 5, pendingStep: 6 };
   }
 
   if (grantAgreementSigned) {
@@ -86,12 +90,8 @@ const useGrantStatus = () => {
     return { status: STATUS.EVALUATED, step: 1 };
   }
 
-  if (grantFullySubmitted) {
-    return { status: STATUS.FULLY_SUBMITTED, step: 0 };
-  }
-
-  if (grantOnlySubmittedOffChain) {
-    return { status: STATUS.OFFCHAIN_SUBMITTED, step: 0 };
+  if (grantSubmitted) {
+    return { status: STATUS.SUBMITTED, step: 0 };
   }
 
   return { status: STATUS.EDIT, step: 0 };

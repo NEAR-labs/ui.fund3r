@@ -3,34 +3,25 @@ import { useTranslation } from 'next-i18next';
 
 import StatusActionEvaluated from '@/components/grant-application-details/StatusActionEvaluated';
 import StatusActionKycApproved from '@/components/grant-application-details/StatusActionKycApproved';
+import StatusActionProposalSubmission from '@/components/grant-application-details/StatusActionProposalSubmission';
 import StatusActionsMilestones from '@/components/grant-application-details/StatusActionsMilestones';
 import { SKIP_EVALUATION_APPROVAL } from '@/config/grants';
 import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
 // eslint-disable-next-line max-lines-per-function
-function DetailsStatusActions({
-  id,
-  email,
-  firstname,
-  lastname,
-  dateInterview,
-  helloSignRequestId,
-  setGrant,
-}: {
-  id: number | undefined;
-  email: string | undefined;
-  firstname: string | undefined;
-  lastname: string | undefined;
-  dateInterview: Date | string | undefined;
-  helloSignRequestId: string | undefined;
-  setGrant: (data: GrantApplicationInterface) => void;
-}) {
+function DetailsStatusActions({ grant, setGrant }: { grant: GrantApplicationInterface | null | undefined; setGrant: (data: GrantApplicationInterface) => void }) {
   const { t } = useTranslation('grant');
   const { status } = useGrantStatus();
 
+  if (!grant) {
+    return null;
+  }
+
+  const { id, email, firstname, lastname, dateInterview, helloSignRequestId } = grant;
+
   const {
-    FULLY_SUBMITTED,
+    SUBMITTED,
     EVALUATED,
     INTERVIEW_SCHEDULED,
     INTERVIEW_COMPLETED,
@@ -40,12 +31,13 @@ function DetailsStatusActions({
     KYC_DENIED,
     KYC_APPROVED,
     AGREEMENT_SIGNED,
+    ONCHAIN_SUBMITTED,
     FIRST_PAYMENT_SENT,
     ONBOARDING_COMPLETED,
   } = STATUS;
 
   if (status === ONBOARDING_COMPLETED) {
-    return <StatusActionsMilestones />;
+    return <StatusActionsMilestones grant={grant} setGrant={setGrant} />;
   }
 
   if (status === FIRST_PAYMENT_SENT) {
@@ -56,11 +48,22 @@ function DetailsStatusActions({
     );
   }
 
-  if (status === AGREEMENT_SIGNED) {
+  if (status === ONCHAIN_SUBMITTED) {
     return (
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-        <Text>{t('details.status-actions.agreement-signed.message')}</Text>
+        <Text>{t('details.status-actions.submitted-onchain.message')}</Text>
       </Paper>
+    );
+  }
+
+  if (status === AGREEMENT_SIGNED) {
+    return (
+      <>
+        <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+          <Text>{t('details.status-actions.agreement-signed.message')}</Text>
+        </Paper>
+        <StatusActionProposalSubmission data={grant} setData={setGrant} />
+      </>
     );
   }
 
@@ -138,7 +141,7 @@ function DetailsStatusActions({
     );
   }
 
-  if (status === FULLY_SUBMITTED) {
+  if (status === SUBMITTED) {
     return (
       <>
         <Paper shadow="sm" p="lg" radius="lg" mt="xl">

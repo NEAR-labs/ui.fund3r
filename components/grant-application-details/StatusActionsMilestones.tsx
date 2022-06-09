@@ -3,9 +3,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
+import MilestoneStatusActionInterviewBooking from '@/components/grant-application-details/MilestoneStatusActionInterviewBooking';
+import MilestoneStatusActionSubmit from '@/components/grant-application-details/MilestoneStatusActionSubmit';
 import { MILESTONE_STATUS, useMilestonesStatus } from '@/hooks/useMilestonesStatus';
+import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
-function StatusActionsMilestones() {
+function StatusActionsMilestones({ grant, setGrant }: { grant: GrantApplicationInterface | undefined; setGrant: (data: GrantApplicationInterface) => void }) {
   const router = useRouter();
   const { t } = useTranslation('grant');
   const { grantRequestSlug } = router.query;
@@ -16,24 +19,16 @@ function StatusActionsMilestones() {
     return null;
   }
 
-  const { status } = milestonesStatus[currentMilestone];
+  const { status, dateInterview } = milestonesStatus[currentMilestone];
   const number = currentMilestone + 1;
 
-  if (status === MILESTONE_STATUS.STARTED) {
-    // to move to a different component
-    return (
-      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-        <Text mb="sm">{t('details.milestones.waiting-submit.message', { number })}</Text>
-        <Link href={`/grants/${grantRequestSlug}/milestones/${currentMilestone}`} passHref>
-          <Button component="a" color="violet">
-            {t('details.milestones.waiting-submit.button', { number })}
-          </Button>
-        </Link>
-      </Paper>
-    );
+  const { STARTED, PARTLY_SUBMITTED, INTERVIEW_NOT_SCHEDULED, SUBMIT, REJECTED } = MILESTONE_STATUS;
+
+  if (status === STARTED) {
+    return <MilestoneStatusActionSubmit number={number} grantRequestSlug={grantRequestSlug} currentMilestone={currentMilestone} />;
   }
 
-  if (status === MILESTONE_STATUS.PARTLY_SUBMITTED) {
+  if (status === PARTLY_SUBMITTED) {
     return (
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
         <Text mb="sm">{t('details.milestones.waiting-blockchain.message')}</Text>
@@ -46,34 +41,26 @@ function StatusActionsMilestones() {
     );
   }
 
-  if (status === MILESTONE_STATUS.SUBMIT) {
+  if (status === INTERVIEW_NOT_SCHEDULED) {
+    return <MilestoneStatusActionInterviewBooking grant={grant} setGrant={setGrant} milestoneId={currentMilestone} />;
+  }
+
+  if (status === SUBMIT) {
     return (
-      <>
-        <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-          <Text>{t('details.milestones.submitted.message', { number })}</Text>
-        </Paper>
-        <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-          <Text>{t('details.milestones.submitted.description', { number })}</Text>
-        </Paper>
-      </>
+      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+        <Text>{t('details.milestones.submitted.message', { number })}</Text>
+        <Text>{typeof dateInterview === 'string' ? dateInterview : dateInterview?.toISOString()}</Text>
+      </Paper>
     );
   }
 
-  if (status === MILESTONE_STATUS.REJECTED) {
+  if (status === REJECTED) {
     return (
       <>
         <Paper shadow="sm" p="lg" radius="lg" mt="xl">
           <Text>{t('details.milestones.rejection.message')}</Text>
         </Paper>
-        {/* To move to a different component */}
-        <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-          <Text mb="sm">{t('details.milestones.waiting-submit.message', { number })}</Text>
-          <Link href={`/grants/${grantRequestSlug}/milestones/${currentMilestone}`} passHref>
-            <Button component="a" color="violet">
-              {t('details.milestones.waiting-submit.button', { number })}
-            </Button>
-          </Link>
-        </Paper>
+        <MilestoneStatusActionSubmit number={number} grantRequestSlug={grantRequestSlug} currentMilestone={currentMilestone} />
       </>
     );
   }

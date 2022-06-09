@@ -95,7 +95,6 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       id: 2,
       nearId: accountId,
       dateSubmission: new Date(),
-      isNearProposalValid: true,
       dateEvaluation: new Date(), // the date evaluation will automatically set if SKIP_EVALUATION_APPROVAL is true
     },
     {
@@ -103,7 +102,6 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       id: 3,
       nearId: accountId,
       dateSubmission: new Date(),
-      isNearProposalValid: true,
       dateEvaluation: new Date(),
       dateInterviewScheduled: new Date(),
       dateInterview: new Date(),
@@ -113,7 +111,6 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       id: 4,
       nearId: accountId,
       dateSubmission: new Date(),
-      isNearProposalValid: true,
       dateEvaluation: new Date(),
       dateInterviewScheduled: new Date(),
       dateInterview: new Date(),
@@ -124,7 +121,6 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       id: 5,
       nearId: accountId,
       dateSubmission: new Date(),
-      isNearProposalValid: true,
       dateEvaluation: new Date(),
       dateInterviewScheduled: new Date(),
       dateInterview: new Date(),
@@ -152,7 +148,6 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       id: 6,
       nearId: accountId,
       dateSubmission: new Date(),
-      isNearProposalValid: true,
       dateEvaluation: new Date(),
       dateInterviewScheduled: new Date(),
       dateInterview: new Date(),
@@ -164,7 +159,6 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       id: 7,
       nearId: accountId,
       dateSubmission: new Date(),
-      isNearProposalValid: true,
       dateEvaluation: new Date(),
       dateInterviewScheduled: new Date(),
       dateInterview: new Date(),
@@ -177,7 +171,6 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       id: 8,
       nearId: accountId,
       dateSubmission: new Date(),
-      isNearProposalValid: true,
       dateEvaluation: new Date(),
       dateInterviewScheduled: new Date(),
       dateInterview: new Date(),
@@ -191,7 +184,6 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       id: 9,
       nearId: accountId,
       dateSubmission: new Date(),
-      isNearProposalValid: true,
       dateEvaluation: new Date(),
       dateInterviewScheduled: new Date(),
       dateInterview: new Date(),
@@ -206,7 +198,6 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       id: 10,
       nearId: accountId,
       dateSubmission: new Date(),
-      isNearProposalValid: true,
       dateEvaluation: new Date(),
       dateInterviewScheduled: new Date(),
       dateInterview: new Date(),
@@ -222,7 +213,6 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       id: 11,
       nearId: accountId,
       dateSubmission: new Date(),
-      isNearProposalValid: true,
       dateEvaluation: new Date(),
       dateInterviewScheduled: new Date(),
       dateInterview: new Date(),
@@ -230,18 +220,9 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateApproval: new Date(),
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
-      dateAgreementSignature: new Date(),
-      dateFirstPaymentSent: new Date(),
+      dateAgreementSignature: new Date(), // Should be checked by the backend using hello sign api
       helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
-      payments: [
-        {
-          id: '00001',
-          amount: 94161,
-          currency: 'NEAR',
-          date: new Date(),
-          status: 'paid',
-        },
-      ],
+      isNearProposalValid: true,
     },
     {
       ...fullProjectData,
@@ -258,7 +239,6 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateKycApproved: new Date(),
       dateAgreementSignature: new Date(),
       dateFirstPaymentSent: new Date(),
-      dateOnboardingCompletion: new Date(), // Will be automatically set as date if SKIP_ONBOARDING is set to true and the first payment sent
       helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       payments: [
         {
@@ -285,7 +265,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateKycApproved: new Date(),
       dateAgreementSignature: new Date(),
       dateFirstPaymentSent: new Date(),
-      dateOnboardingCompletion: new Date(),
+      dateOnboardingCompletion: new Date(), // Will be automatically set as date if SKIP_ONBOARDING is set to true and the first payment sent
       helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       payments: [
         {
@@ -294,19 +274,6 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
           currency: 'NEAR',
           date: new Date(),
           status: 'paid',
-        },
-      ],
-      milestones: [
-        {
-          budget: 100000,
-          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
-          description: 'Alpha of the Metaverse',
-          dateSubmission: new Date(),
-        },
-        {
-          budget: 200000,
-          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 2),
-          description: 'Beta of the Metaverse',
         },
       ],
     },
@@ -342,7 +309,6 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
           deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
           description: 'Alpha of the Metaverse',
           dateSubmission: new Date(),
-          dateSubmissionOnChain: new Date(),
         },
         {
           budget: 200000,
@@ -383,7 +349,92 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
           deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
           description: 'Alpha of the Metaverse',
           dateSubmission: new Date(),
-          dateSubmissionOnChain: new Date(),
+          isNearProposalValid: true,
+        },
+        {
+          budget: 200000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 2),
+          description: 'Beta of the Metaverse',
+        },
+      ],
+    },
+    {
+      ...fullProjectData,
+      id: 16,
+      nearId: accountId,
+      dateSubmission: new Date(),
+      isNearProposalValid: true,
+      dateEvaluation: new Date(),
+      dateInterviewScheduled: new Date(),
+      dateInterview: new Date(),
+      dateInterviewCompletionConfirmation: new Date(),
+      dateApproval: new Date(),
+      dateKycCompletion: new Date(),
+      dateKycApproved: new Date(),
+      dateAgreementSignature: new Date(),
+      dateFirstPaymentSent: new Date(),
+      dateOnboardingCompletion: new Date(),
+      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      payments: [
+        {
+          id: '00001',
+          amount: 94161,
+          currency: 'NEAR',
+          date: new Date(),
+          status: 'paid',
+        },
+      ],
+      milestones: [
+        {
+          budget: 100000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
+          description: 'Alpha of the Metaverse',
+          dateSubmission: new Date(),
+          isNearProposalValid: true,
+          dateInterview: new Date(),
+          dateInterviewCompletionConfirmation: new Date(),
+          dateInterviewScheduled: new Date(),
+        },
+        {
+          budget: 200000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 2),
+          description: 'Beta of the Metaverse',
+        },
+      ],
+    },
+    {
+      ...fullProjectData,
+      id: 17,
+      nearId: accountId,
+      dateSubmission: new Date(),
+      isNearProposalValid: true,
+      dateEvaluation: new Date(),
+      dateInterviewScheduled: new Date(),
+      dateInterview: new Date(),
+      dateInterviewCompletionConfirmation: new Date(),
+      dateApproval: new Date(),
+      dateKycCompletion: new Date(),
+      dateKycApproved: new Date(),
+      dateAgreementSignature: new Date(),
+      dateFirstPaymentSent: new Date(),
+      dateOnboardingCompletion: new Date(),
+      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      payments: [
+        {
+          id: '00001',
+          amount: 94161,
+          currency: 'NEAR',
+          date: new Date(),
+          status: 'paid',
+        },
+      ],
+      milestones: [
+        {
+          budget: 100000,
+          deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
+          description: 'Alpha of the Metaverse',
+          dateSubmission: new Date(),
+          isNearProposalValid: true,
           dateRejection: new Date(),
           reviewMilestone: 'We would like more details about this milestone',
         },
@@ -396,7 +447,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
     },
     {
       ...fullProjectData,
-      id: 16,
+      id: 18,
       nearId: accountId,
       dateSubmission: new Date(),
       isNearProposalValid: true,
@@ -433,7 +484,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
           deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
           description: 'Alpha of the Metaverse',
           dateSubmission: new Date(),
-          dateSubmissionOnChain: new Date(),
+          isNearProposalValid: true,
           dateRejection: new Date(),
           dateValidation: new Date(),
         },
@@ -492,7 +543,7 @@ const handlers = [
     }
 
     if (localStorage.getItem('fund3r-milestone-mock-near-tx') === 'true' && response.milestones && response.milestones[0].budget) {
-      response.milestones[0].dateSubmissionOnChain = new Date();
+      response.milestones[0].isNearProposalValid = true;
     }
 
     return res(ctx.delay(GET_DELAY), ctx.json(response));
@@ -575,22 +626,9 @@ const handlers = [
   // This endpoint will save the interview url & return date of interview and other info updated
   rest.put<never, any>(`${BASE_URL}/grants/:id/calendly/interview`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
-    const { proposalNearTransactionHash } = _req.body;
-
-    const dummyDataString = localStorage.getItem('fund3r-mock-data');
-    const dummyData = dummyDataString ? JSON.parse(dummyDataString) : {};
-
-    const nearFundingAmount: BigInt = BigInt((dummyData.fundingAmount / 5.95) * 10 ** 24);
 
     const response = {
       ...basicData,
-      dateSubmission: new Date(),
-      projectName: dummyData.projectName || 'Mocked Dummy Project',
-      projectDescription: dummyData.projectDescription || 'Mocked Dummy Project Description',
-      nearFundingAmount: nearFundingAmount.toString(),
-      proposalNearTransactionHash,
-      isNearProposalValid: true,
-      dateEvaluation: new Date(),
       dateInterviewScheduled: new Date(),
       dateInterview: new Date(),
     };
@@ -614,10 +652,26 @@ const handlers = [
     const response = {
       ...milestoneData,
       dateSubmission: new Date(),
-      dateSubmissionOnChain: new Date(),
+      isNearProposalValid: true,
     };
 
     localStorage.setItem('fund3r-milestone-mock-near-tx', 'true');
+
+    return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
+  }),
+
+  // This endpoint will save the interview url & return date of interview and other info updated
+  rest.put<never, any>(`${BASE_URL}/grants/:id/milestones/:milestoneId/calendly/interview`, (_req, res, ctx) => {
+    const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
+
+    const { milestoneId } = _req.params;
+    const milestone = basicData.milestones[milestoneId];
+
+    const response = {
+      ...milestone,
+      dateInterviewScheduled: new Date(),
+      dateInterview: new Date(),
+    };
 
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),

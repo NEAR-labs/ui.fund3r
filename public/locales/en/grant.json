@@ -242,7 +242,6 @@
     "addTeamMember": "Add Team Member"
   },
   "blockchain": {
-    "title": "Submission to the DAO",
     "description": "In order to continue the Grant Application request, you need to publish your grant application to the NEAR blockchain. In case you need assistance, please contact our team.",
     "button": "Submit application"
   },
@@ -290,6 +289,9 @@
       },
       "agreement": {
         "title": "Signing of agreement"
+      },
+      "on-chain-submission": {
+        "title": "On-chain submission"
       },
       "payout": {
         "title": "Upfront payout"
@@ -342,7 +344,10 @@
         "button": "Submit KYC again"
       },
       "agreement-signed": {
-        "message": "👍 You successfully signed the agreement and we are ready to payouts you up front part of grant."
+        "message": "👍 You successfully signed the agreement, in order to receive the first payment"
+      },
+      "submitted-onchain": {
+        "message": "👍 You have successfully completed the application. You will receive soon the first payout."
       },
       "first-payment-sent": {
         "message": "👍 We have successfully completed the first payment. The team will contact you soon for the onboarding process."
@@ -366,12 +371,15 @@
         "message": "Please submit your milestone to the DAO",
         "button": "Submit Milestone {{ number }} on NEAR"
       },
+      "waiting-booking": {
+        "message": "Please book your interview with our team in order to validate your milestone",
+        "button": "Book interview"
+      },
       "rejection": {
         "message": "Your milestone application has been denied. Please, check comments and submit your application again."
       },
       "submitted": {
-        "message": "You have successfully submit Milestone {{ number }}",
-        "description": "You will receive a follow up email to confirm Milestone {{ number }} has been approved. If you have questions that aren’t answered on near.org/grants, please contact us via email at grants@near.foundation."
+        "message": "Please attend your interview with our team in order to validate your milestone."
       }
     },
     "project": {

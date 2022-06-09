@@ -11,7 +11,6 @@ import LoadingAnimation from '@/components/common/LoadingAnimation';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
 import GrantApplicationDetails from '@/components/grant-application-details/GrantApplicationDetails';
 import GrantApplicationForm from '@/components/grant-application-form/GrantApplicationForm';
-import GrantApplicationProposalSubmission from '@/components/grant-application-form/GrantApplicationProposalSubmission';
 import { COOKIE_SIGNATURE_KEY } from '@/constants';
 import useGrant from '@/hooks/useGrant';
 import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
@@ -35,7 +34,7 @@ function GrantApplication() {
   const { grant, setGrant, isLoading } = useGrant(numberId);
   const { status, step } = useGrantStatus();
 
-  const { EDIT, OFFCHAIN_SUBMITTED, FULLY_SUBMITTED } = STATUS;
+  const { EDIT, SUBMITTED } = STATUS;
 
   return (
     <DefaultLayout>
@@ -49,8 +48,7 @@ function GrantApplication() {
           ) : (
             <Container size="lg">
               {status === EDIT && <GrantApplicationForm data={grant} setData={setGrant} />}
-              {status === OFFCHAIN_SUBMITTED && <GrantApplicationProposalSubmission data={grant} setData={setGrant} />}
-              {(status === FULLY_SUBMITTED || step >= 1) && <GrantApplicationDetails data={grant} setData={setGrant} />}
+              {(status === SUBMITTED || step >= 1) && <GrantApplicationDetails data={grant} setData={setGrant} />}
             </Container>
           )}
         </NearAuthenticationGuardWithLoginRedirection>
