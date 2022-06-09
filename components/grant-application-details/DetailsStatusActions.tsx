@@ -19,7 +19,7 @@ function DetailsStatusActions({ grant, setGrant }: { grant: GrantApplicationInte
     return null;
   }
 
-  const { id, email, firstname, lastname, dateInterview, helloSignRequestId } = grant;
+  const { id, email, firstname, lastname, dateInterview, helloSignRequestId, addressCountry } = grant;
 
   const {
     SUBMITTED,
@@ -91,7 +91,7 @@ function DetailsStatusActions({ grant, setGrant }: { grant: GrantApplicationInte
   }
 
   if (status === APPROVED) {
-    return <StatusActionProjectApproved />;
+    return <StatusActionProjectApproved email={email} country={addressCountry} />;
   }
 
   if (status === DENIED) {

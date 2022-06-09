@@ -1,15 +1,47 @@
 import { Button, Paper, Text } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
-// import { useKycDao } from '@/modules/kycdao-sdk-react';
+import { useKycDao } from '@/modules/kycdao-sdk-react';
 
-function StatusActionProjectApproved() {
+function StatusActionProjectApproved({ email, country }: { email: string | undefined; country: string | undefined }) {
   const { t } = useTranslation('grant');
 
-  //   const { registerOrLogin } = useKycDao();
+  const kycDao = useKycDao();
+
+  // we need to handle redirect after the connexion / maybe with a custom hook
 
   const startKyc = () => {
-    // registerOrLogin();
+    if (!country || !email) {
+      return;
+    }
+
+    kycDao.connectWallet('Near');
+    kycDao.registerOrLogin(); // this will make kycDao.loggedIn to be true
+
+    const verificationData = {
+      email,
+      isEmailConfirmed: true,
+      taxResidency: country,
+      isLegalEntity: false,
+      verificationType: 'KYC',
+      termsAccepted: true,
+    };
+
+    const options = {
+      personaOptions: {
+        onCancel: () => {
+          console.log('Canceled');
+        },
+        onComplete: async () => {
+          console.log('Completed');
+        },
+        onError: (error: Error) => {
+          console.log('Error', error);
+        },
+      },
+    };
+
+    kycDao.startVerification(verificationData, options);
   };
 
   return (
