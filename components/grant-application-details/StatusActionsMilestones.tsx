@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
 import MilestoneStatusActionInterviewBooking from '@/components/grant-application-details/MilestoneStatusActionInterviewBooking';
+import MilestoneStatusActionSubmit from '@/components/grant-application-details/MilestoneStatusActionSubmit';
 import { MILESTONE_STATUS, useMilestonesStatus } from '@/hooks/useMilestonesStatus';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
@@ -24,17 +25,7 @@ function StatusActionsMilestones({ grant, setGrant }: { grant: GrantApplicationI
   const { STARTED, PARTLY_SUBMITTED, INTERVIEW_NOT_SCHEDULED, SUBMIT, REJECTED } = MILESTONE_STATUS;
 
   if (status === STARTED) {
-    // to move to a different component
-    return (
-      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-        <Text mb="sm">{t('details.milestones.waiting-submit.message', { number })}</Text>
-        <Link href={`/grants/${grantRequestSlug}/milestones/${currentMilestone}`} passHref>
-          <Button component="a" color="violet">
-            {t('details.milestones.waiting-submit.button', { number })}
-          </Button>
-        </Link>
-      </Paper>
-    );
+    return <MilestoneStatusActionSubmit number={number} grantRequestSlug={grantRequestSlug} currentMilestone={currentMilestone} />;
   }
 
   if (status === PARTLY_SUBMITTED) {
@@ -69,15 +60,7 @@ function StatusActionsMilestones({ grant, setGrant }: { grant: GrantApplicationI
         <Paper shadow="sm" p="lg" radius="lg" mt="xl">
           <Text>{t('details.milestones.rejection.message')}</Text>
         </Paper>
-        {/* To move to a different component */}
-        <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-          <Text mb="sm">{t('details.milestones.waiting-submit.message', { number })}</Text>
-          <Link href={`/grants/${grantRequestSlug}/milestones/${currentMilestone}`} passHref>
-            <Button component="a" color="violet">
-              {t('details.milestones.waiting-submit.button', { number })}
-            </Button>
-          </Link>
-        </Paper>
+        <MilestoneStatusActionSubmit number={number} grantRequestSlug={grantRequestSlug} currentMilestone={currentMilestone} />
       </>
     );
   }
