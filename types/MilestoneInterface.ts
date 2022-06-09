@@ -16,6 +16,8 @@ export default interface MilestoneInterface {
   dateSubmission?: Date | null;
   proposalNearTransactionHash?: string | null;
   isNearProposalValid?: boolean | null;
+  dateInterview?: Date | null;
+  dateInterviewScheduled?: Date | null;
   dateRejection?: Date | null;
   dateValidation?: Date | null;
 
