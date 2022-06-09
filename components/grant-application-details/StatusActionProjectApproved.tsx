@@ -8,15 +8,10 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
 
   const kycDao = useKycDao();
 
-  // we need to handle redirect after the connexion / maybe with a custom hook
-
-  const startKyc = () => {
+  const runKycModal = async () => {
     if (!country || !email) {
       return;
     }
-
-    kycDao.connectWallet('Near');
-    kycDao.registerOrLogin(); // this will make kycDao.loggedIn to be true
 
     const verificationData = {
       email,
@@ -35,13 +30,22 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
         onComplete: async () => {
           console.log('Completed');
         },
-        onError: (error: Error) => {
+        onError: (error: string) => {
           console.log('Error', error);
         },
       },
     };
 
+    await kycDao.registerOrLogin();
     kycDao.startVerification(verificationData, options);
+  };
+
+  const startKyc = () => {
+    kycDao.connectWallet('Near');
+
+    if (kycDao.walletConnected) {
+      runKycModal();
+    }
   };
 
   return (
