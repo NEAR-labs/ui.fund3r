@@ -37,6 +37,8 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
         },
         onComplete: async () => {
           console.log('Completed');
+          // run validation polling this using useQuery
+          // kycDao.checkVerificationStatus();
           setIsLoading(false);
         },
         onError: (error: string) => {
