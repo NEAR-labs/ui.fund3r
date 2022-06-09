@@ -15,9 +15,7 @@ const useKycDao = () => {
     throw new Error(`KycDaoProvider has not been set properly, please review the config passed`);
   }
 
-  const { getServerStatus, walletHasKycNft, startMinting } = kycDao;
-
-  return { kycDao, getServerStatus, walletHasKycNft, startMinting };
+  return kycDao;
 };
 
 export default useKycDao;
