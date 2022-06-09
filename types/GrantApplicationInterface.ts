@@ -145,7 +145,8 @@ export interface GrantApplicationInterface {
     description?: string | null;
     reviewMilestone?: string | null;
     dateSubmission?: Date | null;
-    dateSubmissionOnChain?: Date | null;
+    proposalNearTransactionHash?: string | null;
+    isNearProposalValid?: boolean | null;
     dateRejection?: Date | null;
     dateValidation?: Date | null;
     status?: string | null;

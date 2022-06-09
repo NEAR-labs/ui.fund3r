@@ -349,7 +349,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
           deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
           description: 'Alpha of the Metaverse',
           dateSubmission: new Date(),
-          dateSubmissionOnChain: new Date(),
+          isNearProposalValid: true,
         },
         {
           budget: 200000,
@@ -390,7 +390,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
           deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
           description: 'Alpha of the Metaverse',
           dateSubmission: new Date(),
-          dateSubmissionOnChain: new Date(),
+          isNearProposalValid: true,
           dateRejection: new Date(),
           reviewMilestone: 'We would like more details about this milestone',
         },
@@ -440,7 +440,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
           deliveryDate: new Date().setFullYear(new Date().getFullYear() + 1),
           description: 'Alpha of the Metaverse',
           dateSubmission: new Date(),
-          dateSubmissionOnChain: new Date(),
+          isNearProposalValid: true,
           dateRejection: new Date(),
           dateValidation: new Date(),
         },
@@ -499,7 +499,7 @@ const handlers = [
     }
 
     if (localStorage.getItem('fund3r-milestone-mock-near-tx') === 'true' && response.milestones && response.milestones[0].budget) {
-      response.milestones[0].dateSubmissionOnChain = new Date();
+      response.milestones[0].isNearProposalValid = true;
     }
 
     return res(ctx.delay(GET_DELAY), ctx.json(response));
@@ -621,7 +621,7 @@ const handlers = [
     const response = {
       ...milestoneData,
       dateSubmission: new Date(),
-      dateSubmissionOnChain: new Date(),
+      isNearProposalValid: true,
     };
 
     localStorage.setItem('fund3r-milestone-mock-near-tx', 'true');

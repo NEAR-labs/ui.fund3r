@@ -42,7 +42,7 @@ const useMilestonesStatus = () => {
       milestone.pendingStep = 0;
     }
 
-    if (milestone.dateSubmission && milestone.dateSubmissionOnChain) {
+    if (milestone.dateSubmission && milestone.isNearProposalValid) {
       milestone.status = MILESTONE_STATUS.SUBMIT;
       milestone.pendingStep = 1;
     }

@@ -14,7 +14,8 @@ export default interface MilestoneInterface {
   // status
   reviewMilestone?: string | null;
   dateSubmission?: Date | null;
-  dateSubmissionOnChain?: Date | null;
+  proposalNearTransactionHash?: string | null;
+  isNearProposalValid?: boolean | null;
   dateRejection?: Date | null;
   dateValidation?: Date | null;
 
