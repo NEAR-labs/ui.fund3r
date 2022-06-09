@@ -18,7 +18,7 @@ function StatusActionsMilestones({ grant, setGrant }: { grant: GrantApplicationI
     return null;
   }
 
-  const { status } = milestonesStatus[currentMilestone];
+  const { status, dateInterview } = milestonesStatus[currentMilestone];
   const number = currentMilestone + 1;
 
   const { STARTED, PARTLY_SUBMITTED, INTERVIEW_NOT_SCHEDULED, SUBMIT, REJECTED } = MILESTONE_STATUS;
@@ -56,14 +56,10 @@ function StatusActionsMilestones({ grant, setGrant }: { grant: GrantApplicationI
 
   if (status === SUBMIT) {
     return (
-      <>
-        <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-          <Text>{t('details.milestones.submitted.message', { number })}</Text>
-        </Paper>
-        <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-          <Text>{t('details.milestones.submitted.description', { number })}</Text>
-        </Paper>
-      </>
+      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+        <Text>{t('details.milestones.submitted.message', { number })}</Text>
+        <Text>{typeof dateInterview === 'string' ? dateInterview : dateInterview?.toISOString()}</Text>
+      </Paper>
     );
   }
 

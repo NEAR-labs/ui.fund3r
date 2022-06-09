@@ -70,14 +70,14 @@ function MilestoneStatusActionInterviewBooking({
 
   return (
     <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-      <Text mb="sm">{t('details.status-actions.evaluated.message')}</Text>
+      <Text mb="sm">{t('details.milestones.waiting-booking.message')}</Text>
       {typeof window !== 'undefined' && calendlyUrl && (
         <Button<typeof PopupButton>
           color="violet"
           component={PopupButton}
           url={calendlyUrl}
           rootElement={document.getElementById('__next') as HTMLElement}
-          text={t('details.status-actions.evaluated.button')}
+          text={t('details.milestones.waiting-booking.button')}
           prefill={prefilledData}
           loading={isLoading}
           disabled={isLoading}

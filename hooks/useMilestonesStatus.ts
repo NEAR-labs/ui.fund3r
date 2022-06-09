@@ -50,7 +50,7 @@ const useMilestonesStatus = () => {
 
     if (milestone.dateSubmission && milestone.isNearProposalValid && milestone.dateInterviewScheduled) {
       milestone.status = MILESTONE_STATUS.SUBMIT;
-      milestone.pendingStep = 0;
+      milestone.pendingStep = 1;
     }
 
     if (milestone.dateRejection) {
