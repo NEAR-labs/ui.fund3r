@@ -3,9 +3,9 @@ import { useTranslation } from 'next-i18next';
 
 import StatusActionEvaluated from '@/components/grant-application-details/StatusActionEvaluated';
 import StatusActionKycApproved from '@/components/grant-application-details/StatusActionKycApproved';
+import StatusActionProjectApproved from '@/components/grant-application-details/StatusActionProjectApproved';
 import StatusActionProposalSubmission from '@/components/grant-application-details/StatusActionProposalSubmission';
 import StatusActionsMilestones from '@/components/grant-application-details/StatusActionsMilestones';
-import StatusActionProjectApproved from '@/components/grant-application-details/StatusActionProjectApproved';
 import { SKIP_EVALUATION_APPROVAL } from '@/config/grants';
 import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
