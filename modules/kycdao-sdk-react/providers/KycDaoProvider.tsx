@@ -1,5 +1,5 @@
+import { useEffect, useMemo, useState } from 'react';
 import type { SdkConfiguration } from '@kycdao/kycdao-sdk';
-import { useEffect, useState } from 'react';
 import { KycDao } from '@kycdao/kycdao-sdk';
 
 import getConfig from '../config';
@@ -17,7 +17,9 @@ const KycDaoProvider = ({ children, networkId = 'tesnet', config }: { children: 
     setKycDao(kycDaoInstance);
   }, [networkId, config]);
 
-  return <KycDaoContext.Provider value={kycDao}>{children}</KycDaoContext.Provider>;
+  const contextValue = useMemo(() => ({ kycDao }), [kycDao]);
+
+  return <KycDaoContext.Provider value={contextValue}>{children}</KycDaoContext.Provider>;
 };
 
 export default KycDaoProvider;
