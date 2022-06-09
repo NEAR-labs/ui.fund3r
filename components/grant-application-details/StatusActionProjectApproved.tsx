@@ -3,6 +3,7 @@ import { Button, Paper, Text } from '@mantine/core';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
+import useOnceCall from '@/hooks/useOnceCall';
 import { useKycDao } from '@/modules/kycdao-sdk-react';
 
 function StatusActionProjectApproved({ email, country }: { email: string | undefined; country: string | undefined }) {
@@ -69,11 +70,9 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
     }
   };
 
-  useEffect(() => {
-    if (startKyc && kycDao.walletConnected) {
-      runKycModal();
-    }
-  }, [kycDao.walletConnected, runKycModal, startKyc]);
+  useOnceCall(() => {
+    runKycModal();
+  }, (startKyc && kycDao.walletConnected) || false);
 
   return (
     <Paper shadow="sm" p="lg" radius="lg" mt="xl">
