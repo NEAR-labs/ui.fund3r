@@ -8,7 +8,7 @@ const getConfig = (networkId = 'testnet'): SdkConfiguration => {
         baseUrl: 'https://staging.kycdao.xyz/api/frontend',
         enbaledBlockchainNetworks: ['NearTestnet'],
         enbaledVerificationTypes: ['KYC'],
-        environment: 'staging',
+        environment: 'test',
       },
     ],
   ]);
