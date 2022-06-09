@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Button, Paper, Text } from '@mantine/core';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
 import { useKycDao } from '@/modules/kycdao-sdk-react';
@@ -7,10 +8,12 @@ import { useKycDao } from '@/modules/kycdao-sdk-react';
 function StatusActionProjectApproved({ email, country }: { email: string | undefined; country: string | undefined }) {
   const { t } = useTranslation('grant');
   const [isLoading, setIsLoading] = useState(false);
-
+  const router = useRouter();
   const kycDao = useKycDao();
 
-  const runKycModal = async () => {
+  const { startKyc } = router.query;
+
+  const runKycModal = useCallback(async () => {
     if (!country || !email) {
       return;
     }
@@ -45,21 +48,35 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
 
     await kycDao.registerOrLogin();
     kycDao.startVerification(verificationData, options);
-  };
+  }, [country, email, kycDao]);
 
-  const startKyc = () => {
+  const startKycAction = () => {
     setIsLoading(true);
-    kycDao.connectWallet('Near');
+
+    router
+      .push({
+        pathname: router.asPath,
+        query: { startKyc: true },
+      })
+      .then(() => {
+        kycDao.connectWallet('Near');
+      });
 
     if (kycDao.walletConnected) {
       runKycModal();
     }
   };
 
+  useEffect(() => {
+    if (startKyc && kycDao.walletConnected) {
+      runKycModal();
+    }
+  }, [kycDao.walletConnected, runKycModal, startKyc]);
+
   return (
     <Paper shadow="sm" p="lg" radius="lg" mt="xl">
       <Text mb="sm">{t('details.status-actions.approved.message')}</Text>
-      <Button color="violet" onClick={startKyc} loading={isLoading} disabled={isLoading}>
+      <Button color="violet" onClick={startKycAction} loading={isLoading} disabled={isLoading}>
         {t('details.status-actions.approved.button')}
       </Button>
     </Paper>

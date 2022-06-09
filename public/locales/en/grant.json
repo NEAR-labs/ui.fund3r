@@ -328,7 +328,7 @@
         "message": "🤷‍♂️ Your application has been denied. Please, check comments and submit your application again."
       },
       "approved": {
-        "message": "👍 Your funding has been approved, pleace verify your account.",
+        "message": "👍 Your funding has been approved, please verify your account.",
         "button": "Verify account"
       },
       "kyc-completed": {
