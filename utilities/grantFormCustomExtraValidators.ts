@@ -45,8 +45,6 @@ const validate = (form: UseFormReturnType<any>, t: TFunction) => {
     ...customErrors,
   });
 
-  console.log(validation.errors);
-
   return validation.hasErrors || hasCustomErrors;
 };
 

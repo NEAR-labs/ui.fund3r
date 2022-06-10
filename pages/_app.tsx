@@ -8,6 +8,7 @@ import Head from 'next/head';
 import { appWithTranslation } from 'next-i18next';
 import NextNProgress from 'nextjs-progressbar';
 
+import { KycDaoProvider } from '@/modules/kycdao-sdk-react';
 import NearProvider from '@/modules/near-api-react/providers/NearProvider';
 import GrantProvider from '@/providers/GrantProvider';
 
@@ -44,15 +45,17 @@ const App = (props: AppProps) => {
       >
         <NotificationsProvider>
           <NearProvider networkId={nearNetworkEnv}>
-            <QueryClientProvider client={queryClient}>
-              <Hydrate state={pageProps.dehydratedState}>
-                <CookiesProvider>
-                  <GrantProvider>
-                    <Component {...pageProps} />
-                  </GrantProvider>
-                </CookiesProvider>
-              </Hydrate>
-            </QueryClientProvider>
+            <KycDaoProvider networkId={nearNetworkEnv} config={{}}>
+              <QueryClientProvider client={queryClient}>
+                <Hydrate state={pageProps.dehydratedState}>
+                  <CookiesProvider>
+                    <GrantProvider>
+                      <Component {...pageProps} />
+                    </GrantProvider>
+                  </CookiesProvider>
+                </Hydrate>
+              </QueryClientProvider>
+            </KycDaoProvider>
           </NearProvider>
         </NotificationsProvider>
       </MantineProvider>
