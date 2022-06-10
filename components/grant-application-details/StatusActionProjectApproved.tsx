@@ -51,7 +51,8 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
 
     await kycDao.registerOrLogin();
     kycDao.startVerification(verificationData, options);
-  }, [country, email, kycDao]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [country, email]);
 
   const startKycAction = () => {
     if (!isKycValid) {
