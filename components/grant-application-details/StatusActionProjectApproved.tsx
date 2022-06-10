@@ -76,7 +76,7 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
     {
       refetchOnWindowFocus: true,
       refetchInterval: 2000,
-      enabled: true,
+      enabled: kycDao.walletConnected,
       onSuccess: (data) => {
         if (data.KYC === true) {
           setIsKycValid(true);
