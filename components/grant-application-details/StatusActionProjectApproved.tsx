@@ -1,10 +1,9 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Button, Paper, Text } from '@mantine/core';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
-import useOnceCall from '@/hooks/useOnceCall';
 import { useKycDao } from '@/modules/kycdao-sdk-react';
 
 // eslint-disable-next-line max-lines-per-function
@@ -13,6 +12,7 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
   const [isLoading, setIsLoading] = useState(false);
   const [isKycCompleted, setIsKycCompleted] = useState(false);
   const [isKycValid, setIsKycValid] = useState(false);
+  // const [isTokenMinted, setIsTokenMinted] = useState(false);
   const router = useRouter();
   const kycDao = useKycDao();
 
@@ -54,25 +54,30 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
   }, [country, email, kycDao]);
 
   const startKycAction = () => {
-    console.log('Click on button');
-    setIsLoading(true);
+    if (!isKycValid) {
+      setIsLoading(true);
 
-    router.push(`/grants/${grantRequestSlug}?startKyc=true`).then(() => {
-      kycDao.connectWallet('Near');
-    });
+      router.push(`/grants/${grantRequestSlug}?startKyc=true`).then(() => {
+        kycDao.connectWallet('Near');
+      });
+    }
+  };
+
+  const mintSbt = () => {
+    // eslint-disable-next-line no-alert
+    alert('Coming soon');
   };
 
   const { isLoading: validationLoading, refetch: startFetchValidation } = useQuery(
-    ['validate-kyc', isKycCompleted],
+    ['validate-kyc'],
     () => {
       return kycDao.checkVerificationStatus();
     },
     {
       refetchOnWindowFocus: true,
-      refetchInterval: 1000,
-      enabled: isKycCompleted,
+      refetchInterval: 2000,
+      enabled: true,
       onSuccess: (data) => {
-        console.log('Validation data', data);
         if (data.KYC === true) {
           setIsKycValid(true);
         }
@@ -80,23 +85,35 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
     },
   );
 
-  useOnceCall(() => {
-    console.log('this should trigger once only');
-    runKycModal();
-    startFetchValidation(); // temporary for testing TO REMOVE
-    router.push(`/grants/${grantRequestSlug}`);
-  }, !!startKyc && kycDao.walletConnected);
+  useEffect(() => {
+    if (!!startKyc && kycDao.walletConnected) {
+      runKycModal();
+      router.push(`/grants/${grantRequestSlug}`);
+    }
+  }, [grantRequestSlug, kycDao.walletConnected, router, runKycModal, startFetchValidation, startKyc]);
 
   const waitingForValidation = isKycCompleted && !isKycValid;
+  const isLoadingOrWaitingForValidation = isLoading || validationLoading || waitingForValidation;
+
+  // watch isTokenMinted and redirect to the next page by reloading grant
 
   return (
     <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-      <Text mb="sm">{t('details.status-actions.approved.message')}</Text>
-      <Button color="violet" onClick={startKycAction} loading={isLoading || validationLoading} disabled={isLoading || validationLoading}>
-        {t('details.status-actions.approved.button')}
-      </Button>
-      {waitingForValidation && <div>Waiting for KYC validation</div>}
-      {isKycValid && <div>KYC validated</div>}
+      {isKycValid ? (
+        <>
+          <Text mb="sm">{t('details.status-actions.approved.nft-message')}</Text>
+          <Button color="violet" onClick={mintSbt} loading={isLoadingOrWaitingForValidation} disabled={isLoadingOrWaitingForValidation}>
+            {t('details.status-actions.approved.nft-button')}
+          </Button>
+        </>
+      ) : (
+        <>
+          <Text mb="sm">{t('details.status-actions.approved.message')}</Text>
+          <Button color="violet" onClick={startKycAction} loading={isLoadingOrWaitingForValidation} disabled={isLoadingOrWaitingForValidation}>
+            {t('details.status-actions.approved.button')}
+          </Button>
+        </>
+      )}
     </Paper>
   );
 }
