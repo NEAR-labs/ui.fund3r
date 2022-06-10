@@ -19,6 +19,7 @@ function Logout() {
   const logout = useCallback(() => {
     wallet?.signOut();
     removeCookie(COOKIE_SIGNATURE_KEY);
+    localStorage.clear();
     router.push('/');
   }, [wallet, router, removeCookie]);
 
