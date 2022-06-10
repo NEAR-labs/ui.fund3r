@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next';
 
 import StatusActionEvaluated from '@/components/grant-application-details/StatusActionEvaluated';
 import StatusActionKycApproved from '@/components/grant-application-details/StatusActionKycApproved';
+import StatusActionProjectApproved from '@/components/grant-application-details/StatusActionProjectApproved';
 import StatusActionProposalSubmission from '@/components/grant-application-details/StatusActionProposalSubmission';
 import StatusActionsMilestones from '@/components/grant-application-details/StatusActionsMilestones';
 import { SKIP_EVALUATION_APPROVAL } from '@/config/grants';
@@ -18,7 +19,7 @@ function DetailsStatusActions({ grant, setGrant }: { grant: GrantApplicationInte
     return null;
   }
 
-  const { id, email, firstname, lastname, dateInterview, helloSignRequestId } = grant;
+  const { id, email, firstname, lastname, dateInterview, helloSignRequestId, addressCountry } = grant;
 
   const {
     SUBMITTED,
@@ -90,12 +91,7 @@ function DetailsStatusActions({ grant, setGrant }: { grant: GrantApplicationInte
   }
 
   if (status === APPROVED) {
-    return (
-      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
-        <Text mb="sm">{t('details.status-actions.approved.message')}</Text>
-        <Button color="violet">{t('details.status-actions.approved.button')}</Button>
-      </Paper>
-    );
+    return <StatusActionProjectApproved email={email} country={addressCountry} />;
   }
 
   if (status === DENIED) {
