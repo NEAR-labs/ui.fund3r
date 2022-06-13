@@ -2,6 +2,11 @@
 
 > Easy to set up end to end grant application form for DAOs on NEAR Protocol
 
+## Repositories
+
+- [ui.fund3r](https://github.com/NEAR-labs/ui.fund3r)
+- [api.fund3r](https://github.com/NEAR-labs/api.fund3r)
+
 ## Technology stack
 
 - Blockchain: **[NEAR](https://near.org/)**
@@ -18,7 +23,11 @@
 
 ## Project status
 
-Project under construction
+**Work in progress**
+
+- [x] Frontend flow implementation
+- [ ] Backend implementation
+- [ ] Admin panel implementation
 
 ## Guides
 
@@ -56,4 +65,3 @@ npm run start
 
 No tested are implemented yet.
 Check the [Manual Testing](__tests__/MANUAL_TESTING.md) guide.
-
