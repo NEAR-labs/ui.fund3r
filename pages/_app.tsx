@@ -13,7 +13,7 @@ import NearProvider from '@/modules/near-api-react/providers/NearProvider';
 import GrantProvider from '@/providers/GrantProvider';
 
 // if (process.env.NODE_ENV === 'development' && process.env.NEXT_PUBLIC_MOCK_API) {
-if (process.env.NEXT_PUBLIC_MOCK_API) {
+if (process.env.NEXT_PUBLIC_MOCK_API === 'true') {
   /* eslint-disable */
   const { setupWorker } = require('../__tests__/mocks');
   /* eslint-enable */
