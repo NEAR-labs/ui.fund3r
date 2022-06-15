@@ -61,7 +61,7 @@ const saveGrantApplicationAsDraft = async (
   const signedHash = signStringMessage(hash);
 
   const { data } = await axios.put(
-    `${API_HOST}/grants/${grantId}/draft`,
+    `${API_HOST}/grants/${grantId}`,
     {
       grantData,
       hash,
@@ -105,8 +105,8 @@ const submitGrantApplication = async (
   const hash = stringifiedGrantData.slice(0, 10);
   const signedHash = signStringMessage(hash);
 
-  const { data } = await axios.put(
-    `${API_HOST}/grants/${grantId}/submit`,
+  const { data } = await axios.post(
+    `${API_HOST}/grants/${grantId}`,
     {
       hash,
       signedHash,
