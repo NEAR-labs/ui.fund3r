@@ -131,6 +131,11 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {
         form.setErrors(error?.response?.data?.errors);
+
+        showNotification({
+          color: 'red',
+          message: t('error.form.message'),
+        });
       },
     },
   );
