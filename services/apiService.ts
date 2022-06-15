@@ -44,28 +44,24 @@ const saveGrantApplicationAsDraft = async (
   {
     grantId,
     grantData,
-    signStringMessage,
+    signObjectMessage,
   }: {
     grantId: number | undefined;
     grantData: GrantApplicationInterface;
-    signStringMessage: (stringMessage: string) => Promise<Uint8Array | undefined | null>;
+    signObjectMessage: (stringMessage: unknown) => Promise<Uint8Array | undefined | null>;
   },
 ): Promise<GrantApplicationInterface | null> => {
   if (!signature) {
     return null;
   }
 
-  const stringifiedGrantData = JSON.stringify(grantData);
-  // todo: the following should be replaced by a hash function, issue #34
-  const hash = stringifiedGrantData.slice(0, 10);
-  const signedHash = signStringMessage(hash);
+  const signedGrantData = await signObjectMessage(grantData);
 
   const { data } = await axios.put(
     `${API_HOST}/grants/${grantId}`,
     {
       grantData,
-      hash,
-      signedHash,
+      signedGrantData,
     },
     {
       headers: {
@@ -83,11 +79,11 @@ const submitGrantApplication = async (
   {
     grantId,
     grantData,
-    signStringMessage,
+    signObjectMessage,
   }: {
     grantId: number | undefined;
     grantData: GrantApplicationInterface;
-    signStringMessage: (stringMessage: string) => Promise<Uint8Array | undefined | null>;
+    signObjectMessage: (stringMessage: unknown) => Promise<Uint8Array | undefined | null>;
   },
 ): Promise<GrantApplicationInterface | null> => {
   if (!signature) {
@@ -97,19 +93,16 @@ const submitGrantApplication = async (
   await saveGrantApplicationAsDraft(signature, {
     grantId,
     grantData,
-    signStringMessage,
+    signObjectMessage,
   });
 
-  const stringifiedGrantData = JSON.stringify(grantData);
-  // todo: the following should be replaced by a hash function, issue #34
-  const hash = stringifiedGrantData.slice(0, 10);
-  const signedHash = signStringMessage(hash);
+  const signedGrantData = await signObjectMessage(grantData);
 
   const { data } = await axios.post(
     `${API_HOST}/grants/${grantId}`,
     {
-      hash,
-      signedHash,
+      grantData,
+      signedGrantData,
     },
     {
       headers: {

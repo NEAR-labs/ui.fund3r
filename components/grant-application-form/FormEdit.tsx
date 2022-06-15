@@ -28,7 +28,7 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
   const { t } = useTranslation('grant');
 
   const apiSignature = useAccountSignature();
-  const { signStringMessage } = useSigner();
+  const { signObjectMessage } = useSigner();
   const wallet = useWallet();
 
   const accountId = wallet && wallet.isSignedIn() && wallet.getAccountId();
@@ -84,12 +84,12 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
     isLoading: isSavingLoading,
     isError: isSavingError,
   } = useQuery(
-    ['saveForm', apiSignature, grantId, grantData, signStringMessage],
+    ['saveForm', apiSignature, grantId, grantData, signObjectMessage],
     () =>
       saveGrantApplicationAsDraft(apiSignature, {
         grantId,
         grantData,
-        signStringMessage,
+        signObjectMessage,
       }),
     {
       refetchOnWindowFocus: false,
@@ -112,12 +112,12 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
     isLoading: isSubmitingLoading,
     isError: isSubmitingError,
   } = useQuery(
-    ['submitForm', apiSignature, grantId, grantData, signStringMessage],
+    ['submitForm', apiSignature, grantId, grantData, signObjectMessage],
     () =>
       submitGrantApplication(apiSignature, {
         grantId,
         grantData,
-        signStringMessage,
+        signObjectMessage,
       }),
     {
       refetchOnWindowFocus: false,
