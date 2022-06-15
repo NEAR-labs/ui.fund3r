@@ -62,7 +62,7 @@ function FormEditFieldsMilestones({ form, loading }: { form: any; loading: boole
   ));
 
   const addMilestone = () => {
-    form.addListItem('milestones', { budget: null, deliveryDate: null, description: '' });
+    form.addListItem('milestones', { budget: 0, deliveryDate: new Date(), description: '' });
   };
 
   return (
