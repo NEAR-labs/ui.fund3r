@@ -217,7 +217,7 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
           <Group mt="xl" position="apart">
             <Group position="left" mt="xl">
               <Text size="sm" color="dimmed">
-                {lastSavedDate && t('form.draft_date') + dayjs(lastSavedDate).format('ddd, MMM D, YYYY h:mm A')}
+                {lastSavedDate && t('form.draft_date') + dayjs.default(lastSavedDate).format('ddd, MMM D, YYYY h:mm A')}
               </Text>
             </Group>
             <Group position="right" mt="xl">
