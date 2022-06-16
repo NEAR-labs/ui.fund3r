@@ -82,7 +82,7 @@ export async function getServerSideProps({ req, locale, params }: { req: NextApi
     };
   }
 
-  queryClient.prefetchQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, id));
+  await queryClient.prefetchQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, id));
   const dehydratedState = dehydrate(queryClient);
 
   return {
