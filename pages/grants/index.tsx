@@ -69,7 +69,7 @@ export async function getServerSideProps({ req, locale }: { req: NextApiRequest;
     await queryClient.fetchQuery(['grants', apiSignature], () => getAllGrantApplicationsOfUser(apiSignature));
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
-    if (e.response.status === 401) {
+    if (e?.response?.status === 401) {
       return {
         props: {
           ...(await serverSideTranslations(locale, ['common', 'grant'])),
