@@ -1,3 +1,4 @@
+import { ErrorBoundary } from 'react-error-boundary';
 import { dehydrate, QueryClient } from 'react-query';
 import { Container } from '@mantine/core';
 import type { NextApiRequest } from 'next';
@@ -9,6 +10,7 @@ import type { ParsedUrlQuery } from 'querystring';
 
 import LoadingAnimation from '@/components/common/LoadingAnimation';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
+import Error500 from '@/components/errors/500';
 import GrantApplicationDetails from '@/components/grant-application-details/GrantApplicationDetails';
 import GrantApplicationForm from '@/components/grant-application-form/GrantApplicationForm';
 import { COOKIE_SIGNATURE_KEY } from '@/constants';
@@ -43,14 +45,16 @@ function GrantApplication() {
           <title>{t('title')}</title>
         </Head>
         <NearAuthenticationGuardWithLoginRedirection>
-          {isLoading ? (
-            <LoadingAnimation />
-          ) : (
-            <Container size="lg">
-              {status === EDIT && <GrantApplicationForm data={grant} setData={setGrant} />}
-              {(status === SUBMITTED || step >= 1) && <GrantApplicationDetails data={grant} setData={setGrant} />}
-            </Container>
-          )}
+          <ErrorBoundary FallbackComponent={Error500}>
+            {isLoading ? (
+              <LoadingAnimation />
+            ) : (
+              <Container size="lg">
+                {status === EDIT && <GrantApplicationForm data={grant} setData={setGrant} />}
+                {(status === SUBMITTED || step >= 1) && <GrantApplicationDetails data={grant} setData={setGrant} />}
+              </Container>
+            )}
+          </ErrorBoundary>
         </NearAuthenticationGuardWithLoginRedirection>
       </>
     </DefaultLayout>

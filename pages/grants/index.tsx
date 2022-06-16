@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 import type { NextApiRequest } from 'next';
 import Head from 'next/head';
@@ -8,6 +9,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import LoadingAnimation from '@/components/common/LoadingAnimation';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
+import Error500 from '@/components/errors/500';
 import { COOKIE_SIGNATURE_KEY } from '@/constants';
 import useAccountSignature from '@/hooks/useAccountSignature';
 import DefaultLayout from '@/layouts/default';
@@ -35,7 +37,9 @@ function Grants() {
           <title>{t('title')}</title>
         </Head>
         <NearAuthenticationGuardWithLoginRedirection>
-          <LoadingAnimation />
+          <ErrorBoundary FallbackComponent={Error500}>
+            <LoadingAnimation />
+          </ErrorBoundary>
         </NearAuthenticationGuardWithLoginRedirection>
       </>
     </DefaultLayout>
