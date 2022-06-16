@@ -76,7 +76,13 @@ export async function getServerSideProps({ req, locale, params }: { req: NextApi
 
   const id = grantRequestSlug.split('-')[1];
 
-  await queryClient.prefetchQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, id));
+  if (!id) {
+    return {
+      notFound: true,
+    };
+  }
+
+  queryClient.prefetchQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, id));
   const dehydratedState = dehydrate(queryClient);
 
   return {
