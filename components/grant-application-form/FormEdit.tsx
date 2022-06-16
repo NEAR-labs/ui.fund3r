@@ -213,14 +213,18 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
             <FormEditFieldsNear form={form} schema={schema} loading={loading} />
             <Divider mt={32} mb={32} />
           </div>
-          <Text>{lastSavedDate && t('form.draft_date') + lastSavedDate.toLocaleString()}</Text>
-          <Group position="right" mt="xl">
-            <Button color="violet" onClick={saveDraftHandler} variant="light" loading={isSavingLoading}>
-              {t('form.save')}
-            </Button>
-            <Button type="submit" color="violet" disabled={loading} loading={isSubmitingLoading}>
-              {t('form.submit')}
-            </Button>
+          <Group mt="xl" position="apart">
+            <Group position="left" mt="xl">
+              <Text>{lastSavedDate && t('form.draft_date') + lastSavedDate.toLocaleString()}</Text>
+            </Group>
+            <Group position="right" mt="xl">
+              <Button color="violet" onClick={saveDraftHandler} variant="light" loading={isSavingLoading}>
+                {t('form.save')}
+              </Button>
+              <Button type="submit" color="violet" disabled={loading} loading={isSubmitingLoading}>
+                {t('form.submit')}
+              </Button>
+            </Group>
           </Group>
         </form>
       </Grid.Col>
