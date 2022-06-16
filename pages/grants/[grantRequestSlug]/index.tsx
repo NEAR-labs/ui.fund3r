@@ -10,6 +10,7 @@ import type { ParsedUrlQuery } from 'querystring';
 
 import LoadingAnimation from '@/components/common/LoadingAnimation';
 import NearAuthenticationGuardWithLoginRedirection from '@/components/common/NearAuthenticationGuardWithLoginRedirection';
+import Error401 from '@/components/errors/401';
 import Error500 from '@/components/errors/500';
 import GrantApplicationDetails from '@/components/grant-application-details/GrantApplicationDetails';
 import GrantApplicationForm from '@/components/grant-application-form/GrantApplicationForm';
@@ -20,7 +21,7 @@ import DefaultLayout from '@/layouts/default';
 import { getGrantApplication } from '@/services/apiService';
 import parseCookies from '@/utilities/parseCookies';
 
-function GrantApplication() {
+function GrantApplication({ error }: { error: number }) {
   const router = useRouter();
   const { t } = useTranslation('grant');
 
@@ -37,6 +38,19 @@ function GrantApplication() {
   const { status, step } = useGrantStatus();
 
   const { EDIT, SUBMITTED } = STATUS;
+
+  if (error === 401) {
+    return (
+      <DefaultLayout>
+        <>
+          <Head>
+            <title>{t('title')}</title>
+          </Head>
+          <Error401 />
+        </>
+      </DefaultLayout>
+    );
+  }
 
   return (
     <DefaultLayout>
@@ -82,13 +96,28 @@ export async function getServerSideProps({ req, locale, params }: { req: NextApi
     };
   }
 
-  await queryClient.prefetchQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, id));
-  const dehydratedState = dehydrate(queryClient);
+  try {
+    await queryClient.fetchQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, id));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (e: any) {
+    if (e.response.status === 401) {
+      return {
+        props: {
+          ...(await serverSideTranslations(locale, ['common', 'grant'])),
+          error: 401,
+        },
+      };
+    }
+
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'grant'])),
-      dehydratedState,
+      dehydratedState: dehydrate(queryClient),
     },
   };
 }
