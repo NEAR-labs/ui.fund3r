@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import { Alert, Button, Divider, Grid, Group, Text, Title } from '@mantine/core';
 import { formList, useForm, zodResolver } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
+import * as dayjs from 'dayjs';
 import { useTranslation } from 'next-i18next';
 import { AlertCircle } from 'tabler-icons-react';
 
@@ -215,7 +216,9 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
           </div>
           <Group mt="xl" position="apart">
             <Group position="left" mt="xl">
-              <Text>{lastSavedDate && t('form.draft_date') + lastSavedDate.toLocaleString()}</Text>
+              <Text size="sm" color="dimmed">
+                {lastSavedDate && t('form.draft_date') + dayjs(lastSavedDate).format('ddd, MMM D, YYYY h:mm A')}
+              </Text>
             </Group>
             <Group position="right" mt="xl">
               <Button color="violet" onClick={saveDraftHandler} variant="light" loading={isSavingLoading}>
