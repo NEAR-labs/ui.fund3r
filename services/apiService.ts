@@ -11,7 +11,7 @@ const getAllGrantApplicationsOfUser = async (signature: NearApiSignatureInterfac
     return null;
   }
 
-  const { data } = await axios.get(`${API_HOST}/grants`, {
+  const { data } = await axios.get(`${API_HOST}/api/v1/grants`, {
     headers: {
       'X-NEAR-ACCOUNT-ID': signature.accountId,
       'X-NEAR-SIGNATURE': JSON.stringify(signature.signature),
@@ -29,7 +29,7 @@ const getGrantApplication = async (
     return null;
   }
 
-  const { data } = await axios.get(`${API_HOST}/grants/${grantId}`, {
+  const { data } = await axios.get(`${API_HOST}/api/v1/grants/${grantId}`, {
     headers: {
       'X-NEAR-ACCOUNT-ID': signature.accountId,
       'X-NEAR-SIGNATURE': JSON.stringify(signature.signature),
@@ -58,7 +58,7 @@ const saveGrantApplicationAsDraft = async (
   const signedGrantData = await signObjectMessage(grantData);
 
   const { data } = await axios.put(
-    `${API_HOST}/grants/${grantId}`,
+    `${API_HOST}/api/v1/grants/${grantId}`,
     {
       grantData,
       signedGrantData,
@@ -99,7 +99,7 @@ const submitGrantApplication = async (
   const signedGrantData = await signObjectMessage(grantData);
 
   const { data } = await axios.post(
-    `${API_HOST}/grants/${grantId}`,
+    `${API_HOST}/api/v1/grants/${grantId}`,
     {
       grantData,
       signedGrantData,
@@ -130,7 +130,7 @@ const validateNearTransactionHash = async (
   }
 
   const { data } = await axios.put(
-    `${API_HOST}/grants/${grantId}/near-transactions`,
+    `${API_HOST}/api/v1/grants/${grantId}/near-transactions`,
     {
       proposalNearTransactionHash,
     },
@@ -164,7 +164,7 @@ const submitCalendlyUrl = async (
   const signedCalendlyUrl = calendlyUrl && signStringMessage(calendlyUrl);
 
   const { data } = await axios.put(
-    `${API_HOST}/grants/${grantId}/calendly/interview`,
+    `${API_HOST}/api/v1/grants/${grantId}/calendly/interview`,
     {
       grantId,
       calendlyUrl,
@@ -202,7 +202,7 @@ const submitMilestoneCalendlyUrl = async (
   const signedCalendlyUrl = calendlyUrl && signStringMessage(calendlyUrl);
 
   const { data } = await axios.put(
-    `${API_HOST}/grants/${grantId}/milestones/${milestoneId}/calendly/interview`,
+    `${API_HOST}/api/v1/grants/${grantId}/milestones/${milestoneId}/calendly/interview`,
     {
       grantId,
       milestoneId,
@@ -241,7 +241,7 @@ const submitMilestoneData = async (
   const signedData = signObjectMessage(milestoneData);
 
   const { data } = await axios.put(
-    `${API_HOST}/grants/${grantId}/milestones/${milestoneId}`,
+    `${API_HOST}/api/v1/grants/${grantId}/milestones/${milestoneId}`,
     {
       milestoneId,
       signedData,
@@ -275,7 +275,7 @@ const validateMilestoneNearTransactionHash = async (
   }
 
   const { data } = await axios.put(
-    `${API_HOST}/grants/${grantId}/milestones/${milestoneId}/near-transactions`,
+    `${API_HOST}/api/v1/grants/${grantId}/milestones/${milestoneId}/near-transactions`,
     {
       proposalNearTransactionHash,
     },

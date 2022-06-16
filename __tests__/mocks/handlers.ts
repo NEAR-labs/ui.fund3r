@@ -509,13 +509,13 @@ const handlers = [
   // The backend will verify the signature following this https://stackoverflow.com/questions/61982163/jwt-authentication-for-near-protocol-in-a-python-backend
   // It will retrieve the grants from the database
   // If there is no grant, it will create a new one and return an array of grants
-  rest.get<never, any>(`${BASE_URL}/grants`, (_req, res, ctx) => {
+  rest.get<never, any>(`${BASE_URL}/api/v1/grants`, (_req, res, ctx) => {
     return res(ctx.delay(GET_DELAY), ctx.json(getGrantsData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string)));
   }),
 
   // when dateSubmission is true, the backend should check if a proposal really exists
   // maybe we should share the tx id or we can check all the proposals in a dao (?)
-  rest.get<never, any>(`${BASE_URL}/grants/:id`, (_req, res, ctx) => {
+  rest.get<never, any>(`${BASE_URL}/api/v1/grants/:id`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
 
     const dummyDataString = localStorage.getItem('fund3r-mock-data');
@@ -549,7 +549,7 @@ const handlers = [
     return res(ctx.delay(GET_DELAY), ctx.json(response));
   }),
 
-  rest.put<never, any>(`${BASE_URL}/grants/:id`, (_req, res, ctx) => {
+  rest.put<never, any>(`${BASE_URL}/api/v1/grants/:id`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
     const { grantData } = _req.body;
 
@@ -564,7 +564,7 @@ const handlers = [
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),
 
-  rest.post<never, any>(`${BASE_URL}/grants/:id`, (_req, res, ctx) => {
+  rest.post<never, any>(`${BASE_URL}/api/v1/grants/:id`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
 
     const dummyDataString = localStorage.getItem('fund3r-mock-data');
@@ -599,7 +599,7 @@ const handlers = [
   }),
 
   // When this endpoint is called the backend should verify that the transaction hash is matching the grant
-  rest.put<never, any>(`${BASE_URL}/grants/:id/near-transactions`, (_req, res, ctx) => {
+  rest.put<never, any>(`${BASE_URL}/api/v1/grants/:id/near-transactions`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
     const { proposalNearTransactionHash } = _req.body;
 
@@ -624,7 +624,7 @@ const handlers = [
   }),
 
   // This endpoint will save the interview url & return date of interview and other info updated
-  rest.put<never, any>(`${BASE_URL}/grants/:id/calendly/interview`, (_req, res, ctx) => {
+  rest.put<never, any>(`${BASE_URL}/api/v1/grants/:id/calendly/interview`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
 
     const response = {
@@ -636,7 +636,7 @@ const handlers = [
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),
 
-  rest.put<never, any>(`${BASE_URL}/grants/:id/milestones/:milestoneId`, (_req, res, ctx) => {
+  rest.put<never, any>(`${BASE_URL}/api/v1/grants/:id/milestones/:milestoneId`, (_req, res, ctx) => {
     const response = {
       ...milestoneData,
       dateSubmission: new Date(),
@@ -648,7 +648,7 @@ const handlers = [
   }),
 
   // When this endpoint is called the backend should verify that the transaction hash is matching the milestone
-  rest.put<never, any>(`${BASE_URL}/grants/:id/milestones/:milestoneId/near-transactions`, (_req, res, ctx) => {
+  rest.put<never, any>(`${BASE_URL}/api/v1/grants/:id/milestones/:milestoneId/near-transactions`, (_req, res, ctx) => {
     const response = {
       ...milestoneData,
       dateSubmission: new Date(),
@@ -661,7 +661,7 @@ const handlers = [
   }),
 
   // This endpoint will save the interview url & return date of interview and other info updated
-  rest.put<never, any>(`${BASE_URL}/grants/:id/milestones/:milestoneId/calendly/interview`, (_req, res, ctx) => {
+  rest.put<never, any>(`${BASE_URL}/api/v1/grants/:id/milestones/:milestoneId/calendly/interview`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
 
     const { milestoneId } = _req.params;
@@ -677,12 +677,12 @@ const handlers = [
   }),
 
   // todo
-  // rest.post<never, any>(`${BASE_URL}/grants/:id/milestones/:milestoneId/attachment`, (_req, res, ctx) => {
+  // rest.post<never, any>(`${BASE_URL}/api/v1/grants/:id/milestones/:milestoneId/attachment`, (_req, res, ctx) => {
   //   return res(ctx.delay(POST_PUT_DELAY), ctx.json({ todo: true }));
   // }),
 
   // todo
-  // rest.post<never, any>(`${BASE_URL}/grants/:id/attachment`, (_req, res, ctx) => {
+  // rest.post<never, any>(`${BASE_URL}/api/v1/grants/:id/attachment`, (_req, res, ctx) => {
   //   return res(ctx.delay(POST_PUT_DELAY), ctx.json({ todo: true }));
   // }),
 ];
