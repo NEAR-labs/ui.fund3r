@@ -157,11 +157,11 @@ const submitCalendlyUrl = async (
     signStringMessage: (stringMessage: string) => Promise<Uint8Array | undefined | null>;
   },
 ): Promise<GrantApplicationInterface | null> => {
-  if (!signature) {
+  if (!signature || !calendlyUrl) {
     return null;
   }
 
-  const signedCalendlyUrl = calendlyUrl && signStringMessage(calendlyUrl);
+  const signedCalendlyUrl = await signStringMessage(calendlyUrl);
 
   const { data } = await axios.put(
     `${API_HOST}/api/v1/grants/${grantId}/calendly/interview`,
@@ -195,11 +195,11 @@ const submitMilestoneCalendlyUrl = async (
     milestoneId: number | undefined;
   },
 ): Promise<GrantApplicationInterface | null> => {
-  if (!signature) {
+  if (!signature || !calendlyUrl) {
     return null;
   }
 
-  const signedCalendlyUrl = calendlyUrl && signStringMessage(calendlyUrl);
+  const signedCalendlyUrl = await signStringMessage(calendlyUrl);
 
   const { data } = await axios.put(
     `${API_HOST}/api/v1/grants/${grantId}/milestones/${milestoneId}/calendly/interview`,
