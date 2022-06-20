@@ -20,7 +20,7 @@ function DetailsStatusActions({ grant, setGrant }: { grant: GrantApplicationInte
     return null;
   }
 
-  const { id, email, firstname, lastname, dateInterview, helloSignRequestId, addressCountry } = grant;
+  const { id, email, firstname, lastname, dateInterview, helloSignRequestUrl, addressCountry } = grant;
 
   const {
     SUBMITTED,
@@ -70,7 +70,7 @@ function DetailsStatusActions({ grant, setGrant }: { grant: GrantApplicationInte
   }
 
   if (status === KYC_APPROVED) {
-    return <StatusActionKycApproved helloSignRequestId={helloSignRequestId} />;
+    return <StatusActionKycApproved helloSignRequestUrl={helloSignRequestUrl} />;
   }
 
   if (status === KYC_DENIED) {

@@ -6,12 +6,5 @@ const getFileDownloadUrl = (helloSignRequestId: string | undefined) => {
   return `https://app.hellosign.com/home/manage?guid=${helloSignRequestId}`;
 };
 
-const getSignatureUrl = (helloSignRequestId: string | undefined) => {
-  if (!helloSignRequestId) {
-    return null;
-  }
-
-  return `https://app.hellosign.com/sign/${helloSignRequestId}`;
-};
-
-export { getFileDownloadUrl, getSignatureUrl };
+// eslint-disable-next-line import/prefer-default-export
+export { getFileDownloadUrl };
