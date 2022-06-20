@@ -1,5 +1,7 @@
 import { useQuery } from 'react-query';
 import { Divider, Paper, SimpleGrid, Text, Timeline } from '@mantine/core';
+import type { FormList } from '@mantine/form/lib/form-list/form-list';
+import * as dayjs from 'dayjs';
 import { useTranslation } from 'next-i18next';
 import { Check } from 'tabler-icons-react';
 
@@ -7,8 +9,6 @@ import DEFAULT_CURRENCY from '@/config/currency';
 import { getNearUsdConvertRate } from '@/services/currencyConverter';
 import type { PaymentInterface } from '@/types/GrantApplicationInterface';
 import budgetCalculator from '@/utilities/budgetCalculator';
-
-import type { FormList } from '../../node_modules/@mantine/form/lib/form-list/form-list';
 
 // eslint-disable-next-line max-lines-per-function
 function PaymentSchedule({
@@ -42,7 +42,7 @@ function PaymentSchedule({
       >
         <SimpleGrid cols={2}>
           <Text color="dimmed" size="sm">
-            {typeof deliveryDate === 'number' || typeof deliveryDate === 'string' ? deliveryDate : deliveryDate?.toDateString()}
+            {dayjs.default(deliveryDate).format('ddd, MMM D, YYYY')}
           </Text>
           <Text color="dimmed" size="sm" align="right">
             {budget || 0} {currency}
@@ -69,7 +69,7 @@ function PaymentSchedule({
         <Timeline.Item bullet={payments && payments[0] && payments[0].status === 'paid' && <Check />} title={t('details.payment-schedule.launch')}>
           <SimpleGrid cols={2}>
             <Text color="dimmed" size="sm">
-              {typeof projectLaunchDate === 'number' || typeof projectLaunchDate === 'string' ? projectLaunchDate : projectLaunchDate?.toDateString()}
+              {dayjs.default(projectLaunchDate).format('ddd, MMM D, YYYY')}
             </Text>
             <Text color="dimmed" size="sm" align="right">
               {initialBudget} {currency}

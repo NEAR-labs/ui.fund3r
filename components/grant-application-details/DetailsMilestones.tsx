@@ -1,5 +1,6 @@
 import React from 'react';
 import { Divider, Group, Space, Title } from '@mantine/core';
+import * as dayjs from 'dayjs';
 import { useTranslation } from 'next-i18next';
 
 import FeedbackComment from '@/components/common/FeedbackComment';
@@ -33,10 +34,7 @@ function DetailsMilestones({
           <Group>
             <LabelValue label={t('details.project.milestone.budget')} value={`${milestone.budget?.toFixed(0)} ${currency}`} />
             <Divider sx={{ height: '42px' }} orientation="vertical" />
-            <LabelValue
-              label={t('details.project.milestone.date')}
-              value={typeof milestone.deliveryDate === 'number' || typeof milestone.deliveryDate === 'string' ? milestone.deliveryDate : milestone.deliveryDate?.toDateString()}
-            />
+            <LabelValue label={t('details.project.milestone.date')} value={dayjs.default(milestone.deliveryDate).format('ddd, MMM D, YYYY')} />
           </Group>
           <Space h="md" />
           <LabelValue label={t('details.project.milestone.description')} value={milestone.description} />

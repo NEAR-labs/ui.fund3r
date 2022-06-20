@@ -1,4 +1,5 @@
 import { Button, Paper, Text } from '@mantine/core';
+import * as dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -49,7 +50,7 @@ function StatusActionsMilestones({ grant, setGrant }: { grant: GrantApplicationI
     return (
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
         <Text>{t('details.milestones.submitted.message', { number })}</Text>
-        <Text>{typeof dateInterview === 'string' ? dateInterview : dateInterview?.toISOString()}</Text>
+        <Text>{dayjs.default(dateInterview).format('ddd, MMM D, YYYY - HH:mm')}</Text>
       </Paper>
     );
   }

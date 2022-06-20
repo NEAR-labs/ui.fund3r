@@ -1,4 +1,5 @@
 import { Button, Paper, Text } from '@mantine/core';
+import * as dayjs from 'dayjs';
 import { useTranslation } from 'next-i18next';
 
 import StatusActionEvaluated from '@/components/grant-application-details/StatusActionEvaluated';
@@ -119,7 +120,7 @@ function DetailsStatusActions({ grant, setGrant }: { grant: GrantApplicationInte
     return (
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
         <Text>{t('details.status-actions.interview-scheduled.title')}</Text>
-        <Text>{typeof dateInterview === 'string' ? dateInterview : dateInterview?.toISOString()}</Text>
+        <Text>{dayjs.default(dateInterview).format('ddd, MMM D, YYYY - HH:mm')}</Text>
       </Paper>
     );
   }
