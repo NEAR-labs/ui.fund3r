@@ -1,15 +1,11 @@
 import { Button, Paper, Text } from '@mantine/core';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
 function StatusActionReload({ action }: { action: () => void }) {
   const { t } = useTranslation('common');
-  const router = useRouter();
-  const { grantRequestSlug } = router.query;
 
   const onClick = () => {
     action();
-    router.push(`/grants/${grantRequestSlug}`);
   };
 
   return (

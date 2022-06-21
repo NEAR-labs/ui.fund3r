@@ -15,14 +15,14 @@ const useGrant = (grantId: number) => {
   const { grant, setGrant } = context;
   const apiSignature = useAccountSignature();
 
-  const { isLoading: isGrantLoading } = useQuery(['grant', apiSignature, grantId], () => getGrantApplication(apiSignature, grantId), {
+  const { isLoading: isGrantLoading, refetch: refetchGrant } = useQuery(['grant', apiSignature, grantId], () => getGrantApplication(apiSignature, grantId), {
     refetchOnWindowFocus: false,
     onSuccess: (updatedGrantData) => {
       setGrant(updatedGrantData);
     },
-    onError: (error) => {
-      // console.log(error);
-    },
+    // onError: (error) => {
+    //   // console.log(error);
+    // },
   });
 
   const isLoading = isGrantLoading;
@@ -31,6 +31,7 @@ const useGrant = (grantId: number) => {
     grant,
     setGrant,
     isLoading,
+    refetchGrant,
   };
 };
 

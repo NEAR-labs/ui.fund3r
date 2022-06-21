@@ -12,7 +12,15 @@ import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
 // eslint-disable-next-line max-lines-per-function
-function DetailsStatusActions({ grant, setGrant }: { grant: GrantApplicationInterface | null | undefined; setGrant: (data: GrantApplicationInterface) => void }) {
+function DetailsStatusActions({
+  grant,
+  setGrant,
+  refetchGrant,
+}: {
+  grant: GrantApplicationInterface | null | undefined;
+  setGrant: (data: GrantApplicationInterface) => void;
+  refetchGrant: unknown;
+}) {
   const { t } = useTranslation('grant');
   const { status } = useGrantStatus();
 
@@ -70,7 +78,7 @@ function DetailsStatusActions({ grant, setGrant }: { grant: GrantApplicationInte
   }
 
   if (status === KYC_APPROVED) {
-    return <StatusActionKycApproved helloSignRequestUrl={helloSignRequestUrl} />;
+    return <StatusActionKycApproved helloSignRequestUrl={helloSignRequestUrl} refetchGrant={refetchGrant}/>;
   }
 
   if (status === KYC_DENIED) {

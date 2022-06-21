@@ -34,7 +34,7 @@ function GrantApplication({ error }: { error: number }) {
   const id = grantRequestSlug.split('-')[1];
   const numberId = parseInt(id as string, 10);
 
-  const { grant, setGrant, isLoading } = useGrant(numberId);
+  const { grant, setGrant, isLoading, refetchGrant } = useGrant(numberId);
   const { status, step } = useGrantStatus();
 
   const { EDIT, SUBMITTED } = STATUS;
@@ -65,7 +65,7 @@ function GrantApplication({ error }: { error: number }) {
             ) : (
               <Container size="lg">
                 {status === EDIT && <GrantApplicationForm data={grant} setData={setGrant} />}
-                {(status === SUBMITTED || step >= 1) && <GrantApplicationDetails data={grant} setData={setGrant} />}
+                {(status === SUBMITTED || step >= 1) && <GrantApplicationDetails data={grant} setData={setGrant} refetchGrant={refetchGrant} />}
               </Container>
             )}
           </ErrorBoundary>

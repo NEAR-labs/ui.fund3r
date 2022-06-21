@@ -16,7 +16,15 @@ import DetailsStatusActions from '@/components/grant-application-details/Details
 import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
-function GrantApplicationDetails({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
+function GrantApplicationDetails({
+  data,
+  setData,
+  refetchGrant,
+}: {
+  data: GrantApplicationInterface | undefined | null;
+  setData: (data: GrantApplicationInterface) => void;
+  refetchGrant: unknown;
+}) {
   const { t } = useTranslation('grant');
   const { status } = useGrantStatus();
 
@@ -33,7 +41,7 @@ function GrantApplicationDetails({ data, setData }: { data: GrantApplicationInte
           openSourceState={data?.openSourceState}
         />
         <Space h="xs" />
-        <DetailsStatusActions grant={data} setGrant={setData} />
+        <DetailsStatusActions grant={data} setGrant={setData} refetchGrant={refetchGrant} />
         <Space h="xl" />
         <Tabs color="violet" tabPadding="xl" mt="xl">
           <Tabs.Tab label={t('details.project.tab')}>
