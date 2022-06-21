@@ -1,28 +1,33 @@
-import { useEffect, useState } from 'react';
-import HelloSign from 'hellosign-embedded';
+/* eslint-disable import/no-duplicates */
+import { useState } from 'react';
+import type HelloSign from 'hellosign-embedded';
+import type Options from 'hellosign-embedded';
 
-const useHellosignEmbedded = (signUrl: string | undefined, clientId: string | undefined) => {
-  const [hellosign, setHellosign] = useState<HelloSign | null>(null);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const client = new HelloSign();
-      setHellosign(client);
-    }
-  }, []);
+const useHellosignEmbedded = (signUrl: string | undefined, clientId: string | undefined, options: Options | undefined) => {
+  const [hellosignClient, setHellosignClient] = useState<HelloSign | null>(null);
 
   const open = () => {
-    if (!hellosign || !signUrl) {
+    if (!signUrl) {
       return;
     }
 
-    hellosign.open(signUrl, {
-      clientId,
-    });
+    import('hellosign-embedded')
+      .then(({ default: HelloSign }) => {
+        return new HelloSign({
+          allowCancel: true,
+          clientId,
+          skipDomainVerification: true,
+          ...options,
+        });
+      })
+      .then((client) => {
+        setHellosignClient(client);
+        client.open(signUrl);
+      });
   };
 
   return {
-    hellosign,
+    hellosignClient,
     open,
   };
 };
