@@ -1,24 +1,48 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Paper, Text } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
 import StatusActionReload from '@/components/grant-application-details/StatusActionReload';
 import useHellosignEmbedded from '@/modules/hellosign-embedded-react/useHellosignEmbedded';
 
-function StatusActionKycApproved({ helloSignRequestUrl, refetchGrant }: { helloSignRequestUrl: string | undefined; refetchGrant: unknown }) {
+function StatusActionKycApproved({
+  helloSignRequestUrl,
+  refetchGrant,
+  dateAgreementSignature,
+}: {
+  helloSignRequestUrl: string | undefined;
+  refetchGrant: unknown;
+  dateAgreementSignature: Date | undefined;
+}) {
   const { t } = useTranslation('grant');
   const clientId = process.env.NEXT_PUBLIC_HELLO_SIGN_APP_CLIENT_ID;
   const { open, hellosignClient, isLoading, error, setError } = useHellosignEmbedded(helloSignRequestUrl, clientId);
   const [refreshLoading, setRefreshLoading] = useState(false);
+  const [polling, setPolling] = useState(false);
 
   hellosignClient?.on('sign', () => {
     setRefreshLoading(true);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    refetchGrant().then(() => {
-      setRefreshLoading(false);
-    });
+    setPolling(true);
   });
+
+  useEffect(() => {
+    let interval: ReturnType<typeof setInterval>;
+
+    if (polling) {
+      interval = setInterval(() => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        refetchGrant();
+
+        if (dateAgreementSignature) {
+          setRefreshLoading(false);
+          setPolling(false);
+          clearInterval(interval);
+        }
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [dateAgreementSignature, polling, refetchGrant]);
 
   const reloadAction = () => {
     setRefreshLoading(true);
