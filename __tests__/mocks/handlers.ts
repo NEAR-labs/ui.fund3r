@@ -191,7 +191,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateApproval: new Date(),
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6', // Should be created by the backend and passing the redirect url
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6', // Should be created by the backend and passing the redirect url
     },
     {
       ...fullProjectData,
@@ -206,7 +206,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
       dateAgreementSignature: new Date(), // Should be checked by the backend using hello sign api
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
     },
     {
       ...fullProjectData,
@@ -221,7 +221,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
       dateAgreementSignature: new Date(), // Should be checked by the backend using hello sign api
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       isNearProposalValid: true,
     },
     {
@@ -239,7 +239,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateKycApproved: new Date(),
       dateAgreementSignature: new Date(),
       dateFirstPaymentSent: new Date(),
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       payments: [
         {
           id: '00001',
@@ -266,7 +266,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateAgreementSignature: new Date(),
       dateFirstPaymentSent: new Date(),
       dateOnboardingCompletion: new Date(), // Will be automatically set as date if SKIP_ONBOARDING is set to true and the first payment sent
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       payments: [
         {
           id: '00001',
@@ -293,7 +293,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateAgreementSignature: new Date(),
       dateFirstPaymentSent: new Date(),
       dateOnboardingCompletion: new Date(),
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       payments: [
         {
           id: '00001',
@@ -333,7 +333,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateAgreementSignature: new Date(),
       dateFirstPaymentSent: new Date(),
       dateOnboardingCompletion: new Date(),
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       payments: [
         {
           id: '00001',
@@ -374,7 +374,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateAgreementSignature: new Date(),
       dateFirstPaymentSent: new Date(),
       dateOnboardingCompletion: new Date(),
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       payments: [
         {
           id: '00001',
@@ -418,7 +418,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateAgreementSignature: new Date(),
       dateFirstPaymentSent: new Date(),
       dateOnboardingCompletion: new Date(),
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       payments: [
         {
           id: '00001',
@@ -461,7 +461,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateAgreementSignature: new Date(),
       dateFirstPaymentSent: new Date(),
       dateOnboardingCompletion: new Date(),
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       payments: [
         {
           id: '00001',

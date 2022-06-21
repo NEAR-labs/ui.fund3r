@@ -126,8 +126,9 @@ export interface GrantApplicationInterface {
   dateOnboardingCompletion?: Date;
 
   // Hellosign
-  helloSignRequestId?: string;
+  helloSignSignatureRequestId?: string;
   helloSignRequestUrl?: string;
+  helloSignRequestId?: string;
 
   // Links
   interviewUrl?: string;

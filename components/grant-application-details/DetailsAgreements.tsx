@@ -3,10 +3,10 @@ import { useTranslation } from 'next-i18next';
 
 import { getFileDownloadUrl } from '@/services/helloSignService';
 
-function DetailsAgreements({ helloSignRequestId }: { helloSignRequestId: string }) {
+function DetailsAgreements({ helloSignSignatureRequestId }: { helloSignSignatureRequestId: string }) {
   const { t } = useTranslation('grant');
 
-  const fileDownloadUrl = getFileDownloadUrl(helloSignRequestId) || '';
+  const fileDownloadUrl = getFileDownloadUrl(helloSignSignatureRequestId) || '';
 
   return (
     <>

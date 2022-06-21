@@ -58,9 +58,9 @@ function GrantApplicationDetails({
             <DetailsMilestones milestones={data?.milestones} currency={data?.currency} />
             {data?.attachment && <DetailsAttachment reviewAttachments={data?.reviewAttachments} attachment={data?.attachment} />}
             <Space h="xs" />
-            {data?.helloSignRequestId && data?.dateAgreementSignature && (
+            {data?.helloSignSignatureRequestId && data?.dateAgreementSignature && (
               <>
-                <DetailsAgreements helloSignRequestId={data.helloSignRequestId} />
+                <DetailsAgreements helloSignSignatureRequestId={data.helloSignSignatureRequestId} />
                 <Space h="xl" />
               </>
             )}
