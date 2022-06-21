@@ -12,7 +12,7 @@ function StatusActionKycApproved({ helloSignRequestUrl, refetchGrant }: { helloS
   const [refreshLoading, setRefreshLoading] = useState(false);
 
   hellosignClient?.on('sign', () => {
-    setRefreshLoading(true)
+    setRefreshLoading(true);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     refetchGrant().then(() => {
