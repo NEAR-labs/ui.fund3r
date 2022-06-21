@@ -9,7 +9,7 @@ function StatusActionKycApproved({ helloSignRequestUrl }: { helloSignRequestUrl:
   const { t } = useTranslation('grant');
   const clientId = process.env.NEXT_PUBLIC_HELLO_SIGN_APP_CLIENT_ID;
   const router = useRouter();
-  const { open, hellosignClient, isLoading, error } = useHellosignEmbedded(helloSignRequestUrl, clientId);
+  const { open, hellosignClient, isLoading, error, setError } = useHellosignEmbedded(helloSignRequestUrl, clientId);
   const { grantRequestSlug } = router.query;
 
   hellosignClient?.on('sign', () => {
@@ -17,7 +17,7 @@ function StatusActionKycApproved({ helloSignRequestUrl }: { helloSignRequestUrl:
   });
 
   if (error) {
-    return <StatusActionReload />;
+    return <StatusActionReload action={() => setError(null)} />;
   }
 
   return (

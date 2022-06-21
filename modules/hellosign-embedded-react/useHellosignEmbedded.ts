@@ -43,6 +43,7 @@ const useHellosignEmbedded = (signUrl: string | undefined, clientId: string | un
     open,
     isLoading,
     error,
+    setError,
   };
 };
 
