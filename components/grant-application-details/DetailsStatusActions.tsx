@@ -15,10 +15,12 @@ import type { GrantApplicationInterface } from '@/types/GrantApplicationInterfac
 function DetailsStatusActions({
   grant,
   setGrant,
+  isGrantLoading,
   refetchGrant,
 }: {
   grant: GrantApplicationInterface | null | undefined;
   setGrant: (data: GrantApplicationInterface) => void;
+  isGrantLoading: boolean;
   refetchGrant: unknown;
 }) {
   const { t } = useTranslation('grant');
@@ -78,7 +80,7 @@ function DetailsStatusActions({
   }
 
   if (status === KYC_APPROVED) {
-    return <StatusActionKycApproved helloSignRequestUrl={helloSignRequestUrl} refetchGrant={refetchGrant}/>;
+    return <StatusActionKycApproved helloSignRequestUrl={helloSignRequestUrl} isGrantLoading={isGrantLoading} refetchGrant={refetchGrant}/>;
   }
 
   if (status === KYC_DENIED) {

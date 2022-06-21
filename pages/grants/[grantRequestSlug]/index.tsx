@@ -65,7 +65,7 @@ function GrantApplication({ error }: { error: number }) {
             ) : (
               <Container size="lg">
                 {status === EDIT && <GrantApplicationForm data={grant} setData={setGrant} />}
-                {(status === SUBMITTED || step >= 1) && <GrantApplicationDetails data={grant} setData={setGrant} refetchGrant={refetchGrant} />}
+                {(status === SUBMITTED || step >= 1) && <GrantApplicationDetails data={grant} setData={setGrant} isGrantLoading={isLoading} refetchGrant={refetchGrant} />}
               </Container>
             )}
           </ErrorBoundary>
