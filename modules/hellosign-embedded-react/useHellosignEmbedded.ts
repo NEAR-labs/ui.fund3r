@@ -1,4 +1,3 @@
-/* eslint-disable import/no-duplicates */
 import { useState } from 'react';
 import type HelloSign from 'hellosign-embedded';
 
@@ -24,7 +23,7 @@ const useHellosignEmbedded = (signUrl: string | undefined, clientId: string | un
       })
       .then((client) => {
         setHellosignClient(client);
-        setIsLoading(true)
+        setIsLoading(true);
         client.open(signUrl);
       });
   };

@@ -16,16 +16,13 @@ import DetailsStatusActions from '@/components/grant-application-details/Details
 import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
-// eslint-disable-next-line max-lines-per-function
 function GrantApplicationDetails({
   data,
   setData,
-  isGrantLoading,
   refetchGrant,
 }: {
   data: GrantApplicationInterface | undefined | null;
   setData: (data: GrantApplicationInterface) => void;
-  isGrantLoading: boolean;
   refetchGrant: unknown;
 }) {
   const { t } = useTranslation('grant');
@@ -44,7 +41,7 @@ function GrantApplicationDetails({
           openSourceState={data?.openSourceState}
         />
         <Space h="xs" />
-        <DetailsStatusActions grant={data} setGrant={setData} isGrantLoading={isGrantLoading} refetchGrant={refetchGrant} />
+        <DetailsStatusActions grant={data} setGrant={setData} refetchGrant={refetchGrant} />
         <Space h="xl" />
         <Tabs color="violet" tabPadding="xl" mt="xl">
           <Tabs.Tab label={t('details.project.tab')}>

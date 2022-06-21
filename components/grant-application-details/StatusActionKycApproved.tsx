@@ -1,21 +1,15 @@
+import { useState } from 'react';
 import { Button, Paper, Text } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
 import StatusActionReload from '@/components/grant-application-details/StatusActionReload';
 import useHellosignEmbedded from '@/modules/hellosign-embedded-react/useHellosignEmbedded';
 
-function StatusActionKycApproved({
-  helloSignRequestUrl,
-  isGrantLoading,
-  refetchGrant,
-}: {
-  helloSignRequestUrl: string | undefined;
-  isGrantLoading: boolean;
-  refetchGrant: unknown;
-}) {
+function StatusActionKycApproved({ helloSignRequestUrl, refetchGrant }: { helloSignRequestUrl: string | undefined; refetchGrant: unknown }) {
   const { t } = useTranslation('grant');
   const clientId = process.env.NEXT_PUBLIC_HELLO_SIGN_APP_CLIENT_ID;
   const { open, hellosignClient, isLoading, error, setError } = useHellosignEmbedded(helloSignRequestUrl, clientId);
+  const [refreshLoading, setRefreshLoading] = useState(false);
 
   hellosignClient?.on('sign', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -24,17 +18,20 @@ function StatusActionKycApproved({
   });
 
   const reloadAction = () => {
-    setError(null);
+    setRefreshLoading(true);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    refetchGrant();
+    refetchGrant().then(() => {
+      setError(null);
+      setRefreshLoading(false);
+    });
   };
 
-  if (error) {
-    return <StatusActionReload action={reloadAction} isGrantLoading={isGrantLoading} />;
-  }
+  const loading = isLoading || refreshLoading;
 
-  const loading = isLoading || isGrantLoading;
+  if (error) {
+    return <StatusActionReload action={reloadAction} loading={loading} />;
+  }
 
   return (
     <Paper shadow="sm" p="lg" radius="lg" mt="xl">
