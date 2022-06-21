@@ -17,6 +17,10 @@
     "500": {
       "title": "500 | Internal Server Error",
       "description": "There was an error on the server."
+    },
+    "generic": {
+      "message": "Sorry an error occured, we invite you to refresh this page and try again.",
+      "button": "Refresh"
     }
   }
 }
