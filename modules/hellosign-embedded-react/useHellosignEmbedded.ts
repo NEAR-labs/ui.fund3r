@@ -1,9 +1,9 @@
 /* eslint-disable import/no-duplicates */
 import { useState } from 'react';
 import type HelloSign from 'hellosign-embedded';
-import type Options from 'hellosign-embedded';
 
-const useHellosignEmbedded = (signUrl: string | undefined, clientId: string | undefined, options: Options | undefined) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const useHellosignEmbedded = (signUrl: string | undefined, clientId: string | undefined, options: any = {}) => {
   const [hellosignClient, setHellosignClient] = useState<HelloSign | null>(null);
 
   const open = () => {
