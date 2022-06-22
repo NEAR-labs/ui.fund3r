@@ -8,9 +8,7 @@ const downloadFile = async (apiSignature: NearApiSignatureInterface | undefined,
     return;
   }
 
-  const response = await axios({
-    url: `${API_HOST}/api/v1/grants/${grantId}/agreement`,
-    method: 'GET',
+  const response = await axios.get(`${API_HOST}/api/v1/grants/${grantId}/agreement`, {
     responseType: 'blob',
     headers: {
       'X-NEAR-ACCOUNT-ID': apiSignature.accountId,
