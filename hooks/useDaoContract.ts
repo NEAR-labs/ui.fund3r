@@ -22,7 +22,7 @@ const useDaoContract = () => {
 
   const submitProposal = (grantData: GrantApplicationInterface | undefined | null, proposalNumber: number) => {
     setIsNearLoading(true);
-    if (contract && grantData) {
+    if (contract && grantData && networkId) {
       createPayoutProposal(contract, grantData, proposalNumber, networkId);
     }
   };
