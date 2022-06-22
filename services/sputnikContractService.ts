@@ -1,8 +1,9 @@
+import { getTokenId } from '@/config/currency';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 import type SputnikContractInterface from '@/types/SputnikContractInterface';
 import createProposalDescription from '@/utilities/createProposalDescription';
 
-const createPayoutProposal = async (contract: SputnikContractInterface, grantData: GrantApplicationInterface, payoutNumber: number) => {
+const createPayoutProposal = async (contract: SputnikContractInterface, grantData: GrantApplicationInterface, payoutNumber: number, networkId: string) => {
   const description = createProposalDescription(grantData.projectName || '', payoutNumber, grantData.projectDescription || '');
 
   if (contract.get_policy && contract.add_proposal) {
@@ -14,7 +15,7 @@ const createPayoutProposal = async (contract: SputnikContractInterface, grantDat
           description,
           kind: {
             Transfer: {
-              token_id: 'usdn.tesnet',
+              token_id: getTokenId(networkId),
               receiver_id: grantData.nearId,
               amount: BigInt((grantData.fundingAmount || 0) * 10 ** 18).toString(),
             },

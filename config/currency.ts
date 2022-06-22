@@ -1,3 +1,7 @@
-const DEFAULT_CURRENCY = 'USD';
+export const DEFAULT_CURRENCY = 'USD';
 
-export default DEFAULT_CURRENCY;
+export const getTokenId = (networkId = 'testnet') => {
+  const tokenConfig = new Map([['testnet', 'usdn.testnet']]);
+
+  return tokenConfig.get(networkId);
+};

@@ -5,7 +5,7 @@ import * as dayjs from 'dayjs';
 import { useTranslation } from 'next-i18next';
 import { Check } from 'tabler-icons-react';
 
-import DEFAULT_CURRENCY from '@/config/currency';
+import { DEFAULT_CURRENCY } from '@/config/currency';
 import { getNearUsdConvertRate } from '@/services/currencyConverter';
 import type { PaymentInterface } from '@/types/GrantApplicationInterface';
 import budgetCalculator from '@/utilities/budgetCalculator';
