@@ -14,9 +14,9 @@ const createPayoutProposal = async (contract: SputnikContractInterface, grantDat
           description,
           kind: {
             Transfer: {
-              token_id: '',
+              token_id: 'usdn.tesnet',
               receiver_id: grantData.nearId,
-              amount: grantData.nearFundingAmount,
+              amount: BigInt((grantData.fundingAmount || 0) * 10 ** 18).toString(),
             },
           },
         },
