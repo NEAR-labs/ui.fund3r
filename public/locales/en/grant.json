@@ -2,7 +2,7 @@
   "title": "Grant Application | FUND3R",
   "form": {
     "title": "Submission",
-    "description": "Please make sure to fill out all sections of the application. While you should provide clear details of your project timelines and scope, an application with lengthy responses is not necessarily preferable! We read through many submissions, so if you can concisely convey your ideas, we would greatly appreciate it. All applications will be received and reviewed on a rolling basis. Only one application per individual and/or team can be submitted at a time.<br><br>After completing your project’s pre-specified milestones, an individual or team can re-apply for another grant. Grants are issued in NEAR tokens but payment methods such as USD/ EUR can be issued in exceptional circumstances.",
+    "description": "Please make sure to fill out all sections of the application. While you should provide clear details of your project timelines and scope, an application with lengthy responses is not necessarily preferable! We read through many submissions, so if you can concisely convey your ideas, we would greatly appreciate it. All applications will be received and reviewed on a rolling basis. Only one application per individual and/or team can be submitted at a time.<br><br>After completing your project’s pre-specified milestones, an individual or team can re-apply for another grant. Grants are issued in NEAR tokens but payment methods such as USN/ EUR can be issued in exceptional circumstances.",
     "applicationProjectDetailTitle": "Project Details",
     "projectName": {
       "label": "Project Name",
@@ -47,14 +47,14 @@
     "fundingAmount": {
       "label": "How much initial funding do you need?",
       "placeholder": "10000",
-      "error": "Please enter an initial funding amount that is at least 1 USD.",
-      "description": "Please specify the initial amount you are requesting in USD. Extra funding should be added as milestone. E.g. $50,000 * Grants will be given in USD value of NEAR tokens. (Benchmark: average grant <$50K USD)"
+      "error": "Please enter an initial funding amount that is at least 1 USN.",
+      "description": "Please specify the initial amount you are requesting in USN. Extra funding should be added as milestone. E.g. $50,000 * Grants will be given in USN value of NEAR tokens. (Benchmark: average grant <$50K USN)"
     },
     "milestoneTitle": "Milestone",
     "budget": {
       "label": "Estimated Budget",
       "placeholder": "10000",
-      "error": "Please enter a budget that is at least 1 USD."
+      "error": "Please enter a budget that is at least 1 USN."
     },
     "deliveryDate": {
       "label": "Estimated Delivery Date",

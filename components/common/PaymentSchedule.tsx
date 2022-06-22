@@ -1,4 +1,3 @@
-import { useQuery } from 'react-query';
 import { Divider, Paper, SimpleGrid, Text, Timeline } from '@mantine/core';
 import type { FormList } from '@mantine/form/lib/form-list/form-list';
 import * as dayjs from 'dayjs';
@@ -6,7 +5,6 @@ import { useTranslation } from 'next-i18next';
 import { Check } from 'tabler-icons-react';
 
 import { DEFAULT_CURRENCY } from '@/config/currency';
-import { getNearUsdConvertRate } from '@/services/currencyConverter';
 import type { PaymentInterface } from '@/types/GrantApplicationInterface';
 import budgetCalculator from '@/utilities/budgetCalculator';
 
@@ -26,10 +24,6 @@ function PaymentSchedule({
 }) {
   const { t } = useTranslation('grant');
 
-  const { data: usdNearConvertRate } = useQuery(['convertUsdToNear'], () => getNearUsdConvertRate(), {
-    refetchOnWindowFocus: false,
-  });
-
   const timelineItems = milestones?.map((milestone, index) => {
     const { budget, deliveryDate } = milestone;
 
@@ -46,10 +40,6 @@ function PaymentSchedule({
           </Text>
           <Text color="dimmed" size="sm" align="right">
             {budget || 0} {currency}
-          </Text>
-          <div>&nbsp;</div>
-          <Text color="dimmed" size="sm" align="right">
-            ≈ {((budget || 0) / (usdNearConvertRate || 1)).toFixed(2)} NEAR
           </Text>
         </SimpleGrid>
       </Timeline.Item>
@@ -74,10 +64,6 @@ function PaymentSchedule({
             <Text color="dimmed" size="sm" align="right">
               {initialBudget} {currency}
             </Text>
-            <div>&nbsp;</div>
-            <Text color="dimmed" size="sm" align="right">
-              ≈ {(initialBudget / (usdNearConvertRate || 1)).toFixed(2)} NEAR
-            </Text>
           </SimpleGrid>
         </Timeline.Item>
         {timelineItems}
@@ -87,10 +73,6 @@ function PaymentSchedule({
         <Text weight="bold">{t('details.payment-schedule.total')}</Text>
         <Text color="dimmed" size="sm" align="right">
           {totalFundingAmount || 0} {currency}
-        </Text>
-        <div>&nbsp;</div>
-        <Text color="dimmed" size="sm" align="right">
-          ≈ {((totalFundingAmount || 0) / (usdNearConvertRate || 1)).toFixed(2)} NEAR
         </Text>
       </SimpleGrid>
     </Paper>

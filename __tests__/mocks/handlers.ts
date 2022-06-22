@@ -47,7 +47,7 @@ const fullProjectData = {
   referral: '',
   teamReferral: '',
   comments: '',
-  currency: 'USD',
+  currency: 'USN',
   milestones: [
     {
       budget: 100000,
