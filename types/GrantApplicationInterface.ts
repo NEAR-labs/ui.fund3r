@@ -110,6 +110,7 @@ export interface GrantApplicationInterface {
   dateLastDraftSaving?: Date;
   dateSubmission?: Date;
   proposalNearTransactionHash?: string;
+  hashProposal?: string | null;
   isNearProposalValid?: boolean;
   dateEvaluation?: Date;
   dateInterviewScheduled?: Date;
@@ -156,6 +157,7 @@ export interface GrantApplicationInterface {
     status?: string | null;
     step?: number | null;
     pendingStep?: number | null;
+    hashProposal?: string | null;
   }>;
   payments?: PaymentInterface[];
   created_at?: Date;
