@@ -60,7 +60,7 @@ function GrantApplicationDetails({
             <Space h="xs" />
             {data?.helloSignSignatureRequestId && data?.dateAgreementSignature && (
               <>
-                <DetailsAgreements helloSignSignatureRequestId={data.helloSignSignatureRequestId} />
+                <DetailsAgreements grantId={data.id} />
                 <Space h="xl" />
               </>
             )}
