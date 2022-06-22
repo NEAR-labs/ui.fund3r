@@ -346,7 +346,7 @@
         "button": "Submit KYC again"
       },
       "agreement-signed": {
-        "message": "👍 You successfully signed the agreement, in order to receive the first payment"
+        "message": "👍 You successfully signed the agreement"
       },
       "submitted-onchain": {
         "message": "👍 You have successfully completed the application. You will receive soon the first payout."
