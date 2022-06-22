@@ -20,9 +20,6 @@ const useGrant = (grantId: number) => {
     onSuccess: (updatedGrantData) => {
       setGrant(updatedGrantData);
     },
-    // onError: (error) => {
-    //   // console.log(error);
-    // },
   });
 
   return {
