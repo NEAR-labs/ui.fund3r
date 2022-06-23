@@ -3,8 +3,8 @@ import type { GrantApplicationInterface } from '@/types/GrantApplicationInterfac
 import type SputnikContractInterface from '@/types/SputnikContractInterface';
 import createProposalDescription from '@/utilities/createProposalDescription';
 
-const createPayoutProposal = async (contract: SputnikContractInterface, grantData: GrantApplicationInterface, payoutNumber: number, networkId: string) => {
-  const description = createProposalDescription(grantData.projectName || '', payoutNumber, grantData.projectDescription || '');
+const createPayoutProposal = async (contract: SputnikContractInterface, grantData: GrantApplicationInterface, payoutNumber: number, networkId: string, hash: string) => {
+  const description = createProposalDescription(grantData.projectName || '', payoutNumber, grantData.projectDescription || '', hash.slice(0, 8));
 
   if (contract.get_policy && contract.add_proposal) {
     const policy = await contract.get_policy();

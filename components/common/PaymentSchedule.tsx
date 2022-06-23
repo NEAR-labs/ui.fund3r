@@ -8,7 +8,6 @@ import { DEFAULT_CURRENCY } from '@/config/currency';
 import type { PaymentInterface } from '@/types/GrantApplicationInterface';
 import budgetCalculator from '@/utilities/budgetCalculator';
 
-// eslint-disable-next-line max-lines-per-function
 function PaymentSchedule({
   milestones,
   fundingAmount,

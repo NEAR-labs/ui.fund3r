@@ -19,7 +19,7 @@ function StatusActionProposalSubmission({ data, setData }: { data: GrantApplicat
   const { isNearLoading, submitProposal } = useDaoContract();
 
   const submitGrantProposal = () => {
-    submitProposal(data, 0);
+    submitProposal(data, 0, data?.hashProposal);
   };
 
   const { transactionHashes } = router.query;
