@@ -636,7 +636,7 @@ const handlers = [
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),
 
-  rest.put<never, any>(`${BASE_URL}/api/v1/grants/:id/milestones/:milestoneId`, (_req, res, ctx) => {
+  rest.post<never, any>(`${BASE_URL}/api/v1/grants/:id/milestones/:milestoneId`, (_req, res, ctx) => {
     const response = {
       ...milestoneData,
       dateSubmission: new Date(),
