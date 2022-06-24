@@ -5,7 +5,7 @@ import { connect, WalletConnection } from 'near-api-js';
 import getConfig from '../config';
 import NearContext from '../context/NearContext';
 
-const NearProvider = ({ children, networkId = 'tesnet' }: { children: JSX.Element; networkId: string }) => {
+const NearProvider = ({ children, networkId = 'testnet' }: { children: JSX.Element; networkId: string }) => {
   const [near, setNear] = useState<Near | null>(null);
   const [wallet, setWallet] = useState<WalletConnection | null>(null);
 

@@ -4,7 +4,7 @@ import type { KycDao, SdkConfiguration } from '@kycdao/kycdao-sdk';
 import getConfig from '../config';
 import KycDaoContext from '../context/KycDaoContext';
 
-const KycDaoProvider = ({ children, networkId = 'tesnet', config }: { children: JSX.Element; networkId: string; config: SdkConfiguration | object }) => {
+const KycDaoProvider = ({ children, networkId = 'testnet', config }: { children: JSX.Element; networkId: string; config: SdkConfiguration | object }) => {
   const [kycDao, setKycDao] = useState<KycDao | null>(null);
 
   useEffect(() => {
