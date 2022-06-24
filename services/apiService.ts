@@ -238,7 +238,7 @@ const submitMilestoneData = async (
     return null;
   }
 
-  const signedData = signObjectMessage(milestoneData);
+  const signedData = await signObjectMessage(milestoneData);
 
   const { data } = await axios.put(
     `${API_HOST}/api/v1/grants/${grantId}/milestones/${milestoneId}`,
