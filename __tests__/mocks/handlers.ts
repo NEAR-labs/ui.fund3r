@@ -521,7 +521,7 @@ const handlers = [
     const dummyDataString = localStorage.getItem('fund3r-mock-data');
     const dummyData = dummyDataString ? JSON.parse(dummyDataString) : {};
 
-    const nearFundingAmount: BigInt = dummyData && dummyData.fundingAmount ? BigInt((dummyData.fundingAmount / 5.95) * 10 ** 24) : BigInt(0);
+    const fundingAmount = dummyData?.fundingAmount;
 
     const response = {
       ...basicData,
@@ -531,7 +531,7 @@ const handlers = [
       response.dateSubmission = new Date();
       response.projectName = dummyData.projectName || 'Mocked Dummy Project';
       response.projectDescription = dummyData.projectDescription || 'Mocked Dummy Project Description';
-      response.nearFundingAmount = nearFundingAmount.toString();
+      response.fundingAmount = fundingAmount.toString();
     }
 
     if (localStorage.getItem('fund3r-mock-near-tx') === 'true') {
@@ -570,14 +570,14 @@ const handlers = [
     const dummyDataString = localStorage.getItem('fund3r-mock-data');
     const dummyData = dummyDataString ? JSON.parse(dummyDataString) : {};
 
-    const nearFundingAmount: BigInt = dummyData && dummyData.fundingAmount ? BigInt((dummyData.fundingAmount / 5.95) * 10 ** 24) : BigInt(0);
+    const fundingAmount = dummyData?.fundingAmount;
 
     const response = {
       ...basicData,
       dateSubmission: new Date(),
       projectName: dummyData.projectName || 'Mocked Dummy Project',
       projectDescription: dummyData.projectDescription || 'Mocked Dummy Project Description',
-      nearFundingAmount: nearFundingAmount.toString(),
+      fundingAmount,
     };
 
     localStorage.setItem('fund3r-mock-submission', 'true');
@@ -606,14 +606,14 @@ const handlers = [
     const dummyDataString = localStorage.getItem('fund3r-mock-data');
     const dummyData = dummyDataString ? JSON.parse(dummyDataString) : {};
 
-    const nearFundingAmount: BigInt = BigInt((dummyData.fundingAmount / 5.95) * 10 ** 24);
+    const fundingAmount = dummyData?.fundingAmount;
 
     const response = {
       ...basicData,
       dateSubmission: new Date(),
       projectName: dummyData.projectName || 'Mocked Dummy Project',
       projectDescription: dummyData.projectDescription || 'Mocked Dummy Project Description',
-      nearFundingAmount: nearFundingAmount.toString(),
+      fundingAmount,
       proposalNearTransactionHash,
       isNearProposalValid: true,
     };

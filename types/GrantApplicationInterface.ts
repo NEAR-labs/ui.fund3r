@@ -83,7 +83,6 @@ export interface GrantApplicationInterface {
   projectDescription?: string;
   currency?: string;
   fundingAmount?: number;
-  nearFundingAmount?: string;
   whatAndWhy?: string;
   competitionDifference?: string;
   openSourceState?: OpenSourceStates;
