@@ -20,10 +20,15 @@ const useDaoContract = () => {
 
   const [isNearLoading, setIsNearLoading] = useState(false);
 
-  const submitProposal = (grantData: GrantApplicationInterface | undefined | null, proposalNumber: number, hash: string | null | undefined) => {
+  const submitProposal = (
+    grantData: GrantApplicationInterface | undefined | null,
+    fundingAmount: number | null | undefined,
+    proposalNumber: number,
+    hash: string | null | undefined,
+  ) => {
     setIsNearLoading(true);
-    if (contract && grantData && networkId) {
-      createPayoutProposal(contract, grantData, proposalNumber, networkId, hash || '');
+    if (contract && grantData && networkId && fundingAmount) {
+      createPayoutProposal(contract, grantData, fundingAmount, proposalNumber, networkId, hash || '');
     }
   };
 

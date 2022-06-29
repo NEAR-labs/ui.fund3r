@@ -20,7 +20,7 @@ function MilestoneProposalSubmission({ grantData, milestoneId }: { grantData: Gr
   const milestoneNumber = milestoneId + 1;
 
   const submitGrantProposal = () => {
-    submitProposal(grantData, milestoneNumber, grantData?.milestones[milestoneId]?.hashProposal);
+    submitProposal(grantData, grantData?.milestones[milestoneId]?.budget, milestoneNumber, grantData?.milestones[milestoneId]?.hashProposal);
   };
 
   const grantId = grantData?.id;
