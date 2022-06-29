@@ -12,10 +12,11 @@ function DetailsPayments({ payments }: { payments: PaymentInterface[] | undefine
 
   const paymentsItems = payments.map((payment) => {
     return (
-      <Paper shadow="xs" radius="md" p="lg" mt="lg">
+      // eslint-disable-next-line no-underscore-dangle
+      <Paper key={payment._id} shadow="xs" radius="md" p="lg" mt="lg">
         <SimpleGrid cols={2}>
           <Title order={4} mb="lg">
-            {t('details.payments.payment.title')} #{payment.id}
+            {t('details.payments.payment.title')} #{payment.milestoneNumber}
           </Title>
           <Text align="right">{t(`details.payments.payment.statuses.${payment.status}`)}</Text>
           <Text>{typeof payment.date === 'number' || typeof payment.date === 'string' ? payment.date : payment.date?.toDateString()}</Text>

@@ -46,9 +46,10 @@ export enum PaymentStatuses {
 }
 
 export interface PaymentInterface {
+  _id: string;
   id: string;
   date: Date;
-  milestoneId: string; // to link a milestone to a payment should be 0 if initial payment
+  milestoneNumber: number; // to link a milestone to a payment should be 0 if initial payment
   amount: number;
   currency: string;
   status: PaymentStatuses;
