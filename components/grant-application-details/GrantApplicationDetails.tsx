@@ -69,7 +69,7 @@ function GrantApplicationDetails({
             <DetailsAddress addressCountry={data?.addressCountry} addressCity={data?.addressCity} addressStreet={data?.addressStreet} addressZip={data?.addressZip} />{' '}
           </Tabs.Tab>
           <Tabs.Tab label={t('details.payments.tab')}>
-            <DetailsPayments payments={data?.payments} />
+            <DetailsPayments payments={data?.payments} grantId={data?.id} />
           </Tabs.Tab>
         </Tabs>
       </Grid.Col>
