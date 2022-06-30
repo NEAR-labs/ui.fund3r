@@ -4,7 +4,7 @@ import type NearApiSignatureInterface from 'types/NearApiSignatureInterface';
 const API_HOST = process.env.NEXT_PUBLIC_BACKEND_HOST;
 
 const downloadFile = async (apiSignature: NearApiSignatureInterface | undefined, grantId: number | undefined, invoiceId: number) => {
-  if (!apiSignature || !grantId || invoiceId) {
+  if (!apiSignature || !grantId || (!invoiceId && invoiceId !== 0)) {
     return;
   }
 
