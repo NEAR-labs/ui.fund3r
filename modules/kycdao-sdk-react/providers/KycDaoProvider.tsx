@@ -11,11 +11,11 @@ const KycDaoProvider = ({ children, networkId = 'testnet', config }: { children:
     const initKycDao = async () => {
       const { KycDao } = await import('@kycdao/kycdao-sdk');
       const defaultConfig = getConfig(networkId);
-      const kycDaoInstance = new KycDao({
+      const kycDaoInitialized = await KycDao.initialize({
         ...defaultConfig,
         ...config,
       });
-      setKycDao(kycDaoInstance);
+      setKycDao(kycDaoInitialized.kycDao);
     };
 
     initKycDao();
