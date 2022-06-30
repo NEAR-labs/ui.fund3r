@@ -10,7 +10,7 @@
     "lint:fix": "next lint --dir . --fix"
   },
   "dependencies": {
-    "@kycdao/kycdao-sdk": "^0.0.20",
+    "@kycdao/kycdao-sdk": "^0.1.1",
     "@mantine/core": "^4.2.5",
     "@mantine/dates": "^4.2.5",
     "@mantine/dropzone": "^4.2.5",
