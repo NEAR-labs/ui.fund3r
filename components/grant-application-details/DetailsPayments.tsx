@@ -1,5 +1,6 @@
 import { Paper, SimpleGrid, Text, Title } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
+import * as dayjs from 'dayjs';
 
 import type { PaymentInterface } from '@/types/GrantApplicationInterface';
 
@@ -19,7 +20,7 @@ function DetailsPayments({ payments }: { payments: PaymentInterface[] | undefine
             {t('details.payments.payment.title')} #{payment.milestoneNumber}
           </Title>
           <Text align="right">{t(`details.payments.payment.statuses.${payment.status}`)}</Text>
-          <Text>{typeof payment.date === 'number' || typeof payment.date === 'string' ? payment.date : payment.date?.toDateString()}</Text>
+          <Text>{dayjs.default(payment.date).format('ddd, MMM D, YYYY')}</Text>
           <div>&nbsp;</div>
           <Text>{t('details.payments.payment.amount')}</Text>
           <Text align="right">
