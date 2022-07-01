@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Button, Paper, Text } from '@mantine/core';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
 import { useKycDao } from '@/modules/kycdao-sdk-react';
@@ -13,10 +12,7 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
   const [isKycCompleted, setIsKycCompleted] = useState(false);
   const [isKycValid, setIsKycValid] = useState(false);
   // const [isTokenMinted, setIsTokenMinted] = useState(false);
-  const router = useRouter();
   const kycDao = useKycDao();
-
-  const { startKyc, grantRequestSlug } = router.query;
 
   const runKycModal = useCallback(async () => {
     if (!country || !email) {
@@ -51,6 +47,7 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
       },
     };
 
+    await kycDao.connectWallet('Near');
     await kycDao.registerOrLogin();
     kycDao.startVerification(verificationData, options);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -59,10 +56,7 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
   const startKycAction = () => {
     if (!isKycValid) {
       setIsLoading(true);
-
-      router.push(`/grants/${grantRequestSlug}?startKyc=true`).then(() => {
-        kycDao.connectWallet('Near');
-      });
+      runKycModal();
     }
   };
 
@@ -71,7 +65,7 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
     alert('Coming soon');
   };
 
-  const { isLoading: validationLoading, refetch: startFetchValidation } = useQuery(
+  const { isLoading: validationLoading } = useQuery(
     ['validate-kyc'],
     () => {
       return kycDao.checkVerificationStatus();
@@ -87,13 +81,6 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
       },
     },
   );
-
-  useEffect(() => {
-    if (!!startKyc && kycDao.walletConnected) {
-      runKycModal();
-      router.push(`/grants/${grantRequestSlug}`);
-    }
-  }, [grantRequestSlug, kycDao.walletConnected, router, runKycModal, startFetchValidation, startKyc]);
 
   const waitingForValidation = isKycCompleted && !isKycValid;
   const isLoadingOrWaitingForValidation = isLoading || validationLoading || waitingForValidation;
