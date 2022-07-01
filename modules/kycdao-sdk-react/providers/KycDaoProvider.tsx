@@ -10,7 +10,7 @@ const KycDaoProvider = ({ children, networkId = 'testnet', config }: { children:
   useEffect(() => {
     const initKycDao = async () => {
       const { KycDao } = await import('@kycdao/kycdao-sdk');
-      const defaultConfig = getConfig(networkId);
+      const defaultConfig = await getConfig(networkId);
       const kycDaoInitialized = await KycDao.initialize({
         ...defaultConfig,
         ...config,

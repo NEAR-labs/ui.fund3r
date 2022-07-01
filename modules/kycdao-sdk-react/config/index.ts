@@ -1,7 +1,8 @@
 import type { SdkConfiguration } from '@kycdao/kycdao-sdk';
-import { BlockchainNetworks, KycDaoEnvironments, VerificationTypes } from '@kycdao/kycdao-sdk';
 
-const getConfig = (networkId = 'testnet'): SdkConfiguration => {
+const getConfig = async (networkId = 'testnet'): Promise<SdkConfiguration> => {
+  const { BlockchainNetworks, KycDaoEnvironments, VerificationTypes } = await import('@kycdao/kycdao-sdk');
+
   const configMap = new Map([
     [
       'testnet',
