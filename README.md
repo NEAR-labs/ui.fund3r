@@ -20,6 +20,8 @@
 - Form validation: **[zod](https://github.com/colinhacks/zod)**
 - HTTP client: **[Axios](https://github.com/axios/axios)**
 - Query hooks: **[React Query](https://react-query.tanstack.com/)**
+- Contract Signature: **[hellosign](https://github.com/HelloFax/hellosign-nodejs-sdk)**
+- KYC: **[KYC DAO](https://github.com/kycdao)**
 
 ## Project status
 
