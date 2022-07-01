@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Button, Paper, Text } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
@@ -13,6 +13,17 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
   const [isKycValid, setIsKycValid] = useState(false);
   // const [isTokenMinted, setIsTokenMinted] = useState(false);
   const kycDao = useKycDao();
+
+  useEffect(() => {
+    const connect = async () => {
+      setIsLoading(true);
+
+      await kycDao.connectWallet('Near');
+      setIsLoading(false);
+    };
+
+    connect();
+  }, [kycDao]);
 
   const runKycModal = useCallback(async () => {
     if (!country || !email) {
@@ -47,7 +58,6 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
       },
     };
 
-    await kycDao.connectWallet('Near');
     await kycDao.registerOrLogin();
     kycDao.startVerification(verificationData, options);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -60,9 +70,12 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
     }
   };
 
-  const mintSbt = () => {
-    // eslint-disable-next-line no-alert
-    alert('Coming soon');
+  const mintSbt = async () => {
+    setIsLoading(true);
+    await kycDao.startMinting({
+      disclaimerAccepted: true,
+    });
+    setIsLoading(false);
   };
 
   const { isLoading: validationLoading } = useQuery(
