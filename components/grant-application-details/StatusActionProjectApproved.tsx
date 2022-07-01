@@ -16,8 +16,11 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
 
   useEffect(() => {
     const connect = async () => {
-      setIsLoading(true);
+      if (!kycDao) {
+        return;
+      }
 
+      setIsLoading(true);
       await kycDao.connectWallet('Near');
       setIsLoading(false);
     };
@@ -26,7 +29,7 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
   }, [kycDao]);
 
   const runKycModal = useCallback(async () => {
-    if (!country || !email) {
+    if (!country || !email || !kycDao) {
       return;
     }
 
@@ -71,6 +74,10 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
   };
 
   const mintSbt = async () => {
+    if (!kycDao) {
+      return;
+    }
+
     setIsLoading(true);
     await kycDao.startMinting({
       disclaimerAccepted: true,
@@ -81,14 +88,14 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
   const { isLoading: validationLoading } = useQuery(
     ['validate-kyc'],
     () => {
-      return kycDao.checkVerificationStatus();
+      return kycDao && kycDao.checkVerificationStatus();
     },
     {
       refetchOnWindowFocus: true,
       refetchInterval: 2000,
-      enabled: kycDao.walletConnected,
+      enabled: kycDao ? kycDao.walletConnected : false,
       onSuccess: (data) => {
-        if (data.KYC === true) {
+        if (data?.KYC === true) {
           setIsKycValid(true);
         }
       },
