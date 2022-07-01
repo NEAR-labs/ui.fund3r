@@ -25,12 +25,14 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
 
     setIsLoading(true);
 
+    const { VerificationTypes } = await import('@kycdao/kycdao-sdk');
+
     const verificationData = {
       email,
       isEmailConfirmed: true,
       taxResidency: country,
       isLegalEntity: false,
-      verificationType: 'KYC',
+      verificationType: VerificationTypes.KYC,
       termsAccepted: true,
     };
 
