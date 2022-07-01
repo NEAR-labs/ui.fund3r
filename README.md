@@ -22,6 +22,7 @@
 - Query hooks: **[React Query](https://react-query.tanstack.com/)**
 - Contract Signature: **[hellosign](https://github.com/HelloFax/hellosign-nodejs-sdk)**
 - KYC: **[KYC DAO](https://github.com/kycdao)**
+- Scheduling: **[Calendly](https://developer.calendly.com/)**
 
 ## Project status
 
