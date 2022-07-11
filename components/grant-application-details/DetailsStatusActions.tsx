@@ -40,7 +40,8 @@ function DetailsStatusActions({
     KYC_COMPLETED,
     KYC_DENIED,
     KYC_APPROVED,
-    AGREEMENT_SIGNED,
+    AGREEMENT_PARTIALLY_SIGNED,
+    AGREEMENT_FULLY_SIGNED,
     ONCHAIN_SUBMITTED,
     FIRST_PAYMENT_SENT,
     ONBOARDING_COMPLETED,
@@ -66,7 +67,7 @@ function DetailsStatusActions({
     );
   }
 
-  if (status === AGREEMENT_SIGNED) {
+  if (status === AGREEMENT_FULLY_SIGNED) {
     return (
       <>
         <Paper shadow="sm" p="lg" radius="lg" mt="xl">
@@ -74,6 +75,14 @@ function DetailsStatusActions({
         </Paper>
         <StatusActionProposalSubmission data={grant} setData={setGrant} />
       </>
+    );
+  }
+
+  if (status === AGREEMENT_PARTIALLY_SIGNED) {
+    return (
+      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+        <Text>{t('details.status-actions.agreement-partially-signed.message')}</Text>
+      </Paper>
     );
   }
 
