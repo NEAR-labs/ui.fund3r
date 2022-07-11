@@ -172,7 +172,8 @@
     "addressCountry": {
       "label": "Country",
       "placeholder": "Country",
-      "error": "Please select a country."
+      "error": "Please select a country.",
+      "no-results": "No results found"
     },
     "addressCity": {
       "label": "City",

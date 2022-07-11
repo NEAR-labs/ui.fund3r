@@ -1,7 +1,10 @@
+import Countries from '@kycdao/kycdao-sdk/dist/countries.list.json';
 import type { TFunction } from 'next-i18next';
 import { z } from 'zod';
 
 import { GrantCategories, GrantTypes, OpenSourceStates, ProjectStatus, RaisingRoundStatus, WorkingTypes } from '@/types/GrantApplicationInterface';
+
+const countryCodes = Countries.map((country) => country.iso_cca2);
 
 // eslint-disable-next-line max-lines-per-function
 const createSchema = (t: TFunction) => {
@@ -105,7 +108,7 @@ const createSchema = (t: TFunction) => {
     hasPreviouslyReceivedFundingTokensGrantsFromNear: z.boolean(),
     aboutTokensReceivedFromNear: z.string().optional(),
 
-    addressCountry: z.string({ required_error: t('form.addressCountry.error') }).min(1, { message: t('form.addressCountry.error') }),
+    addressCountry: z.enum(['AF', ...countryCodes]),
     addressCity: z.string({ required_error: t('form.addressCity.error') }).min(1, { message: t('form.addressCity.error') }),
     addressStreet: z.string({ required_error: t('form.addressStreet.error') }).min(1, { message: t('form.addressStreet.error') }),
     addressZip: z.string({ required_error: t('form.addressZip.error') }).min(1, { message: t('form.addressZip.error') }),
