@@ -134,7 +134,6 @@ export interface GrantApplicationInterface {
 
   // Links
   interviewUrl?: string;
-  kycUrl?: string;
   agreementUrl?: string;
   invoiceUrl?: string;
 
