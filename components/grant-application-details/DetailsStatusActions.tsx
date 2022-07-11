@@ -28,7 +28,7 @@ function DetailsStatusActions({
     return null;
   }
 
-  const { id, email, firstname, lastname, dateInterview, helloSignRequestUrl, addressCountry, dateAgreementSignature } = grant;
+  const { id, email, firstname, lastname, dateInterview, helloSignRequestUrl, addressCountry, dateAgreementSignatureGrantReceiver } = grant;
 
   const {
     SUBMITTED,
@@ -78,7 +78,9 @@ function DetailsStatusActions({
   }
 
   if (status === KYC_APPROVED) {
-    return <StatusActionKycApproved helloSignRequestUrl={helloSignRequestUrl} refetchGrant={refetchGrant} dateAgreementSignature={dateAgreementSignature} />;
+    return (
+      <StatusActionKycApproved helloSignRequestUrl={helloSignRequestUrl} refetchGrant={refetchGrant} dateAgreementSignatureGrantReceiver={dateAgreementSignatureGrantReceiver} />
+    );
   }
 
   if (status === KYC_DENIED) {

@@ -8,11 +8,11 @@ import useHellosignEmbedded from '@/modules/hellosign-embedded-react/useHellosig
 function StatusActionKycApproved({
   helloSignRequestUrl,
   refetchGrant,
-  dateAgreementSignature,
+  dateAgreementSignatureGrantReceiver,
 }: {
   helloSignRequestUrl: string | undefined;
   refetchGrant: unknown;
-  dateAgreementSignature: Date | undefined;
+  dateAgreementSignatureGrantReceiver: Date | undefined;
 }) {
   const { t } = useTranslation('grant');
   const clientId = process.env.NEXT_PUBLIC_HELLO_SIGN_APP_CLIENT_ID;
@@ -34,7 +34,7 @@ function StatusActionKycApproved({
         // @ts-ignore
         refetchGrant();
 
-        if (dateAgreementSignature) {
+        if (dateAgreementSignatureGrantReceiver) {
           setRefreshLoading(false);
           setPolling(false);
           clearInterval(interval);
@@ -42,7 +42,7 @@ function StatusActionKycApproved({
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [dateAgreementSignature, polling, refetchGrant]);
+  }, [dateAgreementSignatureGrantReceiver, polling, refetchGrant]);
 
   const reloadAction = () => {
     setRefreshLoading(true);

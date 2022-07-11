@@ -37,7 +37,7 @@ const useGrantStatus = () => {
   const grantKycCompleted = grantApproved && grant.dateKycCompletion;
   const grantKycApproved = grantKycCompleted && grant.dateKycApproved;
   const grantKycDenied = grantKycCompleted && grant.dateKycDenied;
-  const grantAgreementSigned = grantKycApproved && grant.dateAgreementSignature;
+  const grantAgreementSigned = grantKycApproved && grant.dateAgreementSignatureGrantReceiver;
   const grantAgreementSubmitedOnChain = grantAgreementSigned && grant && grant.isNearProposalValid;
   const grantFirstPaymentSent = grantAgreementSubmitedOnChain && grant.dateFirstPaymentSent;
   const grantOnboardingCompleted = grantFirstPaymentSent && grant?.dateOnboardingCompletion;
