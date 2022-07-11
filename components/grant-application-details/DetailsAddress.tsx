@@ -2,6 +2,7 @@ import { SimpleGrid, Title } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
 import LabelValue from '@/components/common/LabelValue';
+import getCountry from '@/utilities/getCountry';
 
 function DetailsAddress({
   addressCountry,
@@ -22,7 +23,7 @@ function DetailsAddress({
         {t('details.address.title')}
       </Title>
       <SimpleGrid cols={2}>
-        <LabelValue label={t('form.addressCountry.label')} value={addressCountry} />
+        <LabelValue label={t('form.addressCountry.label')} value={getCountry(addressCountry)} />
         <LabelValue label={t('form.addressCity.label')} value={addressCity} />
         <LabelValue label={t('form.addressStreet.label')} value={addressStreet} />
         <LabelValue label={t('form.addressZip.label')} value={addressZip} />
