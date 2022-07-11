@@ -1,13 +1,13 @@
 {
-  "name": "ui.fund3r",
+  "name": "ui.grants",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint --dir .",
-    "lint:fix": "next lint --dir . --fix"
+    "lint:fix": "next lint --dir . --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@kycdao/kycdao-sdk": "^0.1.1",
