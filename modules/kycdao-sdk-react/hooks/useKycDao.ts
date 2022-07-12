@@ -11,10 +11,6 @@ const useKycDao = () => {
 
   const { kycDao } = context;
 
-  if (!kycDao || kycDao === undefined) {
-    throw new Error(`KycDaoProvider has not been set properly, please review the config passed`);
-  }
-
   return kycDao;
 };
 

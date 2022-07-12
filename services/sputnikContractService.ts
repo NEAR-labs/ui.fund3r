@@ -1,9 +1,17 @@
+import { getTokenId } from '@/config/currency';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 import type SputnikContractInterface from '@/types/SputnikContractInterface';
 import createProposalDescription from '@/utilities/createProposalDescription';
 
-const createPayoutProposal = async (contract: SputnikContractInterface, grantData: GrantApplicationInterface, payoutNumber: number) => {
-  const description = createProposalDescription(grantData.projectName || '', payoutNumber, grantData.projectDescription || '');
+const createPayoutProposal = async (
+  contract: SputnikContractInterface,
+  grantData: GrantApplicationInterface,
+  fundingAmount: number,
+  payoutNumber: number,
+  networkId: string,
+  hash: string,
+) => {
+  const description = createProposalDescription(grantData.projectName || '', payoutNumber, grantData.projectDescription || '', hash.slice(0, 8));
 
   if (contract.get_policy && contract.add_proposal) {
     const policy = await contract.get_policy();
@@ -14,9 +22,9 @@ const createPayoutProposal = async (contract: SputnikContractInterface, grantDat
           description,
           kind: {
             Transfer: {
-              token_id: '',
+              token_id: getTokenId(networkId),
               receiver_id: grantData.nearId,
-              amount: grantData.nearFundingAmount,
+              amount: BigInt((fundingAmount || 0) * 10 ** 18).toString(),
             },
           },
         },

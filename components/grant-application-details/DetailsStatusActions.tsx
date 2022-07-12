@@ -1,4 +1,5 @@
 import { Button, Paper, Text } from '@mantine/core';
+import * as dayjs from 'dayjs';
 import { useTranslation } from 'next-i18next';
 
 import StatusActionEvaluated from '@/components/grant-application-details/StatusActionEvaluated';
@@ -11,7 +12,15 @@ import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
 // eslint-disable-next-line max-lines-per-function
-function DetailsStatusActions({ grant, setGrant }: { grant: GrantApplicationInterface | null | undefined; setGrant: (data: GrantApplicationInterface) => void }) {
+function DetailsStatusActions({
+  grant,
+  setGrant,
+  refetchGrant,
+}: {
+  grant: GrantApplicationInterface | null | undefined;
+  setGrant: (data: GrantApplicationInterface) => void;
+  refetchGrant: unknown;
+}) {
   const { t } = useTranslation('grant');
   const { status } = useGrantStatus();
 
@@ -19,7 +28,7 @@ function DetailsStatusActions({ grant, setGrant }: { grant: GrantApplicationInte
     return null;
   }
 
-  const { id, email, firstname, lastname, dateInterview, helloSignRequestId, addressCountry } = grant;
+  const { id, email, firstname, lastname, dateInterview, helloSignRequestUrl, addressCountry, dateAgreementSignatureGrantReceiver } = grant;
 
   const {
     SUBMITTED,
@@ -31,7 +40,8 @@ function DetailsStatusActions({ grant, setGrant }: { grant: GrantApplicationInte
     KYC_COMPLETED,
     KYC_DENIED,
     KYC_APPROVED,
-    AGREEMENT_SIGNED,
+    AGREEMENT_PARTIALLY_SIGNED,
+    AGREEMENT_FULLY_SIGNED,
     ONCHAIN_SUBMITTED,
     FIRST_PAYMENT_SENT,
     ONBOARDING_COMPLETED,
@@ -57,7 +67,7 @@ function DetailsStatusActions({ grant, setGrant }: { grant: GrantApplicationInte
     );
   }
 
-  if (status === AGREEMENT_SIGNED) {
+  if (status === AGREEMENT_FULLY_SIGNED) {
     return (
       <>
         <Paper shadow="sm" p="lg" radius="lg" mt="xl">
@@ -68,8 +78,18 @@ function DetailsStatusActions({ grant, setGrant }: { grant: GrantApplicationInte
     );
   }
 
+  if (status === AGREEMENT_PARTIALLY_SIGNED) {
+    return (
+      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+        <Text>{t('details.status-actions.agreement-partially-signed.message')}</Text>
+      </Paper>
+    );
+  }
+
   if (status === KYC_APPROVED) {
-    return <StatusActionKycApproved helloSignRequestId={helloSignRequestId} />;
+    return (
+      <StatusActionKycApproved helloSignRequestUrl={helloSignRequestUrl} refetchGrant={refetchGrant} dateAgreementSignatureGrantReceiver={dateAgreementSignatureGrantReceiver} />
+    );
   }
 
   if (status === KYC_DENIED) {
@@ -119,7 +139,7 @@ function DetailsStatusActions({ grant, setGrant }: { grant: GrantApplicationInte
     return (
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
         <Text>{t('details.status-actions.interview-scheduled.title')}</Text>
-        <Text>{typeof dateInterview === 'string' ? dateInterview : dateInterview?.toISOString()}</Text>
+        <Text>{dayjs.default(dateInterview).format('ddd, MMM D, YYYY - HH:mm')}</Text>
       </Paper>
     );
   }

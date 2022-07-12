@@ -16,7 +16,15 @@ import DetailsStatusActions from '@/components/grant-application-details/Details
 import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
-function GrantApplicationDetails({ data, setData }: { data: GrantApplicationInterface | undefined | null; setData: (data: GrantApplicationInterface) => void }) {
+function GrantApplicationDetails({
+  data,
+  setData,
+  refetchGrant,
+}: {
+  data: GrantApplicationInterface | undefined | null;
+  setData: (data: GrantApplicationInterface) => void;
+  refetchGrant: unknown;
+}) {
   const { t } = useTranslation('grant');
   const { status } = useGrantStatus();
 
@@ -33,7 +41,7 @@ function GrantApplicationDetails({ data, setData }: { data: GrantApplicationInte
           openSourceState={data?.openSourceState}
         />
         <Space h="xs" />
-        <DetailsStatusActions grant={data} setGrant={setData} />
+        <DetailsStatusActions grant={data} setGrant={setData} refetchGrant={refetchGrant} />
         <Space h="xl" />
         <Tabs color="violet" tabPadding="xl" mt="xl">
           <Tabs.Tab label={t('details.project.tab')}>
@@ -50,9 +58,9 @@ function GrantApplicationDetails({ data, setData }: { data: GrantApplicationInte
             <DetailsMilestones milestones={data?.milestones} currency={data?.currency} />
             {data?.attachment && <DetailsAttachment reviewAttachments={data?.reviewAttachments} attachment={data?.attachment} />}
             <Space h="xs" />
-            {data?.helloSignRequestId && data?.dateAgreementSignature && (
+            {data?.helloSignSignatureRequestId && data?.dateAgreementSignatureGrantReceiver && (
               <>
-                <DetailsAgreements helloSignRequestId={data.helloSignRequestId} />
+                <DetailsAgreements grantId={data.id} />
                 <Space h="xl" />
               </>
             )}
@@ -61,7 +69,7 @@ function GrantApplicationDetails({ data, setData }: { data: GrantApplicationInte
             <DetailsAddress addressCountry={data?.addressCountry} addressCity={data?.addressCity} addressStreet={data?.addressStreet} addressZip={data?.addressZip} />{' '}
           </Tabs.Tab>
           <Tabs.Tab label={t('details.payments.tab')}>
-            <DetailsPayments payments={data?.payments} />
+            <DetailsPayments payments={data?.payments} grantId={data?.id} />
           </Tabs.Tab>
         </Tabs>
       </Grid.Col>

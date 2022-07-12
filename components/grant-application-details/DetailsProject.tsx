@@ -1,4 +1,5 @@
 import { SimpleGrid, Spoiler } from '@mantine/core';
+import * as dayjs from 'dayjs';
 import { useTranslation } from 'next-i18next';
 
 import FeedbackComment from '@/components/common/FeedbackComment';
@@ -31,7 +32,7 @@ function DetailsProject({
       </Spoiler>
       <SimpleGrid cols={2}>
         <LabelValue label={t('details.project.requested')} value={`${fundingAmount?.toFixed(0)} ${currency}`} />
-        <LabelValue label={t('details.project.launch')} value={typeof projectLaunchDate === 'string' ? projectLaunchDate : projectLaunchDate?.toDateString()} />
+        <LabelValue label={t('details.project.launch')} value={dayjs.default(projectLaunchDate).format('ddd, MMM D, YYYY')} />
         <LabelValue label={t('details.project.project-url')} value={projectUrl} />
         <LabelValue label={t('details.project.github-url')} value={githubUrl} />
       </SimpleGrid>

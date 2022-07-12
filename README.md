@@ -1,11 +1,12 @@
-# ui.fund3r
+# ui.grants
 
 > Easy to set up end to end grant application form for DAOs on NEAR Protocol
 
 ## Repositories
 
-- [ui.fund3r](https://github.com/NEAR-labs/ui.fund3r)
-- [api.fund3r](https://github.com/NEAR-labs/api.fund3r)
+- [ui.grants](https://github.com/NEARWEEK/ui.grants)
+- [api.grants](https://github.com/NEARWEEK/api.grants)
+- [admin.grants](https://github.com/NEARWEEK/admin.grants)
 
 ## Technology stack
 
@@ -20,14 +21,9 @@
 - Form validation: **[zod](https://github.com/colinhacks/zod)**
 - HTTP client: **[Axios](https://github.com/axios/axios)**
 - Query hooks: **[React Query](https://react-query.tanstack.com/)**
-
-## Project status
-
-**Work in progress**
-
-- [x] Frontend flow implementation
-- [ ] Backend implementation
-- [ ] Admin panel implementation
+- Contract Signature: **[hellosign](https://github.com/HelloFax/hellosign-nodejs-sdk)**
+- KYC: **[KYC DAO](https://github.com/kycdao)**
+- Scheduling: **[Calendly](https://developer.calendly.com/)**
 
 ## Guides
 

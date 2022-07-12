@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import { Alert, Button, Divider, Grid, Group, Text, Title } from '@mantine/core';
 import { formList, useForm, zodResolver } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
+import * as dayjs from 'dayjs';
 import { useTranslation } from 'next-i18next';
 import { AlertCircle } from 'tabler-icons-react';
 
@@ -28,7 +29,7 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
   const { t } = useTranslation('grant');
 
   const apiSignature = useAccountSignature();
-  const { signStringMessage } = useSigner();
+  const { signObjectMessage } = useSigner();
   const wallet = useWallet();
 
   const accountId = wallet && wallet.isSignedIn() && wallet.getAccountId();
@@ -84,12 +85,12 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
     isLoading: isSavingLoading,
     isError: isSavingError,
   } = useQuery(
-    ['saveForm', apiSignature, grantId, grantData, signStringMessage],
+    ['saveForm', apiSignature, grantId, grantData, signObjectMessage],
     () =>
       saveGrantApplicationAsDraft(apiSignature, {
         grantId,
         grantData,
-        signStringMessage,
+        signObjectMessage,
       }),
     {
       refetchOnWindowFocus: false,
@@ -112,12 +113,12 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
     isLoading: isSubmitingLoading,
     isError: isSubmitingError,
   } = useQuery(
-    ['submitForm', apiSignature, grantId, grantData, signStringMessage],
+    ['submitForm', apiSignature, grantId, grantData, signObjectMessage],
     () =>
       submitGrantApplication(apiSignature, {
         grantId,
         grantData,
-        signStringMessage,
+        signObjectMessage,
       }),
     {
       refetchOnWindowFocus: false,
@@ -131,6 +132,11 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {
         form.setErrors(error?.response?.data?.errors);
+
+        showNotification({
+          color: 'red',
+          message: t('error.form.message'),
+        });
       },
     },
   );
@@ -208,14 +214,20 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
             <FormEditFieldsNear form={form} schema={schema} loading={loading} />
             <Divider mt={32} mb={32} />
           </div>
-          <Text>{lastSavedDate && t('form.draft_date') + lastSavedDate.toLocaleString()}</Text>
-          <Group position="right" mt="xl">
-            <Button color="violet" onClick={saveDraftHandler} variant="light" loading={isSavingLoading}>
-              {t('form.save')}
-            </Button>
-            <Button type="submit" color="violet" disabled={loading} loading={isSubmitingLoading}>
-              {t('form.submit')}
-            </Button>
+          <Group mt="xl" position="apart">
+            <Group position="left" mt="xl">
+              <Text size="sm" color="dimmed">
+                {lastSavedDate && t('form.draft_date') + dayjs.default(lastSavedDate).format('ddd, MMM D, YYYY - HH:mm')}
+              </Text>
+            </Group>
+            <Group position="right" mt="xl">
+              <Button color="violet" onClick={saveDraftHandler} variant="light" loading={isSavingLoading}>
+                {t('form.save')}
+              </Button>
+              <Button type="submit" color="violet" disabled={loading} loading={isSubmitingLoading}>
+                {t('form.submit')}
+              </Button>
+            </Group>
           </Group>
         </form>
       </Grid.Col>

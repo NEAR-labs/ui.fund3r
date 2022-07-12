@@ -13,7 +13,8 @@ const STATUS = {
   KYC_COMPLETED: 'KYC_COMPLETED',
   KYC_APPROVED: 'KYC_APPROVED',
   KYC_DENIED: 'KYC_DENIED',
-  AGREEMENT_SIGNED: 'AGREEMENT_SIGNED',
+  AGREEMENT_PARTIALLY_SIGNED: 'AGREEMENT_PARTIALLY_SIGNED',
+  AGREEMENT_FULLY_SIGNED: 'AGREEMENT_FULLY_SIGNED',
   ONCHAIN_SUBMITTED: 'ONCHAIN_SUBMITTED',
   FIRST_PAYMENT_SENT: 'FIRST_PAYMENT_SENT',
   ONBOARDING_COMPLETED: 'ONBOARDING_COMPLETED',
@@ -37,8 +38,9 @@ const useGrantStatus = () => {
   const grantKycCompleted = grantApproved && grant.dateKycCompletion;
   const grantKycApproved = grantKycCompleted && grant.dateKycApproved;
   const grantKycDenied = grantKycCompleted && grant.dateKycDenied;
-  const grantAgreementSigned = grantKycApproved && grant.dateAgreementSignature;
-  const grantAgreementSubmitedOnChain = grantAgreementSigned && grant && grant.isNearProposalValid;
+  const grantAgreementPartiallySigned = grantKycApproved && grant.dateAgreementSignatureGrantReceiver;
+  const grantAgreementFullySigned = grantAgreementPartiallySigned && grant.dateAgreementSignatureGrantGiver;
+  const grantAgreementSubmitedOnChain = grantAgreementFullySigned && grant && grant.isNearProposalValid;
   const grantFirstPaymentSent = grantAgreementSubmitedOnChain && grant.dateFirstPaymentSent;
   const grantOnboardingCompleted = grantFirstPaymentSent && grant?.dateOnboardingCompletion;
 
@@ -54,8 +56,12 @@ const useGrantStatus = () => {
     return { status: STATUS.ONCHAIN_SUBMITTED, step: 5, pendingStep: 6 };
   }
 
-  if (grantAgreementSigned) {
-    return { status: STATUS.AGREEMENT_SIGNED, step: 4, pendingStep: 5 };
+  if (grantAgreementFullySigned) {
+    return { status: STATUS.AGREEMENT_FULLY_SIGNED, step: 4, pendingStep: 5 };
+  }
+
+  if (grantAgreementPartiallySigned) {
+    return { status: STATUS.AGREEMENT_PARTIALLY_SIGNED, step: 3, pendingStep: 4 };
   }
 
   if (grantKycApproved) {

@@ -56,7 +56,7 @@ function MilestoneForm({ grantData, milestoneId }: { grantData: GrantApplication
       enabled: false,
       retry: false,
       onSuccess: async () => {
-        submitProposal(grantData, milestoneNumber);
+        submitProposal(grantData, grantData?.milestones[milestoneId]?.budget, milestoneNumber, grantData?.milestones[milestoneId]?.hashProposal);
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {

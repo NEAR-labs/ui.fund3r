@@ -46,9 +46,10 @@ export enum PaymentStatuses {
 }
 
 export interface PaymentInterface {
+  _id: string;
   id: string;
   date: Date;
-  milestoneId: string; // to link a milestone to a payment should be 0 if initial payment
+  milestoneNumber: number; // to link a milestone to a payment should be 0 if initial payment
   amount: number;
   currency: string;
   status: PaymentStatuses;
@@ -83,7 +84,6 @@ export interface GrantApplicationInterface {
   projectDescription?: string;
   currency?: string;
   fundingAmount?: number;
-  nearFundingAmount?: string;
   whatAndWhy?: string;
   competitionDifference?: string;
   openSourceState?: OpenSourceStates;
@@ -110,6 +110,7 @@ export interface GrantApplicationInterface {
   dateLastDraftSaving?: Date;
   dateSubmission?: Date;
   proposalNearTransactionHash?: string;
+  hashProposal?: string | null;
   isNearProposalValid?: boolean;
   dateEvaluation?: Date;
   dateInterviewScheduled?: Date;
@@ -120,17 +121,19 @@ export interface GrantApplicationInterface {
   dateKycCompletion?: Date;
   dateKycDenied?: Date;
   dateKycApproved?: Date;
-  dateAgreementSignature?: Date;
+  dateAgreementSignatureGrantReceiver?: Date;
+  dateAgreementSignatureGrantGiver?: Date;
   dateOnboardingMeeting?: Date;
   dateFirstPaymentSent?: Date;
   dateOnboardingCompletion?: Date;
 
   // Hellosign
+  helloSignSignatureRequestId?: string;
+  helloSignRequestUrl?: string;
   helloSignRequestId?: string;
 
   // Links
   interviewUrl?: string;
-  kycUrl?: string;
   agreementUrl?: string;
   invoiceUrl?: string;
 
@@ -154,6 +157,7 @@ export interface GrantApplicationInterface {
     status?: string | null;
     step?: number | null;
     pendingStep?: number | null;
+    hashProposal?: string | null;
   }>;
   payments?: PaymentInterface[];
   created_at?: Date;

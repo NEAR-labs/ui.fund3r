@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Button, Paper, Text } from '@mantine/core';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
 import { useKycDao } from '@/modules/kycdao-sdk-react';
@@ -13,24 +12,37 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
   const [isKycCompleted, setIsKycCompleted] = useState(false);
   const [isKycValid, setIsKycValid] = useState(false);
   // const [isTokenMinted, setIsTokenMinted] = useState(false);
-  const router = useRouter();
   const kycDao = useKycDao();
 
-  const { startKyc, grantRequestSlug } = router.query;
+  useEffect(() => {
+    const connect = async () => {
+      if (!kycDao) {
+        return;
+      }
+
+      setIsLoading(true);
+      await kycDao.connectWallet('Near');
+      setIsLoading(false);
+    };
+
+    connect();
+  }, [kycDao]);
 
   const runKycModal = useCallback(async () => {
-    if (!country || !email) {
+    if (!country || !email || !kycDao) {
       return;
     }
 
     setIsLoading(true);
+
+    const { VerificationTypes } = await import('@kycdao/kycdao-sdk');
 
     const verificationData = {
       email,
       isEmailConfirmed: true,
       taxResidency: country,
       isLegalEntity: false,
-      verificationType: 'KYC',
+      verificationType: VerificationTypes.KYC,
       termsAccepted: true,
     };
 
@@ -57,41 +69,38 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
   const startKycAction = () => {
     if (!isKycValid) {
       setIsLoading(true);
-
-      router.push(`/grants/${grantRequestSlug}?startKyc=true`).then(() => {
-        kycDao.connectWallet('Near');
-      });
+      runKycModal();
     }
   };
 
-  const mintSbt = () => {
-    // eslint-disable-next-line no-alert
-    alert('Coming soon');
+  const mintSbt = async () => {
+    if (!kycDao) {
+      return;
+    }
+
+    setIsLoading(true);
+    await kycDao.startMinting({
+      disclaimerAccepted: true,
+    });
+    setIsLoading(false);
   };
 
-  const { isLoading: validationLoading, refetch: startFetchValidation } = useQuery(
+  const { isLoading: validationLoading } = useQuery(
     ['validate-kyc'],
     () => {
-      return kycDao.checkVerificationStatus();
+      return kycDao && kycDao.checkVerificationStatus();
     },
     {
       refetchOnWindowFocus: true,
       refetchInterval: 2000,
-      enabled: kycDao.walletConnected,
+      enabled: kycDao ? kycDao.walletConnected : false,
       onSuccess: (data) => {
-        if (data.KYC === true) {
+        if (data?.KYC === true) {
           setIsKycValid(true);
         }
       },
     },
   );
-
-  useEffect(() => {
-    if (!!startKyc && kycDao.walletConnected) {
-      runKycModal();
-      router.push(`/grants/${grantRequestSlug}`);
-    }
-  }, [grantRequestSlug, kycDao.walletConnected, router, runKycModal, startFetchValidation, startKyc]);
 
   const waitingForValidation = isKycCompleted && !isKycValid;
   const isLoadingOrWaitingForValidation = isLoading || validationLoading || waitingForValidation;

@@ -3,12 +3,12 @@ import type NearApiSignatureInterface from 'types/NearApiSignatureInterface';
 
 const API_HOST = process.env.NEXT_PUBLIC_BACKEND_HOST;
 
-const downloadFile = async (apiSignature: NearApiSignatureInterface | undefined, grantId: number | undefined) => {
-  if (!apiSignature || !grantId) {
+const downloadFile = async (apiSignature: NearApiSignatureInterface | undefined, grantId: number | undefined, invoiceId: number) => {
+  if (!apiSignature || !grantId || (!invoiceId && invoiceId !== 0)) {
     return;
   }
 
-  const response = await axios.get(`${API_HOST}/api/v1/grants/${grantId}/agreement`, {
+  const response = await axios.get(`${API_HOST}/api/v1/grants/${grantId}/invoices/${invoiceId}`, {
     responseType: 'blob',
     headers: {
       'X-NEAR-ACCOUNT-ID': apiSignature.accountId,
@@ -19,7 +19,7 @@ const downloadFile = async (apiSignature: NearApiSignatureInterface | undefined,
   const url = window.URL.createObjectURL(new Blob([response.data]));
   const link = document.createElement('a');
   link.href = url;
-  link.setAttribute('download', 'agreement.zip');
+  link.setAttribute('download', `invoice-${apiSignature.accountId}-${grantId}-${invoiceId}.pdf`);
   document.body.appendChild(link);
   link.click();
 };

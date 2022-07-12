@@ -21,7 +21,7 @@ function MilestoneStatusActionInterviewBooking({
   const { t } = useTranslation('grant');
   const { signStringMessage } = useSigner();
   const apiSignature = useAccountSignature();
-  const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL;
+  const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL_MILESTONES;
   const [eventUrl, setEventUrl] = useState(null);
 
   const { id: grantId, email, firstname, lastname } = grant || {};

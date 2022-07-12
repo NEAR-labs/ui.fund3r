@@ -47,7 +47,7 @@ const fullProjectData = {
   referral: '',
   teamReferral: '',
   comments: '',
-  currency: 'USD',
+  currency: 'USN',
   milestones: [
     {
       budget: 100000,
@@ -191,7 +191,7 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateApproval: new Date(),
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6', // Should be created by the backend and passing the redirect url
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6', // Should be created by the backend and passing the redirect url
     },
     {
       ...fullProjectData,
@@ -205,8 +205,8 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateApproval: new Date(),
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
-      dateAgreementSignature: new Date(), // Should be checked by the backend using hello sign api
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      dateAgreementSignatureGrantReceiver: new Date(), // Should be checked by the backend using hello sign api
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
     },
     {
       ...fullProjectData,
@@ -220,8 +220,8 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateApproval: new Date(),
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
-      dateAgreementSignature: new Date(), // Should be checked by the backend using hello sign api
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      dateAgreementSignatureGrantReceiver: new Date(), // Should be checked by the backend using hello sign api
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       isNearProposalValid: true,
     },
     {
@@ -237,9 +237,9 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateApproval: new Date(),
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
-      dateAgreementSignature: new Date(),
+      dateAgreementSignatureGrantReceiver: new Date(),
       dateFirstPaymentSent: new Date(),
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       payments: [
         {
           id: '00001',
@@ -263,10 +263,10 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateApproval: new Date(),
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
-      dateAgreementSignature: new Date(),
+      dateAgreementSignatureGrantReceiver: new Date(),
       dateFirstPaymentSent: new Date(),
       dateOnboardingCompletion: new Date(), // Will be automatically set as date if SKIP_ONBOARDING is set to true and the first payment sent
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       payments: [
         {
           id: '00001',
@@ -290,10 +290,10 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateApproval: new Date(),
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
-      dateAgreementSignature: new Date(),
+      dateAgreementSignatureGrantReceiver: new Date(),
       dateFirstPaymentSent: new Date(),
       dateOnboardingCompletion: new Date(),
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       payments: [
         {
           id: '00001',
@@ -330,10 +330,10 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateApproval: new Date(),
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
-      dateAgreementSignature: new Date(),
+      dateAgreementSignatureGrantReceiver: new Date(),
       dateFirstPaymentSent: new Date(),
       dateOnboardingCompletion: new Date(),
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       payments: [
         {
           id: '00001',
@@ -371,10 +371,10 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateApproval: new Date(),
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
-      dateAgreementSignature: new Date(),
+      dateAgreementSignatureGrantReceiver: new Date(),
       dateFirstPaymentSent: new Date(),
       dateOnboardingCompletion: new Date(),
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       payments: [
         {
           id: '00001',
@@ -415,10 +415,10 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateApproval: new Date(),
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
-      dateAgreementSignature: new Date(),
+      dateAgreementSignatureGrantReceiver: new Date(),
       dateFirstPaymentSent: new Date(),
       dateOnboardingCompletion: new Date(),
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       payments: [
         {
           id: '00001',
@@ -458,10 +458,10 @@ const getGrantData = (accountId: string, id: number): GrantApplicationInterface 
       dateApproval: new Date(),
       dateKycCompletion: new Date(),
       dateKycApproved: new Date(),
-      dateAgreementSignature: new Date(),
+      dateAgreementSignatureGrantReceiver: new Date(),
       dateFirstPaymentSent: new Date(),
       dateOnboardingCompletion: new Date(),
-      helloSignRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
+      helloSignSignatureRequestId: '145e28738c1e9d3c8cbbc5623a8c49fb8708b7f6',
       payments: [
         {
           id: '00001',
@@ -509,19 +509,19 @@ const handlers = [
   // The backend will verify the signature following this https://stackoverflow.com/questions/61982163/jwt-authentication-for-near-protocol-in-a-python-backend
   // It will retrieve the grants from the database
   // If there is no grant, it will create a new one and return an array of grants
-  rest.get<never, any>(`${BASE_URL}/grants`, (_req, res, ctx) => {
+  rest.get<never, any>(`${BASE_URL}/api/v1/grants`, (_req, res, ctx) => {
     return res(ctx.delay(GET_DELAY), ctx.json(getGrantsData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string)));
   }),
 
   // when dateSubmission is true, the backend should check if a proposal really exists
   // maybe we should share the tx id or we can check all the proposals in a dao (?)
-  rest.get<never, any>(`${BASE_URL}/grants/:id`, (_req, res, ctx) => {
+  rest.get<never, any>(`${BASE_URL}/api/v1/grants/:id`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
 
     const dummyDataString = localStorage.getItem('fund3r-mock-data');
     const dummyData = dummyDataString ? JSON.parse(dummyDataString) : {};
 
-    const nearFundingAmount: BigInt = dummyData && dummyData.fundingAmount ? BigInt((dummyData.fundingAmount / 5.95) * 10 ** 24) : BigInt(0);
+    const fundingAmount = dummyData?.fundingAmount;
 
     const response = {
       ...basicData,
@@ -531,7 +531,7 @@ const handlers = [
       response.dateSubmission = new Date();
       response.projectName = dummyData.projectName || 'Mocked Dummy Project';
       response.projectDescription = dummyData.projectDescription || 'Mocked Dummy Project Description';
-      response.nearFundingAmount = nearFundingAmount.toString();
+      response.fundingAmount = fundingAmount.toString();
     }
 
     if (localStorage.getItem('fund3r-mock-near-tx') === 'true') {
@@ -549,7 +549,7 @@ const handlers = [
     return res(ctx.delay(GET_DELAY), ctx.json(response));
   }),
 
-  rest.put<never, any>(`${BASE_URL}/grants/:id/draft`, (_req, res, ctx) => {
+  rest.put<never, any>(`${BASE_URL}/api/v1/grants/:id`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
     const { grantData } = _req.body;
 
@@ -564,20 +564,20 @@ const handlers = [
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),
 
-  rest.put<never, any>(`${BASE_URL}/grants/:id/submit`, (_req, res, ctx) => {
+  rest.post<never, any>(`${BASE_URL}/api/v1/grants/:id`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
 
     const dummyDataString = localStorage.getItem('fund3r-mock-data');
     const dummyData = dummyDataString ? JSON.parse(dummyDataString) : {};
 
-    const nearFundingAmount: BigInt = dummyData && dummyData.fundingAmount ? BigInt((dummyData.fundingAmount / 5.95) * 10 ** 24) : BigInt(0);
+    const fundingAmount = dummyData?.fundingAmount;
 
     const response = {
       ...basicData,
       dateSubmission: new Date(),
       projectName: dummyData.projectName || 'Mocked Dummy Project',
       projectDescription: dummyData.projectDescription || 'Mocked Dummy Project Description',
-      nearFundingAmount: nearFundingAmount.toString(),
+      fundingAmount,
     };
 
     localStorage.setItem('fund3r-mock-submission', 'true');
@@ -599,21 +599,21 @@ const handlers = [
   }),
 
   // When this endpoint is called the backend should verify that the transaction hash is matching the grant
-  rest.put<never, any>(`${BASE_URL}/grants/:id/near-transactions`, (_req, res, ctx) => {
+  rest.put<never, any>(`${BASE_URL}/api/v1/grants/:id/near-transactions`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
     const { proposalNearTransactionHash } = _req.body;
 
     const dummyDataString = localStorage.getItem('fund3r-mock-data');
     const dummyData = dummyDataString ? JSON.parse(dummyDataString) : {};
 
-    const nearFundingAmount: BigInt = BigInt((dummyData.fundingAmount / 5.95) * 10 ** 24);
+    const fundingAmount = dummyData?.fundingAmount;
 
     const response = {
       ...basicData,
       dateSubmission: new Date(),
       projectName: dummyData.projectName || 'Mocked Dummy Project',
       projectDescription: dummyData.projectDescription || 'Mocked Dummy Project Description',
-      nearFundingAmount: nearFundingAmount.toString(),
+      fundingAmount,
       proposalNearTransactionHash,
       isNearProposalValid: true,
     };
@@ -624,7 +624,7 @@ const handlers = [
   }),
 
   // This endpoint will save the interview url & return date of interview and other info updated
-  rest.put<never, any>(`${BASE_URL}/grants/:id/calendly/interview`, (_req, res, ctx) => {
+  rest.put<never, any>(`${BASE_URL}/api/v1/grants/:id/calendly/interview`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
 
     const response = {
@@ -636,7 +636,7 @@ const handlers = [
     return res(ctx.delay(POST_PUT_DELAY), ctx.json(response));
   }),
 
-  rest.put<never, any>(`${BASE_URL}/grants/:id/milestones/:milestoneId`, (_req, res, ctx) => {
+  rest.post<never, any>(`${BASE_URL}/api/v1/grants/:id/milestones/:milestoneId`, (_req, res, ctx) => {
     const response = {
       ...milestoneData,
       dateSubmission: new Date(),
@@ -648,7 +648,7 @@ const handlers = [
   }),
 
   // When this endpoint is called the backend should verify that the transaction hash is matching the milestone
-  rest.put<never, any>(`${BASE_URL}/grants/:id/milestones/:milestoneId/near-transactions`, (_req, res, ctx) => {
+  rest.put<never, any>(`${BASE_URL}/api/v1/grants/:id/milestones/:milestoneId/near-transactions`, (_req, res, ctx) => {
     const response = {
       ...milestoneData,
       dateSubmission: new Date(),
@@ -661,7 +661,7 @@ const handlers = [
   }),
 
   // This endpoint will save the interview url & return date of interview and other info updated
-  rest.put<never, any>(`${BASE_URL}/grants/:id/milestones/:milestoneId/calendly/interview`, (_req, res, ctx) => {
+  rest.put<never, any>(`${BASE_URL}/api/v1/grants/:id/milestones/:milestoneId/calendly/interview`, (_req, res, ctx) => {
     const basicData = getGrantData(_req.headers.get('X-NEAR-ACCOUNT-ID') as string, parseInt(_req.params.id, 10));
 
     const { milestoneId } = _req.params;
@@ -677,12 +677,12 @@ const handlers = [
   }),
 
   // todo
-  // rest.post<never, any>(`${BASE_URL}/grants/:id/milestones/:milestoneId/attachment`, (_req, res, ctx) => {
+  // rest.post<never, any>(`${BASE_URL}/api/v1/grants/:id/milestones/:milestoneId/attachment`, (_req, res, ctx) => {
   //   return res(ctx.delay(POST_PUT_DELAY), ctx.json({ todo: true }));
   // }),
 
   // todo
-  // rest.post<never, any>(`${BASE_URL}/grants/:id/attachment`, (_req, res, ctx) => {
+  // rest.post<never, any>(`${BASE_URL}/api/v1/grants/:id/attachment`, (_req, res, ctx) => {
   //   return res(ctx.delay(POST_PUT_DELAY), ctx.json({ todo: true }));
   // }),
 ];
