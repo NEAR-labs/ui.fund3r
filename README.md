@@ -25,14 +25,6 @@
 - KYC: **[KYC DAO](https://github.com/kycdao)**
 - Scheduling: **[Calendly](https://developer.calendly.com/)**
 
-## Project status
-
-**Work in progress**
-
-- [x] Frontend flow implementation
-- [x] Backend implementation
-- [ ] Admin panel implementation
-
 ## Guides
 
 ### Configuration
