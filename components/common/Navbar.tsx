@@ -19,18 +19,6 @@ const useStyles = createStyles((theme) => ({
     display: 'inline-flex',
   },
 
-  links: {
-    [theme.fn.smallerThan('xs')]: {
-      display: 'none',
-    },
-  },
-
-  burger: {
-    [theme.fn.largerThan('xs')]: {
-      display: 'none',
-    },
-  },
-
   link: {
     display: 'block',
     lineHeight: 1,
@@ -69,7 +57,7 @@ function Navbar() {
             <Image src="/images/logo.svg" height={30} width={100} />
           </a>
         </Link>
-        <Group spacing={5} className={classes.links}>
+        <Group spacing={5}>
           {wallet && wallet.isSignedIn() ? (
             <AccountDropdown />
           ) : (
@@ -80,7 +68,6 @@ function Navbar() {
             </Link>
           )}
         </Group>
-        <Burger opened={opened} onClick={() => toggleOpened()} className={classes.burger} size="sm" />
       </Container>
     </Header>
   );
