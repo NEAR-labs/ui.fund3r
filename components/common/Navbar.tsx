@@ -1,5 +1,4 @@
-import { Burger, Button, Container, createStyles, Group, Header } from '@mantine/core';
-import { useBooleanToggle } from '@mantine/hooks';
+import { Button, Container, createStyles, Group, Header } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
