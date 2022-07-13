@@ -10,7 +10,7 @@ function HomeHero() {
 
   return (
     <Container size="lg">
-      <SimpleGrid cols={2} className={styles.hero}>
+      <SimpleGrid cols={2} className={styles.hero} breakpoints={[{ maxWidth: 576, cols: 1 }]}>
         <Center>
           <div>
             <Title order={1} mb={16}>
