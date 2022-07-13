@@ -43,7 +43,6 @@ const useStyles = createStyles((theme) => ({
 }));
 
 function Navbar() {
-  const [opened, toggleOpened] = useBooleanToggle(false);
   const { classes } = useStyles();
   const { t } = useTranslation('common');
   const wallet = useWallet();
