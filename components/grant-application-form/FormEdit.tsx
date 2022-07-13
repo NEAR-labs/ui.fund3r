@@ -2,7 +2,7 @@
 import type { MouseEvent, SyntheticEvent } from 'react';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { Alert, Button, Divider, Grid, Group, Text, Title } from '@mantine/core';
+import { Alert, Button, Divider, Grid, Group, MediaQuery, Text, Title } from '@mantine/core';
 import { formList, useForm, zodResolver } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import * as dayjs from 'dayjs';
@@ -187,8 +187,16 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
   const error = isSavingError || isSubmitingError;
 
   return (
-    <Grid gutter={48} mb="xl">
-      <Grid.Col span={8}>
+    <Grid
+      gutter={48}
+      mb="xl"
+      sx={() => ({
+        '@media (max-width: 1200px)': {
+          margin: -16,
+        },
+      })}
+    >
+      <Grid.Col xs={12} sm={8}>
         <div>
           <Title order={1} mb={24}>
             {t('form.title')}
@@ -231,9 +239,11 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
           </Group>
         </form>
       </Grid.Col>
-      <Grid.Col span={4}>
-        <FormSummary data={form.values} />
-      </Grid.Col>
+      <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+        <Grid.Col sm={4}>
+          <FormSummary data={form.values} />
+        </Grid.Col>
+      </MediaQuery>
     </Grid>
   );
 }

@@ -1,5 +1,4 @@
-import { Burger, Button, Container, createStyles, Group, Header } from '@mantine/core';
-import { useBooleanToggle } from '@mantine/hooks';
+import { Button, Container, createStyles, Group, Header } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
@@ -17,18 +16,6 @@ const useStyles = createStyles((theme) => ({
 
   branding: {
     display: 'inline-flex',
-  },
-
-  links: {
-    [theme.fn.smallerThan('xs')]: {
-      display: 'none',
-    },
-  },
-
-  burger: {
-    [theme.fn.largerThan('xs')]: {
-      display: 'none',
-    },
   },
 
   link: {
@@ -55,7 +42,6 @@ const useStyles = createStyles((theme) => ({
 }));
 
 function Navbar() {
-  const [opened, toggleOpened] = useBooleanToggle(false);
   const { classes } = useStyles();
   const { t } = useTranslation('common');
   const wallet = useWallet();
@@ -69,7 +55,7 @@ function Navbar() {
             <Image src="/images/logo.svg" height={30} width={100} />
           </a>
         </Link>
-        <Group spacing={5} className={classes.links}>
+        <Group spacing={5}>
           {wallet && wallet.isSignedIn() ? (
             <AccountDropdown />
           ) : (
@@ -80,7 +66,6 @@ function Navbar() {
             </Link>
           )}
         </Group>
-        <Burger opened={opened} onClick={() => toggleOpened()} className={classes.burger} size="sm" />
       </Container>
     </Header>
   );

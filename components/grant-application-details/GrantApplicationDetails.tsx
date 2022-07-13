@@ -16,6 +16,7 @@ import DetailsStatusActions from '@/components/grant-application-details/Details
 import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
+// eslint-disable-next-line max-lines-per-function
 function GrantApplicationDetails({
   data,
   setData,
@@ -29,8 +30,16 @@ function GrantApplicationDetails({
   const { status } = useGrantStatus();
 
   return (
-    <Grid gutter={48} mb="xl">
-      <Grid.Col span={8}>
+    <Grid
+      gutter={48}
+      mb="xl"
+      sx={() => ({
+        '@media (max-width: 1200px)': {
+          margin: -16,
+        },
+      })}
+    >
+      <Grid.Col sm={12} md={8}>
         <DetailsHeader
           projectName={data?.projectName}
           email={data?.email}
@@ -73,7 +82,7 @@ function GrantApplicationDetails({
           </Tabs.Tab>
         </Tabs>
       </Grid.Col>
-      <Grid.Col span={4}>
+      <Grid.Col sm={12} md={4}>
         {status === STATUS.ONBOARDING_COMPLETED ? <DetailsMilestonesProgress /> : <DetailsProcessOverview />}
         <DetailsPaymentSchedule
           milestones={data?.milestones}

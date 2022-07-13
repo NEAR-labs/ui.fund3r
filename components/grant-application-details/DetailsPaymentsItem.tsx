@@ -26,12 +26,17 @@ function DetailsPaymentsItem({ payment, index, grantId }: { payment: PaymentInte
         </Title>
         <Text align="right">{t(`details.payments.payment.statuses.${payment.status}`)}</Text>
         <Text>{dayjs.default(payment.date).format('ddd, MMM D, YYYY')}</Text>
-        <Button variant="light" color="gray" onClick={loadAndDownload} loading={isLoading} disabled={isLoading}>
-          {t('details.payments.payment.download')}
-        </Button>
-        <Text>{t('details.payments.payment.amount')}</Text>
+        <div />
+        <Text style={{ paddingTop: 8 }}>
+          {t('details.payments.payment.amount')}{' '}
+          <strong>
+            {payment.amount} {payment.currency}
+          </strong>
+        </Text>
         <Text align="right">
-          {payment.amount} {payment.currency}
+          <Button variant="light" color="purple" onClick={loadAndDownload} loading={isLoading} disabled={isLoading}>
+            {t('details.payments.payment.download')}
+          </Button>
         </Text>
       </SimpleGrid>
     </Paper>
