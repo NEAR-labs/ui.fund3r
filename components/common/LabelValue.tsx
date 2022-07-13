@@ -4,7 +4,9 @@ function LabelValue({ label, value }: { label: string | null | undefined; value:
   return (
     <div>
       <Text size="xs">{label}</Text>
-      <Text weight={500}>{value}</Text>
+      <Text weight={500} style={{ wordBreak: 'break-word' }}>
+        {value}
+      </Text>
     </div>
   );
 }
