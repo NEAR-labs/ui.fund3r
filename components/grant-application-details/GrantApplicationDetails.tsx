@@ -30,7 +30,7 @@ function GrantApplicationDetails({
 
   return (
     <Grid gutter={48} mb="xl">
-      <Grid.Col span={8}>
+      <Grid.Col sm={12} md={8}>
         <DetailsHeader
           projectName={data?.projectName}
           email={data?.email}
@@ -73,7 +73,7 @@ function GrantApplicationDetails({
           </Tabs.Tab>
         </Tabs>
       </Grid.Col>
-      <Grid.Col span={4}>
+      <Grid.Col sm={12} md={4}>
         {status === STATUS.ONBOARDING_COMPLETED ? <DetailsMilestonesProgress /> : <DetailsProcessOverview />}
         <DetailsPaymentSchedule
           milestones={data?.milestones}
