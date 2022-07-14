@@ -14,20 +14,6 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
   // const [isTokenMinted, setIsTokenMinted] = useState(false);
   const kycDao = useKycDao();
 
-  useEffect(() => {
-    const connect = async () => {
-      if (!kycDao) {
-        return;
-      }
-
-      setIsLoading(true);
-      await kycDao.connectWallet('Near');
-      setIsLoading(false);
-    };
-
-    connect();
-  }, [kycDao]);
-
   const runKycModal = useCallback(async () => {
     if (!country || !email || !kycDao) {
       return;
@@ -62,16 +48,23 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
     };
 
     await kycDao.registerOrLogin();
-    kycDao.startVerification(verificationData, options);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [country, email]);
+    const { KYC } = await kycDao.checkVerificationStatus();
 
-  const startKycAction = () => {
-    if (!isKycValid) {
-      setIsLoading(true);
-      runKycModal();
+    if (!KYC) {
+      kycDao.startVerification(verificationData, options);
     }
-  };
+  }, [country, email, kycDao]);
+
+  useEffect(() => {
+    const startKycAction = () => {
+      if (!isKycValid && kycDao?.connectedWallet) {
+        setIsLoading(true);
+        runKycModal();
+      }
+    };
+
+    startKycAction();
+  }, [isKycValid, kycDao?.connectedWallet, runKycModal]);
 
   const mintSbt = async () => {
     if (!kycDao) {
@@ -102,10 +95,18 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
     },
   );
 
+  const connect = async () => {
+    if (!kycDao) {
+      return;
+    }
+
+    setIsLoading(true);
+    await kycDao.connectWallet('Near');
+    setIsLoading(false);
+  };
+
   const waitingForValidation = isKycCompleted && !isKycValid;
   const isLoadingOrWaitingForValidation = isLoading || validationLoading || waitingForValidation;
-
-  // watch isTokenMinted and redirect to the next page by reloading grant
 
   return (
     <Paper shadow="sm" p="lg" radius="lg" mt="xl">
@@ -119,7 +120,7 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
       ) : (
         <>
           <Text mb="sm">{t('details.status-actions.approved.message')}</Text>
-          <Button color="violet" onClick={startKycAction} loading={isLoadingOrWaitingForValidation} disabled={isLoadingOrWaitingForValidation}>
+          <Button color="violet" onClick={connect} loading={isLoadingOrWaitingForValidation} disabled={isLoadingOrWaitingForValidation}>
             {t('details.status-actions.approved.button')}
           </Button>
         </>
