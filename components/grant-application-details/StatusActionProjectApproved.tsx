@@ -11,7 +11,6 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
   const [isLoading, setIsLoading] = useState(false);
   const [isKycCompleted, setIsKycCompleted] = useState(false);
   const [isKycValid, setIsKycValid] = useState(false);
-  // const [isTokenMinted, setIsTokenMinted] = useState(false);
   const kycDao = useKycDao();
 
   const runKycModal = useCallback(async () => {
