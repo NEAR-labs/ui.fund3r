@@ -48,7 +48,11 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
     };
 
     await kycDao.registerOrLogin();
-    kycDao.startVerification(verificationData, options);
+    const { KYC } = await kycDao.checkVerificationStatus();
+
+    if (!KYC) {
+      kycDao.startVerification(verificationData, options);
+    }
   }, [country, email, kycDao]);
 
   useEffect(() => {
