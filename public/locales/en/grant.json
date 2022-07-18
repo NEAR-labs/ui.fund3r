@@ -411,7 +411,8 @@
         },
         "amount": "Amount",
         "download": "Download Invoice"
-      }
+      },
+      "zero": "🚀 Your payments will appear here soon"
     },
     "agreements": {
       "title": "Agreements",
