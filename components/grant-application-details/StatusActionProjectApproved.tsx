@@ -4,6 +4,7 @@ import { Button, Paper, Text } from '@mantine/core';
 import { useTranslation } from 'next-i18next';
 
 import { useKycDao } from '@/modules/kycdao-sdk-react';
+import getCountry from '@/utilities/getCountry';
 
 // eslint-disable-next-line max-lines-per-function
 function StatusActionProjectApproved({ email, country }: { email: string | undefined; country: string | undefined }) {
@@ -25,7 +26,7 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
     const verificationData = {
       email,
       isEmailConfirmed: true,
-      taxResidency: country,
+      taxResidency: getCountry(country),
       isLegalEntity: false,
       verificationType: VerificationTypes.KYC,
       termsAccepted: true,
