@@ -1,6 +1,6 @@
 {
   "name": "ui.grants",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,7 +10,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@kycdao/kycdao-sdk": "^0.1.1",
     "@mantine/core": "^4.2.5",
     "@mantine/dates": "^4.2.5",
     "@mantine/dropzone": "^4.2.5",
@@ -22,6 +21,7 @@
     "cookie": "^0.5.0",
     "dayjs": "^1.11.3",
     "hellosign-embedded": "^2.10.0",
+    "kycdao-react-sdk": "github:sandoche/kycdao-react-sdk",
     "near-api-js": "^0.44.2",
     "next": "12.1.6",
     "next-i18next": "^11.0.0",

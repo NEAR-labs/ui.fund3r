@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Button, Paper, Text } from '@mantine/core';
+import { useKycDao } from 'kycdao-react-sdk';
 import { useTranslation } from 'next-i18next';
 
-import { useKycDao } from '@/modules/kycdao-sdk-react';
 import getCountry from '@/utilities/getCountry';
 
 // eslint-disable-next-line max-lines-per-function
@@ -13,6 +13,7 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
   const [isKycCompleted, setIsKycCompleted] = useState(false);
   const [isKycValid, setIsKycValid] = useState(false);
   const kycDao = useKycDao();
+  const counter = useRef(0);
 
   const runKycModal = useCallback(async () => {
     if (!country || !email || !kycDao) {
@@ -52,12 +53,16 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
 
     if (!KYC) {
       kycDao.startVerification(verificationData, options);
+    } else {
+      setIsKycValid(true);
+      setIsLoading(false);
     }
   }, [country, email, kycDao]);
 
   useEffect(() => {
     const startKycAction = () => {
-      if (!isKycValid && kycDao?.connectedWallet) {
+      if (!isKycValid && kycDao?.connectedWallet && counter.current === 0) {
+        counter.current += 1;
         setIsLoading(true);
         runKycModal();
       }
@@ -100,9 +105,10 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
       return;
     }
 
+    counter.current = 0;
+
     setIsLoading(true);
     await kycDao.connectWallet('Near');
-    setIsLoading(false);
   };
 
   const waitingForValidation = isKycCompleted && !isKycValid;

@@ -3,12 +3,12 @@ import { CookiesProvider } from 'react-cookie';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
+import { KycDaoProvider } from 'kycdao-react-sdk';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { appWithTranslation } from 'next-i18next';
 import NextNProgress from 'nextjs-progressbar';
 
-import { KycDaoProvider } from '@/modules/kycdao-sdk-react';
 import NearProvider from '@/modules/near-api-react/providers/NearProvider';
 import GrantProvider from '@/providers/GrantProvider';
 
