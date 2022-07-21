@@ -10,6 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@kycdao/kycdao-sdk": "^0.1.2",
     "@mantine/core": "^4.2.5",
     "@mantine/dates": "^4.2.5",
     "@mantine/dropzone": "^4.2.5",
