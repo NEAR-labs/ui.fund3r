@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Button, Paper, Text } from '@mantine/core';
+import { useKycDao } from 'kycdao-react-sdk';
 import { useTranslation } from 'next-i18next';
 
-import { useKycDao } from '@/modules/kycdao-sdk-react';
 import getCountry from '@/utilities/getCountry';
 
 // eslint-disable-next-line max-lines-per-function
@@ -53,6 +53,9 @@ function StatusActionProjectApproved({ email, country }: { email: string | undef
 
     if (!KYC) {
       kycDao.startVerification(verificationData, options);
+    } else {
+      setIsKycValid(true);
+      setIsLoading(false);
     }
   }, [country, email, kycDao]);
 
