@@ -4,9 +4,9 @@
 
 ## Repositories
 
-- [ui.grants](https://github.com/NEARWEEK/ui.grants)
-- [api.grants](https://github.com/NEARWEEK/api.grants)
-- [admin.grants](https://github.com/NEARWEEK/admin.grants)
+- [ui.grants](https://github.com/NEARFoundation/ui.grants)
+- [api.grants](https://github.com/NEARFoundation/api.grants)
+- [admin.grants](https://github.com/NEARFoundation/admin.grants)
 
 ## Technology stack
 
