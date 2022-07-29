@@ -393,7 +393,11 @@
         "message": "Your milestone application has been denied. Please, check comments and submit your application again."
       },
       "submitted": {
-        "message": "Please attend your interview with our team in order to validate your milestone."
+        "message": "Please attend your interview with our team in order to validate your milestone.",
+        "demo": {
+          "title": "Demo Tip",
+          "description": "Because you are using the demo, just refresh and we will automatically validate the milestone."
+        }
       }
     },
     "project": {
