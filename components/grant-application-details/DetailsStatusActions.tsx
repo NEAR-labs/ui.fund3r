@@ -1,4 +1,5 @@
-import { Button, Paper, Text } from '@mantine/core';
+import { Alert, Button, Paper, Text } from '@mantine/core';
+import { IconAlertCircle } from '@tabler/icons';
 import * as dayjs from 'dayjs';
 import { useTranslation } from 'next-i18next';
 
@@ -7,7 +8,7 @@ import StatusActionKycApproved from '@/components/grant-application-details/Stat
 import StatusActionProjectApproved from '@/components/grant-application-details/StatusActionProjectApproved';
 import StatusActionProposalSubmission from '@/components/grant-application-details/StatusActionProposalSubmission';
 import StatusActionsMilestones from '@/components/grant-application-details/StatusActionsMilestones';
-import { SKIP_EVALUATION_APPROVAL } from '@/config/grants';
+import { DEMO_MODE, SKIP_EVALUATION_APPROVAL } from '@/config/grants';
 import { STATUS, useGrantStatus } from '@/hooks/useGrantStatus';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
@@ -140,6 +141,11 @@ function DetailsStatusActions({
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
         <Text>{t('details.status-actions.interview-scheduled.title')}</Text>
         <Text>{dayjs.default(dateInterview).format('ddd, MMM D, YYYY - HH:mm')}</Text>
+        {DEMO_MODE && (
+          <Alert icon={<IconAlertCircle size={16} />} title={t('details.status-actions.interview-scheduled.demo.title')} color="cyan" mt="lg">
+            {t('details.status-actions.interview-scheduled.demo.description')}
+          </Alert>
+        )}
       </Paper>
     );
   }

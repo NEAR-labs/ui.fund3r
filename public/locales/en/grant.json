@@ -319,7 +319,11 @@
         "button": "Select date"
       },
       "interview-scheduled": {
-        "title": "Waiting for an interview"
+        "title": "Waiting for an interview",
+        "demo": {
+          "title": "Demo Tip",
+          "description": "Because you are using the demo, just refresh and we will automatically approve your submission."
+        }
       },
       "interview-completed": {
         "title": "👍 You have successfully completed the interview",
