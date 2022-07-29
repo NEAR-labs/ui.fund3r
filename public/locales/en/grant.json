@@ -351,7 +351,11 @@
         "button": "Submit KYC again"
       },
       "agreement-partially-signed": {
-        "message": "👍 You successfully signed the agreement, we are now waiting for the grant giver to also sign the agreement."
+        "message": "👍 You successfully signed the agreement, we are now waiting for the grant giver to also sign the agreement.",
+        "demo": {
+          "title": "Demo Tip",
+          "description": "Because you are using the demo, just refresh and we will automatically sign on our side."
+        }
       },
       "agreement-signed": {
         "message": "👍 You successfully signed the agreement"

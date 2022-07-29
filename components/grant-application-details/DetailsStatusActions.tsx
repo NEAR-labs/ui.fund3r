@@ -83,6 +83,11 @@ function DetailsStatusActions({
     return (
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
         <Text>{t('details.status-actions.agreement-partially-signed.message')}</Text>
+        {DEMO_MODE && (
+          <Alert icon={<IconAlertCircle size={16} />} title={t('details.status-actions.agreement-partially-signed.demo.title')} color="cyan" mt="lg">
+            {t('details.status-actions.agreement-partially-signed.demo.description')}
+          </Alert>
+        )}
       </Paper>
     );
   }
