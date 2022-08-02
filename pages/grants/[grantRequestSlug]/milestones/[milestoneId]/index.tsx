@@ -31,7 +31,8 @@ function SubmitMilestone() {
     throw new Error('Invalid URL');
   }
 
-  const id = grantRequestSlug.split('-')[1];
+  const grantRequestSlugSplit = grantRequestSlug.split('-');
+  const id = grantRequestSlugSplit[grantRequestSlugSplit.length - 1];
   const grantId = parseInt(id as string, 10);
 
   const { grant, isLoading } = useGrant(grantId);
@@ -85,7 +86,8 @@ export async function getServerSideProps({ req, locale, params }: { req: NextApi
     };
   }
 
-  const id = grantRequestSlug.split('-')[1];
+  const grantRequestSlugSplit = grantRequestSlug.split('-');
+  const id = grantRequestSlugSplit[grantRequestSlugSplit.length - 1];
 
   await queryClient.prefetchQuery(['grant', apiSignature], () => getGrantApplication(apiSignature, id));
   const dehydratedState = dehydrate(queryClient);
