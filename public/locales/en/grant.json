@@ -319,7 +319,11 @@
         "button": "Select date"
       },
       "interview-scheduled": {
-        "title": "Waiting for an interview"
+        "title": "Waiting for an interview",
+        "demo": {
+          "title": "Demo Tip",
+          "description": "Because you are using the demo, just refresh and we will automatically approve your submission."
+        }
       },
       "interview-completed": {
         "title": "👍 You have successfully completed the interview",
@@ -332,7 +336,7 @@
         "message": "👍 Your funding has been approved, please verify your account.",
         "button": "Verify account",
         "nft-message": "✨ In order to finish the KYC process, please mint your Soul Bound Token",
-        "nft-button": "Mint KYC SBT"
+        "nft-button": "Mint soulbound KYC NFT"
       },
       "kyc-completed": {
         "title": "🧐 Thank you! We are currently checking your data",
@@ -347,7 +351,11 @@
         "button": "Submit KYC again"
       },
       "agreement-partially-signed": {
-        "message": "👍 You successfully signed the agreement, we are now waiting for the grant giver to also sign the agreement."
+        "message": "👍 You successfully signed the agreement, we are now waiting for the grant giver to also sign the agreement.",
+        "demo": {
+          "title": "Demo Tip",
+          "description": "Because you are using the demo, just refresh and we will automatically sign on our side."
+        }
       },
       "agreement-signed": {
         "message": "👍 You successfully signed the agreement"
@@ -385,7 +393,11 @@
         "message": "Your milestone application has been denied. Please, check comments and submit your application again."
       },
       "submitted": {
-        "message": "Please attend your interview with our team in order to validate your milestone."
+        "message": "Please attend your interview with our team in order to validate your milestone.",
+        "demo": {
+          "title": "Demo Tip",
+          "description": "Because you are using the demo, just refresh and we will automatically validate the milestone."
+        }
       }
     },
     "project": {

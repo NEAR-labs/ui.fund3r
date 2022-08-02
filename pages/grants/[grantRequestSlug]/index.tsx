@@ -31,7 +31,8 @@ function GrantApplication({ error }: { error: number }) {
     throw new Error('Invalid URL');
   }
 
-  const id = grantRequestSlug.split('-')[1];
+  const grantRequestSlugSplit = grantRequestSlug.split('-');
+  const id = grantRequestSlugSplit[grantRequestSlugSplit.length - 1];
   const numberId = parseInt(id as string, 10);
 
   const { grant, setGrant, isLoading, refetchGrant } = useGrant(numberId);
@@ -88,7 +89,8 @@ export async function getServerSideProps({ req, locale, params }: { req: NextApi
     };
   }
 
-  const id = grantRequestSlug.split('-')[1];
+  const grantRequestSlugSplit = grantRequestSlug.split('-');
+  const id = grantRequestSlugSplit[grantRequestSlugSplit.length - 1];
 
   if (!id) {
     return {

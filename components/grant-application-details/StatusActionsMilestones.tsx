@@ -1,4 +1,5 @@
-import { Button, Paper, Text } from '@mantine/core';
+import { Alert, Button, Paper, Text } from '@mantine/core';
+import { IconAlertCircle } from '@tabler/icons';
 import * as dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -6,6 +7,7 @@ import { useTranslation } from 'next-i18next';
 
 import MilestoneStatusActionInterviewBooking from '@/components/grant-application-details/MilestoneStatusActionInterviewBooking';
 import MilestoneStatusActionSubmit from '@/components/grant-application-details/MilestoneStatusActionSubmit';
+import { DEMO_MODE } from '@/config/grants';
 import { MILESTONE_STATUS, useMilestonesStatus } from '@/hooks/useMilestonesStatus';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
@@ -51,6 +53,11 @@ function StatusActionsMilestones({ grant, setGrant }: { grant: GrantApplicationI
       <Paper shadow="sm" p="lg" radius="lg" mt="xl">
         <Text>{t('details.milestones.submitted.message', { number })}</Text>
         <Text>{dayjs.default(dateInterview).format('ddd, MMM D, YYYY - HH:mm')}</Text>
+        {DEMO_MODE && (
+          <Alert icon={<IconAlertCircle size={16} />} title={t('details.status-actions.agreement-partially-signed.demo.title')} color="cyan" mt="lg">
+            {t('details.status-actions.agreement-partially-signed.demo.description')}
+          </Alert>
+        )}
       </Paper>
     );
   }
