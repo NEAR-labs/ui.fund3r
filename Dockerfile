@@ -64,6 +64,23 @@ ENV NEXT_PUBLIC_MOCK_DELAY_GET=${NEXT_PUBLIC_MOCK_DELAY_GET}
 ENV NEXT_PUBLIC_MOCK_DELAY_POST_PUT=${NEXT_PUBLIC_MOCK_DELAY_POST_PUT}
 ENV NEXT_PUBLIC_HELLO_SIGN_APP_CLIENT_ID=${NEXT_PUBLIC_HELLO_SIGN_APP_CLIENT_ID}
 
+# create .env file with all the environment variables
+RUN echo "NEXT_PUBLIC_NEAR_NETWORK_ENV=${NEXT_PUBLIC_NEAR_NETWORK_ENV}" > .env
+RUN echo "NEXT_PUBLIC_NEAR_DAO_CONTRACT_ID=${NEXT_PUBLIC_NEAR_DAO_CONTRACT_ID}" >> .env
+RUN echo "NEXT_PUBLIC_APP_NAME=${NEXT_PUBLIC_APP_NAME}" >> .env
+RUN echo "NEXT_PUBLIC_SKIP_EVALUATION_APPROVAL=${NEXT_PUBLIC_SKIP_EVALUATION_APPROVAL}" >> .env
+RUN echo "NEXT_PUBLIC_SKIP_ONBOARDING=${NEXT_PUBLIC_SKIP_ONBOARDING}" >> .env
+RUN echo "NEXT_PUBLIC_DEMO_MODE=${NEXT_PUBLIC_DEMO_MODE}" >> .env
+RUN echo "NEXT_PUBLIC_HOST_URL=${NEXT_PUBLIC_HOST_URL}" >> .env
+RUN echo "NEXT_PUBLIC_BACKEND_HOST=${NEXT_PUBLIC_BACKEND_HOST}" >> .env
+RUN echo "NEXT_PUBLIC_CALENDLY_URL_APPLICATION=${NEXT_PUBLIC_CALENDLY_URL_APPLICATION}" >> .env
+RUN echo "NEXT_PUBLIC_CALENDLY_URL_MILESTONES=${NEXT_PUBLIC_CALENDLY_URL_MILESTONES}" >> .env
+RUN echo "NEXT_PUBLIC_MOCK_API=${NEXT_PUBLIC_MOCK_API}" >> .env
+RUN echo "NEXT_PUBLIC_MOCK_DELAY_GET=${NEXT_PUBLIC_MOCK_DELAY_GET}" >> .env
+RUN echo "NEXT_PUBLIC_MOCK_DELAY_POST_PUT=${NEXT_PUBLIC_MOCK_DELAY_POST_PUT}" >> .env
+RUN echo "NEXT_PUBLIC_HELLO_SIGN_APP_CLIENT_ID=${NEXT_PUBLIC_HELLO_SIGN_APP_CLIENT_ID}" >> .env
+
+RUN cat .env
 
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
@@ -76,6 +93,7 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/.env ./.env
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
