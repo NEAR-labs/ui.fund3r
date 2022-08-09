@@ -20,20 +20,6 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
-# ENV NEXT_TELEMETRY_DISABLED 1
-
-RUN yarn build
-
-# If using npm comment out above and use below instead
-# RUN npm run build
-
-# Production image, copy all the files and run next
-FROM node:16-alpine AS runner
-WORKDIR /app
-
 ARG NEXT_PUBLIC_NEAR_NETWORK_ENV=${NEXT_PUBLIC_NEAR_NETWORK_ENV}
 ARG NEXT_PUBLIC_NEAR_DAO_CONTRACT_ID=${NEXT_PUBLIC_NEAR_DAO_CONTRACT_ID}
 ARG NEXT_PUBLIC_APP_NAME=${NEXT_PUBLIC_APP_NAME}
@@ -64,18 +50,45 @@ ENV NEXT_PUBLIC_MOCK_DELAY_GET=${NEXT_PUBLIC_MOCK_DELAY_GET}
 ENV NEXT_PUBLIC_MOCK_DELAY_POST_PUT=${NEXT_PUBLIC_MOCK_DELAY_POST_PUT}
 ENV NEXT_PUBLIC_HELLO_SIGN_APP_CLIENT_ID=${NEXT_PUBLIC_HELLO_SIGN_APP_CLIENT_ID}
 
+RUN echo "NEXT_PUBLIC_NEAR_NETWORK_ENV=${NEXT_PUBLIC_NEAR_NETWORK_ENV}" > .env
+RUN echo "NEXT_PUBLIC_NEAR_DAO_CONTRACT_ID=${NEXT_PUBLIC_NEAR_DAO_CONTRACT_ID}" >> .env
+RUN echo "NEXT_PUBLIC_APP_NAME=${NEXT_PUBLIC_APP_NAME}" >> .env
+RUN echo "NEXT_PUBLIC_SKIP_EVALUATION_APPROVAL=${NEXT_PUBLIC_SKIP_EVALUATION_APPROVAL}" >> .env
+RUN echo "NEXT_PUBLIC_SKIP_ONBOARDING=${NEXT_PUBLIC_SKIP_ONBOARDING}" >> .env
+RUN echo "NEXT_PUBLIC_DEMO_MODE=${NEXT_PUBLIC_DEMO_MODE}" >> .env
+RUN echo "NEXT_PUBLIC_HOST_URL=${NEXT_PUBLIC_HOST_URL}" >> .env
+RUN echo "NEXT_PUBLIC_BACKEND_HOST=${NEXT_PUBLIC_BACKEND_HOST}" >> .env
+RUN echo "NEXT_PUBLIC_CALENDLY_URL_APPLICATION=${NEXT_PUBLIC_CALENDLY_URL_APPLICATION}" >> .env
+RUN echo "NEXT_PUBLIC_CALENDLY_URL_MILESTONES=${NEXT_PUBLIC_CALENDLY_URL_MILESTONES}" >> .env
+RUN echo "NEXT_PUBLIC_MOCK_API=${NEXT_PUBLIC_MOCK_API}" >> .env
+RUN echo "NEXT_PUBLIC_MOCK_DELAY_GET=${NEXT_PUBLIC_MOCK_DELAY_GET}" >> .env
+RUN echo "NEXT_PUBLIC_MOCK_DELAY_POST_PUT=${NEXT_PUBLIC_MOCK_DELAY_POST_PUT}" >> .env
+RUN echo "NEXT_PUBLIC_HELLO_SIGN_APP_CLIENT_ID=${NEXT_PUBLIC_HELLO_SIGN_APP_CLIENT_ID}" >> .env
+
+# Next.js collects completely anonymous telemetry data about general usage.
+# Learn more here: https://nextjs.org/telemetry
+# Uncomment the following line in case you want to disable telemetry during the build.
+ENV NEXT_TELEMETRY_DISABLED 1
+
+RUN yarn build
+
+# If using npm comment out above and use below instead
+# RUN npm run build
+
+# Production image, copy all the files and run next
+FROM node:16-alpine AS runner
+WORKDIR /app
 
 ENV NODE_ENV production
-# Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# You only need to copy next.config.js if you are NOT using the default configuration
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/.env ./
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
