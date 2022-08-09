@@ -1,4 +1,4 @@
-# ui.grants
+# ui.grants [![NEAR](https://img.shields.io/badge/NEAR-%E2%8B%88-111111.svg)](https://near.org/) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
 > Easy to set up end to end grant application form for DAOs on NEAR Protocol
 
@@ -61,3 +61,7 @@ npm run start
 
 No tested are implemented yet.
 Check the [Manual Testing](__tests__/MANUAL_TESTING.md) guide.
+
+## Authors
+
+- [Sandoche](https://github.com/sandoche)
