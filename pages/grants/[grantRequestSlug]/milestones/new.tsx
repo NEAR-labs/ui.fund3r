@@ -44,7 +44,7 @@ function SubmitMilestone() {
         </Head>
         <NearAuthenticationGuardWithLoginRedirection>
           <ErrorBoundary FallbackComponent={Error500}>
-            {isLoading || !milestoneIdInteger ? (
+            {isLoading ? (
               <LoadingAnimation />
             ) : (
               <Container size="lg">
