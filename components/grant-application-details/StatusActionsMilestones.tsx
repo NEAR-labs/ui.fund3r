@@ -7,7 +7,7 @@ import { useTranslation } from 'next-i18next';
 
 import MilestoneStatusActionInterviewBooking from '@/components/grant-application-details/MilestoneStatusActionInterviewBooking';
 import MilestoneStatusActionSubmit from '@/components/grant-application-details/MilestoneStatusActionSubmit';
-import { DEMO_MODE } from '@/config/grants';
+import { ALLOW_MILESTONES_ON_THE_GO, DEMO_MODE } from '@/config/grants';
 import { MILESTONE_STATUS, useMilestonesStatus } from '@/hooks/useMilestonesStatus';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
@@ -70,6 +70,19 @@ function StatusActionsMilestones({ grant, setGrant }: { grant: GrantApplicationI
         </Paper>
         <MilestoneStatusActionSubmit number={number} grantRequestSlug={grantRequestSlug} currentMilestone={currentMilestone} />
       </>
+    );
+  }
+
+  if (ALLOW_MILESTONES_ON_THE_GO) {
+    return (
+      <Paper shadow="sm" p="lg" radius="lg" mt="xl">
+        <Text mb="sm">{t('details.milestones.on-the-go.message')}</Text>
+        <Link href={`/grants/${grantRequestSlug}/milestones/new`} passHref>
+          <Button component="a" color="violet">
+            {t('details.milestones.on-the-go.button')}
+          </Button>
+        </Link>
+      </Paper>
     );
   }
 
