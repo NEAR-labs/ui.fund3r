@@ -34,7 +34,7 @@ function SubmitMilestone() {
 
   const { grant, isLoading } = useGrant(grantId);
 
-  const milestoneIdInteger = grant?.milestones.length;
+  const milestoneIdInteger = grant?.milestones.length || 0;
 
   return (
     <DefaultLayout>
