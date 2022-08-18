@@ -6,9 +6,9 @@ const createSchema = (t: TFunction) => {
     budget: z.number({ invalid_type_error: t('form.budget.error'), required_error: t('form.budget.error') }).min(1, { message: t('form.budget.error') }),
     deliveryDate: z.date({ invalid_type_error: t('form.deliveryDate.error'), required_error: t('form.deliveryDate.error') }),
     description: z
-      .string({ required_error: t('form.milestoneDescription.error') })
-      .min(1, { message: t('form.milestoneDescription.error') })
-      .max(100, { message: t('form.milestoneDescription.error') }),
+      .string({ required_error: t('form.description.error') })
+      .min(1, { message: t('form.description.error') })
+      .max(100, { message: t('form.description.error') }),
     githubUrl: z.string({ required_error: t('form.githubUrl.error') }).url({ message: t('form.githubUrl.error') }),
     attachment: z
       .string({ required_error: t('form.attachment.error') })
