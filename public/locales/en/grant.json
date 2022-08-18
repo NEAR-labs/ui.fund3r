@@ -398,6 +398,10 @@
           "title": "Demo Tip",
           "description": "Because you are using the demo, just refresh and we will automatically validate the milestone."
         }
+      },
+      "on-the-go": {
+        "message": "Do you want to create a new milestone?",
+        "button": "Create new milestone"
       }
     },
     "project": {

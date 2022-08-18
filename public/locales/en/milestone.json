@@ -21,6 +21,21 @@
       "label": "Comments",
       "placeholder": "Comments"
     },
+    "budget": {
+      "label": "Estimated Budget",
+      "placeholder": "10000",
+      "error": "Please enter a budget that is at least 1 USN."
+    },
+    "deliveryDate": {
+      "label": "Estimated Delivery Date",
+      "placeholder": "Estimated Delivery Date",
+      "error": "Please enter a valid date."
+    },
+    "description": {
+      "label": "Milestone Description",
+      "placeholder": "Milestone Description",
+      "error": "Please enter a description that is at least 1 characters long and less than 100."
+    },
     "submit": "Submit milestone"
   },
   "error": {

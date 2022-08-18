@@ -7,7 +7,8 @@ import { useTranslation } from 'next-i18next';
 
 import MilestoneStatusActionInterviewBooking from '@/components/grant-application-details/MilestoneStatusActionInterviewBooking';
 import MilestoneStatusActionSubmit from '@/components/grant-application-details/MilestoneStatusActionSubmit';
-import { DEMO_MODE } from '@/config/grants';
+import StatusActionMilestoneOnTheGo from '@/components/grant-application-details/StatusActionMilestoneOnTheGo';
+import { ALLOW_MILESTONES_ON_THE_GO, DEMO_MODE } from '@/config/grants';
 import { MILESTONE_STATUS, useMilestonesStatus } from '@/hooks/useMilestonesStatus';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
@@ -18,8 +19,12 @@ function StatusActionsMilestones({ grant, setGrant }: { grant: GrantApplicationI
 
   const { currentMilestone, milestonesStatus } = useMilestonesStatus();
 
-  if (!milestonesStatus || milestonesStatus.length === 0) {
+  if (!milestonesStatus) {
     return null;
+  }
+
+  if (milestonesStatus.length === 0 && ALLOW_MILESTONES_ON_THE_GO) {
+    return <StatusActionMilestoneOnTheGo grantRequestSlug={grantRequestSlug} />;
   }
 
   const { status, dateInterview } = milestonesStatus[currentMilestone];
@@ -71,6 +76,10 @@ function StatusActionsMilestones({ grant, setGrant }: { grant: GrantApplicationI
         <MilestoneStatusActionSubmit number={number} grantRequestSlug={grantRequestSlug} currentMilestone={currentMilestone} />
       </>
     );
+  }
+
+  if (ALLOW_MILESTONES_ON_THE_GO) {
+    return <StatusActionMilestoneOnTheGo grantRequestSlug={grantRequestSlug} />;
   }
 
   return null;
