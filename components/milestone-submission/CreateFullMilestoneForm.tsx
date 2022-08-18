@@ -60,7 +60,12 @@ function CreateFullMilestoneForm({ grantData, milestoneId }: { grantData: GrantA
       enabled: false,
       retry: false,
       onSuccess: async () => {
-        submitProposal(grantData, grantData?.milestones[milestoneId]?.budget, milestoneNumber, grantData?.milestones[milestoneId]?.hashProposal);
+        if (!grantData) {
+          throw new Error('Grant data is not available');
+        }
+        const lastIndex = grantData.milestones.length - 1;
+
+        submitProposal(grantData, grantData?.milestones[lastIndex]?.budget, milestoneNumber, grantData?.milestones[lastIndex]?.hashProposal);
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {
