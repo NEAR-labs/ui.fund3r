@@ -10,7 +10,7 @@ import createSchema from '@/form-schemas/fullMilestoneSubmissionFormSchema';
 import useAccountSignature from '@/hooks/useAccountSignature';
 import useDaoContract from '@/hooks/useDaoContract';
 import useSigner from '@/modules/near-api-react/hooks/useSigner';
-import { submitMilestoneData } from '@/services/apiService';
+import { submitFullMilestoneData } from '@/services/apiService';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
 // eslint-disable-next-line max-lines-per-function
@@ -24,8 +24,8 @@ function CreateFullMilestoneForm({ grantData, milestoneId }: { grantData: GrantA
 
   // The following is required to avoid warnings
   const defaultData = {
-    budget: '',
-    deliveryDate: '',
+    budget: 0,
+    deliveryDate: new Date(),
     description: '',
     attachment: '',
     githubUrl: '',
@@ -47,9 +47,9 @@ function CreateFullMilestoneForm({ grantData, milestoneId }: { grantData: GrantA
     isLoading: isSubmitingLoading,
     isError: isSubmitingError,
   } = useQuery(
-    ['submitMilestoneData', apiSignature, grantId, milestoneId, form.values, signObjectMessage],
+    ['submitFullMilestoneData', apiSignature, grantId, milestoneId, form.values, signObjectMessage],
     () =>
-      submitMilestoneData(apiSignature, {
+      submitFullMilestoneData(apiSignature, {
         grantId,
         milestoneId,
         milestoneData: form.values,

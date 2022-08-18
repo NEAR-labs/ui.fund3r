@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import axios from 'axios';
 import type NearApiSignatureInterface from 'types/NearApiSignatureInterface';
 
@@ -258,6 +259,42 @@ const submitMilestoneData = async (
   return data;
 };
 
+const submitFullMilestoneData = async (
+  signature: NearApiSignatureInterface | undefined,
+  {
+    grantId,
+    milestoneData,
+    signObjectMessage,
+  }: {
+    grantId: number | undefined;
+    milestoneId: number | undefined;
+    milestoneData: MilestoneInterface;
+    signObjectMessage: (stringMessage: unknown) => Promise<Uint8Array | undefined | null>;
+  },
+) => {
+  if (!signature) {
+    return null;
+  }
+
+  const signedData = await signObjectMessage(milestoneData);
+
+  const { data } = await axios.post(
+    `${API_HOST}/api/v1/grants/${grantId}/milestones`,
+    {
+      signedData,
+      milestoneData,
+    },
+    {
+      headers: {
+        'X-NEAR-ACCOUNT-ID': signature.accountId,
+        'X-NEAR-SIGNATURE': JSON.stringify(signature.signature),
+      },
+    },
+  );
+
+  return data;
+};
+
 const validateMilestoneNearTransactionHash = async (
   signature: NearApiSignatureInterface | undefined,
   {
@@ -290,20 +327,15 @@ const validateMilestoneNearTransactionHash = async (
   return data;
 };
 
-// const submitMilestoneAttachment = async (signature: NearApiSignatureInterface | undefined, data: any) => {};
-
-// const submitGrantAttachment = async (signature: NearApiSignatureInterface | undefined, data: any) => {};
-
 export {
   getAllGrantApplicationsOfUser,
   getGrantApplication,
   saveGrantApplicationAsDraft,
   submitCalendlyUrl,
+  submitFullMilestoneData,
   submitGrantApplication,
   submitMilestoneCalendlyUrl,
   submitMilestoneData,
   validateMilestoneNearTransactionHash,
   validateNearTransactionHash,
-  // submitMilestoneAttachment,
-  // submitGrantAttachment,
 };
