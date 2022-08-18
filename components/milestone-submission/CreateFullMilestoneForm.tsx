@@ -6,13 +6,14 @@ import { useTranslation } from 'next-i18next';
 import { AlertCircle } from 'tabler-icons-react';
 
 import AutoFormFields from '@/components/auto-form/AutoFormFields';
-import createSchema from '@/form-schemas/milestoneSubmissionFormSchema';
+import createSchema from '@/form-schemas/fullMilestoneSubmissionFormSchema';
 import useAccountSignature from '@/hooks/useAccountSignature';
 import useDaoContract from '@/hooks/useDaoContract';
 import useSigner from '@/modules/near-api-react/hooks/useSigner';
 import { submitMilestoneData } from '@/services/apiService';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
+// eslint-disable-next-line max-lines-per-function
 function CreateFullMilestoneForm({ grantData, milestoneId }: { grantData: GrantApplicationInterface | null; milestoneId: number }) {
   const { t } = useTranslation('milestone');
   const apiSignature = useAccountSignature();
@@ -23,6 +24,9 @@ function CreateFullMilestoneForm({ grantData, milestoneId }: { grantData: GrantA
 
   // The following is required to avoid warnings
   const defaultData = {
+    budget: '',
+    deliveryDate: '',
+    description: '',
     attachment: '',
     githubUrl: '',
     comments: '',
@@ -82,7 +86,13 @@ function CreateFullMilestoneForm({ grantData, milestoneId }: { grantData: GrantA
         </Alert>
       )}
       <form onSubmit={submit}>
-        <AutoFormFields form={form} schema={schema} fields={['githubUrl', 'attachment', 'comments']} loading={loading} translationNamespace="milestone" />
+        <AutoFormFields
+          form={form}
+          schema={schema}
+          fields={['budget', 'deliveryDate', 'description', 'githubUrl', 'attachment', 'comments']}
+          loading={loading}
+          translationNamespace="milestone"
+        />
         <Group position="right" mt="xl">
           <Button type="submit" color="violet" disabled={loading} loading={isSubmitingLoading || isNearLoading}>
             {t('form.submit')}
