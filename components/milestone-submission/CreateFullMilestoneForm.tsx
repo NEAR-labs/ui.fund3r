@@ -1,24 +1,30 @@
 import type { SyntheticEvent } from 'react';
+import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { Alert, Button, Group, Title } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { AlertCircle } from 'tabler-icons-react';
 
 import AutoFormFields from '@/components/auto-form/AutoFormFields';
+import LoadingAnimation from '@/components/common/LoadingAnimation';
 import createSchema from '@/form-schemas/fullMilestoneSubmissionFormSchema';
 import useAccountSignature from '@/hooks/useAccountSignature';
 import useDaoContract from '@/hooks/useDaoContract';
 import useSigner from '@/modules/near-api-react/hooks/useSigner';
-import { submitFullMilestoneData } from '@/services/apiService';
+import { submitFullMilestoneData, validateMilestoneNearTransactionHash } from '@/services/apiService';
 import type { GrantApplicationInterface } from '@/types/GrantApplicationInterface';
 
 // eslint-disable-next-line max-lines-per-function
 function CreateFullMilestoneForm({ grantData, milestoneId }: { grantData: GrantApplicationInterface | null; milestoneId: number }) {
   const { t } = useTranslation('milestone');
+  const router = useRouter();
   const apiSignature = useAccountSignature();
   const { signObjectMessage } = useSigner();
   const { isNearLoading, submitProposal } = useDaoContract();
+
+  const { grantRequestSlug, errorCode, transactionHashes } = router.query;
 
   const schema = createSchema(t);
 
@@ -41,6 +47,26 @@ function CreateFullMilestoneForm({ grantData, milestoneId }: { grantData: GrantA
 
   const milestoneNumber = milestoneId + 1;
   const grantId = grantData?.id;
+
+  const { isLoading, refetch: fetchValidateTransactionHash } = useQuery(
+    ['validate-transaction-hash', apiSignature, grantId, milestoneId, transactionHashes],
+    () => {
+      return validateMilestoneNearTransactionHash(apiSignature, { grantId, milestoneId: milestoneId - 1, proposalNearTransactionHash: transactionHashes });
+    },
+    {
+      refetchOnWindowFocus: false,
+      enabled: false,
+      onSuccess: () => {
+        router.push(`/grants/${grantRequestSlug}`);
+      },
+    },
+  );
+
+  useEffect(() => {
+    if (transactionHashes && apiSignature && typeof grantId !== 'undefined' && grantId >= 0 && milestoneId >= 0) {
+      fetchValidateTransactionHash();
+    }
+  }, [transactionHashes, fetchValidateTransactionHash, apiSignature, grantId, milestoneId]);
 
   const {
     refetch: submitForm,
@@ -81,6 +107,10 @@ function CreateFullMilestoneForm({ grantData, milestoneId }: { grantData: GrantA
     e.preventDefault();
     submitForm();
   };
+
+  if (isLoading) {
+    return <LoadingAnimation />;
+  }
 
   return (
     <div>
