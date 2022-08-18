@@ -45,7 +45,6 @@ const fullProjectData = {
   addressZip: '75001',
   howHeardGrants: 'Twitter',
   referral: '',
-  teamReferral: '',
   comments: '',
   currency: 'USN',
   milestones: [

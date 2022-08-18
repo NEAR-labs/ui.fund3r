@@ -103,7 +103,6 @@ export interface GrantApplicationInterface {
   // About
   howHeardGrants?: string;
   referral?: string;
-  teamReferral?: string; // update with enum eventually
   comments?: string;
 
   // Status and date
