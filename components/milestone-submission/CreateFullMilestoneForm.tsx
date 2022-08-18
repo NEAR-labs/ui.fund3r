@@ -85,13 +85,13 @@ function CreateFullMilestoneForm({ grantData, milestoneId }: { grantData: GrantA
       refetchOnWindowFocus: false,
       enabled: false,
       retry: false,
-      onSuccess: async () => {
-        if (!grantData) {
+      onSuccess: async (data) => {
+        if (!data) {
           throw new Error('Grant data is not available');
         }
-        const lastIndex = grantData.milestones.length - 1;
+        const lastIndex = data.milestones.length - 1;
 
-        submitProposal(grantData, grantData?.milestones[lastIndex]?.budget, milestoneNumber, grantData?.milestones[lastIndex]?.hashProposal);
+        submitProposal(data, data?.milestones[lastIndex]?.budget, milestoneNumber, data?.milestones[lastIndex]?.hashProposal);
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onError: (error: any) => {
