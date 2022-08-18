@@ -66,7 +66,10 @@ function CreateFullMilestoneForm({ grantData, milestoneId }: { grantData: GrantA
     if (transactionHashes && apiSignature && typeof grantId !== 'undefined' && grantId >= 0 && milestoneId >= 0) {
       fetchValidateTransactionHash();
     }
-  }, [transactionHashes, fetchValidateTransactionHash, apiSignature, grantId, milestoneId]);
+    if (errorCode) {
+      router.push(`/grants/${grantRequestSlug}`);
+    }
+  }, [transactionHashes, fetchValidateTransactionHash, apiSignature, grantId, milestoneId, errorCode, router, grantRequestSlug]);
 
   const {
     refetch: submitForm,
