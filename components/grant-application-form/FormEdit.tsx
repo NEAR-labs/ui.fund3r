@@ -60,7 +60,6 @@ function FormEdit({ data, setData }: { data: GrantApplicationInterface | undefin
     addressZip: '',
     howHeardGrants: '',
     referral: '',
-    teamReferral: '',
     comments: '',
     aboutTokensReceivedFromNear: '',
     attachment: '',
