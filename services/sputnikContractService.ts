@@ -11,7 +11,8 @@ const createPayoutProposal = async (
   networkId: string,
   hash: string,
 ) => {
-  const description = createProposalDescription(grantData.projectName || '', payoutNumber, grantData.projectDescription || '', hash.slice(0, 8));
+  const projectDescription = payoutNumber === 0 ? grantData.projectDescription : `Milestone ${payoutNumber} - ${grantData.milestones[payoutNumber - 1].description}`;
+  const description = createProposalDescription(grantData.projectName || '', payoutNumber, projectDescription || '', hash.slice(0, 8));
 
   if (contract.get_policy && contract.add_proposal) {
     const policy = await contract.get_policy();
