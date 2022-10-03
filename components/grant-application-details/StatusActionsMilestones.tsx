@@ -27,6 +27,10 @@ function StatusActionsMilestones({ grant, setGrant }: { grant: GrantApplicationI
     return <StatusActionMilestoneOnTheGo grantRequestSlug={grantRequestSlug} />;
   }
 
+  if (milestonesStatus.length === 0) {
+    return null;
+  }
+
   const { status, dateInterview } = milestonesStatus[currentMilestone];
   const number = currentMilestone + 1;
 
